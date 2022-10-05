@@ -1,0 +1,159 @@
+:root {
+    --sg-yellow: #EDAA1E;
+    --sg-gray: #414442;
+    --black: #000;
+    --white: #fff;
+    --light-gray: #D1C8B5;
+    --table-light-gray: #ececec;
+    --background: #dddddd;
+    --dark-gray: #5e5e5e;
+    --erase: #ff0000;
+    --erase-hover: #942121;
+    --edit-hover: #0000bd;
+}
+
+.sg-container {
+    box-shadow: 0 8px 32px 0 #1f26875e;
+    border-radius: 10px;
+    border: 1px solid #2222225e;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 5%;
+}
+
+.sg-content {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.sg-dark{
+    background-color: var(--sg-gray);
+    color: var(--white);
+}
+
+.sg-footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: var(--sg-yellow);
+    padding: 0px 20px 0px 32px;
+}
+
+.sg-footer-container p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.sg-button {
+    background-color: var(--light-gray);
+    font-weight: 600;
+    color: var(--black);
+    border: 1px solid var(--dark-gray);
+    margin: 10px;
+    padding: 5px 25px;
+}
+
+
+.fa-trash-can{
+    color: var(--erase);
+}
+
+.fa-trash-can:hover {
+    color: var(--erase-hover);
+    cursor: pointer;
+}
+
+.fa-pen-to-square:hover{
+    color: var(--edit-hover);
+    cursor: pointer;
+}
+
+@media(max-width: 994px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media(max-width: 529px) {
+
+    h1 {
+        font-size: 25px;
+    }
+    .sg-footer-container p {
+        font-size: 22px;
+    }
+
+    .sg-button {
+        background-color: var(--light-gray);
+        color: var(--black);
+        border: 1px solid var(--dark-gray);
+        margin: 5px;
+        padding: 4px 20px;
+    }
+
+    .sair-btn{
+        margin: 0px;
+        justify-content: end;
+        align-items: right;
+    }
+    #sg-navbar img{
+        height: 5px;
+    }
+
+}
+
+@media print {
+    .sg-footer-container{
+        display: none;
+    }
+    
+    .sg-header-container h1 {
+        font-size: 20px;
+    }
+    .table-dark {
+        color: var(--black);
+        border: 1px 0px 0px 0px;
+    }
+
+    .sg-action-buttons{
+        display: none;
+    }
+    .sg-table-container {
+        padding: 0px;
+    }    
+
+    tbody {
+        padding: 0px;
+        border: 0px;
+        margin: 0px;
+    }
+
+    th,
+    td {
+        font-size: 11px;
+    }
+    tr{
+        background: var(--white);
+    }
+
+    #sg-filter-table{
+    display: none;
+    }
+
+    .btn{
+        display: none;
+    }
+    .sg-container {
+        box-shadow: none;
+        border-radius: 10px;
+        border: 0px;
+        margin-left: 0%;
+        margin-right: 0%;
+        margin-bottom: 0%;
+    }
+    .sg-content {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
