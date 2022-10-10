@@ -11,7 +11,7 @@
     --erase-hover: #942121;
     --edit-hover: #0000bd;
 }
-h1{color:red}
+
 .sg-container {
     box-shadow: 0 8px 32px 0 #1f26875e;
     border-radius: 10px;
@@ -69,9 +69,18 @@ h1{color:red}
     cursor: pointer;
 }
 
+#safegold{
+    height: 35em;
+    width: 20em;
+}
+
 @media(max-width: 994px) {
     h1 {
         font-size: 30px;
+    }
+    a img {
+        height: 3px;
+        width: auto;
     }
 }
 
@@ -80,6 +89,12 @@ h1{color:red}
     h1 {
         font-size: 25px;
     }
+
+    .logo{
+        height: 3px;
+        width: auto;
+    }
+
     .sg-footer-container p {
         font-size: 22px;
     }

@@ -1,22 +1,10 @@
 {% extends 'crud_app/base.html' %}
 {% load static %}
-{% block content %}
-<h1>teste</h1>
-<div class="image-background mt-0"><img src="{% static 'img/Safegold-Background.jpg' %}"></div>		   
-<!--<style>
-	body, html {
-	  height: 96.7%;
-	  margin: 0;
-	}
-	.image-background{
-	  background-image: url("images/Safegold-Background.jpg");
-	  filter: blur(5px);
-	  -webkit-filter: blur(5px);
-	  height: 100%; 
-	  background-position: center;
-	  background-repeat: no-repeat;
-	  background-size: cover;
-	}
-</style>-->
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">    
+{% endblock  %}
 
+{% block content %}
+	<div class="image-background mt-0"><img src="{% static 'img/Safegold-Background.jpg' %}"></div>
 {% endblock %}
+

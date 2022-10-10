@@ -1,25 +1,38 @@
+from enum import unique
+from tabnanny import verbose
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
 # Create your models here.
-# class Conta(models.Model):
-#     fornecedor = models.ForeignKey('Fornecedor.id',on_delete=models.CASCADE)
-#     desc = models.CharField(max_length=200)
-# 
-#     def get_absolute_url(self):
-#         return reverse("post_detail",kwargs={'pk':self.pk})
-# 
-#     def __str__(self):
-#         return self.title
-# 
-#
-# class Fornecedor(models.Model):
-#    nome = models.CharField(max_length=200)
-#    id = models.IntegerField()
-#
-#    def get_absolute_url(self):
-#        return reverse("post_list")
-#
-#    def __str__(self):
-#        return self.text
+class Conta(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    desc = models.CharField(max_length=200)
+    fornecedor = models.ForeignKey('Fornecedor', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'crud_app_conta'
+        verbose_name_plural = 'Conta'
+
+    def __str__(self):
+        return "{} - {}".format(self.fornecedor, self.desc)
+ 
+    def get_absolute_url(self):
+        return reverse('index')
+
+class Fornecedor(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    nome = models.CharField(max_length=256)
+    documento = models.CharField(unique=True, max_length=256)
+
+    class Meta:
+        managed = False
+        verbose_name_plural = 'Fornecedor'
+        db_table = 'crud_app_fornecedor'
+
+    def __str__(self):
+        return "{}".format(self.nome)
+
+    def get_absolute_url(self):
+        return reverse('index')

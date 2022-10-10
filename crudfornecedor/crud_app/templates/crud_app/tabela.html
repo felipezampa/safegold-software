@@ -1,67 +1,46 @@
 {% extends 'crud_app/base.html' %}
-
+{% load static %}
 {% block content %}
-        <h1 class="d-flex justify-content-center mt-3">Tabela Fornecedor Conta</h1>
-    </header>
-    <main>
-        <div class="sg-container mt-4">
-            <div class="col text-center mt-3 mb-3">
-                <a href="cadastro.html"><button type="submit" class="btn btn-warning btn-block">Adicionar</button></a>
-            </div>
-            <div class="sg-content">
-                <table class="table table-Light table-bordered table-striped mb-4">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="col text-center">ID</th>
-                            <th class="col">Conta</th>
-                            <th class="col">Fornecedor</th>
-                            <th class="col text-center sg-action-buttons excludeExport">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Conta1</td>
-                            <td>Fornecedor1</td>
-                            <td class="sg-action-buttons excludeExport text-center">
-                                <a th:href="@{/usuario/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <a th:href="@{/usuario/delete/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-trash-can"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">2</td>
-                            <td>Conta2</td>
-                            <td>Fornecedor2</td>
-                            <td class="sg-action-buttons excludeExport text-center">
-                                <a th:href="@{/usuario/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <a th:href="@{/usuario/delete/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-trash-can"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">3</td>
-                            <td>Conta3</td>
-                            <td>Fornecedor3</td>
-                            <td class="sg-action-buttons excludeExport text-center">
-                                <a th:href="@{/usuario/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <a th:href="@{/usuario/delete/{id}(id=${usuario.idaux_usuarios})}" class="m-2"><i
-                                        class="fa-solid fa-trash-can"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<header>
+    <h1 class="d-flex justify-content-center mt-3">Tabela Fornecedor Conta</h1>
+</header>
+<main>
+    <div class="sg-container mt-4">
+        <div class="col text-center mt-3 mb-3">
+            <a href="{% url 'crud_app:create' %}"><button type="submit" class="btn btn-warning btn-block">Adicionar</button></a>
         </div>
-    </main>
-    <footer class="footer fixed-bottom">
-        <div class="sg-footer-container">
-            <p>Exportar dados:</p>
-            <button type="button" class="btn btn-outline-dark sg-button" id="xlsxExport">Excel</button>
-            <button type="button" class="btn btn-outline-dark sg-button" id="printExport">Imprimir / PDF</button>
+        <div class="sg-content">
+            <table class="table table-Light table-bordered table-striped mb-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="col text-center">ID</th>
+                        <th class="col">Conta</th>
+                        <th class="col">Fornecedor</th>
+                        <th class="col text-center sg-action-buttons excludeExport">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conta in object_list %}
+                    <tr>
+                        <td class="text-center">{{conta.id}}</td>
+                        <td>{{conta.desc}}</td>
+                        <td>{{conta.fornecedor}}</td>
+                        <td class="sg-action-buttons excludeExport text-center">
+                            <a href="#" class="m-2"><i class="fa-solid fa-pen-to-square">Editar</i></a>
+                            <a href="#" class="m-2"><i class="fa-solid fa-trash-can">Excluir</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </footer>
+    </div>
+</main>
+<footer class="footer fixed-bottom">
+    <div class="sg-footer-container">
+        <p>Exportar dados:</p>
+        <button type="button" class="btn btn-outline-dark sg-button" id="xlsxExport">Excel</button>
+        <button type="button" class="btn btn-outline-dark sg-button" id="printExport">Imprimir / PDF</button>
+    </div>
+</footer>
 {% endblock %}
