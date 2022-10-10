@@ -20,26 +20,26 @@ class ContaListView(ListView):
     # context_object_name = 'schools'
     model = models.Conta
 
+class ContaCreateView(CreateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Conta
+    success_url = reverse_lazy("crud_app:list")
+
+class ContaUpdateView(UpdateView):
+    fields = ("desc","fornecedor")
+    model = models.Conta
+
+class ContaDeleteView(DeleteView):
+    model = models.Conta
+    success_url = reverse_lazy("crud_app:list")
+
 """
 class FornecedorDetailView(DetailView):
     context_object_name = 'fornecedor_details'
     model = models.Fornecedor
     template_name = 'crud_app/school_detail.html'
 
-"""
-class ContaCreateView(CreateView):
-    template_name = 'crud_app/cadastro.html'
-    fields = ("desc","fornecedor")
-    model = models.Conta
-
-"""
-class SchoolUpdateView(UpdateView):
-    fields = ("name","principal")
-    model = models.School
-
-class SchoolDeleteView(DeleteView):
-    model = models.School
-    success_url = reverse_lazy("basic_app:list")
 """
 #def read_planodecontas(request):
 #    conta = Conta.objects.all()
