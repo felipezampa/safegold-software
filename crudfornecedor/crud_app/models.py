@@ -8,7 +8,7 @@ from django.urls import reverse
 class Conta(models.Model):
     id = models.BigAutoField(primary_key=True)
     desc = models.CharField(max_length=200)
-    fornecedor = models.ForeignKey('Fornecedor', models.DO_NOTHING)
+    fornecedor = models.ForeignKey('Fornecedor', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
