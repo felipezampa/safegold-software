@@ -7,7 +7,7 @@ from django.urls import reverse
 # Create your models here.
 class Conta(models.Model):
     id = models.BigAutoField(primary_key=True)
-    desc = models.CharField(max_length=200)
+    desc = models.CharField(max_length=200,verbose_name='Descrição')
     fornecedor = models.ForeignKey('Fornecedor', on_delete=models.CASCADE)
 
     class Meta:

@@ -10,6 +10,8 @@
     --erase: #ff0000;
     --erase-hover: #942121;
     --edit-hover: #0000bd;
+    --expand: #ca8f0f;
+    --expand-hover: #855d08;
 }
 
 .sg-container {
@@ -54,6 +56,13 @@
     padding: 5px 25px;
 }
 
+.fa-expand{
+    color: var(--expand);
+}
+
+.fa-expand:hover{
+    color: var(--expand-hover);
+}
 
 .fa-trash-can{
     color: var(--erase);
@@ -118,7 +127,7 @@
     }
     
     .sg-header-container h1 {
-        font-size: 20px;
+        font-size: 16px;
     }
     .table-dark {
         color: var(--black);
@@ -130,11 +139,7 @@
     }
     .sg-table-container {
         padding: 0px;
-    }
-
-    .esconde-print{
-        display: none;
-    }    
+    }   
 
     tbody {
         padding: 0px;
@@ -150,7 +155,7 @@
         background: var(--white);
     }
 
-    #sg-filter-table{
+    #sg-filter-table, li, a{
     display: none;
     }
 

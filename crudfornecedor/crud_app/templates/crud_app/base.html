@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark sg-dark justify-content-between esconde-print" style="background-color:#414442">
+        <nav class="navbar navbar-expand-lg navbar-dark sg-dark justify-content-between" style="background-color:#414442">
             <div class="navbar-collapse">
                 <a class="navbar-brand d-flex" href="{% url 'index' %}">
                     <img src="{% static "img/Safegold.svg" %}" height="30" alt="Safegold" class="mx-4" id="safegold">
@@ -42,8 +42,6 @@
     {% endblock %}
         <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>	   
     {% block scripts %}
-    <!-- O Jquery, favicon só funcionam quando importados diretamente da web --> 
-        <script src="{% static 'js/tabela.js' %}"></script>
     {% endblock scripts %}
 </body>
 
