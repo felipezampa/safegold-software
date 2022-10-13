@@ -1,12 +1,13 @@
 body, html {
     height: 96.7%;
     margin: 0;
-  }
-  .image-background{
+}
+
+.image-background{
     filter: blur(5px);
     -webkit-filter: blur(5px);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30%;
-  }
+}

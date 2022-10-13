@@ -130,6 +130,10 @@
     }
     .sg-table-container {
         padding: 0px;
+    }
+
+    .esconde-print{
+        display: none;
     }    
 
     tbody {

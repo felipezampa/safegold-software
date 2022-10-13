@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark sg-dark justify-content-between" style="background-color:#414442">
+        <nav class="navbar navbar-expand-lg navbar-dark sg-dark justify-content-between esconde-print" style="background-color:#414442">
             <div class="navbar-collapse">
                 <a class="navbar-brand d-flex" href="{% url 'index' %}">
                     <img src="{% static "img/Safegold.svg" %}" height="30" alt="Safegold" class="mx-4" id="safegold">
@@ -31,7 +31,6 @@
             </div>
             <div>
                 <form class="form-inline d-flex justify-content-right">
-                    <button onclick="myFunction()">Click me!</button>
                     <button class="btn btn-danger my-2 my-sm-0 mx-4" type="submit">
                         <a class="nav-link text-white font-weight-bold" href="{% url 'admin:index' %}">Admin</a>
                     </button>
@@ -40,12 +39,11 @@
         </nav>
     </header>
     {% block content %}
-    {% endblock %}	   
+    {% endblock %}
+        <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>	   
     {% block scripts %}
-        <script src="{% static 'crud_app/js/jquery.js' %}"></script>  
-        <script src="{% static 'crud_app/js/teste.js' %}"></script>
-        <script src="{% static 'crud_app/js/index.js' %}"></script>
-        <script src="{% static 'myfirst.js' %}"></script>
+    <!-- O Jquery, favicon só funcionam quando importados diretamente da web --> 
+        <script src="{% static 'js/tabela.js' %}"></script>
     {% endblock scripts %}
 </body>
 
