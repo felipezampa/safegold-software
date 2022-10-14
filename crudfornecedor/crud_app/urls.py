@@ -8,4 +8,5 @@ urlpatterns = [
     path('create/',views.ContaCreateView.as_view(),name='create'),
     path('update/<int:pk>/',views.ContaUpdateView.as_view(),name='update'),
     path('delete/<int:pk>/',views.ContaDeleteView.as_view(),name='delete'),
+    path('detail/<int:pk>/',views.ContaDetailView.as_view(),name='detail'),
 ]
