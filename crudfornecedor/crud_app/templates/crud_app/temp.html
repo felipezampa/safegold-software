@@ -1,0 +1,95 @@
+{% extends 'crud_app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags%} 
+{% block title %}<title>Tabela</title>{% endblock title %}
+{% block content %}
+<main>
+    <div class="row">
+        <div class="col sg-container mt-2">
+            <p>Adicionar</p>
+            <form action="" class="sg-content" method="POST">
+                {% csrf_token %} 
+                
+                {{ form|crispy }}
+                <div class="col text-center mb-1 mt-1">
+                    <hr>
+                    <button type="submit" class="btn btn-warning btn-block">Adicionar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="col sg-container mt-2">
+                <p>Filtrar</p>
+                <form action="" class="sg-content" method="POST">
+                    {% csrf_token %} 
+                    
+                    {{ form|crispy }}
+                    <div class="col text-center mb-1 mt-1">
+                        <hr>
+                        <button type="submit" class="btn btn-warning btn-block text-center">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </div>  
+    </div>
+
+    <div class="sg-container mt-4">
+        <div class="sg-content">
+            <table class="table table-Light table-bordered table-striped mb-3 mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="col text-center">ID</th>
+                        <th class="col">Conta</th>
+                        <th class="col">Fornecedor</th>
+                        <th class="col text-center sg-action-buttons excludeExport">Action</th>
+                    </tr>
+                </thead>
+                <tbody hx-target = "closest tr" hx-swap="outerHTML">
+                    {% for conta in object_list %}
+                    <tr>
+                        <td class="text-center col-md-1">{{conta.id}}</td>
+                        <td>{{conta.desc}}</td>
+                        <td class="col-md-3">{{conta.fornecedor}}</td>
+                        <td>
+                            <button class="btn btn-danger"
+                                    hx-get="/crud_app/${conta.id}/edit"
+                                    hx-trigger="edit"
+                                    _="on click
+                                        if .editing is not empty
+                                            Swal.fire({title: 'Already Editing',
+                                                        showCancelButton: true,
+                                                        confirmButtonText: 'Yep, Edit This Row!',
+                                                        text:'Hey!  You are already editing a row!  Do you want to cancel that edit and continue?'})
+                                    if the result's isConfirmed is false
+                                        halt
+                                        end
+                                        send cancel to .editing
+                                    end
+                                    trigger edit">
+                             Edit
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer class="footer fixed-bottom">
+    <div class="sg-footer-container">
+        <p>Exportar dados:</p>
+        <button type="button" class="btn btn-outline-dark sg-button" id="xlsxExport">Excel</button>
+        <button type="button" class="btn btn-outline-dark sg-button" id="printExport">PDF</button>
+    </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/tabela.js' %}"></script>
+    <script src="{% static 'js/exportExcel.js' %}"></script>
+{% endblock scripts %}
+
+
+
+

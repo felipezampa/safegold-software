@@ -14,7 +14,7 @@ class ContaListView(ListView):
     model = models.Conta
 
 class ContaCreateView(CreateView):
-    template_name = 'crud_app/cadastro.html'
+    template_name = 'crud_app/tabela.html'
     fields = ("desc","fornecedor")
     model = models.Conta
     success_url = reverse_lazy("crud_app:list")

@@ -10,3 +10,4 @@ urlpatterns = [
     path('delete/<int:pk>/',views.ContaDeleteView.as_view(),name='delete'),
     path('detail/<int:pk>/',views.ContaDetailView.as_view(),name='detail'),
 ]
+
