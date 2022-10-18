@@ -12,12 +12,14 @@
     --edit-hover: #0000bd;
     --expand: #ca8f0f;
     --expand-hover: #855d08;
+    --shadow-container: #1f26875e;
+    --border-container: #2222225e;
 }
 
 .sg-container {
-    box-shadow: 0 8px 32px 0 #1f26875e;
+    box-shadow: 0 8px 32px 0 var(--shadow-container);
     border-radius: 10px;
-    border: 1px solid #2222225e;
+    border: 1px solid var(--border-container);
     margin-left: 3%;
     margin-right: 3%;
     margin-bottom: 5%;
@@ -90,7 +92,7 @@
 @media(max-width: 529px) {
 
     h1 {
-        font-size: 25px;
+        font-size: 17px;
     }
 
     .logo{
