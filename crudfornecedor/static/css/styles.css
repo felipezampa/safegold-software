@@ -16,6 +16,14 @@
     --border-container: #2222225e;
 }
 
+body{
+    margin-bottom: 5em;
+}
+
+main{
+    margin-left: 5em;
+    margin-right: 5em;
+}
 
 .sg-container {
     box-shadow: 0 8px 32px 0 var(--shadow-container);
@@ -142,7 +150,11 @@
     }
     .sg-table-container {
         padding: 0px;
-    }   
+    }
+    
+    .ignore-on-print{
+        display: none;
+    }
 
     tbody {
         padding: 0px;

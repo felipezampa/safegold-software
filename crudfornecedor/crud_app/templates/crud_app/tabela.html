@@ -4,9 +4,9 @@
 {% block title %}<title>Tabela</title>{% endblock title %}
 {% block content %}
 <main>
-    <div class="container-fluid mb-5">
+    <div class="container-fluid" style="margin-bottom:150px;">
         <div class="row">
-            <div class="col sg-container mt-2 mx-3">
+            <div class="col sg-container mt-2 mx-3 ignore-on-print">
                 <h3 class="text-center">Adicionar</h3>
                 <form action="" class="sg-content" method="POST">
                     {% csrf_token %} 
@@ -30,7 +30,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col sg-container mt-2 mx-3">
+            <div class="col sg-container mt-2 mx-3 ignore-on-print">
                 <h3 class="text-center">Filtrar</h3>
                 <form action="" class="sg-content" method="POST">
                     {% csrf_token %} 
@@ -56,10 +56,10 @@
             </div>
         </div>
     
-        <div class="sg-container mt-3 mx-1">
+        <div class="sg-container mt-3 mx-1 mb-5" style="margin-bottom: 1px">
             <div class="sg-content">
-                <h3 class="text-center">Tabela</h3>
-                <table class="table table-Light table-bordered table-striped mb-3 mt-3">
+                <h3 class="text-center mt-1">Tabela</h3>
+                <table class="table table-Light table-bordered table-striped mb-3 mt-2">
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
