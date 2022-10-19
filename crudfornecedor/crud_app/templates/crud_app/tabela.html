@@ -4,6 +4,7 @@
 {% block title %}<title>Tabela</title>{% endblock title %}
 {% block content %}
 <main>
+    <div id="print-info" class="text-center"></div>
     <div class="container-fluid" style="margin-bottom:150px;">
         <div class="row">
             <div class="col sg-container mt-2 mx-3 ignore-on-print">
@@ -50,7 +51,7 @@
                     <div class="col text-center mb-1 mt-1">
     
                         <hr>
-                        <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-2">Filtrar</button>
                     </div>
                 </form>
             </div>
@@ -58,14 +59,14 @@
     
         <div class="sg-container mt-3 mx-1 mb-5" style="margin-bottom: 1px">
             <div class="sg-content">
-                <h3 class="text-center mt-1">Tabela</h3>
-                <table class="table table-Light table-bordered table-striped mb-3 mt-2">
+                <h3 class="text-center mt-1 ignore-on-print">Tabela</h3>
+                <table class="table table-Light table-bordered table-striped mb-3 mt-2" id="user-table">
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
                             <th class="col">Conta</th>
                             <th class="col">Fornecedor</th>
-                            <th class="col text-center sg-action-buttons excludeExport">Action</th>
+                            <th class="col text-center ignore-on-print excludeExport">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +75,7 @@
                             <td class="text-center col-md-1">{{conta.id}}</td>
                             <td>{{conta.desc}}</td>
                             <td class="col-md-3">{{conta.fornecedor}}</td>
-                            <td class="sg-action-buttons excludeExport text-center col-md-2">
+                            <td class="ignore-on-print excludeExport text-center col-md-2">
                                 <a href="{% url 'crud_app:detail' pk=conta.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-expand"></i></a>   
                                 <a href="{% url 'crud_app:update' pk=conta.pk %}" class="mx-3" title="Editar Conta"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="{% url 'crud_app:delete' pk=conta.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
@@ -88,7 +89,7 @@
         </div>
     </div>
 </main>
-<footer class="footer fixed-bottom">
+<footer class="footer fixed-bottom ignore-on-print">
     <div class="sg-footer-container">
         <p>Exportar dados:</p>
         <button type="button" class="btn btn-outline-dark sg-button" id="xlsxExport">Excel</button>

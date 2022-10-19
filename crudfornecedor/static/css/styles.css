@@ -89,19 +89,33 @@ main{
     cursor: pointer;
 }
 
+.print-info{
+    visibility: hidden;
+    display: none;
+}
+
 @media(max-width: 994px) {
     h1 {
         font-size: 30px;
-    }
-    #safegold{
-        display: none;
     }
 }
 
 @media(max-width: 529px) {
 
+    body, main{
+        margin: auto;
+    }
+
+    a {
+        padding: 0px;
+    }
+
     h1 {
         font-size: 17px;
+    }
+
+    img{
+        width: auto;
     }
 
     .logo{
@@ -114,9 +128,6 @@ main{
     }
 
     .sg-button {
-        background-color: var(--light-gray);
-        color: var(--black);
-        border: 1px solid var(--dark-gray);
         margin: 5px;
         padding: 4px 20px;
     }
@@ -126,28 +137,19 @@ main{
         justify-content: end;
         align-items: right;
     }
-    #sg-navbar img{
-        height: 5px;
-    }
 
 }
 
 @media print {
-    .sg-footer-container{
-        display: none;
-    }
-    
-    .sg-header-container h1 {
-        font-size: 16px;
+    .print-info{
+        visibility: visible;
+        display: inline-block;
     }
     .table-dark {
         color: var(--black);
         border: 1px 0px 0px 0px;
     }
 
-    .sg-action-buttons{
-        display: none;
-    }
     .sg-table-container {
         padding: 0px;
     }
@@ -189,4 +191,9 @@ main{
         padding-left: 0%;
         padding-right: 0%;
     }
+}
+
+.dark-mode {
+    background-color: var(--dark-gray);
+    color: white;
 }
