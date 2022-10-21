@@ -1,3 +1,4 @@
+/* ====================================          VARÍAVEIS           ==================================== */
 :root {
     --sg-yellow: #EDAA1E;
     --sg-gray: #414442;
@@ -16,6 +17,7 @@
     --border-container: #2222225e;
 }
 
+/* ====================================    TAGS ORIGINAIS DO HTML    ==================================== */
 body{
     margin-bottom: 5em;
 }
@@ -25,6 +27,7 @@ main{
     margin-right: 5em;
 }
 
+/* ====================================           CLASSES            ==================================== */
 .sg-container {
     box-shadow: 0 8px 32px 0 var(--shadow-container);
     border-radius: 10px;
@@ -67,6 +70,14 @@ main{
     padding: 5px 25px;
 }
 
+.print-info{
+    visibility: hidden;
+    display: none;
+}
+/* ====================================             ID               ==================================== */
+
+
+/* ====================================         FONTAWESOME          ==================================== */
 .fa-expand{
     color: var(--expand);
 }
@@ -89,11 +100,11 @@ main{
     cursor: pointer;
 }
 
-.print-info{
-    visibility: hidden;
-    display: none;
+.fa-circle{
+    font-size: 0.33em;
 }
 
+/* ====================================           @MEDIA             ==================================== */
 @media(max-width: 994px) {
     h1 {
         font-size: 30px;
@@ -193,7 +204,30 @@ main{
     }
 }
 
-.dark-mode {
-    background-color: var(--dark-gray);
-    color: white;
+/* ====================================           NAVBAR             ==================================== */
+.sg-projeto:hover{
+    background-color: var(--sg-yellow);
+    color: var(--sg-gray);
+    font-size: 1em;
 }
+
+.navbar .megamenu{ padding: 1rem; }
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+
+  .navbar .has-megamenu{position:static!important;}
+  .navbar .megamenu{left:0; right:0; width:100%; margin-top:0;  }
+
+}	
+/* ============ desktop view .end// ============ */
+
+/* ============ mobile view ============ */
+@media(max-width: 991px){
+  .navbar.fixed-top .navbar-collapse, .navbar.sticky-top .navbar-collapse{
+    overflow-y: auto;
+      max-height: 90vh;
+      margin-top:10px;
+  }
+}
+/* ============ mobile view .end// ============ */

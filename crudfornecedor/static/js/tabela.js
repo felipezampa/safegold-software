@@ -3,7 +3,6 @@ $(document).ready(
     $(".sg-content").slideDown(1000)        
 );
 
-
 $(document).ready(
     function exportPrint() {
         $(document).on("click", "#printExport", function () {
@@ -30,9 +29,3 @@ $(document).ready(
         });
     }
 );
-
-
-function DarkMode() {
-    var element = document.body;
-    element.classList.toggle("dark-mode");
- }
