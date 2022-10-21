@@ -2,6 +2,7 @@
 :root {
     --sg-yellow: #EDAA1E;
     --sg-gray: #414442;
+    --sg-white: #E6E7E9;
     --black: #000;
     --white: #fff;
     --light-gray: #D1C8B5;
@@ -16,6 +17,7 @@
     --shadow-container: #1f26875e;
     --border-container: #2222225e;
 }
+
 
 /* ====================================    TAGS ORIGINAIS DO HTML    ==================================== */
 body{
@@ -213,21 +215,43 @@ main{
 
 .navbar .megamenu{ padding: 1rem; }
 
-/* ============ desktop view ============ */
+.vertical-line{
+    border-left: solid 1px var(--border-container);
+}
+
+.dropdown-menu{
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+    border-bottom: 1px solid var(--border-container);
+}
+.dropdown-menu a{
+    font-weight: 500 ;
+}
+
+.dropdown-hover:hover>.dropdown-menu {
+    display: inline-block;
+}
+    
+.dropdown-hover>.dropdown-toggle:active {
+/*Without this, clicking will make it sticky*/
+pointer-events: none;
+}
+/* === desktop view === */
 @media all and (min-width: 992px) {
 
   .navbar .has-megamenu{position:static!important;}
   .navbar .megamenu{left:0; right:0; width:100%; margin-top:0;  }
 
-}	
-/* ============ desktop view .end// ============ */
-
-/* ============ mobile view ============ */
+}
+/* === mobile view === */
 @media(max-width: 991px){
   .navbar.fixed-top .navbar-collapse, .navbar.sticky-top .navbar-collapse{
     overflow-y: auto;
       max-height: 90vh;
       margin-top:10px;
   }
+
+  .sg-button{
+    align-items: center;
+  }
 }
-/* ============ mobile view .end// ============ */
