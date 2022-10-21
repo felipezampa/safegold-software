@@ -13,7 +13,7 @@ $(document).ready(
             var min = today.getMinutes();
             var hour = today.getHours();
 
-            today = 'Relatório emitido em:>= ' + dd + '/' + mm + '/' + yyyy + ' às: ' + hour + ':' + min;
+            today = 'Relatório emitido em:  ' + dd + '/' + mm + '/' + yyyy + ' às: ' + hour + ':' + min;
             // Create an "li" node:
             const node = document.createElement("h5");
             // Create a text node:
