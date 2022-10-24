@@ -18,7 +18,6 @@
     --border-container: #2222225e;
 }
 
-
 /* ====================================    TAGS ORIGINAIS DO HTML    ==================================== */
 body{
     margin-bottom: 5em;
@@ -215,6 +214,10 @@ main{
 
 .navbar .megamenu{ padding: 1rem; }
 
+.navbar .dropdown-toggle:hover { 
+    background-color: var(--dark-gray);
+    border-radius: 5%;
+}
 .vertical-line{
     border-left: solid 1px var(--border-container);
 }
@@ -254,4 +257,12 @@ pointer-events: none;
   .sg-button{
     align-items: center;
   }
+  .col{
+    margin: 0px;
+  }
+  .navbar .admin-button{
+    text-align: center;
+    display: flex; 
+    justify-content: center;
+ }
 }
