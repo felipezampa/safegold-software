@@ -44,6 +44,9 @@ class Bairros(models.Model):
         db_table = 'bairros'
         verbose_name_plural = 'Bairros'
 
+    def __str__(self):
+        return "{} - {}".format(self.bairro,self.uf)
+
 
 
 class Cidades(models.Model):
@@ -59,6 +62,7 @@ class Cidades(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.cidade,self.uf)
+
 
 
 class Dimcontas(models.Model):
@@ -119,6 +123,10 @@ class Estados(models.Model):
         db_table = 'estados'        
         verbose_name_plural = 'Estados'
 
+    def __str__(self):
+        return "{}".format(self.estado)
+
+
 
 class MatrizContaFornecedor(models.Model):
     cod_fornecedor = models.BigIntegerField()
@@ -132,6 +140,9 @@ class MatrizContaFornecedor(models.Model):
         managed = False
         db_table = 'matriz_conta_fornecedor'
         verbose_name_plural = 'Matriz Conta Fornecedor'
+    def __str__(self):
+        return "FORNECEDOR: {} - CONTA: {}".format(self.desc_fornecedor, self.id_conta)
+
 
 
 class Pais(models.Model):
@@ -144,7 +155,11 @@ class Pais(models.Model):
     class Meta:
         managed = False
         db_table = 'pais'
-        verbose_name_plural = 'Paises'        
+        verbose_name_plural = 'Paises'      
+          
+    def __str__(self):
+        return "{}".format(self.pais)
+
 
 
 class Projetos(models.Model):
@@ -189,6 +204,8 @@ class Projetos(models.Model):
         db_table = 'projetos'
         verbose_name_plural = 'Projetos'
 
+    def __str__(self):
+        return "{}".format(self.projeto)
 
 class Regioes(models.Model):
     cod_regiao = models.AutoField(primary_key=True)
@@ -198,3 +215,6 @@ class Regioes(models.Model):
         managed = False
         db_table = 'regioes'
         verbose_name_plural = 'Regioes'        
+    
+    def __str__(self):
+        return "{}".format(self.regiao)
