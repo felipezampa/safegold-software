@@ -1,4 +1,26 @@
-$(document).ready(function removeAction() {
+/*
+function ExportToExcel(type, fn, dl) {
+  var elt = document.getElementById("tbl_exporttable_to_xls");
+  var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+  return dl
+    ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+    : XLSX.writeFile(wb, fn || "MySheetName." + (type || "xlsx"));
+}
+*/
+
+
+$(document).ready(function exportToExcel() {
+	$(document).on("click", "#xlsxExport", function () {
+		$("#fornecedor-table").table2excel({
+			exclude: ".excludeExport",
+			filename: "Tabela", // do include extension
+			fileext: ".xls",
+			preserveColors: false // set to true if you want background colors and font colors preserved
+		});
+	});
+});
+
+/*$(document).ready(function removeAction() {
 	$("#xlsxExport").click(function () {
 		let tableClone = $('#user-table').clone();
 		tableClone
@@ -27,3 +49,4 @@ $(document).ready(function refreshPage() {
 		setTimeout(location.reload.bind(location), 50);
 	});
 });
+*/
