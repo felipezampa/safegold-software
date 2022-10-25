@@ -207,6 +207,8 @@ class Projetos(models.Model):
     def __str__(self):
         return "{}".format(self.projeto)
 
+
+
 class Regioes(models.Model):
     cod_regiao = models.AutoField(primary_key=True)
     regiao = models.CharField(max_length=50)

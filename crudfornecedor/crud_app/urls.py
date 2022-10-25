@@ -9,5 +9,11 @@ urlpatterns = [
     path('update/<int:pk>/',views.ContaUpdateView.as_view(),name='update'),
     path('delete/<int:pk>/',views.ContaDeleteView.as_view(),name='delete'),
     path('detail/<int:pk>/',views.ContaDetailView.as_view(),name='detail'),
+    path('empresas/',views.EmpresaListView.as_view(),name='list'),
+    # path('projetos/',views.ProjetoListView.as_view(),name='list'),
+    # path('create/projetos',views.ContaCreateView.as_view(),name='create'),
+    # path('update/projetos/<int:pk>/',views.ContaUpdateView.as_view(),name='update'),
+    # path('delete/projetos/<int:pk>/',views.ContaDeleteView.as_view(),name='delete'),
+    # path('detail/projetos/<int:pk>/',views.ContaDetailView.as_view(),name='detail'),
 ]
 

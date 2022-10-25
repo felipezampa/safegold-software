@@ -5,6 +5,11 @@ from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,Up
 from . import models
 
 
+class  EmpresaListView(ListView):
+    template_name = 'crud_app/EmpresaTabela.html'
+    model = models.Empresas
+
+
 
 class IndexView(TemplateView):
      template_name = 'crud_app/index.html'

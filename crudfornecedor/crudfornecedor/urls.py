@@ -20,5 +20,5 @@ from crud_app import views
 urlpatterns = [
     path('',views.IndexView.as_view(),name='index'),
     path('admin/',admin.site.urls,name='admin'),
-    path('crud_app/',include('crud_app.urls',namespace='crud_app')),
+    path('app/',include('crud_app.urls',namespace='crud_app')),
 ]
