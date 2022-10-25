@@ -4,15 +4,18 @@ from django.http import HttpResponse
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
 
-
+class IndexView(TemplateView):
+     template_name = 'crud_app/index.html'
+###########################################################
 class  EmpresaListView(ListView):
     template_name = 'crud_app/EmpresaTabela.html'
     model = models.Empresas
 
+class  EmpresaCreateView(CreateView):
+    template_name = 'crud_app/EmpresaTabela.html'
+    model = models.Empresas
+###########################################################
 
-
-class IndexView(TemplateView):
-     template_name = 'crud_app/index.html'
 
 class ContaListView(ListView):
     template_name = 'crud_app/tabela.html'

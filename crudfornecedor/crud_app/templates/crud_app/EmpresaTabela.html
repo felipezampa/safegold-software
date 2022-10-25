@@ -64,22 +64,24 @@
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
-                            <th class="col">Conta</th>
-                            <th class="col">Fornecedor</th>
+                            <th class="col">Empresa</th>
+                            <th class="col">Data Cadastro</th>
+                            <th class="col">Data Atualizado</th>
+                            <th class="col">CNPJ</th>
                             <th class="col text-center ignore-on-print excludeExport">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for empresa in object_list %}
+                        {% for empresas in object_list %}
                         <tr>
-                            <td class="text-center col-md-1">{{conta.cod_empresa}}</td>
-                            <td>{{conta.empresa}}</td>
-                            <td>{{conta.data_cadastro}}</td>
-                            <td>{{conta.data_atualiza}}</td>
-                            <td>{{conta.cnpj}}</td>
+                            <td class="text-center col-md-1">{{empresas.cod_empresa}}</td>
+                            <td>{{empresas.empresa}}</td>
+                            <td>{{empresas.data_cadastro|date:"d/m/Y H:i" }}</td>
+                            <td>{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
+                            <td>{{empresas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
-                                <a href="{% url 'crud_app:detail' pk=conta.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
-                                <a href="{% url 'crud_app:delete' pk=conta.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="#" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
+                                <a href="#" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
                             </td>
                         </tr>
                         

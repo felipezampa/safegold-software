@@ -1,20 +1,20 @@
 from django import forms
-
 from .models import *
 
 
-class ExpenseForm(forms.ModelForm):
+class EmpresaForm(forms.ModelForm):
     required_css_class = 'required'
 
     class Meta:
-        model = Expense
-        fields = ('description', 'value')
+        model = Empresas 
+        fields = ('empresa', 'safegold_ger','cnpj')
         widgets = {
-            'description': forms.TextInput(attrs={'placeholder': 'Descrição', 'autofocus': True}),
-            'value': forms.NumberInput(attrs={'placeholder': 'Valor'}),
+            'empresa': forms.TextInput(attrs={'placeholder': 'Nome da Empresa', 'autofocus': True}),
+            'safegold_ger': forms.NumberInput(attrs={'placeholder': 'safegold_ger'}),
+            'cnpj': forms.NumberInput(attrs={'placeholder': 'CNPJ'}),
         }
 
     def __init__(self, *args, **kwargs):
-        super(ExpenseForm, self).__init__(*args, **kwargs)
+        super(EmpresaForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
