@@ -76,7 +76,9 @@ main{
     display: none;
 }
 /* ====================================             ID               ==================================== */
-
+#export:hover{
+    background-color: var(--sg-white);
+}
 
 /* ====================================         FONTAWESOME          ==================================== */
 .fa-expand{
@@ -96,23 +98,12 @@ main{
     cursor: pointer;
 }
 
-.fa-pen-to-square:hover{
-    color: var(--edit-hover);
-    cursor: pointer;
-}
-
 .fa-circle{
     font-size: 0.33em;
 }
 
 /* ====================================           @MEDIA             ==================================== */
-@media(max-width: 994px) {
-    h1 {
-        font-size: 30px;
-    }
-}
-
-@media(max-width: 529px) {
+@media(max-width: 600px) {
 
     body, main{
         margin: auto;
@@ -149,7 +140,11 @@ main{
         justify-content: end;
         align-items: right;
     }
-
+}
+@media(max-width: 740){
+    .sg-container{
+        margin: 0;
+    }
 }
 
 @media print {

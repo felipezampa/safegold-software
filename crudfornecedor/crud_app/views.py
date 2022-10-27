@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from django.views import View
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
 
@@ -41,3 +42,10 @@ class ContaUpdateView(UpdateView):
 class ContaDetailView(DetailView):
     model = models.Conta 
     template_name = 'crud_app/detail.html'
+
+
+class PDF(View):
+    def get(self,request):
+        Veiculos= Veiculo.objects.all()
+
+class CSV():
