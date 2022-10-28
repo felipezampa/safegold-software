@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.views import View
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
 
@@ -13,6 +12,29 @@ class  EmpresaListView(ListView):
     model = models.Empresas
     context_object_name: 'empresa'
 
+def create_book(request, pk):
+    author = Empresas.objects.get(id=pk)
+    books = Book.objects.filter(author=author)
+    form = BookForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.author = author
+            book.save()
+            return redirect("detail-book", pk=book.id)
+        else:
+            return render(request, "partials/book_form.html", context={
+                "form": form
+            })
+
+    context = {
+        "form": form,
+        "author": author,
+        "books": books
+    }
+
+    return render(request, "create_book.html", context)
 
 class  EmpresaCreateView(CreateView):
     template_name = 'crud_app/EmpresaTabela.html'
@@ -45,23 +67,15 @@ class ContaDetailView(DetailView):
     model = models.Conta 
     template_name = 'crud_app/detail.html'
 
-# class PDF(View):
-#     def get(self,request):
-#         Veiculos= Veiculo.objects.all()
-
-# class CSV():
-#     def get(self,request):
-#         Veiculos= Veiculo.objects.all()
-
-def add_empresa(request):
-    name = request.POST.get('empresa')
+# def add_empresa(request):
+#     name = request.POST.get('empresa')
     
-    # add film
-    film = Film.objects.create(name=name)
+#     # add film
+#     film = Film.objects.create(name=name)
     
-    # add the film to the user's list
-    request.user.films.add(film)
+#     # add the film to the user's list
+#     request.user.films.add(film)
 
-    # return template fragment with all the user's films
-    films = request.user.films.all()
-    return render(request, 'partials/film-list.html', {'films': films})
+#     # return template fragment with all the user's films
+#     films = request.user.films.all()
+#     return render(request, 'partials/film-list.html', {'films': films})

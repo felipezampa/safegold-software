@@ -5,10 +5,10 @@ $(document).ready(
 
 $(document).ready(
     function exportPrint() {
-        $(document).on("click", "#printExport", function () {
+        $(document).on("click", "#exportPDF", function () {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
             var min = today.getMinutes();
             var hour = today.getHours();
@@ -18,7 +18,6 @@ $(document).ready(
             const node = document.createElement("h5");
             // Create a text node:
             const textnode = document.createTextNode(today);
-
             // Append the text node to the "li" node:
             node.appendChild(textnode);
 

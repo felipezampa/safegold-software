@@ -60,7 +60,7 @@
         <div class="sg-container mt-3 mx-1 mb-5" style="margin-bottom: 1px">
             <div class="sg-content">
                 <h3 class="text-center mt-1 ignore-on-print">Tabela</h3>
-                <table class="table table-Light table-bordered table-striped mb-3 mt-2 table-responsive table-hover" id="fornecedor-table">
+                <table class="table table-Light table-bordered table-striped mb-3 mt-2 table-responsive table-hover" id="sg-table">
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
@@ -95,17 +95,12 @@
 <footer class="footer fixed-bottom ignore-on-print">
     <div class="sg-footer-container">
         <p>Exportar dados:</p>
-        <button type="button" class="btn btn-outline-dark sg-button" id="export">
-            <a class="text-decoration-none text-dark" href="{% url 'admin:index' %}">CSV</a>
-        </button>
-        <button type="button" class="btn btn-outline-dark sg-button" id="export">
-            <a class="text-decoration-none text-dark" href="{% url 'admin:index' %}">PDF</a>
-        </button>
+        <button type="button" class="btn btn-outline-dark sg-button" id="exportCSV">CSV</button>
+        <button type="button" class="btn btn-outline-dark sg-button" id="exportPDF">PDF</button>
     </div>
 </footer>
 {% endblock %}
 {% block scripts %}
-    <script src="{% static 'js/tabela.js' %}"></script>
-    <script src="{% static 'js/table2excel.js'%}"></script>
-    <script src="{% static 'js/exportExcel.js' %}"></script>
+    <script src="{% static 'js/ExportPDF.js' %}"></script>
+    <script src="{% static 'js/ExportCSV.js' %}"></script>
 {% endblock scripts %}
