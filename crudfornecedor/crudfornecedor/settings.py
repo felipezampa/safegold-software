@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'crud_app.apps.CrudAppConfig',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [

@@ -27,7 +27,7 @@
                     <div class="col text-center mb-1 mt-1">
     
                         <hr>
-                        <button type="submit" class="btn btn-warning btn-block">Adicionar</button>
+                        <button  hx-post: type="submit" class="btn btn-warning btn-block">Adicionar</button>
                     </div>
                 </form>
             </div>
@@ -97,6 +97,17 @@
 </footer>
 {% endblock %}
 {% block scripts %}
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        });
+        htmx.on("htmx:afterSwap", function(evt) {
+        if (evt.target.id == 'expenseTbody') {
+            document.getElementById('id_description').value = ''
+            document.getElementById('id_value').value = ''
+        }
+        });
+    </script>
     <script src="{% static 'js/tabela.js' %}"></script>
     <script src="{% static 'js/table2excel.js'%}"></script>
     <script src="{% static 'js/exportExcel.js' %}"></script>

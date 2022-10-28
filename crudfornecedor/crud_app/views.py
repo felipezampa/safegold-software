@@ -11,6 +11,8 @@ class IndexView(TemplateView):
 class  EmpresaListView(ListView):
     template_name = 'crud_app/EmpresaTabela.html'
     model = models.Empresas
+    context_object_name: 'empresa'
+
 
 class  EmpresaCreateView(CreateView):
     template_name = 'crud_app/EmpresaTabela.html'
@@ -43,9 +45,23 @@ class ContaDetailView(DetailView):
     model = models.Conta 
     template_name = 'crud_app/detail.html'
 
+# class PDF(View):
+#     def get(self,request):
+#         Veiculos= Veiculo.objects.all()
 
-class PDF(View):
-    def get(self,request):
-        Veiculos= Veiculo.objects.all()
+# class CSV():
+#     def get(self,request):
+#         Veiculos= Veiculo.objects.all()
 
-class CSV():
+def add_empresa(request):
+    name = request.POST.get('empresa')
+    
+    # add film
+    film = Film.objects.create(name=name)
+    
+    # add the film to the user's list
+    request.user.films.add(film)
+
+    # return template fragment with all the user's films
+    films = request.user.films.all()
+    return render(request, 'partials/film-list.html', {'films': films})

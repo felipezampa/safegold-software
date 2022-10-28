@@ -3,11 +3,9 @@ from .models import *
 
 
 class EmpresaForm(forms.ModelForm):
-    required_css_class = 'required'
-
     class Meta:
         model = Empresas 
-        fields = ('empresa', 'safegold_ger','cnpj')
+        fields = ("empresa","proj" "safegold_ger","cnpj")
         widgets = {
             'empresa': forms.TextInput(attrs={'placeholder': 'Nome da Empresa', 'autofocus': True}),
             'safegold_ger': forms.NumberInput(attrs={'placeholder': 'safegold_ger'}),
@@ -18,3 +16,4 @@ class EmpresaForm(forms.ModelForm):
         super(EmpresaForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            
