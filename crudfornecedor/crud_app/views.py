@@ -6,76 +6,106 @@ from . import models
 
 class IndexView(TemplateView):
      template_name = 'crud_app/index.html'
-###########################################################
-class  EmpresaListView(ListView):
+#############################     EMPRESA     #############################
+class EmpresaListView(ListView):
     template_name = 'crud_app/EmpresaTabela.html'
     model = models.Empresas
     context_object_name: 'empresa'
 
-def create_book(request, pk):
-    author = Empresas.objects.get(id=pk)
-    books = Book.objects.filter(author=author)
-    form = BookForm(request.POST or None)
-
-    if request.method == "POST":
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.author = author
-            book.save()
-            return redirect("detail-book", pk=book.id)
-        else:
-            return render(request, "partials/book_form.html", context={
-                "form": form
-            })
-
-    context = {
-        "form": form,
-        "author": author,
-        "books": books
-    }
-
-    return render(request, "create_book.html", context)
-
-class  EmpresaCreateView(CreateView):
+class EmpresaCreateView(CreateView):
     template_name = 'crud_app/EmpresaTabela.html'
     model = models.Empresas
-###########################################################
 
+class EmpresaDeleteView(DeleteView):
+     model = models.Empresas
+     template_name= 'crud_app/excluir-cadastro.html'
+     success_url = reverse_lazy("crud_app:list")
 
-class ContaListView(ListView):
-    template_name = 'crud_app/tabela.html'
-    model = models.Conta
-
-class ContaCreateView(CreateView):
+class EmpresaUpdateView(UpdateView):
     template_name = 'crud_app/cadastro.html'
     fields = ("desc","fornecedor")
-    model = models.Conta
+    model = models.Empresas
     success_url = reverse_lazy("crud_app:list")
 
-class ContaDeleteView(DeleteView):
+class EmpresaDetailView(DetailView):
+    model = models.Empresas
+    template_name = 'crud_app/detail.html'
+#############################     EMPRESA     #############################
+#############################     PROJETO     #############################
+class ProjetoListView(ListView):
+    template_name = 'crud_app/tabela.html'
+    model = models.Projetos
+
+class ProjetoCreateView(CreateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Projetos
+    success_url = reverse_lazy("crud_app:list")
+
+class ProjetoDeleteView(DeleteView):
      model = models.Conta
      template_name= 'crud_app/excluir-cadastro.html'
      success_url = reverse_lazy("crud_app:list")
 
-class ContaUpdateView(UpdateView):
+class ProjetoUpdateView(UpdateView):
     template_name = 'crud_app/cadastro.html'
     fields = ("desc","fornecedor")
-    model = models.Conta
+    model = models.Projetos
     success_url = reverse_lazy("crud_app:list")
 
-class ContaDetailView(DetailView):
-    model = models.Conta 
+class ProjetoDetailView(DetailView):
+    model = models.Projetos 
     template_name = 'crud_app/detail.html'
+#############################     PROJETO     #############################
+#############################    DIMCONTAS    #############################
+class ProjetoListView(ListView):
+    template_name = 'crud_app/tabela.html'
+    model = models.Projetos
 
-# def add_empresa(request):
-#     name = request.POST.get('empresa')
-    
-#     # add film
-#     film = Film.objects.create(name=name)
-    
-#     # add the film to the user's list
-#     request.user.films.add(film)
+class ProjetoCreateView(CreateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Projetos
+    success_url = reverse_lazy("crud_app:list")
 
-#     # return template fragment with all the user's films
-#     films = request.user.films.all()
-#     return render(request, 'partials/film-list.html', {'films': films})
+class ProjetoDeleteView(DeleteView):
+     model = models.Conta
+     template_name= 'crud_app/excluir-cadastro.html'
+     success_url = reverse_lazy("crud_app:list")
+
+class ProjetoUpdateView(UpdateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Projetos
+    success_url = reverse_lazy("crud_app:list")
+
+class ProjetoDetailView(DetailView):
+    model = models.Projetos 
+    template_name = 'crud_app/detail.html'
+#############################    DIMCONTAS    #############################
+############################# CONTAFORNECEDOR #############################
+class ProjetoListView(ListView):
+    template_name = 'crud_app/tabela.html'
+    model = models.Projetos
+
+class ProjetoCreateView(CreateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Projetos
+    success_url = reverse_lazy("crud_app:list")
+
+class ProjetoDeleteView(DeleteView):
+     model = models.Conta
+     template_name= 'crud_app/excluir-cadastro.html'
+     success_url = reverse_lazy("crud_app:list")
+
+class ProjetoUpdateView(UpdateView):
+    template_name = 'crud_app/cadastro.html'
+    fields = ("desc","fornecedor")
+    model = models.Projetos
+    success_url = reverse_lazy("crud_app:list")
+
+class ProjetoDetailView(DetailView):
+    model = models.Projetos 
+    template_name = 'crud_app/detail.html'
+############################# CONTAFORNECEDOR #############################
