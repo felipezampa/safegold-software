@@ -46,6 +46,7 @@ def login(request):
         email = request.POST['email']
         senha = request.POST['senha']
         if email == "" or senha == "":
+            messages.error(request, 'Os campos não podem estar em branco!')
             print('Os campos email e senha não podem ficar em branco')
             return redirect('login')
         print(email, senha)
@@ -56,6 +57,10 @@ def login(request):
                 auth.login(request, user)
                 print(f'Login de {nome} realizado com sucesso')
                 return redirect('dashboard')
+        else:
+            messages.error(request, 'O usuário não está cadastrado!')
+            print('O usuário não está cadastrado!')
+            return redirect('login')
 
     return render(request, 'auth/login.html')
 
