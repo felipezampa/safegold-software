@@ -5,7 +5,25 @@
 
 {% block content %}
 <ul>
-    <h1> Seja Bem vindo, {{user.email}}</h1>
-    <h1>Esses são seus projetos</h1>
+    <h1> Seja Bem vindo, {{user.username}}</h1>
+        <h1>Esses são seus projetos</h1>
 </ul>
+<section class="best-receipe-area">
+    <div class="container">
+        <div class="row">
+            {% for obj in projetos %}
+            <!-- Single Best Receipe Area -->
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-best-receipe-area mb-30">
+                        <div class="receipe-content">
+                        <a href="{% url 'crud_app:list' %}">
+                            <h5>{{obj}}</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock content %}

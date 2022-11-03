@@ -161,7 +161,7 @@ class Pais(models.Model):
         return "{}".format(self.pais)
 
 class Projetos(models.Model):
-    pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user', blank=True, null=True)    
     cod_projeto = models.BigAutoField(primary_key=True)
     projeto = models.CharField(max_length=255, blank=True, null=True)
     chave_integracao = models.CharField(max_length=255, blank=True, null=True)
@@ -197,7 +197,6 @@ class Projetos(models.Model):
     safegold_ger = models.IntegerField(blank=True, null=True)
     cod_sub_segmento = models.IntegerField(blank=True, null=True)
     sandbox = models.IntegerField(blank=True, null=True)
-
     class Meta:
         managed = False
         db_table = 'projetos'
