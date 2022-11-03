@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.http import HttpResponse
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
 
@@ -8,32 +7,31 @@ class IndexView(TemplateView):
      template_name = 'crud_app/index.html'
 #############################     EMPRESA     #############################
 class EmpresaListView(ListView):
-    template_name = 'crud_app/EmpresaTabela.html'
+    template_name = 'crud_app/empresa/empresa-tabela.html'
     model = models.Empresas
-    context_object_name: 'empresa'
 
 class EmpresaCreateView(CreateView):
-    template_name = 'crud_app/EmpresaTabela.html'
+    template_name = 'crud_app/cadastro.html'
     model = models.Empresas
 
 class EmpresaDeleteView(DeleteView):
      model = models.Empresas
      template_name= 'crud_app/excluir-cadastro.html'
-     success_url = reverse_lazy("crud_app:list")
+     success_url = reverse_lazy("crud_app:empresa-list")
 
 class EmpresaUpdateView(UpdateView):
     template_name = 'crud_app/cadastro.html'
     fields = ("desc","fornecedor")
     model = models.Empresas
-    success_url = reverse_lazy("crud_app:list")
+    success_url = reverse_lazy("crud_app:empresa-list")
 
 class EmpresaDetailView(DetailView):
     model = models.Empresas
-    template_name = 'crud_app/detail.html'
+    template_name = 'crud_app/detail/empresa-detail.html'
 #############################     EMPRESA     #############################
 #############################     PROJETO     #############################
 class ProjetoListView(ListView):
-    template_name = 'crud_app/tabela.html'
+    template_name = 'crud_app/tabelas/projeto-tabela.html'
     model = models.Projetos
 
 class ProjetoCreateView(CreateView):
@@ -43,7 +41,7 @@ class ProjetoCreateView(CreateView):
     success_url = reverse_lazy("crud_app:list")
 
 class ProjetoDeleteView(DeleteView):
-     model = models.Conta
+     model = models.Projetos
      template_name= 'crud_app/excluir-cadastro.html'
      success_url = reverse_lazy("crud_app:list")
 
@@ -58,28 +56,28 @@ class ProjetoDetailView(DetailView):
     template_name = 'crud_app/detail.html'
 #############################     PROJETO     #############################
 #############################    DIMCONTAS    #############################
-class ProjetoListView(ListView):
-    template_name = 'crud_app/tabela.html'
+class DimContasListView(ListView):
+    template_name = 'crud_app/tabelas/contas-tabela.html'
     model = models.Projetos
 
-class ProjetoCreateView(CreateView):
+class DimContasCreateView(CreateView):
     template_name = 'crud_app/cadastro.html'
-    fields = ("desc","fornecedor")
-    model = models.Projetos
+    fields = ("desc_conta","id_grupo_conta")
+    model = models.Dimcontas
     success_url = reverse_lazy("crud_app:list")
 
-class ProjetoDeleteView(DeleteView):
-     model = models.Conta
+class DimContasDeleteView(DeleteView):
+     model = models.Projetos
      template_name= 'crud_app/excluir-cadastro.html'
      success_url = reverse_lazy("crud_app:list")
 
-class ProjetoUpdateView(UpdateView):
+class DimContasUpdateView(UpdateView):
     template_name = 'crud_app/cadastro.html'
-    fields = ("desc","fornecedor")
+    fields = ("desc_conta","id_grupo_conta")
     model = models.Projetos
     success_url = reverse_lazy("crud_app:list")
 
-class ProjetoDetailView(DetailView):
+class DimContasDetailView(DetailView):
     model = models.Projetos 
     template_name = 'crud_app/detail.html'
 #############################    DIMCONTAS    #############################
