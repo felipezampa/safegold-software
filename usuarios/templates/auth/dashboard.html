@@ -1,11 +1,40 @@
-{% extends 'crud_app/index.html' %}
+{% extends 'auth/base.html' %}
 
 {% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock styles %}
 
 
-{% block content %}
+{% block body %}
+<body  id="body-pd">
+    
+
+
+    <div>
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='fa-solid fa-bars' id="header-toggle"></i> </div>
+        </header>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+            <div> <a href="#" class="nav_logo"></i> <img src="{% static "img/Safegold.svg" %}" width="200" alt="Safegold" class="mx-1" id="safegold"></a>
+                    <div class="nav_list"> 
+                        <a href="#" class="nav_link active"><span class="nav_name">Dashboard</span> </a> 
+                        <a href="#" class="nav_link"><span class="nav_name">Projeto</span> 
+                        </a> <a href="#" class="nav_link"><span class="nav_name">Messages</span> </a>
+                    </div>
+                </div><a href="#" class="nav_link"><i class='bx bx-log-out nav_icon'></i> <span class="nav_name btn btn-outline-danger text-white">Sair</span> </a>
+            </nav>
+        </div>
+
 <ul>
     <h1> Seja Bem vindo, {{user.email}}</h1>
     <h1>Esses são seus projetos</h1>
 </ul>
-{% endblock content %}
+    
+</body>
+{% endblock body %}
+{% block scripts %}
+<script src="{% static 'js/sidebar.js' %}"></script>
+{% endblock scripts %}
+
