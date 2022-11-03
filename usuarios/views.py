@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-
+from crud_app.models import Projetos
 from django.contrib import auth, messages
 # Create your views here.
 
@@ -70,6 +70,14 @@ def logout(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        return render(request,'auth/dashboard.html')
+        id = request.user.id
+        projetos = Projetos.objects.filter(id_user=id)
+        dados = {
+            'projetos': projetos
+        }
+        print('dashboard OK')
+        print(projetos)
+        print(projetos)
+        return render(request,'auth/dashboard.html', dados)
     else:
         return redirect('login')
