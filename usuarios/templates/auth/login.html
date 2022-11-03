@@ -1,50 +1,30 @@
-{% extends 'crud_app/index.html' %}
+{% extends 'auth/base.html' %}
 {% load static %}
-{% block content %}
 
-
-
-<div class="contact-area section-padding-0-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading">
-                    <h2>Login</h2>
-                </div>
+{% block title %}<title>Login</title>{% endblock title %}
+{% block heading %}<h2>Login</h2>{% endblock heading %}
+{% block form %}
+<form action={% url 'login' %} method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-lg-12">
+        <label for="email"><b>Email</b></label>
+            <input type="text" id="email" class="form-control" name="email" placeholder="Entre com o email cadastrado">
+        </div>
+        <div class="col-12 col-lg-12 mt-3">
+            <label for="senha"><b>Senha</b></label>
+            <input id="senha" type="password" class="form-control" name="senha" placeholder="Digite aqui sua senha">
+            <div class=" mt-2">
+                <a href="">Esqueceu sua senha?</a>
             </div>
         </div>
-        {% include 'auth/alertas.html' %}
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form action={% url 'login' %} method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-12 col-lg-12">
-                            <label for="email"><b>Email</b></label>
-                                <input type="text" id="email" class="form-control" name="email" placeholder="Entre com o email cadastrado">
-                            </div>
-                                <div class="col-12 col-lg-12">
-                                <label for="senha"><b>Senha</b></label>
-                                <input id="senha" type="password" class="form-control" name="senha" placeholder="Digite aqui sua senha">
-                            </div>
-                            <div class="col-12 text-center">
-                                <button class="btn btn-success" type="submit">Acessar sua conta</button>
-                                <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="col-12 text-center mt-4">
+            <button class="btn btn-primary mx-2" type="submit">Entrar</button>
+        </div>
+        <hr class="mt-3">
+        <div class="col-12 text-center mt-1">
+            <a class="btn btn-secondary mx-2" href="{% url 'cadastro' %}">Ainda não tem conta? Clique aqui</a>
         </div>
     </div>
-</div>
-
-<script>
-function exibirCriarConta()
-{
-     location.href = "{% url 'cadastro' %}";
-} 
-</script>
-
-{% endblock %}
+</form>
+{% endblock form %}
