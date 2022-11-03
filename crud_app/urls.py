@@ -20,18 +20,18 @@ urlpatterns = [
     # path('projeto/detail/<int:pk>/',views.ProjetoDetailView.as_view(),name='detail'),
     
     ###############################    DIMCONTAS    ###############################
-    # path('conta/',views.DimContasListView.as_view(),name='list'),
-    # path('conta/create/',views.DimContasCreateView.as_view(),name='create'),
-    # path('conta/update/<int:pk>/',views.DimContasUpdateView.as_view(),name='update'),
-    # path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='delete'),
-    # path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='detail'),
+    path('conta/',views.DimContasListView.as_view(),name='contas-list'),
+    path('conta/create/',views.DimContasCreateView.as_view(),name='contas-create'),
+    path('conta/update/<int:pk>/',views.DimContasUpdateView.as_view(),name='contas-update'),
+    path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='contas-delete'),
+    path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='contas-detail'),
 
     ############################### CONTAFORNECEDOR ###############################
-    # path('conta/',views.DimContasListView.as_view(),name='list'),
-    # path('conta/create/',views.DimContasCreateView.as_view(),name='create'),
-    # path('conta/update/<int:pk>/',views.DimContasUpdateView.as_view(),name='update'),
-    # path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='delete'),
-    # path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='detail'),
+    path('matrizfornecedorconta/',views.MatrizFornecedorListView.as_view(),name='matriz-list'),
+    # path('matrizfornecedorconta/create/',views.MatrizFornecedorCreateView.as_view(),name='matriz-create'),
+    # path('matrizfornecedorconta/update/<int:pk>/',views.MatrizFornecedorUpdateView.as_view(),name='matriz-update'),
+    path('matrizfornecedorconta/delete/<int:pk>/',views.MatrizFornecedorDeleteView.as_view(),name='matriz-delete'),
+    path('matrizfornecedorconta/detail/<int:pk>/',views.MatrizFornecedorDetailView.as_view(),name='matriz-detail'),
 
 ]
 
