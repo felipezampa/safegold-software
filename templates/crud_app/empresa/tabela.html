@@ -27,7 +27,7 @@
                     <div class="col text-center mb-1 mt-1">
     
                         <hr>
-                        <a class="btn btn-warning btn-block" href="{% url 'crud_app:' %}">Adicionar</a>
+                        <a class="btn btn-warning btn-block" href="{% url 'crud_app:empresa-create' %}">Adicionar</a>
                     </div>
                 </form>
             </div>
@@ -80,8 +80,8 @@
                             <td>{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
                             <td>{{empresas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
-                                <a href="#" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
-                                <a href="#" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="{% url 'crud_app:empresa-detail' pk=empresas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
+                                <a href="{% url 'crud_app:empresa-delete' pk=empresas.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
                             </td>
                         </tr>
                         
