@@ -66,17 +66,19 @@
                             <th class="col text-center">ID</th>
                             <th class="col">Descrição Conta</th>
                             <th class="col">Grupo Conta</th>
+                            <th class="col">Data Cadastro</th>
+                            <th class="col">Data Atualizado</th>
                             <th class="col text-center ignore-on-print excludeExport">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for contas in object_list %}
                         <tr>
-                            <td class="text-center col-md-1">{{contas.cod_conta}}</td>
-                            <td>{{contas.conta}}</td>
+                            <td class="text-center col-md-1">{{contas.id}}</td>
+                            <td>{{contas.desc_conta}}</td>
+                            <td>{{contas.id_grupo_conta}}</td>
                             <td>{{contas.data_cadastro|date:"d/m/Y H:i" }}</td>
                             <td>{{contas.data_atualiza|date:"d/m/Y H:i" }}</td>
-                            <td>{{contas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
                                 <a href="{% url 'crud_app:conta-detail' pk=contas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
                                 <a href="{% url 'crud_app:conta-delete' pk=contas.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
