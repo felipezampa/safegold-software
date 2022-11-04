@@ -6,28 +6,28 @@
 {% endblock title %} 
 {% block content %}
 <h1 class="d-flex justify-content-center mt-3">
-Excluir Conta
+Excluir Empresa
 </h1>
 <main>
   <div class="sg-container mt-4 p-4">
     <form action="" class="sg-content" method="POST">
       <div>
-        <h3>Você tem certeza que quer excluir: {{ object.desc }}?</h3>
-        <p>O fornecedor <strong>{{ object.fornecedor}}</strong> não será excluído, nem outras contas que ele tenha cadastrado</p>
+        <h3>Você tem certeza que quer excluir: {{ empresas.empresa }}?</h3>
+        <p>O projeto <strong>{{ empresas.cod_projeto }}</strong> não será excluído, nem outras empresas que ele tenha vínculo</p>
       </div>
         
       {% csrf_token %} 
       
       {{ form|crispy }}
       <div class="col text-center mb-4 mt-5">
-        <button type="submit" class="btn btn-danger btn-block">Excluir</button>
+        <button type="submit" class="btn btn-danger btn-block">Sim, desejo Excluir o {{ empresas.empresa }}</button>
       </div>
     </form>
     <hr>
-    <a href="{% url 'crud_app:list' %}"><button class="btn btn-secondary btn-block mx-5">Voltar</button></a>
+    <a href="{% url 'crud_app:empresa-list' %}"><button class="btn btn-secondary btn-block mx-5">Voltar</button></a>
   </div>
 </main>
 {% endblock content %}
 {% block scripts %}
-    <script src="{% static 'js/tabela.js' %}"></script>
+    <script src="{% static 'js/ExportPDF.js' %}"></script>
 {% endblock scripts %}

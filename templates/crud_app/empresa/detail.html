@@ -2,25 +2,53 @@
 {% load static %}
 {% block title %}<title>{{ conta.desc }}</title>{% endblock title %}
 {% block content %}
-<h1 class="d-flex justify-content-center mt-3">Detalhes</h1>
-<main>
-    <div class="jumbotron container">
-        <h2>Conta:</h2>
-        <hr>
-        <p class="mb-5">{{conta.desc}}</p>
-        <h2 class="mt-5">Fornecedor:</h2>
-        <hr>
-        <p>{{conta.fornecedor}}</p>
-        <p>{{fornecedor.documento}}</p>
-        <div class="text-center mt-5 pt-5">
-            <a href="{% url 'crud_app:list' %}" class="mx-3" title="Ver Tabela"><button class="btn btn-secondary">Voltar</button></a>
-            <a href="{% url 'crud_app:update' pk=conta.pk %}" class="mx-3" title="Editar Conta"><button class="btn btn-primary">Editar</button></a>
-            <a href="{% url 'crud_app:delete' pk=conta.pk %}" class="mx-3" title="Excluir Conta"><button class="btn btn-danger">Excluir</button></a>
+
+<main class="sg-container mt-3">
+    <h1 class="d-flex justify-content-center my-3">Detalhes</h1>
+    <div class="jumbotron container sg-content">
+        
+        <div class="row mb-5">
+            <h2>Empresa</h2>
+            <hr>
+            <h5>{{empresas.empresa}}</h5>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+                <h2>CNPJ</h2>
+                <hr>
+                <h5>{{empresas.cnpj}}</h5>
+            </div>
+            <div class="col">
+                <h2>Projeto</h2>
+                <hr>
+                <h5>{{empresas.cod_projeto}}</h5>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+                <h2>Data Cadastro</h2>
+                <hr>
+                <h5>{{empresas.data_cadastro}}</h5>
+            </div>
+            <div class="col">
+                <h2>Data Atualização</h2>
+                <hr>
+                <h5>{{empresas.data_atualiza}}</h5>
+            </div>
+        </div>
+        <div class="row mb-5">
+            
         </div>
     </div>
 </main>
+<footer class="footer fixed-bottom ignore-on-print pb-3 sg-dark">
+    <div class="text-center pt-3">
+        <a href="{% url 'crud_app:empresa-list' %}" class="mx-3" title="Ver Tabela"><button class="btn btn-lg btn-light">Voltar</button></a>
+        <a href="{% url 'crud_app:empresa-update' pk=empresas.pk %}" class="mx-3" title="Editar Conta"><button class="btn btn-lg btn-primary">Editar</button></a>
+        <a href="{% url 'crud_app:empresa-delete' pk=empresas.pk %}" class="mx-3" title="Excluir Conta"><button class="btn btn-lg btn-danger">Excluir</button></a>
+    </div>
+</footer>
 {% endblock %}
 {% block scripts %}
-    <script src="{% static 'js/tabela.js' %}"></script>
-    <script src="{% static 'js/exportExcel.js' %}"></script>
+    <script src="{% static 'js/ExportPDF.js' %}"></script>
 {% endblock scripts %}

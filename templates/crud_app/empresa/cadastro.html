@@ -6,7 +6,7 @@
 {% endblock title %} 
 {% block content %}
 <h1 class="d-flex justify-content-center mt-3">
-  Cadastro de Contas e Fornecedores
+  Cadastro de Empresas
 </h1>
 <main>
   <div class="sg-container mt-4 p-4">
@@ -20,10 +20,10 @@
       </div>
     </form>
     <hr>
-    <a href="{% url 'crud_app:list' %}"><button class="btn btn-secondary btn-block mx-5">Voltar</button></a>
+    <a href="{% url 'crud_app:empresa-list' %}"><button class="btn btn-secondary btn-block mx-5">Voltar</button></a>
   </div>
 </main>
 {% endblock content %}
 {% block scripts %}
-    <script src="{% static 'js/tabela.js' %}"></script>
+    <script src="{% static 'js/ExportPDF.js' %}"></script>
 {% endblock scripts %}
