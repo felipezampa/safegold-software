@@ -13,9 +13,9 @@ class EmpresaListView(ListView):
 
 class EmpresaCreateView(CreateView):
     template_name = 'crud_app/empresa/cadastro.html'
-    fields = ("empresa","empresa","cnpj","safegold_ger")
+    fields = ("empresa","cod_projeto","cnpj","safegold_ger")
     model = models.Empresas
-    success_url = reverse_lazy("crud_app:list")
+    success_url = reverse_lazy("crud_app:empresa-list")
 
 class EmpresaDeleteView(DeleteView):
      model = models.Empresas
@@ -24,7 +24,7 @@ class EmpresaDeleteView(DeleteView):
 
 class EmpresaUpdateView(UpdateView):
     template_name = 'crud_app/empresa/cadastro.html'
-    fields = ("desc","fornecedor")
+    fields = ("empresa","cod_projeto","cnpj","safegold_ger")
     model = models.Empresas
     success_url = reverse_lazy("crud_app:empresa-list")
 
