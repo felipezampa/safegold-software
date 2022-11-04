@@ -6,11 +6,11 @@ app_name = 'crud_app'
 urlpatterns = [
 
     ###############################     EMPRESA     ###############################
-    path('empresas/',views.EmpresaListView.as_view(),name='empresa-list'),
-    path('empresas/create/',views.EmpresaCreateView.as_view(),name='empresa-create'),
-    path('empresas/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
-    path('empresas/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
-    path('empresas/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
+    path('empresa/',views.EmpresaListView.as_view(),name='empresa-list'),
+    path('empresa/create/',views.EmpresaCreateView.as_view(),name='empresa-create'),
+    path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
+    path('empresa/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
+    path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
 
     ###############################     PROJETO     ###############################
     # path('projeto/',views.ProjetoListView.as_view(),name='list'),
@@ -20,11 +20,11 @@ urlpatterns = [
     # path('projeto/detail/<int:pk>/',views.ProjetoDetailView.as_view(),name='detail'),
     
     ###############################    DIMCONTAS    ###############################
-    path('conta/',views.DimContasListView.as_view(),name='contas-list'),
-    path('conta/create/',views.DimContasCreateView.as_view(),name='contas-create'),
-    path('conta/update/<int:pk>/',views.DimContasUpdateView.as_view(),name='contas-update'),
-    path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='contas-delete'),
-    path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='contas-detail'),
+    path('conta/',views.DimContasListView.as_view(),name='conta-list'),
+    path('conta/create/',views.DimContasCreateView.as_view(),name='conta-create'),
+    path('conta/update/<int:pk>/',views.DimContasUpdateView.as_view(),name='conta-update'),
+    path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='conta-delete'),
+    path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='conta-detail'),
 
     ############################### CONTAFORNECEDOR ###############################
     path('matrizfornecedorconta/',views.MatrizFornecedorListView.as_view(),name='matriz-list'),

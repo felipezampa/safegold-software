@@ -4,7 +4,7 @@ from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,Up
 from . import models
 
 class IndexView(TemplateView):
-     template_name = 'crud_app/index.html'
+     template_name = 'base.html'
 
 #############################     EMPRESA     #############################
 class EmpresaListView(ListView):
@@ -62,29 +62,29 @@ class ProjetoDetailView(DetailView):
 
 #############################    DIMCONTAS    #############################
 class DimContasListView(ListView):
-    template_name = 'crud_app/contas/tabela.html'
+    template_name = 'crud_app/conta/tabela.html'
     model = models.Dimcontas
 
 class DimContasCreateView(CreateView):
-    template_name = 'crud_app/contas/cadastro.html'
+    template_name = 'crud_app/conta/cadastro.html'
     fields = ("desc_conta","id_grupo_conta")
     model = models.Dimcontas
-    success_url = reverse_lazy("crud_app:contas-list")
+    success_url = reverse_lazy("crud_app:conta-list")
 
 class DimContasDeleteView(DeleteView):
      model = models.Dimcontas
-     template_name= 'crud_app/contas/excluir.html'
-     success_url = reverse_lazy("crud_app:contas-list")
+     template_name= 'crud_app/conta/excluir.html'
+     success_url = reverse_lazy("crud_app:conta-list")
 
 class DimContasUpdateView(UpdateView):
-    template_name = 'crud_app/contas/cadastro.html'
+    template_name = 'crud_app/conta/cadastro.html'
     fields = ("desc_conta","id_grupo_conta")
     model = models.Dimcontas
-    success_url = reverse_lazy("crud_app:contas-list")
+    success_url = reverse_lazy("crud_app:conta-list")
 
 class DimContasDetailView(DetailView):
     model = models.Dimcontas 
-    template_name = 'crud_app/contas/detail.html'
+    template_name = 'crud_app/conta/detail.html'
 ###########################################################################
 
 ############################# CONTAFORNECEDOR #############################

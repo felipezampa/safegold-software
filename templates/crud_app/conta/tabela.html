@@ -14,7 +14,7 @@
                     
                     {{ form|crispy }}                
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
-                    <div class="input-group input-group-sm my-1 ml-3 mr-3">
+                    {% comment %} <div class="input-group input-group-sm my-1 ml-3 mr-3">
                         <input type="text" name="id" class="form-control" aria-la bel="Large" placeholder="Adicionar ID" />
                     </div>
                     <div class="input-group input-group-sm my-1 ml-3 mr-3">
@@ -22,12 +22,12 @@
                     </div>
                     <div class="input-group input-group-sm my-1 ml-3 mr-3">
                         <input type="text" name="fornecedor" class="form-control" aria-label="Large" placeholder="Adicionar fornecedor" />
-                    </div>
+                    </div> {% endcomment %}
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     <div class="col text-center mb-1 mt-1">
     
                         <hr>
-                        <a class="btn btn-warning btn-block" href="{% url 'crud_app:' %}">Adicionar</a>
+                        <a class="btn btn-warning btn-block" href="{% url 'crud_app:conta-create' %}">Adicionar</a>
                     </div>
                 </form>
             </div>
@@ -64,24 +64,22 @@
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
-                            <th class="col">Empresa</th>
-                            <th class="col">Data Cadastro</th>
-                            <th class="col">Data Atualizado</th>
-                            <th class="col">CNPJ</th>
+                            <th class="col">Descrição Conta</th>
+                            <th class="col">Grupo Conta</th>
                             <th class="col text-center ignore-on-print excludeExport">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for empresas in object_list %}
+                        {% for contas in object_list %}
                         <tr>
-                            <td class="text-center col-md-1">{{empresas.cod_empresa}}</td>
-                            <td>{{empresas.empresa}}</td>
-                            <td>{{empresas.data_cadastro|date:"d/m/Y H:i" }}</td>
-                            <td>{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
-                            <td>{{empresas.cnpj}}</td>
+                            <td class="text-center col-md-1">{{contas.cod_conta}}</td>
+                            <td>{{contas.conta}}</td>
+                            <td>{{contas.data_cadastro|date:"d/m/Y H:i" }}</td>
+                            <td>{{contas.data_atualiza|date:"d/m/Y H:i" }}</td>
+                            <td>{{contas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
-                                <a href="#" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
-                                <a href="#" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="{% url 'crud_app:conta-detail' pk=contas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
+                                <a href="{% url 'crud_app:conta-delete' pk=contas.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
                             </td>
                         </tr>
                         

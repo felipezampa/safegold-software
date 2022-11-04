@@ -42,6 +42,8 @@ class Cidades(models.Model):
 class Dimcontas(models.Model):
     desc_conta = models.CharField(max_length=255)
     id_grupo_conta = models.ForeignKey('Dimgrupocontas', models.DO_NOTHING, db_column='id_grupo_conta', blank=True, null=True)
+    data_cadastro = models.DateTimeField(auto_now_add=True)
+    data_atualiza = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
