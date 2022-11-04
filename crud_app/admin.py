@@ -1,10 +1,6 @@
 from django.contrib import admin
 from .models import *
 # Register your models here.
-admin.site.register(Conta)
-admin.site.register(Fornecedor)
-
-
 admin.site.register(Bairros)
 admin.site.register(Cidades)
 admin.site.register(Dimcontas)
