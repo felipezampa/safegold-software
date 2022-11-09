@@ -27,10 +27,10 @@
                             <a href="{% url 'dashboard' %}" class="nav_link active"><i class="fa-solid fa-table-columns"></i><span class="nav_name">Dashboard</span></a> 
                             <a href="#" class="nav_link"><i class="fa-solid fa-handshake"></i><span class="nav_name">Projetos</span></a>
                             <a href="#" class="nav_link"><i class="fa-solid fa-briefcase"></i><span class="nav_name">Empresas</span></a>
-                            <a href="#" class="nav_link"><i class="fa-solid fa-lock"></i><span class="nav_name">Admin</span></a>
+                            <a href="{% url 'admin:index' %}" class="nav_link"><i class="fa-solid fa-lock"></i><span class="nav_name">Admin</span></a>
                         </div>
                     </div>
-                    <a href="{% url 'logout' %}" class="nav_link"><i class="fa-solid fa-right-from-bracket text-danger"></i><span class="nav_name text-white">Sair</span> </a>
+                    <a href="{% url 'logout' %}" class="nav_link logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav_name text-white">Sair</span> </a>
                 </nav>
             </div>
         </div>
