@@ -9,10 +9,10 @@
         <div class="row">
             <div class="col sg-container mt-2 mx-3 ignore-on-print">
                 <h3 class="text-center">Adicionar</h3>
-                <form action="" class="sg-content" method="POST">
+                <form action="{% url 'crud_app:add-empresa' %}" class="sg-content" method="POST" enctype = "multipart/form-data">
                     {% csrf_token %} 
                     
-                    {{ form|crispy }}                
+                    {{ form|crispy }}
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     {% comment %} <div class="input-group input-group-sm my-1 ml-3 mr-3">
                         <input type="text" name="id" class="form-control" aria-la bel="Large" placeholder="Adicionar ID" />
@@ -27,7 +27,7 @@
                     <div class="col text-center mb-1 mt-1">
     
                         <hr>
-                        <a class="btn btn-warning btn-block" href="{% url 'crud_app:empresa-create' %}">Adicionar</a>
+                        <button class="btn btn-warning btn-block" type="submit">Adicionar</button>
                     </div>
                 </form>
             </div>
@@ -36,7 +36,6 @@
                 <form action="" class="sg-content" method="POST">
                     {% csrf_token %} 
                     
-                    {{ form|crispy }}                
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     <div class="input-group input-group-sm my-1 ml-3 mr-3">
                         <input type="text" name="id" class="form-control" aria-la bel="Large" placeholder="Filtrar por ID" />

@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.urls import reverse_lazy
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
-
+from .forms import EmpresaForm
 class IndexView(TemplateView):
      template_name = 'base.html'
 
@@ -10,7 +10,21 @@ class IndexView(TemplateView):
 class EmpresaListView(ListView):
     template_name = 'crud_app/empresa/tabela.html'
     model = models.Empresas
+    def get_context_data(self, **kwargs):
+        context = super(EmpresaListView, self).get_context_data(**kwargs)
+        context['form'] = EmpresaForm()
+        return context
 
+def cadastro_empresa(request):
+    if request.POST:
+        form = EmpresaForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('crud_app:empresa-list')
+    
+    return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
+
+    
 class EmpresaCreateView(CreateView):
     template_name = 'crud_app/empresa/cadastro.html'
     fields = ("empresa","cod_projeto","cnpj","safegold_ger")
@@ -113,3 +127,18 @@ class MatrizFornecedorDetailView(DetailView):
     model = models.MatrizContaFornecedor 
     template_name = 'crud_app/matriz/detail.html'
 ###########################################################################
+
+
+
+
+
+# testes
+
+def cadastro_empresa(request):
+    if request.POST:
+        form = EmpresaForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('crud_app:empresa-list')
+    
+    return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
