@@ -12,7 +12,13 @@ urlpatterns = [
     path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
     path('empresa/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
     path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
-    path('empresa/add',views.cadastro_empresa,name='add-empresa'  ),
+    #path('empresa/add',views.cadastro_empresa,name='add-empresa'  ),
+    path('empresa/save',views.saveempresa,name='saveempresa'),
+    path('empresa/add',views.insertempresa,name='insert'),
+    # path('empresa/delete',views.delete_empresa,name='delete'),
+
+
+
 
     ###############################     PROJETO     ###############################
     # path('projeto/',views.ProjetoListView.as_view(),name='list'),

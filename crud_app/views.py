@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
 from .forms import EmpresaForm
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 class IndexView(TemplateView):
      template_name = 'base.html'
 
@@ -18,11 +20,70 @@ class EmpresaListView(ListView):
 def cadastro_empresa(request):
     if request.POST:
         form = EmpresaForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():           
             form.save()
         return redirect('crud_app:empresa-list')
     
     return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
+
+# def get_empresa(self, request):
+#     form = EmpresaForm(request.POST)
+#     if form.is_valid():
+#         teste = form.cleaned_data['empresa']
+#         print(teste)
+
+
+@csrf_exempt
+def saveempresa(request):
+    id=request.POST.get('id','')
+    type = request.POST.get('type', '')
+    value = request.POST.get('value', '')
+    print(id,type,value)
+    empresa = models.Empresas.objects.get(cod_empresa=id)
+    if type == "empresa":
+        empresa.empresa = value
+    if type == "data_cadastro":
+        empresa.data_cadastro = value
+    if type == "data_atualiza":
+        empresa.data_atualiza = value
+    if type == "cnpj":
+        empresa.cnpj = value
+
+    empresa.save()
+    return JsonResponse({"success":"Updated"})
+
+@csrf_exempt
+def insertempresa(request):
+    teste=request.POST.get("cod_projeto")
+    projeto = models.Projetos.objects.get(cod_projeto=teste)
+    empresa = request.POST.get("empresa")
+    safegold_ger = request.POST.get("safegold_ger")
+    cnpj = request.POST.get("cnpj")
+
+    try:    
+        print(projeto,empresa,safegold_ger,cnpj)
+        empresa = models.Empresas(cod_projeto=projeto, empresa=empresa, safegold_ger=safegold_ger, cnpj=cnpj)
+        print(empresa)
+        empresa.save()
+        empresa_data={"cod_empresa": empresa.cod_empresa,"data_cadastro":empresa.data_cadastro,"error":False,"errorMensage":"Empresa adicionada com Sucesso"}
+        print(empresa_data)
+        return JsonResponse(empresa_data,safe=False)
+    except:
+        empresa_data={"error":True,"errorMensage":"Failed to add"}
+        return JsonResponse(empresa_data,safe=False)
+
+# @csrf_exempt
+# def delete_empresa(request):
+#     id=request.POST.get("cod_empresa")
+#     print(id)
+#     try:
+#         empresa=models.Empresas.objects.get(cod_empresa=id)
+#         empresa.delete()
+#         empresa_data={"error":False,"errorMessage":"Deleted Successfully"}
+#         return JsonResponse(empresa_data,safe=False)
+#     except:
+#         empresa_data={"error":True,"errorMessage":"Failed to Delete Data"}
+#         return JsonResponse(empresa_data,safe=False)
 
     
 class EmpresaCreateView(CreateView):
