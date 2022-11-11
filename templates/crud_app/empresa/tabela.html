@@ -57,8 +57,13 @@
     
                         <hr>
                         <button type="submit" class="btn btn-primary btn-block mb-2">Filtrar</button>
+
                     </div>
                 </form>
+                <button class="btn btn-block btn-success" id="update_btn">EDIT ALL</button>
+                <button class="btn btn-block btn-success" id="save_all_btn" style="display:none;margin-top:0px">SAVE ALL</button>
+
+
             </div>
         </div>
     
@@ -240,6 +245,26 @@
                  $("#upt_error").show();
             });
     });
+
+    $("#update_btn").click(function(){
+        $("#update_btn").hide();
+        $("#save_all_btn").show();
+
+   $(".editable").each(function(){
+       var value=$(this).text();
+       var types=$(this).data('type');
+
+        var html_data="<input type='text' name='"+types+"'  class='form-control input_"+types+" input_data' value='"+value+"'>";
+        $(this).html(html_data);
+
+    });
+});
+    $("#save_all_btn").click(function(){
+        var json_data={};
+        $(".editable").each()
+        
+    })
+
     </script>
 {% endblock scripts %}
 

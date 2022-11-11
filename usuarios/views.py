@@ -81,3 +81,6 @@ def dashboard(request):
         return render(request,'auth/dashboard.html', dados)
     else:
         return redirect('login')
+
+
+    

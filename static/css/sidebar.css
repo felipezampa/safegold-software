@@ -129,11 +129,11 @@ a {
 }
 
 .show {
-    left: 0
+    left: 0;
 }
 
 .body-pd {
-    padding-left: calc(var(--nav-width) + 1rem)
+    padding-left: calc(var(--nav-width) + 1rem);
 }
 
 .active {
@@ -151,6 +151,19 @@ a {
 
 .height-100 {
     height: 100vh
+}
+
+.nav .logout{
+    border-top: 1px solid var(--first-color-light);
+    margin-left: .5rem;
+    column-gap: 1rem;
+    padding: .5rem 0 .5rem 1.1rem;
+    color: red;
+}
+
+.logout:hover{
+    background-color: red;
+    color: white;
 }
 
 @media screen and (min-width: 768px) {
