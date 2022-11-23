@@ -69,7 +69,7 @@
         <div class="sg-container mt-3 mx-1 mb-5" style="margin-bottom: 1px">
             <div class="sg-content">
                 <h3 class="text-center mt-1 ignore-on-print">Tabela</h3>
-                <table class="table table-Light table-bordered table-striped mb-3 mt-2 table-responsive table-hover" id="sg-table">
+                <table class="table table-Light table-bordered table-striped mb-3 mt-2 table-responsive table-hover ordena" id="sg-table">
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
@@ -94,16 +94,13 @@
                                 <a href="{% url 'crud_app:empresa-detail' pk=empresas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
                                 {% comment %} <button class="btn btn-block btn-delete btn-danger">DELETE</button>                                 {% endcomment %}
                                 <a href="{% url 'crud_app:empresa-delete' pk=empresas.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
-                            </td>
-                            
-                            
+                            </td>                                                       
                         </tr>
                         
                         {% endfor %}
                     </tbody>
                 </table>
                 {% include "crud_app/pagination.html" %}
-
             </div>
         </div>
     </div>
@@ -111,7 +108,8 @@
 {% endblock main %}
 {% block scripts %}
     <script src="{% static 'js/ExportPDF.js' %}"></script>
-    <script src="{% static 'js/ExportCSV.js' %}"></script>
+    <script src="{% static 'js/jquery-table-sort.js' %}"></script>
+    <script src="{% static 'js/ordena-tabela.js' %}"></script>
     <script>
         // SCRIPT DE UPDATE CLICANDO NA TABELA
         $(document).ready(function(){
