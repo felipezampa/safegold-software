@@ -49,10 +49,12 @@
                                 <i class="fa-solid fa-file-invoice"></i>
                                 <span class="nav_name">Contas</span>
                             </a>
+                            {% if user.is_superuser %}
                             <a href="{% url 'admin:index' %}" class="nav_link " id="admin">
                                 <i class="fa-solid fa-lock"></i>
                                 <span class="nav_name">Admin</span>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                     <a href="{% url 'logout' %}" class="nav_link logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav_name text-white">Sair</span> </a>
