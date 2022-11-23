@@ -15,6 +15,7 @@ urlpatterns = [
     #path('empresa/add',views.cadastro_empresa,name='add-empresa'  ),
     path('empresa/save',views.saveempresa,name='saveempresa'),
     path('empresa/add',views.insertempresa,name='insert'),
+    path('empresa/update',views.update_all, name= 'update_all'),
     # path('empresa/delete',views.delete_empresa,name='delete'),
 
 

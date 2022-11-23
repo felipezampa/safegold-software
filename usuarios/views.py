@@ -72,15 +72,21 @@ def dashboard(request):
     if request.user.is_authenticated:
         id = request.user.id
         projetos = Projetos.objects.filter(id_user=id)
+        ativos = Projetos.objects.filter(id_user = id)
+        projetos_ativos = ativos.filter(ativo='1')
+        print(projetos_ativos)
         dados = {
-            'projetos': projetos
+            'projetos': projetos,
+            'projetos_ativos': projetos_ativos
         }
         print('dashboard OK')
-        print(projetos)
-        print(projetos)
         return render(request,'auth/dashboard.html', dados)
     else:
         return redirect('login')
 
 
+def projetos_ativos(request):
+    # if request.user.is_authenticated:
+    #     id = request.user.id
+    pass
     

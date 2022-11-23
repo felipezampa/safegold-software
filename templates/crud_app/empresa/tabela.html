@@ -259,11 +259,62 @@
 
     });
 });
-    $("#save_all_btn").click(function(){
-        var json_data={};
-        $(".editable").each()
-        
-    })
+
+$("#save_all_btn").click(function(){
+    $("#save_all_btn").attr("disabled","disabled");
+    $("#save_all_btn").text("Saving Data....");
+
+    var json_data=[];
+    $(".input_data").each(function(){
+            var value=$(this).val();
+            var parent_html=$(this).parent();
+            parent_html.html(value);
+            $(this).remove();
+     });
+    $("tbody tr").each(function(){
+         var cod_empresa=$(this).children().eq(0).text()
+         var empresa=$(this).children().eq(1).text()
+         var cnpj=$(this).children().eq(4).text()
+        console.log(cod_empresa)
+        console.log(empresa)
+        console.log(cnpj)
+         var single_data={"cod_empresa":cod_empresa,"empresa":empresa,"cnpj":cnpj};
+         json_data.push(single_data);
+    });
+    console.log(json_data)
+
+    var string_data=JSON.stringify(json_data)
+    $.ajax({
+            url:'{% url 'crud_app:update_all' %}',
+            type:'POST',
+            data:{data:string_data}
+        })
+        .done(function(response){
+            if(response['error']==false){
+                $("#upt_error").hide();
+                $("#upt_success").text(response['errorMessage']);
+                $("#upt_success").show();
+
+            }
+            else{
+                $("#upt_success").hide();
+                $("#upt_error").text(response['errorMessage']);
+                $("#upt_error").show();
+            }
+        })
+        .fail(function(){
+             $("#upt_success").hide();
+             $("#upt_error").text("Something Went Wrong!");
+             $("#upt_error").show();
+        })
+        .always(function(){
+             $("#save_all_btn").removeAttr("disabled");
+             $("#save_all_btn").text("SAVE ALL");
+             $("#update_btn").show();
+             $("#save_all_btn").hide();
+        })
+
+});
 
     </script>
 {% endblock scripts %}

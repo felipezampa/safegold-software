@@ -5,6 +5,7 @@ from . import models
 from .forms import EmpresaForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+import json
 class IndexView(TemplateView):
      template_name = 'base.html'
 
@@ -71,6 +72,23 @@ def insertempresa(request):
     except:
         empresa_data={"error":True,"errorMensage":"Failed to add"}
         return JsonResponse(empresa_data,safe=False)
+
+@csrf_exempt
+def update_all(request):
+    data=request.POST.get("data")
+    dict_data=json.loads(data)
+    try:
+        for dic_single in dict_data:
+            empresa=models.Empresas.objects.get(cod_empresa=dic_single['cod_empresa'])
+            empresa.empresa=dic_single['empresa']
+            empresa.cnpj=dic_single['cnpj']
+            empresa.save()
+            print(empresa)
+        stuent_data={"error":False,"errorMessage":"Updated Successfully"}
+        return JsonResponse(stuent_data,safe=False)
+    except:
+        stuent_data={"error":True,"errorMessage":"Failed to Update Data"}
+        return JsonResponse(stuent_data,safe=False)
 
 # @csrf_exempt
 # def delete_empresa(request):

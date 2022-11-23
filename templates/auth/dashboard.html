@@ -8,6 +8,26 @@
 <section class="best-receipe-area">
     <div class="container">
         <div class="row">
+            {% for obj_active in projetos_ativos %}
+            <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
+                <div class="single-best-receipe-area mb-30">
+                    <div class="receipe-content">
+                        <div class="card mb-3 shadow p-3 bg-white rounded" style="width: 19rem;">
+                            <img class="card-img-top" src="https://safegold.com.br/wp-content/themes/safeGold/assets/img/thumb-whats.png" alt="Card image cap">
+                            <div class="card-body text-center">
+                                <a href="{% url 'crud_app:empresa-list' %}" class="text-decoration-none text-dark">
+                                    <h5>{{obj_active}}</h5>
+                                    <h5>PROJETO ATIVO</h5>
+                                </a>
+                                <hr>
+                                <a href="{% url 'crud_app:empresa-list' %}" class="btn btn-primary">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
             {% for obj in projetos %}
             <!-- Single Best Receipe Area -->
             <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
