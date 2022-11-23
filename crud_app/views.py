@@ -18,14 +18,14 @@ class EmpresaListView(ListView):
         context['form'] = EmpresaForm()
         return context
 
-def cadastro_empresa(request):
-    if request.POST:
-        form = EmpresaForm(request.POST)
-        if form.is_valid():           
-            form.save()
-        return redirect('crud_app:empresa-list')
+# def cadastro_empresa(request):
+#     if request.POST:
+#         form = EmpresaForm(request.POST)
+#         if form.is_valid():           
+#             form.save()
+#         return redirect('crud_app:empresa-list')
     
-    return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
+#     return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
 
 # def get_empresa(self, request):
 #     form = EmpresaForm(request.POST)
@@ -60,14 +60,19 @@ def insertempresa(request):
     empresa = request.POST.get("empresa")
     safegold_ger = request.POST.get("safegold_ger")
     cnpj = request.POST.get("cnpj")
+    print(projeto)
 
     try:    
-        print(projeto,empresa,safegold_ger,cnpj)
+        #print(projeto,empresa,safegold_ger,cnpj)
         empresa = models.Empresas(cod_projeto=projeto, empresa=empresa, safegold_ger=safegold_ger, cnpj=cnpj)
-        print(empresa)
+        #print(empresa)
         empresa.save()
         empresa_data={"cod_empresa": empresa.cod_empresa,"data_cadastro":empresa.data_cadastro,"error":False,"errorMensage":"Empresa adicionada com Sucesso"}
-        print(empresa_data)
+        empresa_data['detail'] = "<a href='/app/empresa/detail/"+str(empresa.pk)+"/' class='mx-3' title='Detalhar Conta'><i class='fa-solid fa-up-right-and-down-left-from-center'></i></a>"
+        empresa_data['delete'] = "<a href='/app/empresa/delete/"+str(empresa.pk)+"/' class='mx-3' title='Excluir Conta'><i class='fa-solid fa-trash-can'></i></a>"
+     
+        # path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
+
         return JsonResponse(empresa_data,safe=False)
     except:
         empresa_data={"error":True,"errorMensage":"Failed to add"}
@@ -210,14 +215,13 @@ class MatrizFornecedorDetailView(DetailView):
 
 
 
-
 # testes
 
-def cadastro_empresa(request):
-    if request.POST:
-        form = EmpresaForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('crud_app:empresa-list')
-    
-    return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
+
+class EmpresaTeste(ListView):
+    template_name = 'crud_app/empresa/tabelateste.html'
+    model = models.Projetos
+
+
+
+

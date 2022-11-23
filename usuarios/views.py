@@ -84,9 +84,3 @@ def dashboard(request):
     else:
         return redirect('login')
 
-
-def projetos_ativos(request):
-    # if request.user.is_authenticated:
-    #     id = request.user.id
-    pass
-    

@@ -17,6 +17,7 @@ urlpatterns = [
     path('empresa/add',views.insertempresa,name='insert'),
     path('empresa/update',views.update_all, name= 'update_all'),
     # path('empresa/delete',views.delete_empresa,name='delete'),
+    
 
 
 
@@ -41,6 +42,14 @@ urlpatterns = [
     # path('matrizfornecedorconta/update/<int:pk>/',views.MatrizFornecedorUpdateView.as_view(),name='matriz-update'),
     path('matrizfornecedorconta/delete/<int:pk>/',views.MatrizFornecedorDeleteView.as_view(),name='matriz-delete'),
     path('matrizfornecedorconta/detail/<int:pk>/',views.MatrizFornecedorDetailView.as_view(),name='matriz-detail'),
+
+
+
+
+    ############# TESTE
+
+    path('tabelateste/',views.EmpresaTeste.as_view(),name='empresa-teste'),
+    # path('teste/',views.ativos,name='ativos-teste'),
 
 ]
 
