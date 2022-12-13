@@ -44,7 +44,8 @@
                     <div id="div_id_cnpj" class="mb-3"> <label for="id_cnpj" class="form-label">CNPJ</label>
                          <input type="text" name="cnpj" class="textinput textInput form-control" id="id_cnpj" onkeypress="$(this).mask('00.000.000/0000-00')"> 
                     </div>
-                
+                    <hr>
+      
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
@@ -116,7 +117,7 @@
                     </thead>
                     <tbody >
                         {% for empresas in teste %}
-                        <tr>
+                        <tr class="record">
                             <td class="text-center col-md-1">{{empresas.cod_empresa}}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="empresa">{{empresas.empresa}}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="cod_projeto">{{empresas.cod_projeto}}</td>
@@ -124,9 +125,9 @@
                             <td class="" data-id="{{empresas.cod_empresa}}" data-type="data_atualiza">{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="cnpj">{{empresas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
-                                <a href="{% url 'crud_app:empresa-detail' pk=empresas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
-                                {% comment %} <button class="btn btn-block btn-delete btn-danger">DELETE</button>                                 {% endcomment %}
-                                <a href="{% url 'crud_app:empresa-delete' pk=empresas.pk %}" class="mx-3" title="Excluir Conta"><i class="fa-solid fa-trash-can"></i></a>
+                                {% comment %} <a href="{% url 'crud_app:empresa-detail' pk=empresas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a> {% endcomment %}
+                                <button class="btn btn-block btn-delete fa-solid fa-trash-can "></button>                             
+                                {% comment %} <a href="{% url 'crud_app:empresa-delete' pk=empresas.pk %}" class="mx-3" title="Excluir Conta"><i class="link-delete fa-solid fa-trash-can"></i></a> {% endcomment %}
                             </td>
                             
                             
@@ -138,6 +139,40 @@
                 </table>
                 {% include "crud_app/pagination.html" %}
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fase" id="editModal" tabindex="-1" arial-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Empresa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id='formEdit' action="">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group validate">
+                            <input type="text" name="owner">
+                            <small class="text-red text-muted mySpan"></small>                            
+                        </div>
+                        <div class="form-group validate">
+                            <input type="text">
+                            <small class="text-red text-muted mySpan"></small>                            
+                        </div>
+                        <div class="form-group validate">
+                            <input type="text">
+                            <small class="text-red text-muted mySpan"></small>                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btnUpdate" data-dismiss="modal">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -237,7 +272,7 @@
                         $("#ins_error").hide();
                         $("#ins_success").text(response['errorMessage']);
                         $("#ins_success").show();
-                        var html_data="<tr><td class='text-center col-md-1'>"+response['cod_empresa']+"</td><td class='editable' data-type='empresa'>"+empresa+"</td><td class='editable' data-type='empresa'>"+cod_projeto+"</td><td>"+data_cadastro+"</td><td>"+data_atualiza+"</td><td class='editable' data-type='cnpj'>"+cnpj+"</td><td class='ignore-on-print excludeExport text-center col-md-2'><a href='/app/empresa/detail/"+response['cod_empresa']+"/' class='mx-3' title='Detalhar Conta'><i class='fa-solid fa-up-right-and-down-left-from-center'></i></a><a href='/app/empresa/delete/"+response['cod_empresa']+"/' class='mx-3' title='Excluir Conta'><i class='fa-solid fa-trash-can'></i></a></td>";
+                        var html_data="<tr><td class='text-center col-md-1'>"+response['cod_empresa']+"</td><td class='editable' data-type='empresa'>"+empresa+"</td><td class='editable' data-type='empresa'>"+cod_projeto+"</td><td>"+data_cadastro+"</td><td>"+data_atualiza+"</td><td class='editable' data-type='cnpj'>"+cnpj+"</td><td class='ignore-on-print excludeExport text-center col-md-2'><button class='btn btn-block btn-delete fa-solid fa-trash-can'></button></td>";
                         $(".table tbody").prepend(html_data);
                                         
                     }
@@ -261,36 +296,43 @@
        // SCRIPT DE DELETE
        $(document).on("click",".btn-delete",function(){
         var this_html=$(this);
-        this_html.attr("disabled","disabled");
-        this_html.text("DELETING....");
         var cod_empresa=this_html.parent().parent().children().first().text();
         //console.log(id);
-        $.ajax({
-            url:"{% url 'crud_app:delete' %}",
-            type:'POST',
-            data:{cod_empresa:cod_empresa}
-        })
-        .done(function(response){
-            if(response['error']==false){
-                this_html.parent().parent().remove();
-                $("#upt_error").hide();
-                $("#upt_success").text(response['errorMessage']);
-                $("#upt_success").show();
+        if(confirm("Tem Certeza?")){
 
-            }
-            else{
-                $("#upt_success").hide();
-                $("#upt_error").text(response['errorMessage']);
-                $("#upt_error").show();
-            }
-        })
-        .fail(function(){
-             $("#upt_success").hide();
-             $("#upt_error").text("Something Went Wrong!");
-             $("#upt_error").show();
-        });
+            $.ajax({
+                url:"{% url 'crud_app:delete' %}",
+                type:'POST',
+                data:{cod_empresa:cod_empresa}
+            })
+            .done(function(response){
+                if(response['error']==false){
+                    this_html.parent().parent().remove();
+                    $("#upt_error").hide();
+                    $("#upt_success").text(response['errorMessage']);
+                    $("#upt_success").show();
+                
+                }
+                else{
+                    alert(resp.message);
+                    $("#upt_success").hide();
+                    $("#upt_error").text(response['errorMessage']);
+                    $("#upt_error").show();
+                }
+            })
+            .fail(function(){
+                 $("#upt_success").hide();
+                 $("#upt_error").text("Something Went Wrong!");
+                 $("#upt_error").show();
+                
+                });
+        }
+        else{
+        return false;
+        }        
 });
  
+
     // SCRIPT DE UPDATE ALL 
 $("#update_btn").click(function(){
     $("#update_btn").hide();

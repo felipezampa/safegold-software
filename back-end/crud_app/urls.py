@@ -10,7 +10,7 @@ urlpatterns = [
     #path('empresa/',views.empresalistview,name='empresa-list'),
     path('empresa/create/',views.EmpresaCreateView.as_view(),name='empresa-create'),
     path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
-    path('empresa/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
+    #path('empresa/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
     path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
     #path('empresa/add',views.cadastro_empresa,name='add-empresa'  ),
     path('empresa/save',views.saveempresa,name='saveempresa'),
@@ -19,6 +19,7 @@ urlpatterns = [
     # path('empresa/pag',views.paginacao, name= 'paginacao'),
     path('empresa/delete',views.delete_empresa,name='delete'),
     path('empresa/',views.ativos,name='empresa-list'),
+    path('empresa/delete/<int:pk>/',views.EmpresaDeleteView_teste.as_view(),name='empresa-delete'),
 
     
     
