@@ -6,7 +6,7 @@ app_name = 'crud_app'
 urlpatterns = [
 
     ###############################     EMPRESA     ###############################
-    path('empresa/',views.EmpresaListView.as_view(),name='empresa-list'),
+    #path('empresa/',views.EmpresaListView.as_view(),name='empresa-list'),
     #path('empresa/',views.empresalistview,name='empresa-list'),
     path('empresa/create/',views.EmpresaCreateView.as_view(),name='empresa-create'),
     path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
@@ -17,7 +17,10 @@ urlpatterns = [
     path('empresa/add',views.insertempresa,name='insert'),
     path('empresa/update',views.update_all, name= 'update_all'),
     # path('empresa/pag',views.paginacao, name= 'paginacao'),
-    # path('empresa/delete',views.delete_empresa,name='delete'),
+    path('empresa/delete',views.delete_empresa,name='delete'),
+    path('empresa/',views.ativos,name='empresa-list'),
+
+    
     
 
 
@@ -37,7 +40,7 @@ urlpatterns = [
     path('conta/delete/<int:pk>/',views.DimContasDeleteView.as_view(),name='conta-delete'),
     path('conta/detail/<int:pk>/',views.DimContasDetailView.as_view(),name='conta-detail'),
 
-    ############################### CONTAFORNECEDOR ###############################
+    ###############################  CONTAFORNECEDOR     ###############################
     path('matrizfornecedorconta/',views.MatrizFornecedorListView.as_view(),name='matriz-list'),
     # path('matrizfornecedorconta/create/',views.MatrizFornecedorCreateView.as_view(),name='matriz-create'),
     # path('matrizfornecedorconta/update/<int:pk>/',views.MatrizFornecedorUpdateView.as_view(),name='matriz-update'),
@@ -47,10 +50,8 @@ urlpatterns = [
 
 
 
-    ############# TESTE
+    ############# TESTE     
 
-    path('tabelateste/',views.EmpresaTeste.as_view(),name='empresa-teste'),
-    # path('teste/',views.ativos,name='ativos-teste'),
 
 
 

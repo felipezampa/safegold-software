@@ -22,28 +22,25 @@
                     
                 
                     <div id="div_id_cod_projeto" class="mb-3"> <label for="id_cod_projeto" class="form-label">Projeto</label> 
-                        <select name="cod_projeto" class="select form-select" id="id_cod_projeto">
-                            {% for obj in projetos_final %}
+                        <select name="cod_projeto" class="select form-select" id="id_cod_projeto"> 
+                            <option value="" selected="">---------</option>
+                            {% for obj in projetos_ativos %}
                             <option value="{{obj.cod_projeto}}" selected="">{{obj.projeto}}</option>
-                            {% endfor %}
+                            {% endfor %} 
                         
                         </select>             
                     </div>
                 
                     <div id="div_id_empresa" class="mb-3"> <label for="id_empresa" class="form-label">Empresa</label> 
-                    <input type="text" name="empresa" maxlength="255" class="textinput textInput form-control" id="id_empresa" required>
-                 </div>
-                  <div id="div_id_safegold_ger" class="mb-3">
-                     <label for="id_safegold_ger" class="form-label">Safegold Gerencia? </label> 
+                    <input type="text" name="empresa" maxlength="255" class="textinput textInput form-control" id="id_empresa"> </div> <div id="div_id_safegold_ger" class="mb-3"> <label for="id_safegold_ger" class="form-label">Safegold Gerência? </label> 
                     <select name="safegold_ger" class="select form-select" id="id_safegold_ger"> 
+                        <option value="">---------</option> 
                         <option value="0">Não</option> 
                         <option value="1" selected="">Sim</option>
                     </select>
                     </div> 
                 
-                    <div id="div_id_cnpj" class="mb-3"> <label for="id_cnpj" class="form-label">CNPJ</label>
-                         <input type="text" name="cnpj" class="textinput textInput form-control" id="id_cnpj" onkeypress="$(this).mask('00.000.000/0000-00')"> 
-                    </div>
+                    <div id="div_id_cnpj" class="mb-3"> <label for="id_cnpj" class="form-label">Cnpj</label> <input type="text" name="cnpj" maxlength="255" class="textinput textInput form-control" id="id_cnpj"> </div>
                 
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     
@@ -87,12 +84,12 @@
                     </div>
                     <div class="form-group form-group-sm my-3 ml-3 mr-3">
                         <label for="cnpjFilter">CNPJ</label>
-                        <input type="text" name="cnpj" id="cnpjFilter" class="form-control" aria-label="Large" placeholder="Filtrar por CNPJ" onkeypress="$(this).mask('00.000.000/0000-00')" onkeyup="filtrarPorCNPJ()" />
+                        <input type="text" name="cnpj" id="cnpjFilter" class="form-control" aria-label="Large" placeholder="Filtrar por CNPJ" onkeyup="filtrarPorCNPJ()" />
                     </div>
                     <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
                     <div class="col text-center mb-1 mt-1">
                         <hr>
-                        <button class="btn btn-block btn-success mb-2" id="update_btn">Editar Todos</button>
+                        <button class="btn btn-block btn-success mb-2" id="update_btn">Editar</button>
                         <button class="btn btn-block btn-success mb-2" id="save_all_btn" style="display:none;margin-top:0px">Salvar</button>
                     </div>
                 </div>
@@ -101,27 +98,27 @@
     
         <div class="sg-container mt-3 mx-1 mb-5" style="margin-bottom: 1px">
             <div class="sg-content">
-                <h3 class="text-center mt-1 ignore-on-print">{{ projeto.cod_projeto }}</h3>
+                <h3 class="text-center mt-1 ignore-on-print">Tabela</h3>
                 <table class="table table-Light table-bordered table-striped mb-3 mt-2 table-responsive table-hover" id="sg-table">
                     <thead class="table-dark">
                         <tr>
                             <th class="col text-center">ID</th>
                             <th class="col">Empresa</th>
                             <th class="col">Projeto</th>
-                            <th class="col">Data de Cadastro</th>
-                            <th class="col">Data de Atualização</th>
+                            <th class="col">Data Cadastro</th>
+                            <th class="col">Data Atualizado</th>
                             <th class="col">CNPJ</th>
-                            <th class="col text-center ignore-on-print excludeExport">Ações</th>
+                            <th class="col text-center ignore-on-print excludeExport">Action</th>
                         </tr>
                     </thead>
                     <tbody >
-                        {% for empresas in teste %}
+                        {% for empresas in empresa %}
                         <tr>
                             <td class="text-center col-md-1">{{empresas.cod_empresa}}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="empresa">{{empresas.empresa}}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="cod_projeto">{{empresas.cod_projeto}}</td>
-                            <td class="" data-id="{{empresas.cod_empresa}}" data-type="data_cadastro">{{empresas.data_cadastro|date:"d/m/Y H:i" }}</td>
-                            <td class="" data-id="{{empresas.cod_empresa}}" data-type="data_atualiza">{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
+                            <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="data_cadastro">{{empresas.data_cadastro|date:"d/m/Y H:i" }}</td>
+                            <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="data_atualiza">{{empresas.data_atualiza|date:"d/m/Y H:i" }}</td>
                             <td class="editable" data-id="{{empresas.cod_empresa}}" data-type="cnpj">{{empresas.cnpj}}</td>
                             <td class="ignore-on-print excludeExport text-center col-md-2">
                                 <a href="{% url 'crud_app:empresa-detail' pk=empresas.pk %}" class="mx-3" title="Detalhar Conta"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
@@ -146,7 +143,6 @@
 {% block scripts %}
     <script src="{% static 'js/ExportPDF.js' %}"></script>
     <script src="{% static 'js/ExportCSV.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script>
         // SCRIPT DE UPDATE CLICANDO NA TABELA
         $(document).ready(function(){
@@ -221,8 +217,8 @@
                 return;
             }
 
-            else if(cnpj.length != 18){
-                $("#ins_error").text("CNPJ inválido")
+            else if(cnpj.length != 14){
+                $("#ins_error").text("CNPJ INVALIDO")
                 $("#ins_error").show()
                 return;
             }
@@ -266,7 +262,7 @@
         var cod_empresa=this_html.parent().parent().children().first().text();
         //console.log(id);
         $.ajax({
-            url:"{% url 'crud_app:delete' %}",
+            url:"#",
             type:'POST',
             data:{cod_empresa:cod_empresa}
         })
@@ -392,3 +388,47 @@ $(function(){
 
 
 
+
+<form class="sg-content" id="sg_form">
+    <input type="hidden" name="csrfmiddlewaretoken" value="hEVhIjt4q9d7kw1PNNYrfEVOuMwEcjdDN8hwWJdmKZde4sMJLumYtVTBaaPKwFqa"> 
+    
+    
+
+    <div id="div_id_cod_projeto" class="mb-3"> <label for="id_cod_projeto" class="form-label">Projeto</label> 
+        <select name="cod_projeto" class="select form-select" id="id_cod_projeto"> 
+            <option value="" selected="">---------</option>
+            {% for obj in projetos_ativos %}
+            <option value="{{obj.projeto}}" selected="">{{obj.projeto}}</option>
+            {% endfor %} 
+        
+        </select>             
+    </div>
+
+    <div id="div_id_empresa" class="mb-3"> <label for="id_empresa" class="form-label">Empresa</label> 
+    <input type="text" name="empresa" maxlength="255" class="textinput textInput form-control" id="id_empresa"> </div> <div id="div_id_safegold_ger" class="mb-3"> <label for="id_safegold_ger" class="form-label">Safegold Gerência? </label> 
+    <select name="safegold_ger" class="select form-select" id="id_safegold_ger"> 
+        <option value="">---------</option> 
+        <option value="0">Não</option> 
+        <option value="1" selected="">Sim</option>
+    </select>
+    </div> 
+
+    <div id="div_id_cnpj" class="mb-3"> <label for="id_cnpj" class="form-label">Cnpj</label> <input type="text" name="cnpj" maxlength="255" class="textinput textInput form-control" id="id_cnpj"> </div>
+
+    <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
+    
+    <!--======================================= APAGAR DEPOIS, SOMENTE PARA TESTES =======================================-->
+    <div class="col text-center mb-1 mt-1">
+        <input type="button" name="submit" class="btn btn-warning btn-block btn-info btn-insert-data" value="Adicionar" id="btn">
+    </div>
+    <div class="form-group">
+        <div class="alert alert-success" id="ins_success" style="display:none">
+            Empresa cadastrada com sucesso!
+
+        </div>
+         <div class="alert alert-danger" id="ins_error" style="display:none">
+            Ocorreu um erro!                  
+
+        </div>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (TemplateView,ListView,CreateView,DeleteView,UpdateView,DetailView)
 from . import models
@@ -10,60 +10,47 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 import datetime
 import csv
+from django.contrib import auth, messages
+
 
 
 class IndexView(TemplateView):
      template_name = 'base.html'
 
+
+
 #############################     EMPRESA     #############################
+def ativos(request):
+    if request.user.is_authenticated:
+        id = request.user.id
+        user_table = models.Projetos.objects.filter(id_user = id)
+        user = user_table.all().values('cod_projeto')
 
+        projetos_ativos_select = user_table.filter(ativo='1').values()  # ---> filtro pro select
 
-ITEMS_PAGINA = 50
+        projetos_ativos = user_table.values('cod_projeto') # ---> tabela com todos
+        empresa = models.Empresas.objects.filter(cod_projeto__in=projetos_ativos)
+        empresa_all = models.Empresas.objects.filter(cod_projeto__in=user)
+        #        projetos_ativos = user_table.filter(ativo='1').values('cod_projeto') # ---> tabela só com ativos
 
-class EmpresaListView(ListView):
-    template_name = 'crud_app/empresa/tabela.html'
-    model = models.Empresas
-    paginate_by = ITEMS_PAGINA
+        projetos = request.POST.get('projeto', None)
+        
 
-    def get_queryset(self):
-        queryset = super(EmpresaListView, self).get_queryset()
-
-        data = self.request.GET
-        search = data.get('empresa')
-
-        if search:
-            queryset = queryset.filter(
-                Q(cod_empresa__icontains=search)|
-                Q(cod_projeto__icontains=search)| 
-                Q(empresa__icontains=search)|
-                Q(data_cadastr__icontains=search)|
-                Q(data_atualiz__icontains=search)|
-                Q(safegold_ger__icontains=search)|
-                Q(cnpj__icontains=search)
-
-            )
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(EmpresaListView, self).get_context_data(**kwargs)
-        context['form'] = EmpresaForm()
-        return context
-
-
-# def cadastro_empresa(request):
-#     if request.POST:
-#         form = EmpresaForm(request.POST)
-#         if form.is_valid():           
-#             form.save()
-#         return redirect('crud_app:empresa-list')
-    
-#     return render(request,'crud_app/empresa/tabela.html', {'form': EmpresaForm})
-
-# def get_empresa(self, request):
-#     form = EmpresaForm(request.POST)
-#     if form.is_valid():
-#         teste = form.cleaned_data['empresa']
-#         print(teste)
+        #print(projeto)
+        
+        projetos_final = user_table.filter(cod_projeto=projetos).values() #
+        tabela_geral = user_table.filter(cod_projeto=projetos).values('cod_projeto') #
+        teste = models.Empresas.objects.filter(cod_projeto__in=tabela_geral)
+        print(teste)
+        dados = {
+            'projetos_ativos': projetos_ativos_select,
+            'user': empresa_all,
+            'empresa': empresa,
+            'projetos_final': projetos_final,
+            'teste': teste
+        }
+       # print('dashboard OK')
+        return render(request,'crud_app/empresa/tabela.html', dados)
 
 
 @csrf_exempt
@@ -92,23 +79,29 @@ def insertempresa(request):
     empresa = request.POST.get("empresa")
     safegold_ger = request.POST.get("safegold_ger")
     cnpj = request.POST.get("cnpj")
-    print(projeto)
+    print(len(cnpj))
+    if models.Empresas.objects.filter(cnpj=cnpj).exists(): # ----> validação para cnpj existentes
+        messages.error(request, 'esse cnpj ja existe')
+    # if len(cnpj) >= 17:
+    #     messages.error(request, 'invalido')
+    else:
 
-    try:    
-        #print(projeto,empresa,safegold_ger,cnpj)
-        empresa = models.Empresas(cod_projeto=projeto, empresa=empresa, safegold_ger=safegold_ger, cnpj=cnpj)
-        #print(empresa)
-        empresa.save()
-        empresa_data={"cod_empresa": empresa.cod_empresa,"data_cadastro":empresa.data_cadastro,"error":False,"errorMensage":"Empresa adicionada com Sucesso"}
-        empresa_data['detail'] = "<a href='/app/empresa/detail/"+str(empresa.pk)+"/' class='mx-3' title='Detalhar Conta'><i class='fa-solid fa-up-right-and-down-left-from-center'></i></a>"
-        empresa_data['delete'] = "<a href='/app/empresa/delete/"+str(empresa.pk)+"/' class='mx-3' title='Excluir Conta'><i class='fa-solid fa-trash-can'></i></a>"
-     
-        # path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
+        try:    
+            #print(projeto,empresa,safegold_ger,cnpj)
+            empresa = models.Empresas(cod_projeto=projeto, empresa=empresa, safegold_ger=safegold_ger, cnpj=cnpj)
+            #print(empresa)
+            empresa.save()
+            empresa_data={"cod_empresa": empresa.cod_empresa,"data_cadastro":empresa.data_cadastro,"error":False,"errorMensage":"Empresa adicionada com Sucesso"}
+            empresa_data['detail'] = "<a href='/app/empresa/detail/"+str(empresa.pk)+"/' class='mx-3' title='Detalhar Conta'><i class='fa-solid fa-up-right-and-down-left-from-center'></i></a>"
+            empresa_data['delete'] = "<a href='/app/empresa/delete/"+str(empresa.pk)+"/' class='mx-3' title='Excluir Conta'><i class='fa-solid fa-trash-can'></i></a>"
 
-        return JsonResponse(empresa_data,safe=False)
-    except:
-        empresa_data={"error":True,"errorMensage":"Failed to add"}
-        return JsonResponse(empresa_data,safe=False)
+
+            return JsonResponse(empresa_data,safe=False)
+        except:
+            empresa_data={"error":True,"errorMensage":"Failed to add"}
+            return JsonResponse(empresa_data,safe=False)
+
+
 
 @csrf_exempt
 def update_all(request):
@@ -127,19 +120,18 @@ def update_all(request):
         stuent_data={"error":True,"errorMessage":"Failed to Update Data"}
         return JsonResponse(stuent_data,safe=False)
 
-# @csrf_exempt
-# def delete_empresa(request):
-#     id=request.POST.get("cod_empresa")
-#     print(id)
-#     try:
-#         empresa=models.Empresas.objects.get(cod_empresa=id)
-#         empresa.delete()
-#         empresa_data={"error":False,"errorMessage":"Deleted Successfully"}
-#         return JsonResponse(empresa_data,safe=False)
-#     except:
-#         empresa_data={"error":True,"errorMessage":"Failed to Delete Data"}
-#         return JsonResponse(empresa_data,safe=False)
-
+@csrf_exempt
+def delete_empresa(request):
+    id=request.POST.get("cod_empresa")
+    print(id)
+    try:
+        empresa=models.Empresas.objects.get(cod_empresa=id)
+        empresa.delete()
+        empresa_data={"error":False,"errorMessage":"Deleted Successfully"}
+        return JsonResponse(empresa_data,safe=False)
+    except:
+        empresa_data={"error":True,"errorMessage":"Failed to Delete Data"}
+        return JsonResponse(empresa_data,safe=False)
     
 class EmpresaCreateView(CreateView):
     template_name = 'crud_app/empresa/cadastro.html'
@@ -161,6 +153,8 @@ class EmpresaUpdateView(UpdateView):
 class EmpresaDetailView(DetailView):
     model = models.Empresas
     template_name = 'crud_app/empresa/detail.html'
+    success_url = reverse_lazy("crud_app:empresa-list")
+
 ###########################################################################
 
 #############################     PROJETO     #############################
@@ -250,9 +244,6 @@ class MatrizFornecedorDetailView(DetailView):
 # testes
 
 
-class EmpresaTeste(ListView):
-    template_name = 'crud_app/empresa/tabelateste.html'
-    model = models.Projetos
 
 
 ### CSV PDF
@@ -274,4 +265,34 @@ def export_csv(request):
 
 
     return response
+
+
+
+
+
+######### LIST VIEW with API
+from . import serializers
+
+from rest_framework import viewsets
+
+class EmpresaserializerViewSet(viewsets.ModelViewSet):
+    queryset = models.Empresas.objects.all()
+    serializer_class = serializers.EmpresasSerializer
+
+class MatrizContaFornecedorViewSet(viewsets.ModelViewSet):
+    queryset = models.MatrizContaFornecedor.objects.all()
+    serializer_class = serializers.MatrizContaFornecedorSerializer
+
+class ProjetosViewSet(viewsets.ModelViewSet):
+    queryset = models.Projetos.objects.all()
+    serializer_class = serializers.ProjetosSerializer
+
+class DimcontasViewSet(viewsets.ModelViewSet):
+    queryset = models.Dimcontas.objects.all()
+    serializer_class = serializers.DimcontasSerializer
+
+
+
+
+
 
