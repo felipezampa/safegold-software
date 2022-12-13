@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block styles %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock styles %}
 {% block main %}
     <h1 class="text-center"> Seja Bem vindo, {{user.username}}</h1>
     <hr>
@@ -11,23 +11,22 @@
         <div class="container">
             <div class="row">
                 {% for obj_active in projetos_ativos %}
-                <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
-                    <div class="single-best-receipe-area mb-30">
-                        <div class="receipe-content">
-                            <div class="card mb-3 shadow p-3 bg-white rounded" style="width: 19rem;">
-                                <img class="card-img-top" src="https://safegold.com.br/wp-content/themes/safeGold/assets/img/thumb-whats.png" alt="Card image cap">
+                <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+                    <div class="single-best-receipe-area mb-3">
+                        <button type="submit" form="projetoform" name="projeto" value="{{obj_active.cod_projeto}}" class="sg-btn">
+                            <div class="receipe-content">
+                            <div class="card shadow-lg bg-white rounded">
+                                <img class="card-img-top sg-card-img--hover" src="https://safegold.com.br/wp-content/themes/safeGold/assets/img/thumb-whats.png" alt="Card image cap" style="width: 17rem; height: 12rem;">
                                 <div class="card-body text-center">
-                                    <a href="{% url 'crud_app:empresa-list' %}" class="text-decoration-none text-dark" id="{{obj_active.cod_projeto}}" form="projetoform" name="projeto" value="{{obj_active}}" type='submit'>
+                                    <div class="sg-card-category">Projeto Ativo</div>
                                         <h5>{{obj_active.projeto}}</h5>
-                                    </a>
-                                    <hr>
-                                    <button type="submit" form="projetoform" name="projeto" value="{{obj_active.cod_projeto}}" class="btn btn-primary btn-lg btn-black">Ver projeto</button>
+                                    
                                 </div>
                             </div>
                         </div>
+                        </button>
                     </div>
                 </div>
-            
                 {% endfor %}
             </div>
         </div>
@@ -43,23 +42,21 @@
         <div class="container">
             <div class="row">
                 {% for obj in projetos %}
-                <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
-                    <div class="single-best-receipe-area mb-30">
-                        <div class="receipe-content">
-                            <div class="card mb-3 shadow p-3 bg-white rounded" style="width: 19rem;">
-                                <img class="card-img-top" src="https://safegold.com.br/wp-content/themes/safeGold/assets/img/thumb-whats.png" alt="Card image cap">
-                                <div class="card-body text-center">
-                                    <a href="{% url 'crud_app:empresa-list' %}" class="text-decoration-none text-dark" id="{{obj.cod_projeto}}" form="projetoform" name="projeto" value="{{obj}}" type='submit'>
-                                        <h5>{{obj.projeto}}</h5>
-                                    </a>
-                                    <hr>
-                                    <button type="submit" form="projetoform" name="projeto" value="{{obj.cod_projeto}}" class="btn btn-primary btn-lg btn-black">Ver projeto</button>
+                <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+                    <div class="single-best-receipe-area mb-3">
+                        <button type="submit" form="projetoform" name="projeto" value="{{obj.cod_projeto}}" class="sg-btn">
+                            <div class="receipe-content">
+                                <div class="card shadow-lg bg-white rounded">
+                                    <img class="card-img-top sg-card-img--hover" src="https://safegold.com.br/wp-content/themes/safeGold/assets/img/thumb-whats.png" alt="Card image cap" style="width: 17rem; height: 12rem;">
+                                    <div class="card-body text-center">
+                                        <div class="sg-card-category">Projeto</div>
+                                            <h5>{{obj.projeto}}</h5>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
-                </div>
-             
+                </div>       
                 {% endfor %}
             </div>
         </div>
