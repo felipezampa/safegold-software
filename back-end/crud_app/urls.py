@@ -9,7 +9,7 @@ urlpatterns = [
     #path('empresa/',views.EmpresaListView.as_view(),name='empresa-list'),
     #path('empresa/',views.empresalistview,name='empresa-list'),
     path('empresa/create/',views.EmpresaCreateView.as_view(),name='empresa-create'),
-    path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
+    #path('empresa/update/<int:pk>/',views.EmpresaUpdateView.as_view(),name='empresa-update'),
     #path('empresa/delete/<int:pk>/',views.EmpresaDeleteView.as_view(),name='empresa-delete'),
     path('empresa/detail/<int:pk>/',views.EmpresaDetailView.as_view(),name='empresa-detail'),
     #path('empresa/add',views.cadastro_empresa,name='add-empresa'  ),
@@ -20,6 +20,8 @@ urlpatterns = [
     path('empresa/delete',views.delete_empresa,name='delete'),
     path('empresa/',views.ativos,name='empresa-list'),
     path('empresa/delete/<int:pk>/',views.EmpresaDeleteView_teste.as_view(),name='empresa-delete'),
+    path('empresa/update/<int:pk>/',views.EmpresaUpdateView_teste.as_view(),name='empresa-update'),
+
 
     
     
@@ -52,6 +54,8 @@ urlpatterns = [
 
 
     ############# TESTE     
+    path('tabelateste/',views.TabelaTesteView.as_view(),name='tabela-teste'),
+
 
 
 

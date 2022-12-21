@@ -85,7 +85,7 @@ class Empresas(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True)
     data_atualiza = models.DateTimeField(auto_now=True)
     safegold_ger = models.IntegerField(blank=True, null=True, default=1, choices=CHOICES_BOOL, verbose_name='Safegold Gerência? ')    
-    cnpj = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    cnpj = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -205,3 +205,64 @@ class Regioes(models.Model):
     
     def __str__(self):
         return "{}".format(self.regiao)
+
+
+class User_projeto(models.Model):
+    user_id = models.ManyToManyField(User)
+    user_projeto = models.ManyToManyField(Projetos)
+    class Meta:
+        managed = False
+        db_table = 'User_projetos'
+        verbose_name_plural = 'User_projetos'
+        
+
+# Plano de Contas Models
+
+class FinGrupoContas(models.Model):
+    cod_grupo_contas = models.IntegerField(primary_key=True)
+    desc_grupo_contas = models.CharField(max_length=300, blank=True, null=True)
+    permite_vinculo = models.CharField(max_length=3, blank=True, null=True)
+    sumario = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fin_grupo_contas'
+        verbose_name_plural = 'Grupo de Contas // Plano de Contas'
+
+    
+    def __str__(self):
+        return "{} - {}".format(self.cod_grupo_contas, self.desc_grupo_contas)
+
+
+
+class FinPlanoContas(models.Model):
+    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
+    cod_plano_conta = models.IntegerField(primary_key=True)
+    desc_conta = models.CharField(max_length=300, blank=True, null=True)
+    cod_subgrupo_contas = models.ForeignKey('FinSubgrupoContas', models.DO_NOTHING, db_column='cod_subgrupo_contas', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fin_plano_contas'
+        verbose_name_plural = 'Analitico // Plano de Contas'
+
+
+    def __str__(self):
+        return "Empresa: {} // Código Analitico: {} - Descrição: {}".format(self.cod_empresa, self.cod_plano_conta, self.desc_conta)
+
+
+class FinSubgrupoContas(models.Model):
+    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
+    cod_subgrupo_contas = models.IntegerField(primary_key=True)
+    desc_subgrupo_contas = models.CharField(max_length=300, blank=True, null=True)
+    cod_grupo_contas = models.ForeignKey(FinGrupoContas, models.DO_NOTHING, db_column='cod_grupo_contas', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fin_subgrupo_contas'
+        verbose_name_plural = 'SubgrupoContas // Plano de Contas'
+
+
+    def __str__(self):
+        return "Empresa: {} // Código Subgrupo: {} - Descrição: {}".format(self.cod_empresa, self.cod_subgrupo_contas, self.desc_subgrupo_contas)
+

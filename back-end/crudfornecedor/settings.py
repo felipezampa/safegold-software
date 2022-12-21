@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-# import django_heroku
-
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
@@ -27,7 +26,7 @@ SECRET_KEY = 'django-insecure-2i_r3^epdg@1zo!d-$u2bubb#_($nmflvk)jdn1d5(&vy^rdmn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://crud-empresa.herokuapp.com/', '*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,7 +43,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'usuarios.apps.UsuariosConfig',
-    'corsheaders'
+    'rest_framework',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -55,15 +56,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
-# =================  Link que salvou a minha vida, problemas com o REST: https://github.com/adamchainz/django-cors-headers  =================
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
-]
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)
 
 ROOT_URLCONF = 'crudfornecedor.urls'
 
@@ -146,19 +147,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 
 # Messages
-from django.contrib.messages import constants as messages
-MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
-    messages.SUCCESS: 'success',
-}
+# from django.contrib.messages import constants as messages
+# MESSAGE_TAGS = {
+#     messages.ERROR: 'danger',
+#     messages.SUCCESS: 'success',
+# }
 
 
-
-
-# django_heroku.settings(locals())
-
-
-# if "DATABASE_URL" in os.environ:
-#     import dj_database_url
-
-#     DATABASES = {"default": dj_database_url.config()}
+django_heroku.settings(locals())
