@@ -148,7 +148,7 @@ class Pais(models.Model):
         return "{}".format(self.pais)
 
 class Projetos(models.Model):
-    id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user', blank=True, null=True)    
+    id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user',related_name='projeto',blank=True, null=True)    
     cod_projeto = models.BigAutoField(primary_key=True)
     projeto = models.CharField(max_length=255, blank=True, null=True)
     chave_integracao = models.CharField(max_length=255, blank=True, null=True)
@@ -193,7 +193,6 @@ class Projetos(models.Model):
         return "{}".format(self.projeto)
 
 
-
 class Regioes(models.Model):
     cod_regiao = models.AutoField(primary_key=True)
     regiao = models.CharField(max_length=50)
@@ -207,13 +206,6 @@ class Regioes(models.Model):
         return "{}".format(self.regiao)
 
 
-class User_projeto(models.Model):
-    user_id = models.ManyToManyField(User)
-    user_projeto = models.ManyToManyField(Projetos)
-    class Meta:
-        managed = False
-        db_table = 'User_projetos'
-        verbose_name_plural = 'User_projetos'
         
 
 # Plano de Contas Models
@@ -266,3 +258,67 @@ class FinSubgrupoContas(models.Model):
     def __str__(self):
         return "Empresa: {} // Código Subgrupo: {} - Descrição: {}".format(self.cod_empresa, self.cod_subgrupo_contas, self.desc_subgrupo_contas)
 
+
+
+#### TESTES
+
+
+
+
+class Projetos_teste(models.Model):
+    cod_projeto1 = models.BigAutoField(primary_key=True)
+    projeto1 = models.CharField(max_length=255, blank=True, null=True)
+    chave_integracao1 = models.CharField(max_length=255, blank=True, null=True)
+    cod_usuario1 = models.IntegerField(blank=True, null=True)
+    chave_inteligente1 = models.CharField(max_length=255, blank=True, null=True)
+    cod_segmento1 = models.IntegerField(blank=True, null=True)
+    ativo1 = models.IntegerField(blank=True, null=True)
+    cor1 = models.CharField(max_length=255, blank=True, null=True)
+    avatar_nome_arq1 = models.CharField(max_length=255, blank=True, null=True)
+    avatar_tipo1 = models.CharField(max_length=255, blank=True, null=True)
+    avatar_tamanho1 = models.BigIntegerField(blank=True, null=True)
+    avatar_atualizacao1 = models.DateTimeField(blank=True, null=True)
+    tipo_endereco1 = models.CharField(max_length=255, blank=True, null=True)
+    endereco1 = models.CharField(max_length=255, blank=True, null=True)
+    end_numero1 = models.CharField(max_length=255, blank=True, null=True)
+    end_compl = models.CharField(max_length=255, blank=True, null=True)
+    bairro1 = models.CharField(max_length=255, blank=True, null=True)
+    cep1 = models.CharField(max_length=255, blank=True, null=True)
+    end_estado1 = models.ForeignKey(Estados, models.DO_NOTHING, db_column='end_estado', blank=True, null=True)
+    data_fecha1 = models.DateField(blank=True, null=True)
+    id_importacao1 = models.IntegerField(blank=True, null=True)
+    end_cidade1 = models.CharField(max_length=255, blank=True, null=True)
+    cidade1 = models.CharField(max_length=255, blank=True, null=True)
+    resp_email1 = models.CharField(max_length=255, blank=True, null=True)
+    resp_nome1 = models.CharField(max_length=255, blank=True, null=True)
+    resp_cod1= models.CharField(max_length=255, blank=True, null=True)
+    job_state1 = models.CharField(max_length=255, blank=True, null=True)
+    job_report1 = models.TextField(blank=True, null=True)
+    job_id1 = models.IntegerField(blank=True, null=True)
+    data_criacao1 = models.DateTimeField()
+    data_atualiza1 = models.DateTimeField()
+    legacy_id1 = models.IntegerField(blank=True, null=True)
+    safegold_ger1 = models.IntegerField(blank=True, null=True)
+    cod_sub_segmento1 = models.IntegerField(blank=True, null=True)
+    sandbox1 = models.IntegerField(blank=True, null=True)
+    class Meta:
+        managed = True
+        db_table = 'projetos_teste'
+        verbose_name_plural = 'Projetos_teste'
+
+    def __str__(self):
+        return "{}".format(self.projeto)
+
+
+class User_projeto(models.Model):
+    id_user = models.ManyToManyField(User)
+    cod_projeto = models.ManyToManyField(Projetos_teste)
+
+    class Meta:
+        managed = True
+        db_table = 'user_projeto'
+        
+
+
+    def __str__(self):
+        return "{} - {}" .format(self.id_user, self.cod_projeto)
