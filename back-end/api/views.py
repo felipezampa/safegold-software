@@ -62,11 +62,6 @@ def projetos_list_api(request):
     return JsonResponse({'Projetos': serializer.data}, safe=False)
 
 
-# def users_list_api(request):
-#     user = models.User.objects.all()
-#     serializer = serializers.UserSerializer(user, many=True)
-#     return JsonResponse({'Users': serializer.data}, safe=False)
-
 def fin_grupocontas_api(request):
     pass
 
