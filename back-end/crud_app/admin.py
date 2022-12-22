@@ -11,3 +11,13 @@ admin.site.register(MatrizContaFornecedor)
 admin.site.register(Pais)
 admin.site.register(Projetos)
 admin.site.register(Regioes)
+admin.site.register(User_projeto)
+
+
+
+
+
+# Plano de contas
+admin.site.register(FinGrupoContas)
+admin.site.register(FinPlanoContas)
+admin.site.register(FinSubgrupoContas)

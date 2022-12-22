@@ -11,6 +11,7 @@ from django.db.models import Q
 import datetime
 import csv
 from django.contrib import auth, messages
+from django.views import View
 
 
 
@@ -31,11 +32,10 @@ def ativos(request):
         projetos_ativos = user_table.values('cod_projeto') # ---> tabela com todos
         empresa = models.Empresas.objects.filter(cod_projeto__in=projetos_ativos)
         empresa_all = models.Empresas.objects.filter(cod_projeto__in=user)
-        #        projetos_ativos = user_table.filter(ativo='1').values('cod_projeto') # ---> tabela só com ativos
+        # projetos_ativos = user_table.filter(ativo='1').values('cod_projeto') # ---> tabela só com ativos
 
         projetos = request.POST.get('projeto', None)
         
-
         #print(projeto)
         
         projetos_final = user_table.filter(cod_projeto=projetos).values() #
@@ -44,10 +44,10 @@ def ativos(request):
         print(teste)
         dados = {
             'projetos_ativos': projetos_ativos_select,
-            'user': empresa_all,
+            'user': empresa_all, 
             'empresa': empresa,
             'projetos_final': projetos_final,
-            'teste': teste
+            'teste': teste #trocar
         }
        # print('dashboard OK')
         return render(request,'crud_app/empresa/tabela.html', dados)
@@ -81,7 +81,7 @@ def insertempresa(request):
     cnpj = request.POST.get("cnpj")
     print(len(cnpj))
     if models.Empresas.objects.filter(cnpj=cnpj).exists(): # ----> validação para cnpj existentes
-        messages.error(request, 'esse cnpj ja existe')
+        print('esse cnpj ja existe')
     # if len(cnpj) >= 17:
     #     messages.error(request, 'invalido')
     else:
@@ -133,6 +133,43 @@ def delete_empresa(request):
         empresa_data={"error":True,"errorMessage":"Failed to Delete Data"}
         return JsonResponse(empresa_data,safe=False)
     
+
+class EmpresaDeleteView_teste(View):
+    def get(self,request,pk,*args, **kwargs):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest': 
+
+            cod_empresa=request.POST.get("cod_empresa")
+            empresa = models.Empresas.objects.get(pk=cod_empresa)
+            print(empresa)
+            empresa.delete()
+            return JsonResponse({"message":"sucess"})
+        return JsonResponse({"message": "Wrong request"})
+
+class EmpresaUpdateView_teste(View):
+    def post(self,request,pk,*args, **kwargs):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest': 
+
+            pk=request.POST.get("cod_empresa",'')            
+            empresa = models.Empresas.objects.get(pk=pk)
+            teste=request.POST.get("cod_projeto",'')
+            projeto = models.Projetos.objects.get(cod_projeto=teste)
+            empresa = request.POST.get("empresa",'')
+            safegold_ger = request.POST.get("safegold_ger",'')
+            cnpj = request.POST.get("cnpj",'')
+            empresa_fin = models.Empresas(cod_projeto=projeto, empresa=empresa, safegold_ger=safegold_ger, cnpj=cnpj)
+            empresa_fin.save()
+
+
+            return JsonResponse({'message':'success'})
+
+
+        return JsonResponse({'message': 'Wrong request'})
+
+
+
+
+
+
 class EmpresaCreateView(CreateView):
     template_name = 'crud_app/empresa/cadastro.html'
     fields = ("empresa","cod_projeto","cnpj","safegold_ger")
@@ -243,7 +280,8 @@ class MatrizFornecedorDetailView(DetailView):
 
 # testes
 
-
+class TabelaTesteView(TemplateView):
+     template_name = 'crud_app/empresa/tabelateste.html'
 
 
 ### CSV PDF
@@ -270,26 +308,7 @@ def export_csv(request):
 
 
 
-######### LIST VIEW with API
-from . import serializers
 
-from rest_framework import viewsets
-
-class EmpresaserializerViewSet(viewsets.ModelViewSet):
-    queryset = models.Empresas.objects.all()
-    serializer_class = serializers.EmpresasSerializer
-
-class MatrizContaFornecedorViewSet(viewsets.ModelViewSet):
-    queryset = models.MatrizContaFornecedor.objects.all()
-    serializer_class = serializers.MatrizContaFornecedorSerializer
-
-class ProjetosViewSet(viewsets.ModelViewSet):
-    queryset = models.Projetos.objects.all()
-    serializer_class = serializers.ProjetosSerializer
-
-class DimcontasViewSet(viewsets.ModelViewSet):
-    queryset = models.Dimcontas.objects.all()
-    serializer_class = serializers.DimcontasSerializer
 
 
 

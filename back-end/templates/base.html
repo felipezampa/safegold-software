@@ -21,14 +21,6 @@
                 <div class="header_toggle"> 
                     <i class='fa-solid fa-bars' id="header-toggle"></i> 
                 </div>
-                <div class="col-2">
-                    <select class="form-select mr-5" aria-label="Default select example">
-                        <option selected>Projeto</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
                 {% block headMiddle %}<div></div>{% endblock headMiddle %}
                 {% block headRight %}<div></div>{% endblock headRight %}
             </header>
@@ -36,7 +28,7 @@
                 <nav class="nav">
                     <div> 
                         <a href="{% url 'dashboard' %}" class="nav_logo"></i> <img src="{% static "img/Safegold.svg" %}" width="200" alt="Safegold" class="mx-1" id="safegold"></a>
-                        <div class="nav_list">
+                        <div class="nav_list"> 
                             <a href="{% url 'dashboard' %}" class="nav_link" id="dashboard">
                                 <i class="fa-solid fa-table-columns"></i>
                                 <span class="nav_name">Dashboard</span>
