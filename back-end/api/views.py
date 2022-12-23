@@ -13,6 +13,8 @@ from rest_framework.parsers import JSONParser
 # Create your views here.
 
 
+
+### ---------> EMPRESAS API <--------- ###
 @csrf_exempt
 def empresa_list_api(request):
     if request.method == 'GET':
@@ -26,7 +28,8 @@ def empresa_list_api(request):
             serializer.save()
             JsonResponse(serializer.data, status=201)
         JsonResponse(serializer.errors, status=400)
-        
+
+### update and delete         
 @csrf_exempt
 def empresa_detail_api(request, pk):
     try:
@@ -39,7 +42,7 @@ def empresa_detail_api(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser.parse(request)
+        data = JSONParser().parse(request)
         serializer = serializers.EmpresasSerializer(empresa, data=data)
         if serializer.is_valid():
             serializer.save()
@@ -49,17 +52,50 @@ def empresa_detail_api(request, pk):
     elif request.method == 'DELETE':
         empresa.delete()
         return HttpResponse(status = 204)
+### ---------> EMPRESAS API <--------- ###
 
+
+
+
+### ---------> PROJETOS API ###
+@csrf_exempt
+def projeto_list_api(request):
+    if request.method == 'GET':
+        projeto = models.Projetos.objects.all()
+        serializer = serializers.ProjetosSerializer(projeto, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = serializers.ProjetosSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            JsonResponse(serializer.data, status = 201)
+        JsonResponse(serializer.errors, status=400)
+
+# update and delete  
+@csrf_exempt
+def projeto_detail_api(request,pk):
+    try:
+        projeto = models.Projetos.objects.get(cod_projeto=pk)
+    except:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = serializers.ProjetosSerializer(projeto)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data =  JSONParser().parse(request)
+        serializer = serializers.ProjetosSerializer(projeto, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    
+    elif request.method == 'DELETE':
+        projeto.delete()
+        return HttpResponse(status=204)
+### PROJETOS API <--------- ###
     
 
-
-
-
-
-def projetos_list_api(request):
-    projetos = models.Projetos.objects.all()
-    serializer = serializers.ProjetosSerializer(projetos, many=True)
-    return JsonResponse({'Projetos': serializer.data}, safe=False)
 
 
 def fin_grupocontas_api(request):
@@ -71,6 +107,9 @@ def fin_planocontas_api(request):
     pass
 
 
+
+
+### ---------> USERS API  ###
 @csrf_exempt
 def user_list_api(request):
     if request.method == 'GET':
@@ -85,6 +124,8 @@ def user_list_api(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
+### update and delete ###
 @csrf_exempt
 def user_detail_api(request,pk):
     try:
@@ -109,6 +150,18 @@ def user_detail_api(request,pk):
         user.delete()
         return HttpResponse(status=204)
 
+###  USERS API <--------- ###
 
 
 
+
+
+
+
+
+
+
+
+
+
+## GENERICS

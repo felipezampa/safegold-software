@@ -12,7 +12,6 @@
 .card:hover .sg-card-img--hover {
     height: 100%;
     opacity: 0.5;
-    transition: 0.2s all ease-out;
     transform: scale(1.9);
 }
 

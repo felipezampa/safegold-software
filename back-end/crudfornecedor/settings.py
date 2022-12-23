@@ -44,16 +44,18 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'usuarios.apps.UsuariosConfig',
     'rest_framework',
-    'corsheaders',
-
-    
+    'corsheaders'
+ 
 ]
+
 # =================  Link que salvou a minha vida, problemas com o REST: https://github.com/adamchainz/django-cors-headers  =================
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,8 +65,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = (
