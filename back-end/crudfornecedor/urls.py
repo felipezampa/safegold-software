@@ -19,11 +19,11 @@ from api import views
 
 from rest_framework import routers
 router = routers.DefaultRouter()
-router.register('Empresas', views.EmpresaserializerViewSet, basename= 'Empresas')
-router.register('MatrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
-router.register('Projetos', views.ProjetosViewSet, basename= 'Projetos')
-router.register('Dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
-router.register('User', views.UserViewSet, basename= 'User')
+router.register('empresas', views.EmpresaserializerViewSet, basename= 'Empresas')
+# router.register('matrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
+router.register('projetos', views.ProjetosViewSet, basename= 'Projetos')
+# router.register('dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
+router.register('user', views.UserViewSet, basename= 'User')
 
 
 
