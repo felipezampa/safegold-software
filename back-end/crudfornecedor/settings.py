@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'usuarios.apps.UsuariosConfig',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'django_filters',
+
  
 ]
 
@@ -155,12 +157,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 
-# Messages
-# from django.contrib.messages import constants as messages
-# MESSAGE_TAGS = {
-#     messages.ERROR: 'danger',
-#     messages.SUCCESS: 'success',
-# }
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'bootstrap4', 'materialize_css_forms', )
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
-
-django_heroku.settings(locals())
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
