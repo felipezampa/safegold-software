@@ -15,15 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api import views
+from api.views import (
+    EmpresaserializerViewSet,
+    ProjetosViewSet,
+    UserViewSet,
+    MyObtainTokenPairView
+)
 
 from rest_framework import routers
+
+from rest_framework_simplejwt.views import(
+    TokenObtainPairView,
+    TokenRefreshView,
+
+)
 router = routers.DefaultRouter()
-router.register('empresas', views.EmpresaserializerViewSet, basename= 'Empresas')
+router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
 # router.register('matrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
-router.register('projetos', views.ProjetosViewSet, basename= 'Projetos')
+router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 # router.register('dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
-router.register('user', views.UserViewSet, basename= 'User')
+router.register('user', UserViewSet, basename= 'User')
 
 
 
@@ -36,4 +47,6 @@ urlpatterns = [
     path('app/',include('crud_app.urls',namespace='crud_app')),
     path('', include('usuarios.urls')),
     path('api/',include(router.urls)),
+    path('token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 ]
