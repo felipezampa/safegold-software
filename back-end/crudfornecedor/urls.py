@@ -19,16 +19,16 @@ from api.views import (
     EmpresaserializerViewSet,
     ProjetosViewSet,
     UserViewSet,
-    MyObtainTokenPairView
+    # MyObtainTokenPairView
 )
 
 from rest_framework import routers
 
-from rest_framework_simplejwt.views import(
-    TokenObtainPairView,
-    TokenRefreshView,
+# from rest_framework_simplejwt.views import(
+#     TokenObtainPairView,
+#     TokenRefreshView,
 
-)
+# )
 router = routers.DefaultRouter()
 router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
 # router.register('matrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
@@ -47,6 +47,12 @@ urlpatterns = [
     path('app/',include('crud_app.urls',namespace='crud_app')),
     path('', include('usuarios.urls')),
     path('api/',include(router.urls)),
-    path('token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+    # path('token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+
+
+
+    #rest
+    path('api/auth/', include('rest_framework.urls')),
+    path('accounts/', include('accounts.urls'))
 ]
