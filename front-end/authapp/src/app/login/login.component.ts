@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
       this.myform = new FormGroup({
-        email: new FormControl(''),
+        username: new FormControl(''),
         password: new FormControl('')
       });
     }
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-      this.authService.login(this.f.email.value, this.f.password.value).pipe(first()).subscribe(
+      this.authService.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(
         data => {
           console.log(data);
 

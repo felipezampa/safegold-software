@@ -18,7 +18,7 @@ class ProfileView(APIView):
 
     def get(self, request, format=None):
         content = {
-            'user': str(request.user.email),  # `django.contrib.auth.User` instance.
+            'user': str(request.user.username),  # `django.contrib.auth.User` instance.
             'auth': str(request.auth),  # None
         }
         return Response(content)
