@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from crud_app.models import  *
 '''
+
+    @eduardolcordeiro
+
     Implementaçã do ModelSerializer
         faz a serialização da tabela no models.py
 
@@ -15,6 +18,22 @@ from crud_app.models import  *
 
 
         
+        API'S ANINHADAS:
+            - instancie um objeto da tabela que vc quer aninhar a sua api "main", esse objeto tem que ser a foreign key !
+                exemplo:
+
+
+            class UserSerializer(serializers.ModelSerializer):
+                class Meta:
+                    model = User
+                    fields = '__all__'
+
+
+            class ProjetosSerializer(serializers.ModelSerializer):
+                id_user = UserSerializer()
+                class Meta:
+                    model = Projetos
+                    fields = ('cod_projeto','projeto','ativo','safegold_ger','id_user')
 
 
 '''
@@ -56,6 +75,8 @@ class DimcontasSerializer(serializers.ModelSerializer):
 
 
 '''
+    @eduardolcordeiro
+
 
     Autenticação JWT (JSON Web Token)
         - JWT é usado para criar tokens de acesso a um app

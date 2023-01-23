@@ -6,7 +6,10 @@ from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 
 '''
+    @eduardolcordeiro
+
     Construção do ViewSet da api
+
         - queryset = Faz a busca no banco de dados, semelhante a um 'SELECT * FROM xtable'
         - serializer_class = recebe o serializes do serializer.py
         - filter_backends = Implementação de filtros do DRF
@@ -57,6 +60,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 '''
+    @eduardolcordeiro
 
     Autenticação JWT (JSON Web Token)
         - JWT é usado para criar tokens de acesso a um app
