@@ -23,9 +23,13 @@ export class AuthService {
       map(user => {
         if (user && user.token){
           localStorage.setItem("currentUser", JSON.stringify(user));
+          console.log('loginID: ', JSON.parse(localStorage.getItem('user_id')||'{}'));
+
+
         }
         return user;
       })
+
     );
   }
   logout(){
