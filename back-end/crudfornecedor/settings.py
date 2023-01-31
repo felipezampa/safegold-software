@@ -89,7 +89,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 CORS_ORIGIN_ALLOW_ALL=True
 
 ROOT_URLCONF = 'crudfornecedor.urls'
-
+SESSION_COOKIE_SECURE = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
