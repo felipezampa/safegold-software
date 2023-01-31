@@ -1,0 +1,95 @@
+<div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 *ngIf="!editMode" id="modalLabel">CADASTRAR EMPRESA</h5>
+    <h5 *ngIf="editMode" id="modalLabel">EDITAR EMPRESA</h5>
+</div>
+<div class="modal-body text-center">
+    <form #formEmpresas="ngForm">
+        <div class="row">
+            <span [innerHTML]="mensagemErro"></span>
+            <h5>Empresa</h5>
+            <hr>
+            <div>
+                <input type="text" name="empresa" maxlength="255" ngModel id="empresa" class="sg-input" minlength="3" required>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <h5>Código Empresa</h5>
+                <hr>
+                <div>
+                    <input *ngIf="!editMode" type="text" name="cod_empresa" ngModel class="sg-input" placeholder="Valor preenchido automaticamente" disabled>
+                    <input *ngIf="editMode" type="text" name="cod_empresa" ngModel class="sg-input" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <h5>Projeto</h5>
+                <hr>
+                <div>
+                    <!-- <input type="text" class="sg-input" name="cod_projeto" ngModel required > -->
+                    <select *ngIf="!editMode" class="sg-select" name="cod_projeto" ngModel>
+                        <option *ngFor="let projeto of projetos" [ngValue]="projeto">{{ projeto.projeto }}</option>
+                    </select>
+                    <input *ngIf="editMode" type="text" class="sg-input" name="cod_projeto" ngModel required>
+                    <!-- <select *ngIf="editMode" class="form-select" name="cod_projeto" ngModel aria-label="Default select example">
+                        <option *ngFor="let projeto of projetos" value="{{projeto}}" selected>{{ projeto.projeto }}</option>
+                        <option *ngFor="let projeto of projetos" value="{{projeto}}">{{ projeto.projeto }}</option>
+                    </select> -->
+                </div>
+            </div>
+            <div class="col">
+                <h5>CNPJ</h5>
+                <hr>
+                <div>
+                    <input type="text" name="cnpj" maxlength="18" minlength="18" required ngModel class="sg-input" mask="00.000.000/0000-00">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <h5>Safegold gerencia essa empresa?</h5>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <select *ngIf="!editMode" class="sg-select" name="safegold_ger" ngModel required>
+                    <option [ngValue]="1" selected>SIM</option>
+                    <option [ngValue]="0">NÃO</option>
+                </select>
+                <!-- <div class="form-check form-check-inline">
+                    <input class=" sg-radio" type="radio" name="safegold_ger" value="1" ngModel  checked="checked" >
+                    <label class="form-check-label sg-radio" for="inlineRadio1">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class=" sg-radio" type="radio" name="safegold_ger" value="0" ngModel>
+                    <label class="form-check-label sg-radio" for="inlineRadio2">Não</label>
+                </div> -->
+
+                <!-- <input *ngIf="!editMode" type="text" name="safegold_ger" maxlength="255" ngModel id="safegold_ger"
+                    class="sg-input" placeholder="Valor preenchido automaticamente" disabled>
+                <input *ngIf="editMode" type="text" name="safegold_ger" maxlength="255" ngModel id="safegold_ger"
+                    class="sg-input" readonly> -->
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <h5>Data de cadastro</h5>
+                <hr>
+                <div>
+                    <input *ngIf="!editMode" type="text" name="data_cadastro" ngModel class="sg-input" placeholder="Valor preenchido automaticamente" disabled>
+                    <input *ngIf="editMode" type="text" name="data_cadastro" ngModel class="sg-input" mask="0000-00-00 Hh:m0:s0" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <h5>Data de atualização</h5>
+                <hr>
+                <div>
+                    <input *ngIf="!editMode" type="text" name="data_atualiza" ngModel class="sg-input" placeholder="Valor preenchido automaticamente" disabled>
+                    <input *ngIf="editMode" type="text" name="data_atualiza" ngModel class="sg-input" mask="0000-00-00 Hh:m0:s0" readonly>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-center align-items-center">
+    <button *ngIf="!editMode" type="submit" class="btn btn-primary mx-2" (click)="SalvarForm(formEmpresas.value)">Salvar</button>
+    <button *ngIf="editMode"  type="submit" class="btn btn-warning mx-2" (click)="SalvarForm(formEmpresas.value)">Atualizar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>

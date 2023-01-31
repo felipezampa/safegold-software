@@ -1,0 +1,64 @@
+<div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 class="d-flex justify-content-center" id="modalLabel">VER EMPRESA</h5>
+</div>
+<div class="modal-body text-center">
+    <div>
+        <div class="row">
+            <h5>Empresa</h5>
+            <hr>
+            <div>
+                <h3 id="nomeEmpresa">{{ empresa.empresa}}</h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <h5>Código Empresa</h5>
+                <hr>
+                <div>
+                    <h3 id="codProjeto">{{ empresa.cod_empresa }}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <h5>Projeto</h5>
+                <hr>
+                <div>
+                    <h3 id="codProjeto">{{ empresa.cod_projeto.projeto == null ? 'N/A' : empresa.cod_projeto.projeto }}
+                    </h3>
+                </div>
+            </div>
+            <div class="col">
+                <h5>CNPJ</h5>
+                <hr>
+                <div>
+                    <h3 id="codProjeto">{{ empresa.cnpj! | mask: '00.000.000/0000-00' }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <h5>Safegold gerencia essa empresa?</h5>
+            <hr>
+            <div>
+                <h3 id="codProjeto">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <h5>Data de cadastro</h5>
+                <hr>
+                <div>
+                    <h3 id="data_cadastro">{{ empresa.data_cadastro.toString()! | mask: '0000-00-00 Hh:m0:s0'}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <h5>Data de atualização</h5>
+                <hr>
+                <div>
+                    <h3 id="codProjeto">{{ empresa.data_atualiza.toString()! | mask: '0000-00-00 Hh:m0:s0' }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>
