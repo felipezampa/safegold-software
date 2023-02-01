@@ -1,75 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --sg-yellow: #EDA900;
-    --sg-gray: #373935;
-    --sg-white: #E6E7E9;
-    --black: #000;
-    --white: #fff;
-    --table-light-gray: #ececec;
-    --background: #f7f7f7;
-    --dark-gray: #323232;
-    --sidebar-primaria: #fff;
-    --sidebar-hover: #eda900;
+  --sg-yellow: #EDA900;
+  --sg-gray: #373935;
+  --sg-white: #E6E7E9;
+  --black: #000;
+  --white: #fff;
+  --table-light-gray: #ececec;
+  --background: #f7f7f7;
+  --dark-gray: #323232;
+  --sidebar-primaria: #fff;
+  --sidebar-hover: #eda900;
 }
 
-.fa-trash-can{
-    color: #ff4242;
-    transition: 0.3s;
-}
-.fa-trash-can:hover{
-    color: #af0000;
+.fa-trash-can {
+  color: #ff4242;
+  transition: 0.3s;
 }
 
-.fa-eye{
-    color: #3c9638;
-    transition: 0.3s;
-}
-.fa-eye:hover{
-    color: #1d461b;
+.fa-trash-can:hover {
+  color: #af0000;
 }
 
-.fa-pencil{
-    color: #7e807d;
-    transition: 0.3s;
+.fa-eye {
+  color: #3c9638;
+  transition: 0.3s;
 }
-.fa-pencil:hover{
-    color: #000;
+
+.fa-eye:hover {
+  color: #1d461b;
+}
+
+.fa-pencil {
+  color: #7e807d;
+  transition: 0.3s;
+}
+
+.fa-pencil:hover {
+  color: #000;
 }
 
 
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
-	background-color: #F5F5F5;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #ffffff;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background-color: #353333;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #000000;
-  }
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #353333;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
 
 
-  @media print {
+@media print {
 
-    .no-print,
-    .no-print * {
-      display: none !important;
-    }
-    *{
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
+  .no-print,
+  .no-print * {
+    display: none !important;
   }
+
+  * {
+    margin-top: 0%;
+    padding: 0;
+    border: 0;
+  }
+
+  .card {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .sg-content {
+    margin: 0;
+  }
+  .mx-2{
+    margin: 0;
+  }
+  .shadow-lg{
+    box-shadow: 0px 0px;
+  }
+  .card-header{
+    background-color: #000;
+  }
+}

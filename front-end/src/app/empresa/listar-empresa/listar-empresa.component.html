@@ -49,8 +49,8 @@
                         <tbody>
                             <tr *ngFor="let empresa of empresas">
                                 <td class="text-center">{{ empresa.cod_empresa }}</td>
-                                <td>{{ empresa.empresa }}</td>
-                                <td>{{ empresa.projeto }}</td>
+                                <td>{{ empresa.empresa | uppercase }}</td>
+                                <td>{{ empresa.projeto | uppercase }}</td>
                                 <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
                                 <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
                                 </td>

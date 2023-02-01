@@ -30,6 +30,7 @@ hr {
     border-bottom: 2px solid #EDA900;
     outline: none;
     margin-bottom: 10px;
+    text-align: center; 
 }
 
 .sg-input[type=text]:focus,
@@ -58,6 +59,7 @@ hr {
     border-bottom: 2px solid #EDA900;
     outline: none;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .sg-select option {
