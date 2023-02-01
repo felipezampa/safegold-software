@@ -1,5 +1,3 @@
-import { Projeto } from "./projeto.model";
-
 export interface Empresa {
     cod_empresa: number;
     empresa: string;
@@ -7,6 +5,10 @@ export interface Empresa {
     data_atualiza: Date;
     safegold_ger: number;
     cnpj: string;
-    cod_projeto: Projeto;
+    cod_projeto: number;
+    projeto: string;
+    projeto_ativo: string;
+    id_user: string;
+    user_username: string;
 }
 

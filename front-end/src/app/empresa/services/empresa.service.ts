@@ -19,9 +19,7 @@ export class EmpresaService {
   }
   constructor(private http: HttpClient) { }
 
-  createEmpresa(value: { cod_projeto: Projeto; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
-    console.log(value);
-    
+  createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
@@ -32,7 +30,7 @@ export class EmpresaService {
       );
   }
 
-  updateEmpresa(id: number, value: { cod_projeto: Projeto; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
+  updateEmpresa(id: number, value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo PUT
     return this.http.put(this.baseURL + id + '/', value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada

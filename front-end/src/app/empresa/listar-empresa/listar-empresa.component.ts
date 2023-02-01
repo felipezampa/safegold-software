@@ -74,7 +74,7 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   salvarPDF() {
-    alert('Funcionalidade ainda não implementada');
+    window.print();
   }
 
   salvarCSV() {

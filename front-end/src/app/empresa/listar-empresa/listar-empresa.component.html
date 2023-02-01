@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav">
+<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around no-print">
     <div>
         <span id="exportar">AÇÕES:</span>
         <button type="button" class="sg-action-button" (click)="abrirFormCadastro()">Cadastrar</button>
         <button type="button" class="sg-action-button" (click)="editarTodos()">Editar Todos</button>
     </div>
-    <img src="../../../assets/img/vrline.png" height="30px" width="2px">
+    <div></div>
     <div>
         <span id="exportar">EXPORTAR:</span>
         <button class="mx-1 sg-button" (click)="salvarCSV()">CSV</button>
@@ -12,7 +12,7 @@
     </div>
 </nav>
 <div class="container-fluid mb-5" style="padding-top: 60px;">
-    <div class="row mb-3">
+    <div class="row mb-3 no-print">
         <div class="col">
             <div class="card shadow-lg mx-2">
                 <div class="card-header">
@@ -43,18 +43,18 @@
                                 <th class="col">Projeto</th>
                                 <th class="col-1 text-center">Safegold</th>
                                 <th class="col-2">CNPJ</th>
-                                <th class="col-1 text-center">Ações</th>
+                                <th class="col-1 text-center no-print">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let empresa of empresas">
                                 <td class="text-center">{{ empresa.cod_empresa }}</td>
                                 <td>{{ empresa.empresa }}</td>
-                                <td>{{ empresa.cod_projeto.projeto }}</td>
+                                <td>{{ empresa.projeto }}</td>
                                 <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
                                 <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center no-print">
                                     <a type="submit" (click)="verModalEmpresa(empresa)">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>

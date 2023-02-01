@@ -46,6 +46,7 @@ hr {
 
 .sg-input:disabled {
     color: #000000;
+    font-size: 1rem;
 }
 
 .sg-select {

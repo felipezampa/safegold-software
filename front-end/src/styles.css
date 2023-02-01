@@ -59,3 +59,17 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #000000;
   }
+
+
+  @media print {
+
+    .no-print,
+    .no-print * {
+      display: none !important;
+    }
+    *{
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }

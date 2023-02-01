@@ -8,10 +8,10 @@ h2 {
     font-weight: 700;
     color: var(--sg-gray);
     color: var(--sg-yellow);
-    margin: 0;   
+    margin: 0;
 }
 
-.sg-fixed-nav{
+.sg-fixed-nav {
     background-color: var(--background);
     padding: 0px 20px;
     position: fixed;
@@ -62,8 +62,9 @@ h2 {
 .sg-action-button:hover {
     background-color: var(--dark-gray);
     color: var(--white);
-    border: 1px solid var(--dark-gray);;
-} 
+    border: 1px solid var(--dark-gray);
+    ;
+}
 
 .sg-filter {
     border: none;
@@ -83,6 +84,6 @@ h2 {
     outline: none;
 }
 
-.card-header{
+.card-header {
     background-color: var(--sg-gray);
 }

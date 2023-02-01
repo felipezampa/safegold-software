@@ -27,16 +27,13 @@ export class InserirEditarEmpresaComponent {
     this.atualizarEmpresa();
   }
 
-  SalvarForm(dataForm: { cod_projeto: Projeto; empresa: string; cnpj: string; safegold_ger: number }) {
+  SalvarForm(dataForm: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }) {
+    console.log(dataForm);
     Number(dataForm.safegold_ger);
-    //let projeto = this.projetos.find((pj) => { return pj.cod_projeto == dataForm.cod_projeto.cod_projeto });
     if (!this.editMode) { //CADASTRANDO
       try {
         // Testa se os parametros nao estao vazios
-        if (dataForm.cod_projeto !== null && dataForm.empresa !== '' && dataForm.cnpj !== '') {
-          console.log(dataForm.cod_projeto);
-          
-          console.log(dataForm);
+        if (dataForm.cod_projeto && dataForm.empresa !== '' && dataForm.cnpj !== '') {
           this.empresaService.createEmpresa(dataForm).subscribe();
           this.formEmpresas.reset();
           this.activeModal.close();
@@ -60,7 +57,7 @@ export class InserirEditarEmpresaComponent {
 
 
   atualizarEmpresa() {
-    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro
+    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro    
     if (this.editMode == true) {
       try {
         // Testa se o id da empresa existe
@@ -72,7 +69,7 @@ export class InserirEditarEmpresaComponent {
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
               cnpj: empresa[0].cnpj,
               empresa: empresa[0].empresa,
-              cod_projeto: empresa[0].cod_projeto.projeto,
+              cod_projeto: empresa[0].projeto,
               safegold_ger: empresa[0].safegold_ger,
               cod_empresa: empresa[0].cod_empresa,
               data_cadastro: empresa[0].data_cadastro,
