@@ -45,17 +45,24 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProjetosSerializer(serializers.ModelSerializer):
-    id_user = UserSerializer()
+    id_user = UserSerializer(read_only= True)
     class Meta:
         model = Projetos
-        fields = ('cod_projeto','projeto','ativo','safegold_ger','id_user')
+        fields = ('cod_projeto','projeto','ativo','safegold_ger','data_criacao','data_atualiza','id_user')
 
 
 class EmpresasSerializer(serializers.ModelSerializer):
-    cod_projeto = ProjetosSerializer()
+    projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
+    projeto_ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
+    id_user = serializers.StringRelatedField(source='cod_projeto.id_user.id')
+    user_username = serializers.StringRelatedField(source='cod_projeto.id_user.username')
+    
+
+    cod_projeto = serializers.PrimaryKeyRelatedField(queryset=Projetos.objects.all())
+
     class Meta:
         model = Empresas
-        fields = ('cod_empresa', 'empresa','data_cadastro','data_atualiza','safegold_ger', 'cnpj','cod_projeto' )
+        fields = ('cod_empresa', 'empresa','data_cadastro','data_atualiza','safegold_ger', 'cnpj','cod_projeto','projeto','projeto_ativo','id_user','user_username' )
     
 class MatrizContaFornecedorSerializer(serializers.ModelSerializer):
     class Meta:
