@@ -16,3 +16,7 @@ h5 {
 #modalLabel{
     color: var(--sg-yellow);    
 }
+
+hr{
+    margin-bottom: 10px;
+}

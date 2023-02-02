@@ -19,7 +19,7 @@ export class InserirEditarEmpresaComponent {
   mensagemErro: string = '';
   projetoAtualiza: string;
   codProjetoAtualiza: number;
-  empresa: Empresa;
+  empresa!: Empresa;
 
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private projetoService: ProjetoService) { }
 
@@ -54,9 +54,11 @@ export class InserirEditarEmpresaComponent {
         // Testa se os parametros nao estao vazios
         if (dataForm.cod_projeto && dataForm.empresa !== '' && dataForm.cnpj !== '') {
           // Insere os dados na API, limpa o form e fecha o modal
-          this.empresaService.updateEmpresa(this.idEmpresa, dataForm).subscribe();
-          this.formEmpresas.reset();
-          this.activeModal.close();
+          console.log(dataForm);
+          
+          // this.empresaService.updateEmpresa(this.idEmpresa, dataForm).subscribe();
+          // this.formEmpresas.reset();
+          // this.activeModal.close();
         } else {
           // Caso dados não estejam corretamente preenchidos então levanta uma excecão
           throw new Error('Por favor preencher todos os campos');
@@ -86,8 +88,9 @@ export class InserirEditarEmpresaComponent {
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
               cnpj: empresa[0].cnpj,
               empresa: empresa[0].empresa,
-              cod_projeto: empresa[0].projeto,
+              cod_projeto: empresa[0].cod_projeto,
               safegold_ger: empresa[0].safegold_ger
+              // '<h4 class="alert alert-danger strong">' + e + '</h4>'
             });
           });
         } else {
@@ -105,6 +108,7 @@ export class InserirEditarEmpresaComponent {
     // Lista todos os projetos para selecionar no input de option
     this.projetoService.listProjetos().subscribe(projetos => {
       this.projetos = projetos;
+      projetos.sort();
     });
   }
 }

@@ -4,40 +4,45 @@
 </div>
 <div class="modal-body text-center">
     <form #formEmpresas="ngForm">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <span [innerHTML]="mensagemErro"></span>
             <h5>Empresa</h5>
             <hr>
-            <div>
-                <input type="text" name="empresa" maxlength="255" ngModel id="empresa" class="sg-input" minlength="3"
-                    required>
-            </div>
+            <input type="text" name="empresa" maxlength="255" ngModel id="empresa" class="sg-input" required>
         </div>
         <div class="row mt-2">
             <div class="col">
                 <h5>Projeto</h5>
                 <hr>
                 <div>
-                    <select *ngIf="!editMode" class="sg-select" name="cod_projeto" ngModel>
+                     <select class="sg-select" name="cod_projeto" ngModel>
                         <option value=""> --- </option>
-                        <option *ngFor="let projeto of projetos" [ngValue]="projeto.cod_projeto">{{ projeto.projeto }}
+                        <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
                         </option>
                     </select>
-                    <select *ngIf="editMode" class="sg-select" name="cod_projeto" ngModel>
-                        <option value="codProjetoAtualiza" selected>{{projetoAtualiza}}</option>
-                        <option *ngFor="let projeto of projetos" [ngValue]="projeto.cod_projeto">{{ projeto.projeto }}
+                    <!-- <select *ngIf="editMode" class="sg-select" name="cod_projeto" ngModel>
+                        <option [innerHTML]="atualiza" selected>{{projetoAtualiza}}</option>
+                        <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
                         </option>
-                    </select>
-                    <input *ngIf="editMode" type="text" class="sg-input" name="cod_projeto" ngModel required>
+                    </select> -->
+                    <!-- <ng-select [(ngModel)]="empresa.cod_projeto">
+                        <ng-option *ngFor="let proj of projetos" [value]="proj.cod_projeto">{{proj.projeto}}</ng-option>
+                     </ng-select> -->
+                    <!-- <ng-select 
+                        name="cod_projeto" 
+                        [items]="projetos" 
+                        bindLabel="projeto" 
+                        [(ngModel)]="empresa.cod_projeto"
+                        placeholder="Selecione um Projeto">
+                    </ng-select> -->
+                    <!-- <input *ngIf="editMode" type="text" class="sg-input" name="cod_projeto" ngModel required> -->
                 </div>
             </div>
             <div class="col">
                 <h5>CNPJ</h5>
                 <hr>
-                <div>
-                    <input type="text" name="cnpj" maxlength="18" required ngModel class="sg-input"
-                        mask="00.000.000/0000-00">
-                </div>
+                <input type="text" name="cnpj" maxlength="18" required ngModel class="sg-input"
+                    mask="00.000.000/0000-00">
             </div>
         </div>
         <div class="row mt-2">
