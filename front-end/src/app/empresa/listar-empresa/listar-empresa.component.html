@@ -7,8 +7,8 @@
     <div></div>
     <div>
         <span id="exportar">EXPORTAR:</span>
-        <button class="mx-1 sg-button" (click)="salvarCSV()">CSV</button>
-        <button class="sg-button" (click)="salvarPDF()">PDF</button>
+        <button class="mx-1 sg-button" (click)="salvarExcel(empresas)">EXCEL</button>
+        <button class="sg-button" (click)="salvarPDF(empresas)">PDF</button>
     </div>
 </nav>
 <div class="container-fluid mb-5" style="padding-top: 60px;">
@@ -21,7 +21,6 @@
                 <div class="row justify-content-between p-3">
                     <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Empresa">
                     <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Projeto">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar CNPJ">
                 </div>
             </div>
         </div>

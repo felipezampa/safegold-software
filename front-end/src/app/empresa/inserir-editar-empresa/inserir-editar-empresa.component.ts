@@ -17,9 +17,6 @@ export class InserirEditarEmpresaComponent {
   @Input() editMode!: boolean;
   projetos: Projeto[] = [];
   mensagemErro: string = '';
-  projetoAtualiza: string;
-  codProjetoAtualiza: number;
-  empresa!: Empresa;
 
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private projetoService: ProjetoService) { }
 
@@ -53,12 +50,10 @@ export class InserirEditarEmpresaComponent {
       try {
         // Testa se os parametros nao estao vazios
         if (dataForm.cod_projeto && dataForm.empresa !== '' && dataForm.cnpj !== '') {
-          // Insere os dados na API, limpa o form e fecha o modal
-          console.log(dataForm);
-          
-          // this.empresaService.updateEmpresa(this.idEmpresa, dataForm).subscribe();
-          // this.formEmpresas.reset();
-          // this.activeModal.close();
+          // Insere os dados na API, limpa o form e fecha o modal   
+          this.empresaService.updateEmpresa(this.idEmpresa, dataForm).subscribe();
+          this.formEmpresas.reset();
+          this.activeModal.close();
         } else {
           // Caso dados não estejam corretamente preenchidos então levanta uma excecão
           throw new Error('Por favor preencher todos os campos');
@@ -80,17 +75,12 @@ export class InserirEditarEmpresaComponent {
           // Busca o objeto empresa com o ID passado
           this.empresaService.buscarEmpresaPorId(this.idEmpresa).subscribe(empresa => {
             // Coloca os valores encontrados no objeto nos campos do form
-            this.projetoAtualiza = empresa[0].projeto;
-            this.codProjetoAtualiza = empresa[0].cod_projeto;
-            console.log(this.projetoAtualiza, this.codProjetoAtualiza);
-            this.empresa = empresa;
             this.formEmpresas.setValue({
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
               cnpj: empresa[0].cnpj,
               empresa: empresa[0].empresa,
               cod_projeto: empresa[0].cod_projeto,
               safegold_ger: empresa[0].safegold_ger
-              // '<h4 class="alert alert-danger strong">' + e + '</h4>'
             });
           });
         } else {
@@ -108,7 +98,6 @@ export class InserirEditarEmpresaComponent {
     // Lista todos os projetos para selecionar no input de option
     this.projetoService.listProjetos().subscribe(projetos => {
       this.projetos = projetos;
-      projetos.sort();
     });
   }
 }

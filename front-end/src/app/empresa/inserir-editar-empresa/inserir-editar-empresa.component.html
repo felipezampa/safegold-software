@@ -15,27 +15,10 @@
                 <h5>Projeto</h5>
                 <hr>
                 <div>
-                     <select class="sg-select" name="cod_projeto" ngModel>
-                        <option value=""> --- </option>
+                     <select class="sg-select" name="cod_projeto" ngModel required>
                         <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
                         </option>
                     </select>
-                    <!-- <select *ngIf="editMode" class="sg-select" name="cod_projeto" ngModel>
-                        <option [innerHTML]="atualiza" selected>{{projetoAtualiza}}</option>
-                        <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
-                        </option>
-                    </select> -->
-                    <!-- <ng-select [(ngModel)]="empresa.cod_projeto">
-                        <ng-option *ngFor="let proj of projetos" [value]="proj.cod_projeto">{{proj.projeto}}</ng-option>
-                     </ng-select> -->
-                    <!-- <ng-select 
-                        name="cod_projeto" 
-                        [items]="projetos" 
-                        bindLabel="projeto" 
-                        [(ngModel)]="empresa.cod_projeto"
-                        placeholder="Selecione um Projeto">
-                    </ng-select> -->
-                    <!-- <input *ngIf="editMode" type="text" class="sg-input" name="cod_projeto" ngModel required> -->
                 </div>
             </div>
             <div class="col">
@@ -49,12 +32,10 @@
             <h5>Safegold gerencia essa empresa?</h5>
             <hr>
             <div class="d-flex justify-content-center">
-                <select *ngIf="!editMode" class="sg-select" name="safegold_ger" ngModel required>
-                    <option value="1" aria-selected="true">SIM</option>
+                <select class="sg-select" name="safegold_ger" ngModel required>
+                    <option value="1">SIM</option>
                     <option value="0">NÃO</option>
                 </select>
-                <input *ngIf="editMode" type="text" name="safegold_ger" maxlength="255" ngModel id="safegold_ger"
-                    class="sg-input">
             </div>
         </div>
     </form>
