@@ -71,34 +71,3 @@ hr {
     color: #EDA900;
     font-size: 3rem;
 }
-
-
-
-input[type="radio"] {
-    /* ...existing styles */
-    display: grid;
-    place-content: center;
-}
-
-input[type="radio"]::before {
-    content: "";
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em #EDA900;
-}
-
-input[type="radio"]:checked::before {
-    transform: scale(1);
-}
-/* 
-.sg-radio {
-    font-size: 1.5rem;
-    font-weight: 500;
-    width: 90%;
-    transform: scaleX(1);
-    outline: none;
-    margin-bottom: 10px;
-} */

@@ -24,6 +24,7 @@ export class ListarEmpresaComponent implements OnInit {
   currentEmpresaId?: number;
   subscription: Subscription | undefined;
   safegoldGerencia: number | undefined = 0;
+  filtro: '';
 
   constructor(
     private empresaService: EmpresaService,
@@ -102,5 +103,5 @@ export class ListarEmpresaComponent implements OnInit {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     XLSX.writeFile(workbook, "Relatório.xlsx");
   }
-
+  
 }

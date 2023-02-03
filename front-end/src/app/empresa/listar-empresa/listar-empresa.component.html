@@ -18,11 +18,10 @@
                     <h2 class="text-center">FILTRAR</h2>
                 </div>
                 <div class="row justify-content-between p-3">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Empresa">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Projeto">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off" [(ngModel)]="filtro">
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
     <div class="row">
         <div class="col">
@@ -33,7 +32,7 @@
                 </div>
                 <div class="p-3">
                     <table *ngIf="empresas.length >= 1 && !isLoading"
-                        class="table table-striped table-Light table-bordered mb-3 table-responsive table-hover">
+                        class="table table-striped table-Light table-bordered mb-3 table-responsive table-hover" id="sg-tabela">
                         <thead class="table-dark">
                             <tr>
                                 <th class="col-1 text-center">ID</th>
@@ -45,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let empresa of empresas">
+                            <tr *ngFor="let empresa of empresas |filter:filtro">
                                 <td class="text-center">{{ empresa.cod_empresa }}</td>
                                 <td>{{ empresa.empresa | uppercase }}</td>
                                 <td>{{ empresa.projeto | uppercase }}</td>

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExcluirEmpresaComponent, ModalEmpresaComponent, ListarEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from './index';
 import { NumericoDirective } from '../shared/directives/numerico.directive';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     FormsModule,
     HttpClientModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    Ng2SearchPipeModule
   ],
   providers: [
     EmpresaService,
