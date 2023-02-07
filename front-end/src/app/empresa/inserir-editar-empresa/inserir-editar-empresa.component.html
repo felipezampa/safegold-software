@@ -3,35 +3,44 @@
     <h5 *ngIf="editMode" id="modalLabel">EDITAR EMPRESA</h5>
 </div>
 <div class="modal-body text-center">
-    <form #formEmpresas="ngForm">
-        <div class="row d-flex justify-content-center">
+    <form #formEmpresas="ngForm" class="px-5">
+        <div class="row mt-2">
             <span [innerHTML]="mensagemErro"></span>
-            <h5>Empresa</h5>
-            <hr>
-            <input type="text" name="empresa" maxlength="255" ngModel id="empresa" class="sg-input" required>
-        </div>
-        <div class="row mt-2">
-            <div class="col">
-                <h5>Projeto</h5>
-                <hr>
-                <div>
-                     <select class="sg-select" name="cod_projeto" ngModel required>
-                        <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
-                        </option>
-                    </select>
-                </div>
+            <div class="col-3">
+                <label for="empresa" class="sg-label">Empresa:</label>
             </div>
             <div class="col">
-                <h5>CNPJ</h5>
-                <hr>
+                <input type="text" name="empresa" maxlength="255" ngModel id="empresa" class="sg-input" required  placeholder="Nome da Empresa">
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cod_projeto" class="sg-label">Projeto:</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_projeto" ngModel required>
+                    <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
+                    </option>
+                </select>
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cnpj" class="sg-label">CNPJ:</label>
+            </div>
+            <div class="col">
                 <input type="text" name="cnpj" maxlength="18" required ngModel class="sg-input"
-                    mask="00.000.000/0000-00">
+                    mask="00.000.000/0000-00"  placeholder="00.000.000/0000-00">
             </div>
+            <hr>
         </div>
         <div class="row mt-2">
-            <h5>Safegold gerencia essa empresa?</h5>
-            <hr>
-            <div class="d-flex justify-content-center">
+            <div class="col-3">
+                <label for="safegold_ger" class="sg-gerencia">Safegold gerencia essa empresa?</label>
+            </div>
+            <div class="col">
                 <select class="sg-select" name="safegold_ger" ngModel required>
                     <option value="1">SIM</option>
                     <option value="0">NÃO</option>

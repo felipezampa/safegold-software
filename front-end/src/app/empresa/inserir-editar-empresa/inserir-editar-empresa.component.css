@@ -1,16 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
-h5 {
+.sg-label {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     letter-spacing: 2px;
     font-weight: 700;
     color: #686868;
+    margin-right: 10px;
 }
 
-hr {
-    margin-bottom: 8px;
+.sg-gerencia {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #686868;
+    margin-right: 10px;
 }
 
 .modal-header {
@@ -25,12 +32,11 @@ hr {
     border: none;
     font-size: 1.5rem;
     font-weight: 500;
-    width: 90%;
+    width: 100%;
     transform: scaleX(1);
     border-bottom: 2px solid #EDA900;
     outline: none;
     margin-bottom: 10px;
-    text-align: center; 
 }
 
 .sg-input[type=text]:focus,
@@ -54,20 +60,9 @@ hr {
     border: none;
     font-size: 1.5rem;
     font-weight: 500;
-    width: 90%;
+    width: 100%;
     transform: scaleX(1);
     border-bottom: 2px solid #EDA900;
     outline: none;
     margin-bottom: 10px;
-    text-align: center;
-}
-
-.sg-select option {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.sg-select option:hover {
-    color: #EDA900;
-    font-size: 3rem;
 }
