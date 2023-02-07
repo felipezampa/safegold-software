@@ -66,3 +66,8 @@
     outline: none;
     margin-bottom: 10px;
 }
+
+.sg-select option {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

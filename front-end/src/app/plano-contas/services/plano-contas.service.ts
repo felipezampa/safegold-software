@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { Empresa } from 'src/app/shared';
+import { PlanoContas } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmpresaService {
+export class PlanoContasService {
 
-  empresas: Empresa[] = [];
-  baseURL = 'http://127.0.0.1:8000/api/empresas/'
+  planoConta: PlanoContas[] = [];
+  baseURL = 'http://127.0.0.1:8000/api/planocontas/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
@@ -18,7 +18,7 @@ export class EmpresaService {
   }
   constructor(private http: HttpClient) { }
 
-  createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
+  createPlanoContas(value: { cod_empresa: number; cod_plano_conta: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
@@ -29,7 +29,7 @@ export class EmpresaService {
       );
   }
 
-  updateEmpresa(id: number, value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
+  updatePlanoContas(id: number, value: { cod_empresa: number; cod_plano_conta: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo PUT
     return this.http.put(this.baseURL + id + '/', value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
@@ -40,17 +40,17 @@ export class EmpresaService {
       );
   }
 
-  listEmpresas(): Observable<any> {
+  listPlanoContas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API 
-    return this.http.get<Empresa[]>(this.baseURL, { headers: this.httpHeaders });
+    return this.http.get<PlanoContas[]>(this.baseURL, { headers: this.httpHeaders });
   }
 
-  buscarEmpresaPorId(id: number): Observable<any>{
+  buscarPlanoContasPorId(id: number): Observable<any>{
     //trazer os dados de uma unica empresa
-    return this.http.get<Empresa>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
+    return this.http.get<PlanoContas>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
   }
 
-  deleteEmpresa(id: number) {
+  deletePlanoContas(id: number) {
     //Deleta uma instancia da API
     return this.http.delete(this.baseURL + id + '/')
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
