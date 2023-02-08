@@ -29,7 +29,7 @@
         <div class="col">
             <div class="card shadow-lg mx-2">
                 <div class="card-header">
-                    <h2 *ngIf="planoContas.length < 1 && !isLoading" class="text-center">Nenhum dado encontrado!</h2>
+                    <h2 *ngIf="planoContas.length < 1 || isLoading" class="text-center">Nenhum dado encontrado!</h2>
                     <h2 *ngIf="planoContas.length >= 1 && !isLoading" class="text-center">EMPRESAS</h2>
                 </div>
                 <div class="p-3">
@@ -48,11 +48,11 @@
                         <tbody>
                             <tr *ngFor="let empresa of planoContas">
                                 <td class="text-center">{{ empresa.cod_empresa }}</td>
-                                <td>{{ empresa.empresa | uppercase }}</td>
+                                <!-- <td>{{ empresa.empresa | uppercase }}</td>
                                 <td>{{ empresa.projeto | uppercase }}</td>
                                 <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
                                 <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
-                                </td>
+                                </td> -->
                                 <td class="text-center no-print">
                                     <a type="submit" (click)="verModalEmpresa(empresa)">
                                         <i class="fa-solid fa-eye"></i>

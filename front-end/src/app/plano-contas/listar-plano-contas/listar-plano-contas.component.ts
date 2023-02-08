@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanoContas } from 'src/app/shared';
 import { PlanoContasService } from '../services/plano-contas.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { PlanoContasService } from '../services/plano-contas.service';
 })
 export class ListarPlanoContasComponent implements OnInit {
 
-  planoContas: any[] = [];
+  planoContas: PlanoContas[] = [];
   isLoading: boolean = false;
 
   constructor(private planoContasService: PlanoContasService,) { }
