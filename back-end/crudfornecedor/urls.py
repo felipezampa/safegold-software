@@ -19,6 +19,7 @@ from api.views import (
     EmpresaserializerViewSet,
     ProjetosViewSet,
     UserViewSet,
+    ProjetoUserViewSet
     # MyObtainTokenPairView
 )
 
@@ -35,6 +36,8 @@ router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
 router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 # router.register('dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
 router.register('user', UserViewSet, basename= 'User')
+router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
+
 
 
 
@@ -43,9 +46,9 @@ from crud_app import views
 
 urlpatterns = [
     path('index/',views.IndexView.as_view(),name='index'),
-    path('admin/',admin.site.urls,name='admin'),
+    path('/',admin.site.urls,name='admin'),
     path('app/',include('crud_app.urls',namespace='crud_app')),
-    path('', include('usuarios.urls')),
+    path('home/', include('usuarios.urls')),
     path('api/',include(router.urls)),
     # path('token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 

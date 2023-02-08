@@ -21,7 +21,7 @@ class EmpresaserializerViewSet(viewsets.ModelViewSet):
     queryset = models.Empresas.objects.all()
     serializer_class = serializers.EmpresasSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['cod_empresa', 'empresa', 'cnpj', 'cod_projeto']
+    filterset_fields = ['empresa', 'cnpj', 'cod_projeto','cod_projeto__id_user']
     search_fields = ['cod_empresa', 'empresa', 'cnpj','cod_projeto']
     # permission_classes = [IsAuthenticated]
 
@@ -95,3 +95,6 @@ class UserViewSet(viewsets.ModelViewSet):
 #     serializer_class = MyTokenObtainPairSerializer
 
 
+class ProjetoUserViewSet(viewsets.ModelViewSet):
+    queryset = models.ProjetoUser.objects.all()
+    serializer_class = serializers.ProjetoUserSerializer

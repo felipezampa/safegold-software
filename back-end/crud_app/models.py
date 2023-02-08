@@ -77,6 +77,41 @@ CHOICES_BOOL = (
 )
 
 
+class Estados(models.Model):
+    cod_estado = models.IntegerField()
+    cod_uf = models.IntegerField()
+    estado = models.CharField(max_length=50)
+    uf = models.CharField(primary_key=True, max_length=2)
+    regiao = models.ForeignKey('Regioes', models.DO_NOTHING, db_column='regiao')
+
+    class Meta:
+        managed = False
+        db_table = 'estados'        
+        verbose_name_plural = 'Estados'
+
+    def __str__(self):
+        return "{}".format(self.estado)
+
+
+
+
+
+
+class Pais(models.Model):
+    cod_pais = models.BigAutoField(primary_key=True)
+    pais = models.CharField(max_length=60, blank=True, null=True)
+    pais_pt = models.CharField(max_length=60, blank=True, null=True)
+    sigla = models.CharField(max_length=2, blank=True, null=True)
+    bacen = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pais'
+        verbose_name_plural = 'Paises'      
+          
+    def __str__(self):
+        return "{}".format(self.pais)
+    
 
 class Empresas(models.Model):
     cod_empresa = models.BigAutoField(primary_key=True)
@@ -96,22 +131,75 @@ class Empresas(models.Model):
     def __str__(self):
         return "{}".format(self.empresa)
 
+class Projetos(models.Model):
+    id_user = models.ManyToManyField(User, through='ProjetoUser')
+    cod_projeto = models.BigAutoField(primary_key=True)
+    projeto = models.CharField(max_length=255, blank=True, null=True)
+    chave_integracao = models.CharField(max_length=255, blank=True, null=True)
+    cod_usuario = models.IntegerField(blank=True, null=True)
+    chave_inteligente = models.CharField(max_length=255, blank=True, null=True)
+    cod_segmento = models.IntegerField(blank=True, null=True)
+    ativo = models.IntegerField(blank=True, null=True)
+    cor = models.CharField(max_length=255, blank=True, null=True)
+    avatar_nome_arq = models.CharField(max_length=255, blank=True, null=True)
+    avatar_tipo = models.CharField(max_length=255, blank=True, null=True)
+    avatar_tamanho = models.BigIntegerField(blank=True, null=True)
+    avatar_atualizacao = models.DateTimeField(blank=True, null=True)
+    tipo_endereco = models.CharField(max_length=255, blank=True, null=True)
+    endereco = models.CharField(max_length=255, blank=True, null=True)
+    end_numero = models.CharField(max_length=255, blank=True, null=True)
+    end_compl = models.CharField(max_length=255, blank=True, null=True)
+    bairro = models.CharField(max_length=255, blank=True, null=True)
+    cep = models.CharField(max_length=255, blank=True, null=True)
+    end_estado = models.CharField(max_length=255, blank=True, null=True)
+    data_fecha = models.DateField(blank=True, null=True)
+    id_importacao = models.IntegerField(blank=True, null=True)
+    end_cidade = models.CharField(max_length=255, blank=True, null=True)
+    cidade = models.CharField(max_length=255, blank=True, null=True)
+    resp_email = models.CharField(max_length=255, blank=True, null=True)
+    resp_nome = models.CharField(max_length=255, blank=True, null=True)
+    resp_cod = models.CharField(max_length=255, blank=True, null=True)
+    job_state = models.CharField(max_length=255, blank=True, null=True)
+    job_report = models.TextField(blank=True, null=True)
+    job_id = models.IntegerField(blank=True, null=True)
+    data_criacao = models.DateTimeField()
+    data_atualiza = models.DateTimeField()
+    legacy_id = models.IntegerField(blank=True, null=True)
+    safegold_ger = models.IntegerField(blank=True, null=True)
+    cod_sub_segmento = models.IntegerField(blank=True, null=True)
+    sandbox = models.IntegerField(blank=True, null=True)
+    class Meta:
+        managed = True
+        db_table = 'projetos'
+        verbose_name_plural = 'Projetos'
+
+    def __str__(self):
+        return "{}".format(self.projeto)
 
 
-class Estados(models.Model):
-    cod_estado = models.IntegerField()
-    cod_uf = models.IntegerField()
-    estado = models.CharField(max_length=50)
-    uf = models.CharField(primary_key=True, max_length=2)
-    regiao = models.ForeignKey('Regioes', models.DO_NOTHING, db_column='regiao')
+class ProjetoUser(models.Model):
+    cod_projeto = models.ForeignKey('Projetos', models.DO_NOTHING, db_column='cod_projeto')
+    id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user')
 
     class Meta:
         managed = False
-        db_table = 'estados'        
-        verbose_name_plural = 'Estados'
+        db_table = 'projeto_user'
+        unique_together = (("cod_projeto", "id_user"),)
 
     def __str__(self):
-        return "{}".format(self.estado)
+        return "{} -- {}".format(self.cod_projeto, self.id_user)
+
+class Regioes(models.Model):
+    cod_regiao = models.AutoField(primary_key=True)
+    regiao = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'regioes'
+        verbose_name_plural = 'Regioes'        
+    
+    def __str__(self):
+        return "{}".format(self.regiao)
 
 
 
@@ -132,81 +220,6 @@ class MatrizContaFornecedor(models.Model):
 
 
 
-class Pais(models.Model):
-    cod_pais = models.BigAutoField(primary_key=True)
-    pais = models.CharField(max_length=60, blank=True, null=True)
-    pais_pt = models.CharField(max_length=60, blank=True, null=True)
-    sigla = models.CharField(max_length=2, blank=True, null=True)
-    bacen = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pais'
-        verbose_name_plural = 'Paises'      
-          
-    def __str__(self):
-        return "{}".format(self.pais)
-
-class Projetos(models.Model):
-    id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user',related_name='projeto',blank=True, null=True)    
-    cod_projeto = models.BigAutoField(primary_key=True)
-    projeto = models.CharField(max_length=255, blank=True, null=True)
-    chave_integracao = models.CharField(max_length=255, blank=True, null=True)
-    cod_usuario = models.IntegerField(blank=True, null=True)
-    chave_inteligente = models.CharField(max_length=255, blank=True, null=True)
-    cod_segmento = models.IntegerField(blank=True, null=True)
-    ativo = models.IntegerField(blank=True, null=True)
-    cor = models.CharField(max_length=255, blank=True, null=True)
-    avatar_nome_arq = models.CharField(max_length=255, blank=True, null=True)
-    avatar_tipo = models.CharField(max_length=255, blank=True, null=True)
-    avatar_tamanho = models.BigIntegerField(blank=True, null=True)
-    avatar_atualizacao = models.DateTimeField(blank=True, null=True)
-    tipo_endereco = models.CharField(max_length=255, blank=True, null=True)
-    endereco = models.CharField(max_length=255, blank=True, null=True)
-    end_numero = models.CharField(max_length=255, blank=True, null=True)
-    end_compl = models.CharField(max_length=255, blank=True, null=True)
-    bairro = models.CharField(max_length=255, blank=True, null=True)
-    cep = models.CharField(max_length=255, blank=True, null=True)
-    end_estado = models.ForeignKey(Estados, models.DO_NOTHING, db_column='end_estado', blank=True, null=True)
-    data_fecha = models.DateField(blank=True, null=True)
-    id_importacao = models.IntegerField(blank=True, null=True)
-    end_cidade = models.CharField(max_length=255, blank=True, null=True)
-    cidade = models.CharField(max_length=255, blank=True, null=True)
-    resp_email = models.CharField(max_length=255, blank=True, null=True)
-    resp_nome = models.CharField(max_length=255, blank=True, null=True)
-    resp_cod = models.CharField(max_length=255, blank=True, null=True)
-    job_state = models.CharField(max_length=255, blank=True, null=True)
-    job_report = models.TextField(blank=True, null=True)
-    job_id = models.IntegerField(blank=True, null=True)
-    data_criacao = models.DateTimeField()
-    data_atualiza = models.DateTimeField()
-    legacy_id = models.IntegerField(blank=True, null=True)
-    safegold_ger = models.IntegerField(blank=True, null=True)
-    cod_sub_segmento = models.IntegerField(blank=True, null=True)
-    sandbox = models.IntegerField(blank=True, null=True)
-    class Meta:
-        managed = False
-        db_table = 'projetos'
-        verbose_name_plural = 'Projetos'
-
-    def __str__(self):
-        return "{}".format(self.projeto)
-
-
-class Regioes(models.Model):
-    cod_regiao = models.AutoField(primary_key=True)
-    regiao = models.CharField(max_length=50)
-
-    class Meta:
-        managed = False
-        db_table = 'regioes'
-        verbose_name_plural = 'Regioes'        
-    
-    def __str__(self):
-        return "{}".format(self.regiao)
-
-
-        
 
 # Plano de Contas Models
 
@@ -265,60 +278,3 @@ class FinSubgrupoContas(models.Model):
 
 
 
-class Projetos_teste(models.Model):
-    cod_projeto1 = models.BigAutoField(primary_key=True)
-    projeto1 = models.CharField(max_length=255, blank=True, null=True)
-    chave_integracao1 = models.CharField(max_length=255, blank=True, null=True)
-    cod_usuario1 = models.IntegerField(blank=True, null=True)
-    chave_inteligente1 = models.CharField(max_length=255, blank=True, null=True)
-    cod_segmento1 = models.IntegerField(blank=True, null=True)
-    ativo1 = models.IntegerField(blank=True, null=True)
-    cor1 = models.CharField(max_length=255, blank=True, null=True)
-    avatar_nome_arq1 = models.CharField(max_length=255, blank=True, null=True)
-    avatar_tipo1 = models.CharField(max_length=255, blank=True, null=True)
-    avatar_tamanho1 = models.BigIntegerField(blank=True, null=True)
-    avatar_atualizacao1 = models.DateTimeField(blank=True, null=True)
-    tipo_endereco1 = models.CharField(max_length=255, blank=True, null=True)
-    endereco1 = models.CharField(max_length=255, blank=True, null=True)
-    end_numero1 = models.CharField(max_length=255, blank=True, null=True)
-    end_compl = models.CharField(max_length=255, blank=True, null=True)
-    bairro1 = models.CharField(max_length=255, blank=True, null=True)
-    cep1 = models.CharField(max_length=255, blank=True, null=True)
-    end_estado1 = models.ForeignKey(Estados, models.DO_NOTHING, db_column='end_estado', blank=True, null=True)
-    data_fecha1 = models.DateField(blank=True, null=True)
-    id_importacao1 = models.IntegerField(blank=True, null=True)
-    end_cidade1 = models.CharField(max_length=255, blank=True, null=True)
-    cidade1 = models.CharField(max_length=255, blank=True, null=True)
-    resp_email1 = models.CharField(max_length=255, blank=True, null=True)
-    resp_nome1 = models.CharField(max_length=255, blank=True, null=True)
-    resp_cod1= models.CharField(max_length=255, blank=True, null=True)
-    job_state1 = models.CharField(max_length=255, blank=True, null=True)
-    job_report1 = models.TextField(blank=True, null=True)
-    job_id1 = models.IntegerField(blank=True, null=True)
-    data_criacao1 = models.DateTimeField()
-    data_atualiza1 = models.DateTimeField()
-    legacy_id1 = models.IntegerField(blank=True, null=True)
-    safegold_ger1 = models.IntegerField(blank=True, null=True)
-    cod_sub_segmento1 = models.IntegerField(blank=True, null=True)
-    sandbox1 = models.IntegerField(blank=True, null=True)
-    class Meta:
-        managed = True
-        db_table = 'projetos_teste'
-        verbose_name_plural = 'Projetos_teste'
-
-    def __str__(self):
-        return "{}".format(self.projeto)
-
-
-class User_projeto(models.Model):
-    id_user = models.ManyToManyField(User)
-    cod_projeto = models.ManyToManyField(Projetos_teste)
-
-    class Meta:
-        managed = True
-        db_table = 'user_projeto'
-        
-
-
-    def __str__(self):
-        return "{} - {}" .format(self.id_user, self.cod_projeto)
