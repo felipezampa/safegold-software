@@ -62,7 +62,6 @@ export class ListarEmpresaComponent implements OnInit {
     this.editMode = true;
     const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
     modalRef.componentInstance.idEmpresa = id;
-    // modalRef.componentInstance.empresas = this.empresas;
     modalRef.componentInstance.editMode = this.editMode;
   }
 
