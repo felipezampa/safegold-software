@@ -38,6 +38,49 @@ from crud_app.models import  *
 
 '''
 
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = '__all__'
+
+
+# class ProjetosSerializer(serializers.ModelSerializer):
+#     id_user = UserSerializer(read_only= True, many=True)
+#     class Meta:
+#         model = Projetos
+#         fields = ('cod_projeto','projeto','ativo','safegold_ger','data_criacao','data_atualiza','id_user')
+
+
+class ProjetoUserSerializer(serializers.ModelSerializer):
+    cod_projeto = serializers.PrimaryKeyRelatedField(queryset=Projetos.objects.all())
+    id_user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
+    username = serializers.StringRelatedField(source='id_user.username')
+
+
+
+    class Meta:
+        model = ProjetoUser
+        fields = ('id','id_user','username','cod_projeto','projeto')
+
+
+
+
+# class EmpresasSerializer(serializers.ModelSerializer):
+#     cod_projeto = ProjetosSerializer(many=True)
+#     #cod_projeto = serializers.CharField(source='projeto_user.cod_projeto.projeto', read_only=True)
+   
+#     # projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
+#     # projeto_ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
+#     # #id_user = serializers.StringRelatedField(source='cod_projeto.id_user.id')
+#     # user_username = serializers.StringRelatedField(source='cod_projeto.id_user.username')
+    
+
+
+#     class Meta:
+#         model = Empresas
+#         fields = ('cod_empresa', 'empresa','data_cadastro','data_atualiza','safegold_ger', 'cnpj','cod_projeto')
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -45,7 +88,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProjetosSerializer(serializers.ModelSerializer):
-    id_user = UserSerializer(read_only= True)
+    id_user = UserSerializer(read_only= True, many=True)
+
     class Meta:
         model = Projetos
         fields = ('cod_projeto','projeto','ativo','safegold_ger','data_criacao','data_atualiza','id_user')
@@ -53,17 +97,20 @@ class ProjetosSerializer(serializers.ModelSerializer):
 
 class EmpresasSerializer(serializers.ModelSerializer):
     projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
-    projeto_ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
-    id_user = serializers.StringRelatedField(source='cod_projeto.id_user.id')
-    user_username = serializers.StringRelatedField(source='cod_projeto.id_user.username')
-    
+    ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
+    id_user = serializers.StringRelatedField(source='cod_projeto.id_user', many=True, read_only=True)
+    id_user_id = serializers.StringRelatedField(source='cod_projeto.id_user.id')
 
-    cod_projeto = serializers.PrimaryKeyRelatedField(queryset=Projetos.objects.all())
 
     class Meta:
         model = Empresas
-        fields = ('cod_empresa', 'empresa','data_cadastro','data_atualiza','safegold_ger', 'cnpj','cod_projeto','projeto','projeto_ativo','id_user','user_username' )
-    
+        fields = ('cod_empresa', 'empresa', 'data_cadastro', 'data_atualiza', 'safegold_ger', 'cnpj', 'cod_projeto','projeto','ativo','id_user','id_user_id')
+
+
+
+
+
+
 class MatrizContaFornecedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = MatrizContaFornecedor
@@ -119,3 +166,5 @@ class DimcontasSerializer(serializers.ModelSerializer):
 #         # Add custom claims
 #         token['username'] = user.username
 #         return token
+
+
