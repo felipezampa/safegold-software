@@ -7,7 +7,7 @@ import { ListarPlanoContasComponent } from './plano-contas';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'empresas',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

@@ -23,7 +23,7 @@
                     <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
     <div class="row">
         <div class="col">
@@ -33,38 +33,57 @@
                     <h2 *ngIf="planoContas.length >= 1 && !isLoading" class="text-center">EMPRESAS</h2>
                 </div>
                 <div class="p-3">
-                    <table *ngIf="planoContas.length >= 1 && !isLoading"
-                        class="table table-striped table-Light table-bordered mb-3 table-responsive table-hover" id="sg-tabela">
+                    <!-- <table *ngIf="planoContas.length >= 1 && !isLoading" -->
+                    <table class="table table-striped table-Light table-bordered mb-3 table-responsive table-hover"
+                        id="sg-tabela">
                         <thead class="table-dark">
                             <tr>
                                 <th class="col-1 text-center">ID</th>
+                                <th class="col">Conta Analítica</th>
+                                <th class="col">Sub-Grupo de Conta</th>
+                                <th class="col text-center">Grupo de Conta</th>
                                 <th class="col">Empresa</th>
-                                <th class="col">Projeto</th>
-                                <th class="col-1 text-center">Safegold</th>
-                                <th class="col-2">CNPJ</th>
                                 <th class="col-1 text-center no-print">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let empresa of planoContas">
-                                <td class="text-center">{{ empresa.cod_empresa }}</td>
-                                <!-- <td>{{ empresa.empresa | uppercase }}</td>
-                                <td>{{ empresa.projeto | uppercase }}</td>
-                                <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
-                                <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
-                                </td> -->
+                            <tr>
+                                <td>1</td>
+                                <td>Conta analítica</td>
+                                <td>Sub Grupo</td>
+                                <td>Grupo de Conta</td>
+                                <td>Empresa</td>
                                 <td class="text-center no-print">
-                                    <a type="submit" (click)="verModalEmpresa(empresa)">
+                                    <a type="submit">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a type="submit" class="mx-3" (click)="abrirFormAtualizacao(empresa.cod_empresa)">
+                                    <a type="submit" class="mx-3">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
-                                    <a type="submit" (click)="deletarModalEmpresa(empresa)">
+                                    <a type="submit">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
+                            <!-- <tr *ngFor="let empresa of planoContas">
+                                <td class="text-center">{{ empresa.cod_empresa }}</td>
+                                <td>{{ empresa.empresa | uppercase }}</td>
+                                <td>{{ empresa.projeto | uppercase }}</td>
+                                <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
+                                <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
+                                </td> 
+                            <td class="text-center no-print">
+                                <a type="submit" (click)="verModalEmpresa(empresa)">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a type="submit" class="mx-3" (click)="abrirFormAtualizacao(empresa.cod_empresa)">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                                <a type="submit" (click)="deletarModalEmpresa(empresa)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                            </tr>-->
                         </tbody>
                     </table>
                     <div *ngIf="isLoading" class="text-center text-dark">

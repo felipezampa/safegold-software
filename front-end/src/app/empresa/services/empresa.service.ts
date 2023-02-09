@@ -42,7 +42,7 @@ export class EmpresaService {
 
   listEmpresas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API 
-    return this.http.get<Empresa[]>(this.baseURL, { headers: this.httpHeaders });
+    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto=4', { headers: this.httpHeaders });
   }
 
   buscarEmpresaPorId(id: number): Observable<any>{
