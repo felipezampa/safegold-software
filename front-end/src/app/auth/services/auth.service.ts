@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators'
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +16,7 @@ const httpOptions = {
 export class AuthService {
 
   api_url: string = 'http://localhost:8000/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private router: Router) { }
 
   login(username:string, password:string){
     return this.http.post<any>(this.api_url + `accounts/api/auth/`,
@@ -23,13 +24,12 @@ export class AuthService {
       map(user => {
         if (user && user.token){
           localStorage.setItem("currentUser", JSON.stringify(user));
+          this.router.navigate(['/empresas']);
+
         }
         return user;
       })
     );
   }
-  // Agora tá no APP.COMPONENT.TS
-  // logout(){
-  //   localStorage.removeItem('currentUser');
-  // }
+
 }

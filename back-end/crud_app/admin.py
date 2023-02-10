@@ -17,5 +17,6 @@ admin.site.register(ProjetoUser)
 
 # Plano de contas
 admin.site.register(FinGrupoContas)
-admin.site.register(FinPlanoContas)
+admin.site.register(FinContaAnalitica)
 admin.site.register(FinSubgrupoContas)
+admin.site.register(MatrizAnaliticaFornecedor)

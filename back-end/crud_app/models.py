@@ -238,26 +238,7 @@ class FinGrupoContas(models.Model):
     def __str__(self):
         return "{} - {}".format(self.cod_grupo_contas, self.desc_grupo_contas)
 
-
-
-class FinPlanoContas(models.Model):
-    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
-    cod_plano_conta = models.IntegerField(primary_key=True)
-    desc_conta = models.CharField(max_length=300, blank=True, null=True)
-    cod_subgrupo_contas = models.ForeignKey('FinSubgrupoContas', models.DO_NOTHING, db_column='cod_subgrupo_contas', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'fin_plano_contas'
-        verbose_name_plural = 'Analitico // Plano de Contas'
-
-
-    def __str__(self):
-        return "Empresa: {} // Código Analitico: {} - Descrição: {}".format(self.cod_empresa, self.cod_plano_conta, self.desc_conta)
-
-
 class FinSubgrupoContas(models.Model):
-    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
     cod_subgrupo_contas = models.IntegerField(primary_key=True)
     desc_subgrupo_contas = models.CharField(max_length=300, blank=True, null=True)
     cod_grupo_contas = models.ForeignKey(FinGrupoContas, models.DO_NOTHING, db_column='cod_grupo_contas', blank=True, null=True)
@@ -269,9 +250,40 @@ class FinSubgrupoContas(models.Model):
 
 
     def __str__(self):
-        return "Empresa: {} // Código Subgrupo: {} - Descrição: {}".format(self.cod_empresa, self.cod_subgrupo_contas, self.desc_subgrupo_contas)
+        return "Código Subgrupo: {} - Descrição: {}".format(self.cod_subgrupo_contas, self.desc_subgrupo_contas)
+
+class FinContaAnalitica(models.Model):
+    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
+    cod_conta_analitica = models.AutoField(primary_key=True)
+    desc_conta = models.CharField(max_length=300, blank=True, null=True)
+    cod_subgrupo_contas = models.ForeignKey('FinSubgrupoContas', models.DO_NOTHING, db_column='cod_subgrupo_contas', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fin_conta_analitica'
+        verbose_name_plural = 'Analitico // Plano de Contas'
 
 
+    def __str__(self):
+        return "Empresa: {} // Código Analitico: {} - Descrição: {}".format(self.cod_empresa, self.cod_conta_analitica, self.desc_conta)
+
+
+
+
+class MatrizAnaliticaFornecedor(models.Model):
+    cod_matriz_analitica_fornecedor = models.AutoField(primary_key=True)
+    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
+    vinculo = models.IntegerField(blank=True, null=True)
+    cod_conta_analitica = models.ForeignKey(FinContaAnalitica, models.DO_NOTHING, db_column='cod_conta_analitica', blank=True, null=True)
+    cod_fornecedor = models.IntegerField(blank=True, null=True)
+    desc_fornecedor = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'matriz_analitica_fornecedor'
+        verbose_name_plural = 'Vinculo de Fornecedor á Conta Analitica'
+    def __str__(self):
+        return "Empresa: {} // Código Analitico: {} - Desc Fornecedor: {}".format(self.cod_empresa, self.cod_conta_analitica, self.desc_fornecedor)
 
 #### TESTES
 

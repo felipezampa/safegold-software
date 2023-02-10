@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        localStorage.setItem("currentUser", JSON.stringify(data));
 
       }
     )

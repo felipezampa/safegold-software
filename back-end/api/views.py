@@ -25,12 +25,7 @@ class EmpresaserializerViewSet(viewsets.ModelViewSet):
     search_fields = ['cod_empresa', 'empresa', 'cnpj','cod_projeto']
     # permission_classes = [IsAuthenticated]
 
-class MatrizContaFornecedorViewSet(viewsets.ModelViewSet):
-    queryset = models.MatrizContaFornecedor.objects.all()
-    serializer_class = serializers.MatrizContaFornecedorSerializer
-    filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['campo1', 'campo2']
-    # permission_classes = [IsAuthenticated]
+
     
 
 class ProjetosViewSet(viewsets.ModelViewSet):
@@ -42,12 +37,7 @@ class ProjetosViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-class DimcontasViewSet(viewsets.ModelViewSet):
-    queryset = models.Dimcontas.objects.all()
-    serializer_class = serializers.DimcontasSerializer
-    filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['campo1', 'campo2']
-    # permission_classes = [IsAuthenticated]
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -58,6 +48,26 @@ class UserViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
+
+class ProjetoUserViewSet(viewsets.ModelViewSet):
+    queryset = models.ProjetoUser.objects.all()
+    serializer_class = serializers.ProjetoUserSerializer
+
+class FinGrupoContasViewSet(viewsets.ModelViewSet):
+    queryset = models.FinGrupoContas.objects.all()
+    serializer_class = serializers.FinGrupoContasSerializer
+
+class FinSubgrupoContasViewSet(viewsets.ModelViewSet):
+    queryset = models.FinSubgrupoContas.objects.all()
+    serializer_class = serializers.FinSubgrupoContasSerializer
+
+class FinContaAnaliticaViewSet(viewsets.ModelViewSet):
+    queryset = models.FinContaAnalitica.objects.all()
+    serializer_class = serializers.FinContaAnaliticaSerializer
+
+class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
+    queryset = models.MatrizAnaliticaFornecedor.objects.all()
+    serializer_class = serializers.MatrizAnaliticaFornecedorSerializer
 
 '''
     @eduardolcordeiro
@@ -94,7 +104,3 @@ class UserViewSet(viewsets.ModelViewSet):
 #     permission_classes = (AllowAny,)
 #     serializer_class = MyTokenObtainPairSerializer
 
-
-class ProjetoUserViewSet(viewsets.ModelViewSet):
-    queryset = models.ProjetoUser.objects.all()
-    serializer_class = serializers.ProjetoUserSerializer

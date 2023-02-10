@@ -19,8 +19,11 @@ from api.views import (
     EmpresaserializerViewSet,
     ProjetosViewSet,
     UserViewSet,
-    ProjetoUserViewSet
-    # MyObtainTokenPairView
+    ProjetoUserViewSet,
+    FinGrupoContasViewSet,
+    FinSubgrupoContasViewSet,
+    FinContaAnaliticaViewSet,
+    MatrizAnaliticaFornecedorViewSet
 )
 
 from rest_framework import routers
@@ -37,6 +40,10 @@ router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 # router.register('dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
 router.register('user', UserViewSet, basename= 'User')
 router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
+router.register('fin_grupo_contas',FinGrupoContasViewSet, basename='fin_grupo_contas')
+router.register('fin_subgrupo_contas',FinSubgrupoContasViewSet, basename='fin_subgrupo_contas')
+router.register('fin_conta_analitica',FinContaAnaliticaViewSet, basename='fin_conta_analitica')
+router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, basename='matriz_analitica_fornecedor')
 
 
 
@@ -46,7 +53,7 @@ from crud_app import views
 
 urlpatterns = [
     path('index/',views.IndexView.as_view(),name='index'),
-    path('/',admin.site.urls,name='admin'),
+    path('admin/',admin.site.urls,name='admin'),
     path('app/',include('crud_app.urls',namespace='crud_app')),
     path('home/', include('usuarios.urls')),
     path('api/',include(router.urls)),

@@ -64,23 +64,7 @@ class ProjetoUserSerializer(serializers.ModelSerializer):
         fields = ('id','id_user','username','cod_projeto','projeto')
 
 
-
-
-# class EmpresasSerializer(serializers.ModelSerializer):
-#     cod_projeto = ProjetosSerializer(many=True)
-#     #cod_projeto = serializers.CharField(source='projeto_user.cod_projeto.projeto', read_only=True)
-   
-#     # projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
-#     # projeto_ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
-#     # #id_user = serializers.StringRelatedField(source='cod_projeto.id_user.id')
-#     # user_username = serializers.StringRelatedField(source='cod_projeto.id_user.username')
-    
-
-
-#     class Meta:
-#         model = Empresas
-#         fields = ('cod_empresa', 'empresa','data_cadastro','data_atualiza','safegold_ger', 'cnpj','cod_projeto')
-    
+ 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -108,20 +92,31 @@ class EmpresasSerializer(serializers.ModelSerializer):
 
 
 
-
-
-
-class MatrizContaFornecedorSerializer(serializers.ModelSerializer):
+class FinGrupoContasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MatrizContaFornecedor
+        model = FinGrupoContas
         fields = '__all__'
 
-
-class DimcontasSerializer(serializers.ModelSerializer):
+class FinSubgrupoContasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Dimcontas
+        model = FinSubgrupoContas
         fields = '__all__'
 
+class FinContaAnaliticaSerializer(serializers.ModelSerializer):
+    empresa = serializers.StringRelatedField(source='cod_empresa.empresa')
+    desc_subgrupo = serializers.StringRelatedField(source='cod_subgrupo_contas.desc_subgrupo_contas')
+    class Meta:
+        model = FinContaAnalitica
+        fields = ('cod_conta_analitica','cod_empresa','empresa','desc_conta','cod_subgrupo_contas','desc_subgrupo')
+
+class MatrizAnaliticaFornecedorSerializer(serializers.ModelSerializer):
+    empresa = serializers.StringRelatedField(source='cod_empresa.empresa')
+    desc_cod_conta_analitica = serializers.StringRelatedField(source='cod_conta_analitica.desc_conta')
+
+
+    class Meta:
+        model = MatrizAnaliticaFornecedor
+        fields = ('cod_matriz_analitica_fornecedor','cod_empresa','empresa','cod_conta_analitica','cod_fornecedor','desc_fornecedor','vinculo','desc_cod_conta_analitica')
 
 
 
@@ -155,16 +150,5 @@ class DimcontasSerializer(serializers.ModelSerializer):
 
 
 '''
-# from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-
-#         # Add custom claims
-#         token['username'] = user.username
-#         return token
 
 
