@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,14 +13,18 @@ import { AppComponent } from 'src/app/app.component';
 export class LoginComponent implements OnInit {
 
   myform: FormGroup;
-  constructor(private authService: AuthService, private app: AppComponent) { }
+  constructor(private authService: AuthService, private app: AppComponent, private router:Router) { }
 
   ngOnInit(): void {
     this.myform = new FormGroup({
       username: new FormControl(''),
       password: new FormControl('')
     });
+
+    if (localStorage.getItem('currentUser')) {
+      this.router.navigate(['/empresas']);
   }
+}
 
   get f() {
     return this.myform.controls;

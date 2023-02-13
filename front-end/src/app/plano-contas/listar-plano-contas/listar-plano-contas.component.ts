@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -20,7 +21,7 @@ export class ListarPlanoContasComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
 
-  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal) { }
+  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router:Router) { }
 
   ngOnInit(): void {
     this.listarContas();
@@ -28,6 +29,9 @@ export class ListarPlanoContasComponent implements OnInit {
     this.subscription = this.planoContasService.refreshPage$.subscribe(() => {
       this.listarContas();
     })
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/login']);
+    }
   }
 
   listarContas() {
@@ -80,6 +84,7 @@ export class ListarPlanoContasComponent implements OnInit {
     pdf.save("RelatorioPlanoContas.pdf");
   }
 
+<<<<<<< HEAD
   salvarExcel(tableData: Array<ContaAnalitica>) {
     const columns = ['ID', 'Conta', 'Sub-Grupo', 'Empresa'];
     const rows = tableData.map(data => [data.cod_conta_analitica, data.desc_conta, data.desc_subgrupo, data.empresa]);
@@ -90,4 +95,9 @@ export class ListarPlanoContasComponent implements OnInit {
     XLSX.writeFile(workbook, "Relatório.xlsx");
   }
 
+=======
+  verModalEmpresa(empresa: any) { }
+  abrirFormAtualizacao(empresa: number) { }
+  deletarModalEmpresa(empresa: any) { }
+>>>>>>> 10fd49d4b8085939052a4aae59ba2265fe950331
 }

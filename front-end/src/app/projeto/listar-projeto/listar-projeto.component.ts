@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -23,7 +24,8 @@ export class ListarProjetoComponent implements OnInit {
 
   constructor(
     private projetoService: ProjetoService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +34,10 @@ export class ListarProjetoComponent implements OnInit {
     this.subscription = this.projetoService.refreshPage$.subscribe(() => {
       this.listarProjeto();
     })
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/login']);
+    }
+
   }
 
   SalvarForm(postData: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }) {

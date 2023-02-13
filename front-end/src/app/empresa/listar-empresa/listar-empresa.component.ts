@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ExcluirEmpresaComponent, ModalEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from '../index';
 import { Empresa } from 'src/app/shared';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -25,7 +26,8 @@ export class ListarEmpresaComponent implements OnInit {
 
   constructor(
     private empresaService: EmpresaService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private router :Router) { }
 
   ngOnInit(): void {
     this.listarEmpresa();
@@ -33,6 +35,10 @@ export class ListarEmpresaComponent implements OnInit {
     this.subscription = this.empresaService.refreshPage$.subscribe(() => {
       this.listarEmpresa();
     })
+
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/login']);
+    }
   }
 
   listarEmpresa() {
@@ -99,5 +105,5 @@ export class ListarEmpresaComponent implements OnInit {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     XLSX.writeFile(workbook, "Relatório.xlsx");
   }
-  
+
 }
