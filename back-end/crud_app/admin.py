@@ -19,3 +19,6 @@ admin.site.register(FinGrupoContas)
 admin.site.register(FinContaAnalitica)
 admin.site.register(FinSubgrupoContas)
 admin.site.register(MatrizAnaliticaFornecedor)
+
+admin.site.register(Fornecedor)
+

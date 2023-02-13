@@ -56,18 +56,34 @@ class ProjetoUserViewSet(viewsets.ModelViewSet):
 class FinGrupoContasViewSet(viewsets.ModelViewSet):
     queryset = models.FinGrupoContas.objects.all()
     serializer_class = serializers.FinGrupoContasSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_grupo_contas','desc_grupo_contas', 'permite_vinculo', 'sumario']
 
 class FinSubgrupoContasViewSet(viewsets.ModelViewSet):
     queryset = models.FinSubgrupoContas.objects.all()
     serializer_class = serializers.FinSubgrupoContasSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_subgrupo_contas', 'desc_subgrupo_contas', 'cod_grupo_contas']
 
 class FinContaAnaliticaViewSet(viewsets.ModelViewSet):
     queryset = models.FinContaAnalitica.objects.all()
     serializer_class = serializers.FinContaAnaliticaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_empresa', 'cod_conta_analitica', 'desc_conta','cod_subgrupo_contas']
+
+class FornecedorViewset(viewsets.ModelViewSet):
+    queryset = models.Fornecedor.objects.all()
+    serializer_class = serializers.FornecedorSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa', 'insc_est', 'matriz', 'cod_fornec', 'fornecedor']
+
+
 
 class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     queryset = models.MatrizAnaliticaFornecedor.objects.all()
     serializer_class = serializers.MatrizAnaliticaFornecedorSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_matriz_analitica_fornecedor', 'cod_empresa', 'vinculo', 'cod_conta_analitica', 'cod_fornecedor']
 
 '''
     @eduardolcordeiro

@@ -112,14 +112,18 @@ class FinContaAnaliticaSerializer(serializers.ModelSerializer):
 class MatrizAnaliticaFornecedorSerializer(serializers.ModelSerializer):
     empresa = serializers.StringRelatedField(source='cod_empresa.empresa')
     desc_cod_conta_analitica = serializers.StringRelatedField(source='cod_conta_analitica.desc_conta')
-
+    desc_fornecedor = serializers.StringRelatedField(source='cod_fornecedor.fornecedor')
 
     class Meta:
         model = MatrizAnaliticaFornecedor
-        fields = ('cod_matriz_analitica_fornecedor','cod_empresa','empresa','cod_conta_analitica','cod_fornecedor','desc_fornecedor','vinculo','desc_cod_conta_analitica')
+        fields = ('cod_matriz_analitica_fornecedor','cod_empresa','empresa','cod_conta_analitica','desc_cod_conta_analitica','cod_fornecedor','desc_fornecedor','vinculo')
 
 
+class FornecedorSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Fornecedor
+        fields = '__all__'
 
 
 
