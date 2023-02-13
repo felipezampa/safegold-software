@@ -84,7 +84,6 @@ export class ListarPlanoContasComponent implements OnInit {
     pdf.save("RelatorioPlanoContas.pdf");
   }
 
-<<<<<<< HEAD
   salvarExcel(tableData: Array<ContaAnalitica>) {
     const columns = ['ID', 'Conta', 'Sub-Grupo', 'Empresa'];
     const rows = tableData.map(data => [data.cod_conta_analitica, data.desc_conta, data.desc_subgrupo, data.empresa]);
@@ -95,9 +94,4 @@ export class ListarPlanoContasComponent implements OnInit {
     XLSX.writeFile(workbook, "Relatório.xlsx");
   }
 
-=======
-  verModalEmpresa(empresa: any) { }
-  abrirFormAtualizacao(empresa: number) { }
-  deletarModalEmpresa(empresa: any) { }
->>>>>>> 10fd49d4b8085939052a4aae59ba2265fe950331
 }
