@@ -23,7 +23,8 @@ from api.views import (
     FinGrupoContasViewSet,
     FinSubgrupoContasViewSet,
     FinContaAnaliticaViewSet,
-    MatrizAnaliticaFornecedorViewSet
+    MatrizAnaliticaFornecedorViewSet,
+    FornecedorViewset
 )
 
 from rest_framework import routers
@@ -43,6 +44,8 @@ router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
 router.register('fin_grupo_contas',FinGrupoContasViewSet, basename='fin_grupo_contas')
 router.register('fin_subgrupo_contas',FinSubgrupoContasViewSet, basename='fin_subgrupo_contas')
 router.register('fin_conta_analitica',FinContaAnaliticaViewSet, basename='fin_conta_analitica')
+router.register('fornecedor',FornecedorViewset, basename='fornecedor')
+
 router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, basename='matriz_analitica_fornecedor')
 
 

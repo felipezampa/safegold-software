@@ -252,7 +252,22 @@ class FinContaAnalitica(models.Model):
     def __str__(self):
         return "Empresa: {} // Código Analitico: {} - Descrição: {}".format(self.cod_empresa, self.cod_conta_analitica, self.desc_conta)
 
+class Fornecedor(models.Model):
+    cod_fornecedor = models.AutoField(primary_key=True)
+    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
+    cnpj = models.CharField(max_length=14, blank=True, null=True)
+    empresa = models.CharField(max_length=200, blank=True, null=True)
+    insc_est = models.CharField(max_length=20, blank=True, null=True)
+    matriz = models.CharField(max_length=3, blank=True, null=True)
+    cod_fornec = models.IntegerField(blank=True, null=True)
+    fornecedor = models.CharField(max_length=255, blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'fornecedor'
+        verbose_name_plural = 'Fornecedor'
+    def __str__(self):
+        return "Fornecedor: {} ".format(self.fornecedor)
 
 
 class MatrizAnaliticaFornecedor(models.Model):
@@ -260,15 +275,19 @@ class MatrizAnaliticaFornecedor(models.Model):
     cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
     vinculo = models.IntegerField(blank=True, null=True)
     cod_conta_analitica = models.ForeignKey(FinContaAnalitica, models.DO_NOTHING, db_column='cod_conta_analitica', blank=True, null=True)
-    cod_fornecedor = models.IntegerField(blank=True, null=True)
-    desc_fornecedor = models.CharField(max_length=255, blank=True, null=True)
+    cod_fornecedor = models.ForeignKey(Fornecedor, models.DO_NOTHING, db_column='cod_fornecedor', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'matriz_analitica_fornecedor'
         verbose_name_plural = 'Vinculo de Fornecedor á Conta Analitica'
     def __str__(self):
-        return "Empresa: {} // Código Analitico: {} - Desc Fornecedor: {}".format(self.cod_empresa, self.cod_conta_analitica, self.desc_fornecedor)
+        return "Empresa: {} // Código Analitico: {} // Fornecedor: {}".format(self.cod_empresa, self.cod_conta_analitica, self.cod_fornecedor)
+
+
+
+
+
 
 #### TESTES
 
