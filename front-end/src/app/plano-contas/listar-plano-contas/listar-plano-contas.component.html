@@ -6,8 +6,8 @@
     <div></div>
     <div>
         <span id="exportar">EXPORTAR:</span>
-        <button class="mx-1 sg-button" (click)="salvarExcel()">EXCEL</button>
-        <button class="sg-button" (click)="salvarPDF()">PDF</button>
+        <button class="mx-1 sg-button" (click)="salvarExcel(planoContas)">EXCEL</button>
+        <button class="sg-button" (click)="salvarPDF(planoContas)">PDF</button>
     </div>
 </nav>
 <div class="container-fluid mb-5" style="padding-top: 60px;">
@@ -41,18 +41,16 @@
                                 <th class="col-1 text-center">ID</th>
                                 <th class="col">Conta Analítica</th>
                                 <th class="col">Sub-Grupo de Conta</th>
-                                <th class="col text-center">Grupo de Conta</th>
                                 <th class="col">Empresa</th>
                                 <th class="col-1 text-center no-print">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Conta analítica</td>
-                                <td>Sub Grupo</td>
-                                <td>Grupo de Conta</td>
-                                <td>Empresa</td>
+                            <tr *ngFor="let contas of planoContas">
+                                <td class="text-center">{{ contas.cod_conta_analitica }}</td>
+                                <td>{{ contas.desc_conta }}</td>
+                                <td>{{ contas.desc_subgrupo }}</td>
+                                <td>{{ contas.empresa }}</td>
                                 <td class="text-center no-print">
                                     <a type="submit">
                                         <i class="fa-solid fa-eye"></i>
@@ -65,8 +63,8 @@
                                     </a>
                                 </td>
                             </tr>
-                            <!-- <tr *ngFor="let empresa of planoContas">
-                                <td class="text-center">{{ empresa.cod_empresa }}</td>
+                            <!-- <tr *ngFor="let contas of planoContas">
+                                <td class="text-center">{{ contas.cod_empresa }}</td>
                                 <td>{{ empresa.empresa | uppercase }}</td>
                                 <td>{{ empresa.projeto | uppercase }}</td>
                                 <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>

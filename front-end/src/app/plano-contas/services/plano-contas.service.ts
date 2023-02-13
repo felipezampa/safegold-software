@@ -9,7 +9,7 @@ import { PlanoContas } from 'src/app/shared';
 export class PlanoContasService {
 
   planoConta: PlanoContas[] = [];
-  baseURL = 'http://127.0.0.1:8000/api/planocontas/'
+  baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
@@ -45,10 +45,10 @@ export class PlanoContasService {
     return this.http.get<PlanoContas[]>(this.baseURL, { headers: this.httpHeaders });
   }
 
-  buscarPlanoContasPorId(id: number): Observable<any>{
-    //trazer os dados de uma unica empresa
-    return this.http.get<PlanoContas>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
-  }
+  // buscarPlanoContasPorId(id: number): Observable<any>{
+  //   //trazer os dados de uma unica empresa
+  //   return this.http.get<PlanoContas>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
+  // }
 
   deletePlanoContas(id: number) {
     //Deleta uma instancia da API
