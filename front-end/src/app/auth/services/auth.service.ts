@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
 export class AuthService {
 
   api_url: string = 'http://localhost:8000/';
-  constructor(private http: HttpClient,  private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   login(username:string, password:string){
     return this.http.post<any>(this.api_url + `accounts/api/auth/`,

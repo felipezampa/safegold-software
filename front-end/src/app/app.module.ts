@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PlanoContasModule } from './plano-contas/plano-contas.module';
 import { ProjetoModule } from './projeto/projeto.module';
+import { CookieService} from 'ngx-cookie-service'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ProjetoModule } from './projeto/projeto.module';
     AuthModule,
     Ng2SearchPipeModule
   ],
-  providers: [AuthModule],
+  providers: [AuthModule, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

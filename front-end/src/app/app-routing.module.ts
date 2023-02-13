@@ -5,11 +5,7 @@ import { ListarEmpresaComponent } from './empresa';
 import { ListarPlanoContasComponent } from './plano-contas';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'empresas',
-    pathMatch: 'full'
-  },
+
   {
     path: 'empresas',
     component: ListarEmpresaComponent,
