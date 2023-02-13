@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { InserirEditarPlanoContasComponent, ListarPlanoContasComponent, PlanoContasService } from './index';
+import { ExcluirPlanoContasComponent, InserirEditarPlanoContasComponent, ListarPlanoContasComponent, PlanoContasService } from './index';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -10,6 +10,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   declarations: [
     ListarPlanoContasComponent,
     InserirEditarPlanoContasComponent,
+    ExcluirPlanoContasComponent,
   ],
   imports: [
     CommonModule,

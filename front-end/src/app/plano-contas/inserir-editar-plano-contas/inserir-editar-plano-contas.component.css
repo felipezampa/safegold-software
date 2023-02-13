@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+.sg-label {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #686868;
+    margin-right: 10px;
+}
+
+.sg-gerencia {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #686868;
+    margin-right: 10px;
+}
+
+.modal-header {
+    background-color: var(--sg-gray);
+}
+
+#modalLabel {
+    color: var(--sg-yellow);
+}
+
+.sg-input {
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 100%;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.sg-input[type=text]:focus,
+.sg-input[type=text]:active {
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+}
+
+.sg-input:read-only {
+    background-color: #e6e6e6;
+    border-bottom: 2px solid #EDA900;
+}
+
+.sg-input:disabled {
+    color: #000000;
+    font-size: 1rem;
+}
+
+.sg-select {
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 100%;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.sg-select option {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

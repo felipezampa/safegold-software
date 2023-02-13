@@ -1,1 +1,49 @@
-<p>inserir-editar-plano-contas works!</p>
+<div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 *ngIf="!editMode" id="modalLabel">CADASTRAR CONTA ANALÍTICA</h5>
+    <h5 *ngIf="editMode" id="modalLabel">EDITAR CONTA ANALÍTICA</h5>
+</div>
+<div class="modal-body text-center">
+    <form #formPlanoContas="ngForm" class="px-5">
+        <div class="row mt-2">
+            <span [innerHTML]="mensagemErro"></span>
+            <div class="col-3">
+                <label for="desc_conta" class="sg-label">Conta Analítica:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="desc_conta" ngModel id="desc_conta" class="sg-input" required  placeholder="Descrição da Conta">
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cod_empresa" class="sg-label">Empresa:</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_empresa" ngModel required>
+                    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
+                    </option>
+                </select>
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cod_subgrupo_contas" class="sg-label">Sub-Grupo</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_subgrupo_contas" ngModel required>
+                    <option *ngFor="let subgrupo of subgrupos" [value]="subgrupo.cod_subgrupo_contas">{{ subgrupo.cod_subgrupo_contas }} - {{ subgrupo.desc_subgrupo_contas }}
+                    </option>
+                </select>
+            </div>
+            <hr>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-center align-items-center">
+    <button *ngIf="!editMode" type="submit" class="btn btn-primary mx-2" (click)="SalvarForm(formPlanoContas.value)"
+        [disabled]="!formPlanoContas.valid">Salvar</button>
+    <button *ngIf="editMode" type="submit" class="btn btn-warning mx-2" (click)="SalvarForm(formPlanoContas.value)"
+        [disabled]="!formPlanoContas.valid">Atualizar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>

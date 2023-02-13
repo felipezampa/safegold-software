@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { PlanoContas } from 'src/app/shared';
+import { ContaAnalitica, SubGrupo } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanoContasService {
 
-  planoConta: PlanoContas[] = [];
+  planoConta: ContaAnalitica[] = [];
   baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
@@ -18,7 +18,7 @@ export class PlanoContasService {
   }
   constructor(private http: HttpClient) { }
 
-  createPlanoContas(value: { cod_empresa: number; cod_plano_conta: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
+  createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
@@ -29,7 +29,7 @@ export class PlanoContasService {
       );
   }
 
-  updatePlanoContas(id: number, value: { cod_empresa: number; cod_plano_conta: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
+  updatePlanoContas(id: number, value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo PUT
     return this.http.put(this.baseURL + id + '/', value)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
@@ -42,13 +42,13 @@ export class PlanoContasService {
 
   listPlanoContas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API 
-    return this.http.get<PlanoContas[]>(this.baseURL, { headers: this.httpHeaders });
+    return this.http.get<ContaAnalitica[]>(this.baseURL, { headers: this.httpHeaders });
   }
 
-  // buscarPlanoContasPorId(id: number): Observable<any>{
-  //   //trazer os dados de uma unica empresa
-  //   return this.http.get<PlanoContas>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
-  // }
+  buscarPlanoContasPorId(id: number): Observable<any>{
+    //trazer os dados de uma unica instancia
+    return this.http.get<ContaAnalitica>(this.baseURL + '?cod_conta_analitica=' + id, { headers: this.httpHeaders })
+  }
 
   deletePlanoContas(id: number) {
     //Deleta uma instancia da API
@@ -59,5 +59,10 @@ export class PlanoContasService {
           this._refreshPage$.next();
         })
       );
+  }
+
+  listSubGrupoContas(): Observable<any> {
+    // Retorna um Observable contendo todas as instancias da API 
+    return this.http.get<SubGrupo[]>('http://127.0.0.1:8000/api/fin_subgrupo_contas/', { headers: this.httpHeaders });
   }
 }

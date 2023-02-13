@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { PlanoContas } from 'src/app/shared';
+import { ContaAnalitica } from 'src/app/shared';
 import { InserirEditarPlanoContasComponent } from '../inserir-editar-plano-contas/inserir-editar-plano-contas.component';
 import { PlanoContasService } from '../services/plano-contas.service';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { ExcluirPlanoContasComponent } from '../excluir-plano-contas/excluir-plano-contas.component';
 
 @Component({
   selector: 'app-listar-plano-contas',
@@ -14,10 +15,10 @@ import * as XLSX from 'xlsx';
 })
 export class ListarPlanoContasComponent implements OnInit {
 
-  planoContas: PlanoContas[] = [];
+  planoContas: ContaAnalitica[] = [];
   isLoading: boolean = false;
-  subscription: Subscription | undefined;
   editMode: boolean = false;
+  subscription: Subscription | undefined;
 
   constructor(private planoContasService: PlanoContasService, private modalService: NgbModal) { }
 
@@ -44,17 +45,19 @@ export class ListarPlanoContasComponent implements OnInit {
     modalRef.componentInstance.editMode = this.editMode;
   }
 
-  salvarExcel(tableData: Array<PlanoContas>) {
-    const columns = ['ID', 'Conta', 'Sub-Grupo', 'Empresa'];
-    const rows = tableData.map(data => [data.cod_conta_analitica, data.desc_conta, data.desc_subgrupo, data.empresa]);
-    // Criação do relatório
-    const worksheet = XLSX.utils.aoa_to_sheet([columns, ...rows]);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, "Relatório.xlsx");
+  abrirFormAtualizacao(id: number) {
+    this.editMode = true;
+    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl', backdrop: 'static' });
+    modalRef.componentInstance.idConta = id;
+    modalRef.componentInstance.editMode = this.editMode;
   }
 
-  salvarPDF(tableData: Array<PlanoContas>) {
+  deletarModal(conta: ContaAnalitica) {
+    const modalRef = this.modalService.open(ExcluirPlanoContasComponent, { size: 'xl' });
+    modalRef.componentInstance.conta = conta;
+  }
+
+  salvarPDF(tableData: Array<ContaAnalitica>) {
     // Garante que o jsPDF foi importado e instancia um objeto novo
     const { jsPDF } = require("jspdf");
     const pdf = new jsPDF();
@@ -76,8 +79,15 @@ export class ListarPlanoContasComponent implements OnInit {
     });
     pdf.save("RelatorioPlanoContas.pdf");
   }
-  
-  verModalEmpresa(empresa: any) { }
-  abrirFormAtualizacao(empresa: number) { }
-  deletarModalEmpresa(empresa: any) { }
+
+  salvarExcel(tableData: Array<ContaAnalitica>) {
+    const columns = ['ID', 'Conta', 'Sub-Grupo', 'Empresa'];
+    const rows = tableData.map(data => [data.cod_conta_analitica, data.desc_conta, data.desc_subgrupo, data.empresa]);
+    // Criação do relatório
+    const worksheet = XLSX.utils.aoa_to_sheet([columns, ...rows]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, "Relatório.xlsx");
+  }
+
 }

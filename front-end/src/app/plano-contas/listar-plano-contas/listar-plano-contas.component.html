@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around no-print">
+<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around ">
     <div>
         <span id="exportar">AÇÕES:</span>
         <button type="button" class="sg-action-button" (click)="abrirFormCadastro()">Cadastrar</button>
@@ -11,7 +11,7 @@
     </div>
 </nav>
 <div class="container-fluid mb-5" style="padding-top: 60px;">
-    <div class="row mb-3 no-print">
+    <div class="row mb-2 ">
         <div class="col">
             <div class="card shadow-lg mx-2">
                 <div class="card-header">
@@ -30,7 +30,7 @@
             <div class="card shadow-lg mx-2">
                 <div class="card-header">
                     <h2 *ngIf="planoContas.length < 1 || isLoading" class="text-center">Nenhum dado encontrado!</h2>
-                    <h2 *ngIf="planoContas.length >= 1 && !isLoading" class="text-center">EMPRESAS</h2>
+                    <h2 *ngIf="planoContas.length >= 1 && !isLoading" class="text-center">CONTA ANALÍTICA</h2>
                 </div>
                 <div class="p-3">
                     <!-- <table *ngIf="planoContas.length >= 1 && !isLoading" -->
@@ -42,7 +42,7 @@
                                 <th class="col">Conta Analítica</th>
                                 <th class="col">Sub-Grupo de Conta</th>
                                 <th class="col">Empresa</th>
-                                <th class="col-1 text-center no-print">Ações</th>
+                                <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,37 +51,18 @@
                                 <td>{{ contas.desc_conta }}</td>
                                 <td>{{ contas.desc_subgrupo }}</td>
                                 <td>{{ contas.empresa }}</td>
-                                <td class="text-center no-print">
-                                    <a type="submit">
+                                <td class="text-center">
+                                    <!-- <a type="submit" (click)="verModal(contas)">
                                         <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <a type="submit" class="mx-3">
+                                    </a> -->
+                                    <a type="submit" class="me-3" (click)="abrirFormAtualizacao(contas.cod_conta_analitica)">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
-                                    <a type="submit">
+                                    <a type="submit" (click)="deletarModal(contas)">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <!-- <tr *ngFor="let contas of planoContas">
-                                <td class="text-center">{{ contas.cod_empresa }}</td>
-                                <td>{{ empresa.empresa | uppercase }}</td>
-                                <td>{{ empresa.projeto | uppercase }}</td>
-                                <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
-                                <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
-                                </td> 
-                            <td class="text-center no-print">
-                                <a type="submit" (click)="verModalEmpresa(empresa)">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a type="submit" class="mx-3" (click)="abrirFormAtualizacao(empresa.cod_empresa)">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </a>
-                                <a type="submit" (click)="deletarModalEmpresa(empresa)">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                            </td>
-                            </tr>-->
                         </tbody>
                     </table>
                     <div *ngIf="isLoading" class="text-center text-dark">

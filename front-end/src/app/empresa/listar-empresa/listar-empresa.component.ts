@@ -16,12 +16,9 @@ import * as XLSX from 'xlsx';
 
 export class ListarEmpresaComponent implements OnInit {
 
-  @ViewChild('formEmpresa') formEmpresa!: NgForm;
   empresas: Empresa[] = [];
-
   isLoading: boolean = false;
   editMode: boolean = false;
-  currentEmpresaId?: number;
   subscription: Subscription | undefined;
   safegoldGerencia: number | undefined = 0;
   filtro: '';
@@ -38,12 +35,6 @@ export class ListarEmpresaComponent implements OnInit {
     })
   }
 
-  abrirFormCadastro() {
-    this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
-    modalRef.componentInstance.editMode = this.editMode;
-  }
-
   listarEmpresa() {
     this.isLoading = true;
     this.empresaService.listEmpresas()
@@ -53,9 +44,10 @@ export class ListarEmpresaComponent implements OnInit {
       });
   }
 
-  verModalEmpresa(empresa: Empresa) {
-    const modalRef = this.modalService.open(ModalEmpresaComponent, { size: 'xl' });
-    modalRef.componentInstance.empresa = empresa;
+  abrirFormCadastro() {
+    this.editMode = false;
+    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
+    modalRef.componentInstance.editMode = this.editMode;
   }
 
   abrirFormAtualizacao(id: number) {
@@ -63,6 +55,11 @@ export class ListarEmpresaComponent implements OnInit {
     const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
     modalRef.componentInstance.idEmpresa = id;
     modalRef.componentInstance.editMode = this.editMode;
+  }
+
+  verModalEmpresa(empresa: Empresa) {
+    const modalRef = this.modalService.open(ModalEmpresaComponent, { size: 'xl' });
+    modalRef.componentInstance.empresa = empresa;
   }
 
   deletarModalEmpresa(empresa: Empresa) {

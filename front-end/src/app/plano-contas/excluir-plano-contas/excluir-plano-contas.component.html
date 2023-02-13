@@ -1,0 +1,11 @@
+<div class="modal-header text-center modal-lg d-flex justify-content-center">
+    <h1 class="text-danger">ATENÇÃO!</h1>
+</div>
+<div class="modal-body text-center mt-2 mb-2">
+    <h3>Você tem certeza que deseja excluir a Conta: {{ conta.desc_conta }}?</h3>
+    <h3>Essa ação é permanente e não poderá ser desfeita</h3>
+</div>
+<div class="modal-footer justify-content-center align-items-center">
+    <button type="submit" class="btn btn-outline-danger mx-2" (click)="excluir(conta.cod_conta_analitica)">Excluir Conta Analítica</button>
+    <button type="button" class="btn btn-outline-dark mx-2" (click)="activeModal.close()">Cancelar</button>
+</div>
