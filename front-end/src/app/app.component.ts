@@ -11,7 +11,6 @@ export class AppComponent {
   currentUser: boolean;
 
   constructor(private router: Router) { this.setCurrentUser() }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);

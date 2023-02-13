@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -19,7 +20,7 @@ export class ListarPlanoContasComponent implements OnInit {
   subscription: Subscription | undefined;
   editMode: boolean = false;
 
-  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal) { }
+  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router:Router) { }
 
   ngOnInit(): void {
     this.listarContas();
@@ -27,6 +28,9 @@ export class ListarPlanoContasComponent implements OnInit {
     this.subscription = this.planoContasService.refreshPage$.subscribe(() => {
       this.listarContas();
     })
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/login']);
+    }
   }
 
   listarContas() {
@@ -76,7 +80,7 @@ export class ListarPlanoContasComponent implements OnInit {
     });
     pdf.save("RelatorioPlanoContas.pdf");
   }
-  
+
   verModalEmpresa(empresa: any) { }
   abrirFormAtualizacao(empresa: number) { }
   deletarModalEmpresa(empresa: any) { }
