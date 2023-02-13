@@ -203,21 +203,6 @@ class Regioes(models.Model):
 
 
 
-class MatrizContaFornecedor(models.Model):
-    cod_fornecedor = models.BigIntegerField()
-    desc_fornecedor = models.CharField(max_length=255)
-    id_conta = models.ForeignKey(Dimcontas, models.DO_NOTHING, db_column='id_conta', blank=True, null=True)
-    data_importacao = models.DateField(blank=True, null=True)
-    cod_projeto = models.ForeignKey('Projetos', models.DO_NOTHING, db_column='cod_projeto', blank=True, null=True)
-    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'matriz_conta_fornecedor'
-        verbose_name_plural = 'Matriz Conta Fornecedor'
-    def __str__(self):
-        return "FORNECEDOR: {} - CONTA: {}".format(self.desc_fornecedor, self.id_conta)
-
 
 
 
