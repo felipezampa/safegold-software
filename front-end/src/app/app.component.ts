@@ -7,15 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-end';
 
-  constructor(private router: Router) { }
+  currentUser: boolean;
 
+  constructor(private router: Router) { this.setCurrentUser() }
 
-
-  logout(){
+  logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
+    this.setCurrentUser();
+  }
 
+  setCurrentUser() {
+    if (localStorage.getItem('currentUser') != null) {
+      this.currentUser = true;
+    } else{
+      this.currentUser = false;
+    }
   }
 }

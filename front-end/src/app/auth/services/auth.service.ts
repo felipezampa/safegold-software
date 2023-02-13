@@ -25,7 +25,6 @@ export class AuthService {
         if (user && user.token){
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.router.navigate(['/empresas']);
-
         }
         return user;
       })

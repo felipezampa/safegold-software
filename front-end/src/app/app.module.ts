@@ -23,7 +23,7 @@ import { ProjetoModule } from './projeto/projeto.module';
     AuthModule,
     Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [AuthModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

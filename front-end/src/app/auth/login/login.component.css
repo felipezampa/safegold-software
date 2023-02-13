@@ -1,0 +1,17 @@
+.sg-background{
+    background-color: #373935;
+    width: 40rem;
+    display: flex;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.sg-login-container{
+    margin-right: 97px;
+    margin-bottom: 90px;
+    background-color: #373935;
+}
+
+.sg-header{
+    color: #EDA900;
+}
