@@ -18,34 +18,34 @@ export class DashboardComponent implements OnInit {
   }
   projetos: any[];
   empresas: any[];
-  selectedProject: any;
-  uniqueProjects: any[];
+  selectedProjetos: any;
+  projetos_unicos: any[];
 
   constructor(private http: HttpClient, private router:Router) { }
 
   ngOnInit() {
-    this.getProjects();
+    this.getProjetos();
   }
 
-  getProjects() {
+  getProjetos() {
     this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?id_user=${this.getCurrentUser()}`)
       .subscribe(data => {
         this.projetos = data;
-        this.getUniqueProjects();
+        this.getUniqueProjetos();
       });
   }
 
-  getUniqueProjects() {
-    this.uniqueProjects = [];
+  getUniqueProjetos() {
+    this.projetos_unicos = [];
     this.projetos.forEach((projeto) => {
-      if (!this.uniqueProjects.find(p => p.cod_projeto === projeto.cod_projeto)) {
-        this.uniqueProjects.push(projeto);
+      if (!this.projetos_unicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
+        this.projetos_unicos.push(projeto);
       }
     });
   }
 
-  getCompanies(cod_projeto : number) {
-    this.selectedProject = cod_projeto;
+  getEmpresas(cod_projeto : number) {
+    this.selectedProjetos = cod_projeto;
     this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto=${cod_projeto}`)
       .subscribe(data => {
         this.empresas = data;
@@ -53,8 +53,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onProjectChange() {
-    if (this.selectedProject) {
-      this.http.get<Empresa[]>(`http://localhost:8000/api/empresas/?cod_projeto=${this.selectedProject}`)
+    if (this.selectedProjetos) {
+      this.http.get<Empresa[]>(`http://localhost:8000/api/empresas/?cod_projeto=${this.selectedProjetos}`)
         .subscribe(data => {
           this.empresas = data;
         });
@@ -67,4 +67,4 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/plano-de-contas']);
 
   }
-} 
+}
