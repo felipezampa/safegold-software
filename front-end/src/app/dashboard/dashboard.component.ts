@@ -11,10 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  getCurrentUser() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).user_id : null;
-  }
+
 
 
   projetos: any[];
@@ -41,6 +38,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  getCurrentUser() {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser).user_id : null;
+  }
+
   getProjetos() {
     this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto__id_user=${this.getCurrentUser()}`)
       .subscribe(data => {
@@ -56,14 +58,6 @@ export class DashboardComponent implements OnInit {
         this.projetos_unicos.push(projeto);
       }
     });
-  }
-
-  getEmpresas(cod_projeto : number) {
-    this.selectedProjetos = cod_projeto;
-    this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto=${cod_projeto}`)
-      .subscribe(data => {
-        this.empresas = data;
-      });
   }
 
   onProjectChange() {
