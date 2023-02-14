@@ -8,11 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PlanoContasModule } from './plano-contas/plano-contas.module';
 import { ProjetoModule } from './projeto/projeto.module';
-import { CookieService} from 'ngx-cookie-service'
+import { CookieService} from 'ngx-cookie-service';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

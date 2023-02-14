@@ -32,6 +32,7 @@ export class ListarPlanoContasComponent implements OnInit {
     if (!localStorage.getItem('currentUser')) {
       this.router.navigate(['/login']);
     }
+
   }
 
   listarContas() {

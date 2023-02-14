@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmpresaService } from 'src/app/empresa';
 import { Empresa, SubGrupo } from 'src/app/shared';
@@ -19,16 +20,18 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
 
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService) { }
-
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute) { }
+  selectedCardId: any;
   ngOnInit(): void {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
+    this.selectedCardId = localStorage.getItem("selectedCardId");
   }
 
   SalvarForm(dataForm: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }) {
     console.log(dataForm);
+
     
     if (!this.editMode) { 
       // CADASTRANDO

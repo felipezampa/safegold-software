@@ -7,6 +7,11 @@ import { ContaAnalitica, SubGrupo } from 'src/app/shared';
   providedIn: 'root'
 })
 export class PlanoContasService {
+  getCurrentEmpresa() {
+    const CurrentEmpresa = localStorage.getItem('selectedCardId');
+
+    return CurrentEmpresa ? JSON.parse(CurrentEmpresa) : null;
+  }
 
   planoConta: ContaAnalitica[] = [];
   baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
@@ -42,7 +47,9 @@ export class PlanoContasService {
 
   listPlanoContas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API 
-    return this.http.get<ContaAnalitica[]>(this.baseURL, { headers: this.httpHeaders });
+    console.log(this.getCurrentEmpresa());
+    
+    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.getCurrentEmpresa(), { headers: this.httpHeaders });
   }
 
   buscarPlanoContasPorId(id: number): Observable<any>{
