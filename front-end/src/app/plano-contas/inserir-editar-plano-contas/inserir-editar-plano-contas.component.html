@@ -20,8 +20,8 @@
             </div>
             <div class="col">
                 <select class="sg-select" name="cod_empresa" ngModel required>
-                    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
-                    </option>
+                  <option selected [ngValue]="selectedCardCod_empresa" [selected]="selectedCardCod_empresa">{{ selectedCardEmpresa }}
+                  </option>
                 </select>
             </div>
             <hr>

@@ -25,11 +25,10 @@ export class AuthService {
       map(user => {
         if (user && user.token){
           localStorage.setItem("currentUser", JSON.stringify(user));
-          this.router.navigate(['/empresas']);
+          this.router.navigate(['/dashboard']);
         }
         return user;
       })
     );
   }
-
 }

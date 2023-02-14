@@ -1,3 +1,4 @@
+import { Empresa } from './../../shared/models/empresa.model';
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,20 +16,21 @@ export class InserirEditarEmpresaComponent {
   @ViewChild('formEmpresas') formEmpresas!: NgForm;
   @Input() idEmpresa: number;
   @Input() editMode!: boolean;
-  projetos: Projeto[] = [];
+  empresas: Empresa[] = [];
   mensagemErro: string = '';
-
+  projetos_unicos: any [];
+  projetos: any[];
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private projetoService: ProjetoService) { }
 
   ngOnInit(): void {
-    this.listarProjetos();
+    this.listarEmpresas();
     this.atualizarEmpresa();
   }
 
   SalvarForm(dataForm: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }) {
     // Força o parsing do safegold_Ger para numero caso venha em string por engano
     Number(dataForm.safegold_ger);
-    if (!this.editMode) { 
+    if (!this.editMode) {
       // CADASTRANDO
       try {
         // Testa se os parametros nao estao vazios
@@ -50,7 +52,7 @@ export class InserirEditarEmpresaComponent {
       try {
         // Testa se os parametros nao estao vazios
         if (dataForm.cod_projeto && dataForm.empresa !== '' && dataForm.cnpj !== '') {
-          // Insere os dados na API, limpa o form e fecha o modal   
+          // Insere os dados na API, limpa o form e fecha o modal
           this.empresaService.updateEmpresa(this.idEmpresa, dataForm).subscribe();
           this.formEmpresas.reset();
           this.activeModal.close();
@@ -67,7 +69,7 @@ export class InserirEditarEmpresaComponent {
   }
 
   atualizarEmpresa() {
-    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro    
+    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro
     if (this.editMode == true) {
       try {
         // Testa se o id da empresa existe
@@ -94,10 +96,19 @@ export class InserirEditarEmpresaComponent {
     }
   }
 
-  listarProjetos() {
-    // Lista todos os projetos para selecionar no input de option
-    this.projetoService.listProjetos().subscribe(projetos => {
-      this.projetos = projetos;
+  listarEmpresas() {
+    // Lista todos as empresas para selecionar no input de option
+    this.empresaService.listEmpresas().subscribe(empresas => {
+      this.empresas = empresas;
+      this.getUniqueProjetos()
+    });
+  }
+  getUniqueProjetos() {
+    this.projetos_unicos = [];
+    this.empresas.forEach((empresas) => {
+      if (!this.projetos_unicos.find(p => p.cod_projeto === empresas.cod_projeto)) {
+        this.projetos_unicos.push(empresas);
+      }
     });
   }
 }

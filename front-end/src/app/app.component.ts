@@ -26,10 +26,13 @@ export class AppComponent {
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('selectedEmpresa');
     this.cookieService.delete('previousUrl');
     this.router.navigate(['/login']);
     this.setCurrentUser();
   }
+
+
 
   setCurrentUser() {
     if (localStorage.getItem('currentUser') != null) {

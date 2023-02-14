@@ -19,21 +19,42 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   empresas: Empresa[] = [];
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
-
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute) { }
-  selectedCardId: any;
+  selectedCardCod_empresa: number;
+  selectedCardEmpresa: string;
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute) {
+    this.selectedCardCod_empresa = this.getCurrentCod_empresa()
+    this.selectedCardEmpresa = this.getCurrentNome_empresa()
+  }
   ngOnInit(): void {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
-    this.selectedCardId = localStorage.getItem("selectedCardId");
+
+
   }
 
+  ////////////////////////////////////// GETS DO LOCAL STORAGE//////////////////////////////////////////
+  getCurrentCod_empresa() {
+    const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
+
+    return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
+  }
+
+  getCurrentNome_empresa(){
+    const CurrentNome_empresa = localStorage.getItem('selectedEmpresa');
+    return CurrentNome_empresa ? JSON.parse(CurrentNome_empresa).empresa: null;
+  }
+
+  getCurrentUser() {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser).user_id : null;
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
   SalvarForm(dataForm: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }) {
     console.log(dataForm);
 
-    
-    if (!this.editMode) { 
+
+    if (!this.editMode) {
       // CADASTRANDO
       try {
         // Testa se os parametros nao estao vazios
@@ -55,7 +76,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
       try {
         // Testa se os parametros nao estao vazios
         if (dataForm.cod_empresa && dataForm.desc_conta !== '' && dataForm.cod_subgrupo_contas) {
-          // Insere os dados na API, limpa o form e fecha o modal   
+          // Insere os dados na API, limpa o form e fecha o modal
           this.planoContasService.updatePlanoContas(this.idConta, dataForm).subscribe();
           this.formPlanoContas.reset();
           this.activeModal.close();
@@ -71,7 +92,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   }
 
   atualizarConta() {
-    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro    
+    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro
     if (this.editMode == true) {
       try {
         // Testa se o id da empresa existe

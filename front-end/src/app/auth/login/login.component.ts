@@ -17,12 +17,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.myform = new FormGroup({
-      username: new FormControl(''),
+      email: new FormControl(''),
       password: new FormControl('')
     });
 
     if (localStorage.getItem('currentUser')) {
-      this.router.navigate(['/empresas']);
+      this.router.navigate(['/dashboard']);
   }
 }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(
+    this.authService.login(this.f.email.value, this.f.password.value).pipe(first()).subscribe(
       data => {
         localStorage.setItem("currentUser", JSON.stringify(data));
         this.app.setCurrentUser();

@@ -18,7 +18,7 @@ class ProfileView(APIView):
 
     def get(self, request, format=None):
         content = {
-            'user': str(request.user.username),  # `django.contrib.auth.User` instance.
+            'user': str(request.user),  # `django.contrib.auth.User` instance.
             'auth': str(request.auth),  # None
         }
         return Response(content)
@@ -41,5 +41,5 @@ class CustomAuthToken(ObtainAuthToken):
             'last_name': user.last_name,
             'user_id': user.pk,
             'email': user.email,
-            'status': 'ok'
+            'status': '1'
         })

@@ -7,10 +7,15 @@ import { ContaAnalitica, SubGrupo } from 'src/app/shared';
   providedIn: 'root'
 })
 export class PlanoContasService {
-  getCurrentEmpresa() {
-    const CurrentEmpresa = localStorage.getItem('selectedCardId');
+  getCurrentCod_empresa() {
+    const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
 
-    return CurrentEmpresa ? JSON.parse(CurrentEmpresa) : null;
+    return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
+  }
+
+  getCurrentNome_empresa(){
+    const CurrentNome_empresa = localStorage.getItem('selectedEmpresa');
+    return CurrentNome_empresa ? JSON.parse(CurrentNome_empresa).empresa: null;
   }
 
   planoConta: ContaAnalitica[] = [];
@@ -46,10 +51,10 @@ export class PlanoContasService {
   }
 
   listPlanoContas(): Observable<any> {
-    // Retorna um Observable contendo todas as instancias da API 
-    console.log(this.getCurrentEmpresa());
-    
-    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.getCurrentEmpresa(), { headers: this.httpHeaders });
+    // Retorna um Observable contendo todas as instancias da API
+    console.log(this.getCurrentCod_empresa());
+
+    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.getCurrentCod_empresa(), { headers: this.httpHeaders });
   }
 
   buscarPlanoContasPorId(id: number): Observable<any>{
@@ -69,7 +74,7 @@ export class PlanoContasService {
   }
 
   listSubGrupoContas(): Observable<any> {
-    // Retorna um Observable contendo todas as instancias da API 
+    // Retorna um Observable contendo todas as instancias da API
     return this.http.get<SubGrupo[]>('http://127.0.0.1:8000/api/fin_subgrupo_contas/', { headers: this.httpHeaders });
   }
 }
