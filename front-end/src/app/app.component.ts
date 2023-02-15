@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { DashboardService } from './dashboard/services/dashboard.service';
+import { AuthService } from 'src/app/auth';
+import { Component, OnInit  } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Empresa } from './shared';
+import { Empresa, Projeto  } from './shared';
 
 
 @Component({
@@ -9,13 +11,18 @@ import { Empresa } from './shared';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   currentUser: boolean;
   empresas: Empresa[];
+  projetos: Projeto[];
+  selectedProjetos: number;
+  selectedEmpresa: number;
   projetosUnicos: any[];
+  firstName: string;
 
-  constructor(private router: Router, private cookieService: CookieService, ) {
+
+  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {
     this.setCurrentUser();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -24,6 +31,46 @@ export class AppComponent {
         }
       }
     });
+  }
+  ngOnInit() {
+    this.firstName = this.authService.getUsername();
+    this.getProjetos();
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/empresas']);
+    }
+
+    const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') || '{}');
+    this.selectedProjetos = contexto.cod_projeto;
+    this.selectedEmpresa = Number(contexto.cod_empresa);
+  }
+
+  getProjetos() {
+    this.dashboardService.getProjetos(this.authService.getCurrentUser())
+      .subscribe(data => {
+        this.projetos = data;
+        this.getUniqueProjetos();
+      });
+  }
+  getUniqueProjetos() {
+    this.projetosUnicos = [];
+    this.projetos.forEach((projeto) => {
+      if (!this.projetosUnicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
+        this.projetosUnicos.push(projeto);
+      }
+    });
+  }
+  onProjectChange() {
+    if (this.selectedProjetos) {
+      this.dashboardService.alteraProjeto(this.selectedProjetos)
+        .subscribe(data => {
+          this.empresas = data;
+        });
+    }
+  }
+
+  onEmpresaChanged(cod_empresa: number) {
+    const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
+    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
 
   logout() {

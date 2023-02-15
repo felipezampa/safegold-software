@@ -31,4 +31,23 @@ export class AuthService {
       })
     );
   }
+  getCurrentCod_empresa() {
+    const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
+
+    return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
+  }
+
+  getCurrentNome_empresa(){
+    const CurrentNome_empresa = localStorage.getItem('selectedEmpresa');
+    return CurrentNome_empresa ? JSON.parse(CurrentNome_empresa).empresa: null;
+  }
+
+  getCurrentUser() {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser).user_id : null;
+  }
+  getUsername() {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser).first_name : null;
+  }
 }

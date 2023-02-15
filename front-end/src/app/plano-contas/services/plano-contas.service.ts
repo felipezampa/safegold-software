@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
@@ -7,16 +8,7 @@ import { ContaAnalitica, SubGrupo } from 'src/app/shared';
   providedIn: 'root'
 })
 export class PlanoContasService {
-  getCurrentCod_empresa() {
-    const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
 
-    return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
-  }
-
-  getCurrentNome_empresa(){
-    const CurrentNome_empresa = localStorage.getItem('selectedEmpresa');
-    return CurrentNome_empresa ? JSON.parse(CurrentNome_empresa).empresa: null;
-  }
 
   planoConta: ContaAnalitica[] = [];
   baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
@@ -26,7 +18,9 @@ export class PlanoContasService {
   get refreshPage$() {
     return this._refreshPage$;
   }
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+
 
   createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
@@ -52,9 +46,9 @@ export class PlanoContasService {
 
   listPlanoContas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API
-    console.log(this.getCurrentCod_empresa());
+    console.log(this.authService.getCurrentCod_empresa());
 
-    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.getCurrentCod_empresa(), { headers: this.httpHeaders });
+    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
   }
 
   buscarPlanoContasPorId(id: number): Observable<any>{

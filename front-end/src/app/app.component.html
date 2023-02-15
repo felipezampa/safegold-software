@@ -10,18 +10,17 @@
             <hr>
             <span class="sg-nav-item">CONTEXTO</span>
             <li class="sg-hover">
-                <select class="form-control">
-                    <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
-                    </option>
-                </select>
-            </li>
-            <li class="sg-hover">
-                <select class="form-control">
-                    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
-                    </option>
-                </select>
-            </li>
-            <hr>
+              <select class="form-control" [(ngModel)]="selectedProjetos" (ngModelChange)="onProjectChange()">
+                  <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+                  </option>
+              </select>
+          </li>
+          <li class="sg-hover">
+              <select class="form-control" [(ngModel)]="selectedEmpresa" (ngModelChange)="onEmpresaChanged($event)">
+                  <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
+                  </option>
+              </select>
+          </li>
             <li class="sg-hover">
                 <a href="conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>

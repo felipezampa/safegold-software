@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Empresa, Projeto } from 'src/app/shared';
@@ -17,28 +18,18 @@ export class DashboardComponent implements OnInit {
   projetosUnicos: any[];
   firstName: string;
 
-  constructor(private dashboardService: DashboardService, private router: Router) { }
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.firstName = this.getUsername();
+    this.firstName = this.authService.getUsername();
     this.getProjetos();
     if (!localStorage.getItem('currentUser')) {
       this.router.navigate(['/empresas']);
     }
   }
 
-  getUsername() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).first_name : null;
-  }
-
-  getCurrentUser() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).user_id : null;
-  }
-
   getProjetos() {
-    this.dashboardService.getProjetos(this.getCurrentUser())
+    this.dashboardService.getProjetos(this.authService.getCurrentUser())
       .subscribe(data => {
         this.projetos = data;
         this.getUniqueProjetos();
@@ -67,7 +58,7 @@ export class DashboardComponent implements OnInit {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
     localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
-  
+
 
   // onCardClick(cod_empresa: string) {
   // Armazenando o valor do id do card clicado no dashboard

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/auth';
 import { EmpresaService } from 'src/app/empresa';
 import { Empresa, SubGrupo } from 'src/app/shared';
 import { PlanoContasService } from '../services/plano-contas.service';
@@ -21,34 +22,19 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   mensagemErro: string = '';
   selectedCardCod_empresa: number;
   selectedCardEmpresa: string;
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute) {
-    this.selectedCardCod_empresa = this.getCurrentCod_empresa()
-    this.selectedCardEmpresa = this.getCurrentNome_empresa()
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute, private authService: AuthService) {
+
   }
   ngOnInit(): void {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
-
+    this.selectedCardCod_empresa = this.authService.getCurrentCod_empresa()
+    this.selectedCardEmpresa = this.authService.getCurrentNome_empresa()
 
   }
 
-  ////////////////////////////////////// GETS DO LOCAL STORAGE//////////////////////////////////////////
-  getCurrentCod_empresa() {
-    const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
 
-    return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
-  }
-
-  getCurrentNome_empresa(){
-    const CurrentNome_empresa = localStorage.getItem('selectedEmpresa');
-    return CurrentNome_empresa ? JSON.parse(CurrentNome_empresa).empresa: null;
-  }
-
-  getCurrentUser() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).user_id : null;
-  }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
   SalvarForm(dataForm: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }) {
     console.log(dataForm);
