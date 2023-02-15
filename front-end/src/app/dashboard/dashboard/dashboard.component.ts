@@ -13,7 +13,8 @@ export class DashboardComponent implements OnInit {
   projetos: Projeto[];
   empresas: Empresa[];
   selectedProjetos: number;
-  projetos_unicos: any[];
+  selectedEmpresa: number;
+  projetosUnicos: any[];
   firstName: string;
 
   constructor(private dashboardService: DashboardService, private router: Router) { }
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getProjetos() {
-    this.dashboardService.getProjetos()
+    this.dashboardService.getProjetos(this.getCurrentUser())
       .subscribe(data => {
         this.projetos = data;
         this.getUniqueProjetos();
@@ -45,30 +46,28 @@ export class DashboardComponent implements OnInit {
   }
 
   getUniqueProjetos() {
-    this.projetos_unicos = [];
+    this.projetosUnicos = [];
     this.projetos.forEach((projeto) => {
-      if (!this.projetos_unicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
-        this.projetos_unicos.push(projeto);
+      if (!this.projetosUnicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
+        this.projetosUnicos.push(projeto);
       }
     });
   }
 
   onProjectChange() {
     if (this.selectedProjetos) {
-      this.http.get<Empresa[]>(`http://localhost:8000/api/empresas/?cod_projeto=${this.selectedProjetos}`)
+      this.dashboardService.alteraProjeto(this.selectedProjetos)
         .subscribe(data => {
           this.empresas = data;
         });
     }
   }
+
   onEmpresaChanged(cod_empresa: number) {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa.empresa, cod_projeto: selectedEmpresa.cod_projeto, projeto: selectedEmpresa.projeto }));
+    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
   
-  // selectedEmpresa() {
-  //   this.onEmpresaChanged
-  // }
 
   // onCardClick(cod_empresa: string) {
   // Armazenando o valor do id do card clicado no dashboard

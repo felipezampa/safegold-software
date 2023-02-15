@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Empresa } from 'src/app/shared';
 
 @Injectable({
@@ -9,8 +10,8 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getProjetos() {
-    return this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto__id_user=${this.getCurrentUser()}`)
+  getProjetos(idUser: number): Observable<any> {
+    return this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto__id_user=${idUser}`)
   }
 
   alteraProjeto(selectedProjetos: number){

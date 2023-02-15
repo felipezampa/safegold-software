@@ -1,5 +1,4 @@
 <div>
-    <!-- *ngIf="currentUser" -->
     <div *ngIf="currentUser" class="sg-sidebar">
         <ul>
 
@@ -11,13 +10,13 @@
             <hr>
             <span class="sg-nav-item">CONTEXTO</span>
             <li class="sg-hover">
-                <select class="sg-form">
-                    <option *ngFor="let projeto of projetos_unicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+                <select class="form-control">
+                    <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
                     </option>
                 </select>
             </li>
             <li class="sg-hover">
-                <select class="sg-form">
+                <select class="form-control">
                     <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
                     </option>
                 </select>

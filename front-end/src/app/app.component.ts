@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Empresa } from './shared';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {
 
   currentUser: boolean;
+  empresas: Empresa[];
+  projetosUnicos: any[];
 
   constructor(private router: Router, private cookieService: CookieService, ) {
     this.setCurrentUser();
@@ -20,7 +23,6 @@ export class AppComponent {
           this.cookieService.set('previousUrl', event.url);
         }
       }
-
     });
   }
 
@@ -31,8 +33,6 @@ export class AppComponent {
     this.router.navigate(['/login']);
     this.setCurrentUser();
   }
-
-
 
   setCurrentUser() {
     if (localStorage.getItem('currentUser') != null) {
