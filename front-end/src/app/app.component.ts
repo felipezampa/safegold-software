@@ -12,7 +12,7 @@ export class AppComponent {
 
   currentUser: boolean;
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, private cookieService: CookieService, ) {
     this.setCurrentUser();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

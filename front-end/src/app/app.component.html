@@ -2,11 +2,27 @@
     <!-- *ngIf="currentUser" -->
     <div *ngIf="currentUser" class="sg-sidebar">
         <ul>
+
             <li class="sg-hover">
                 <a href="dashboard" class="logo">
                     <img src="../assets/img/Safegold.svg" alt="Safegold">
                 </a>
-            </li><hr>
+            </li>
+            <hr>
+            <span class="sg-nav-item">CONTEXTO</span>
+            <li class="sg-hover">
+                <select class="sg-form">
+                    <option *ngFor="let projeto of projetos_unicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+                    </option>
+                </select>
+            </li>
+            <li class="sg-hover">
+                <select class="sg-form">
+                    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
+                    </option>
+                </select>
+            </li>
+            <hr>
             <li class="sg-hover">
                 <a href="conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>
@@ -19,13 +35,13 @@
                     <span class="sg-nav-item">Plano de Contas</span>
                 </a>
             </li>
-            <li  class="sg-hover">
+            <li class="sg-hover">
                 <a href="empresas" class="sg-anchor">
                     <i class="fa-solid fa-briefcase"></i>
                     <span class="sg-nav-item">Empresas</span>
                 </a>
             </li>
-            <li  class="sg-hover">
+            <li class="sg-hover">
                 <a href="http://127.0.0.1:8000/admin/" class="sg-anchor">
                     <i class="fa-solid fa-lock"></i>
                     <span class="sg-nav-item">Admin</span>
@@ -42,7 +58,7 @@
     <div class="sg-content mb-5">
         <router-outlet></router-outlet>
     </div>
-<footer class="sg-content text-center mt-2 pt-2 pb-2">
-    Em caso de problemas, entre em contato com o Administrador: failover@safegold.com.br
-</footer>
+    <footer class="sg-content text-center mt-2 pt-2 pb-2">
+        Em caso de problemas, entre em contato com o Administrador: failover@safegold.com.br
+    </footer>
 </div>

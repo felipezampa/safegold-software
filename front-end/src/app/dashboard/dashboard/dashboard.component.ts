@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Empresa } from '../shared';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Empresa, Projeto } from 'src/app/shared';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,31 +10,25 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-
-
-
-  projetos: any[];
-  empresas: any[];
-  selectedProjetos: any;
+  projetos: Projeto[];
+  empresas: Empresa[];
+  selectedProjetos: number;
   projetos_unicos: any[];
-  first_name: string;
+  firstName: string;
 
-  constructor(private http: HttpClient, private router:Router) {
-    this.first_name = this.getUsername()
-  }
+  constructor(private dashboardService: DashboardService, private router: Router) { }
 
   ngOnInit() {
+    this.firstName = this.getUsername();
     this.getProjetos();
     if (!localStorage.getItem('currentUser')) {
       this.router.navigate(['/empresas']);
+    }
+  }
 
-  }
-  }
-  getUsername(){
+  getUsername() {
     const currentUser = localStorage.getItem('currentUser');
-
     return currentUser ? JSON.parse(currentUser).first_name : null;
-
   }
 
   getCurrentUser() {
@@ -44,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getProjetos() {
-    this.http.get<Array<{cod_empresa: number, empresa: string, cod_projeto: number}>>(`http://localhost:8000/api/empresas/?cod_projeto__id_user=${this.getCurrentUser()}`)
+    this.dashboardService.getProjetos()
       .subscribe(data => {
         this.projetos = data;
         this.getUniqueProjetos();
@@ -68,22 +61,24 @@ export class DashboardComponent implements OnInit {
         });
     }
   }
+  onEmpresaChanged(cod_empresa: number) {
+    const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
+    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa.empresa, cod_projeto: selectedEmpresa.cod_projeto, projeto: selectedEmpresa.projeto }));
+  }
+  
+  // selectedEmpresa() {
+  //   this.onEmpresaChanged
+  // }
 
   // onCardClick(cod_empresa: string) {
-    // Armazenando o valor do id do card clicado no dashboard
+  // Armazenando o valor do id do card clicado no dashboard
   //  const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
 
   //  localStorage.setItem("selectedCard", JSON.stringify({cod_empresa: cod_empresa, empresa: selectedEmpresa.empresa, cod_projeto: selectedEmpresa.cod_projeto, projeto: selectedEmpresa.projeto}));
 
   // this.router.navigate(['/plano-de-contas']);
 
- // }
+  // }
 
-  onEmpresaChanged(cod_empresa: string) {
-    const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-    localStorage.setItem("selectedEmpresa", JSON.stringify({cod_empresa: cod_empresa, empresa: selectedEmpresa.empresa, cod_projeto: selectedEmpresa.cod_projeto, projeto: selectedEmpresa.projeto}));
-  }
-  selectedEmpresa() {
-    this.onEmpresaChanged
-  }
+
 }
