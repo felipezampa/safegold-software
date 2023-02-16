@@ -20,8 +20,6 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   empresas: Empresa[] = [];
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
-  selectedCardCod_empresa: number;
-  selectedCardEmpresa: string;
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute, private authService: AuthService) {
 
   }
@@ -29,8 +27,6 @@ export class InserirEditarPlanoContasComponent implements OnInit {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
-    this.selectedCardCod_empresa = this.authService.getCurrentCod_empresa()
-    this.selectedCardEmpresa = this.authService.getCurrentNome_empresa()
   }
 
 
@@ -85,7 +81,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
           // Busca o objeto empresa com o ID passado
           this.planoContasService.buscarPlanoContasPorId(this.idConta).subscribe(conta => {
             console.log(conta);
-            
+
             // Coloca os valores encontrados no objeto nos campos do form
             this.formPlanoContas.setValue({
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined

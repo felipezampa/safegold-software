@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit {
     if (!localStorage.getItem('currentUser')) {
       this.router.navigate(['/empresas']);
     }
+    const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
+    this.selectedProjetos = contexto?.cod_projeto;
+    this.selectedEmpresa = contexto?.cod_empresa;
+    this.onProjectChange()
   }
 
   getProjetos() {
@@ -54,21 +58,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+
   onEmpresaChanged(cod_empresa: number) {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
+    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
-
-
-  // onCardClick(cod_empresa: string) {
-  // Armazenando o valor do id do card clicado no dashboard
-  //  const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-
-  //  localStorage.setItem("selectedCard", JSON.stringify({cod_empresa: cod_empresa, empresa: selectedEmpresa.empresa, cod_projeto: selectedEmpresa.cod_projeto, projeto: selectedEmpresa.projeto}));
-
-  // this.router.navigate(['/plano-de-contas']);
-
-  // }
-
 
 }
