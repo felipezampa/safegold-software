@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { DashboardService } from './../../dashboard/services/dashboard.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOptions = {
 export class AuthService {
 
   api_url: string = 'http://localhost:8000/';
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
 
   login(username:string, password:string){
     return this.http.post<any>(this.api_url + `accounts/api/auth/`,
@@ -25,12 +26,15 @@ export class AuthService {
       map(user => {
         if (user && user.token){
           localStorage.setItem("currentUser", JSON.stringify(user));
-          this.router.navigate(['/dashboard']);
+          this.dashboardService.getProjetos(user.user_id).subscribe(() => {
+            this.router.navigate(['/dashboard']);
+          });
         }
         return user;
       })
     );
   }
+
   getCurrentCod_empresa() {
     const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
     return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
@@ -53,4 +57,5 @@ export class AuthService {
     const CurrentProjeto = localStorage.getItem('selectedEmpresa');
     return CurrentProjeto ? JSON.parse(CurrentProjeto).cod_projeto: null;
   }
+
 }

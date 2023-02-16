@@ -21,28 +21,26 @@ export class AppComponent implements OnInit {
   projetosUnicos: any[];
   firstName: string;
 
-
-  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {
-    this.setCurrentUser();
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if (localStorage.getItem('currentUser')) {
-          this.cookieService.set('previousUrl', event.url);
-        }
-      }
-    });
-  }
+  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {
+    this.setCurrentUser();
     this.firstName = this.authService.getUsername();
-    this.getProjetos();
     if (!localStorage.getItem('currentUser')) {
       this.router.navigate(['/empresas']);
+    } else {
+      // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
+      this.dashboardService.getProjetos(this.authService.getCurrentUser())
+        .subscribe(data => {
+          this.projetos = data;
+          this.getUniqueProjetos();
+        });
     }
-
-    const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') || '{}');
-    this.selectedProjetos = contexto.cod_projeto;
-    this.selectedEmpresa = Number(contexto.cod_empresa);
+    const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
+    this.selectedProjetos = contexto?.cod_projeto;
+    this.selectedEmpresa = contexto?.cod_empresa;
+    this.onProjectChange();
   }
+
 
   getProjetos() {
     this.dashboardService.getProjetos(this.authService.getCurrentUser())
@@ -70,7 +68,9 @@ export class AppComponent implements OnInit {
 
   onEmpresaChanged(cod_empresa: number) {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
+    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
+    window.location.reload();
+
   }
 
   logout() {
@@ -79,6 +79,8 @@ export class AppComponent implements OnInit {
     this.cookieService.delete('previousUrl');
     this.router.navigate(['/login']);
     this.setCurrentUser();
+    this.selectedProjetos = null ?? 0; // Limpa o contexto selecionado
+    this.selectedEmpresa = null ?? 0;
   }
 
   setCurrentUser() {
@@ -86,6 +88,8 @@ export class AppComponent implements OnInit {
       this.currentUser = true;
     } else {
       this.currentUser = false;
+      this.selectedProjetos = null ?? 0; // Limpa o contexto selecionado
+      this.selectedEmpresa = null ?? 0;
     }
   }
 }

@@ -13,7 +13,7 @@ import { AppComponent } from 'src/app/app.component';
 export class LoginComponent implements OnInit {
 
   myform: FormGroup;
-  constructor(private authService: AuthService, private app: AppComponent, private router:Router) { }
+  constructor(private authService: AuthService, private app: AppComponent, private router:Router, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.myform = new FormGroup({
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       data => {
         localStorage.setItem("currentUser", JSON.stringify(data));
         this.app.setCurrentUser();
+        this.appComponent.getProjetos(); // Starta o script de contexto
       }
     )
   }
