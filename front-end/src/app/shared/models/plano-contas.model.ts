@@ -13,3 +13,8 @@ export interface SubGrupo {
     cod_grupo_contas: number;
 }
 
+export interface Grupo {
+    cod_subgrupo_contas: number;
+    desc_subgrupo_contas: string;
+    cod_grupo_contas: number;
+}

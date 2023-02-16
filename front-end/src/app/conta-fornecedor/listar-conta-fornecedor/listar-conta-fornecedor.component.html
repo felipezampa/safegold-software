@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around ">
+    <div>
+        <span id="exportar">AÇÕES:</span>
+        <button type="button" class="sg-action-button" (click)="abrirFormCadastro()">Cadastrar</button>
+    </div>
+    <div></div>
+    <div>
+        <span id="exportar">EXPORTAR:</span>
+        <button class="mx-1 sg-button" (click)="salvarExcel(planoContas)">EXCEL</button>
+        <button class="sg-button" (click)="salvarPDF(planoContas)">PDF</button>
+    </div>
+</nav>
+<div class="container-fluid mb-5" style="padding-top: 60px;">
+    <div class="row mb-2 ">
+        <div class="col">
+            <div class="card shadow-lg mx-2">
+                <div class="card-header">
+                    <h2 class="text-center">FILTRAR</h2>
+                </div>
+                <div class="row justify-content-between p-3">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-lg mx-2">
+                <div class="card-header">
+                    <h2 *ngIf="planoContas.length < 1 || isLoading" class="text-center">Nenhum dado encontrado!</h2>
+                    <h2 *ngIf="planoContas.length >= 1 && !isLoading" class="text-center">CONTA ANALÍTICA</h2>
+                </div>
+                <div class="p-3">
+                    <!-- <table *ngIf="planoContas.length >= 1 && !isLoading" -->
+                    <table class="table table-striped table-Light table-bordered mb-3 table-responsive table-hover"
+                        id="sg-tabela">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="col-1 text-center">ID</th>
+                                <th class="col">Conta Analítica</th>
+                                <th class="col">Sub-Grupo de Conta</th>
+                                <th class="col">Empresa</th>
+                                <th class="col-1 text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contas of planoContas">
+                                <td class="text-center">{{ contas.cod_conta_analitica }}</td>
+                                <td>{{ contas.desc_conta }}</td>
+                                <td>{{ contas.desc_subgrupo }}</td>
+                                <td>{{ contas.empresa }}</td>
+                                <td class="text-center">
+                                    <!-- <a type="submit" (click)="verModal(contas)">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a> -->
+                                    <a type="submit" class="me-3" (click)="abrirFormAtualizacao(contas.cod_conta_analitica)">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                    <a type="submit" (click)="deletarModal(contas)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="isLoading" class="text-center text-dark">
+                        <button class="btn btn-warning mt-2" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Carregando dados...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

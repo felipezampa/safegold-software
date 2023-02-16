@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
+import { ListarContaFornecedorComponent } from './conta-fornecedor';
 import { DashboardComponent } from './dashboard';
 import { ListarEmpresaComponent } from './empresa';
 import { ListarPlanoContasComponent } from './plano-contas';
@@ -25,7 +26,10 @@ const routes: Routes = [
     component: ListarPlanoContasComponent,
   },
   {
-    //TEMPORARIO
+    path: 'conta-fornecedor',
+    component: ListarContaFornecedorComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },

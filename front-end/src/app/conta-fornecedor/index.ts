@@ -1,0 +1,1 @@
+export * from './listar-conta-fornecedor/listar-conta-fornecedor.component';

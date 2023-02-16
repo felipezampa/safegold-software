@@ -7,20 +7,21 @@
                     <img src="../assets/img/Safegold.svg" alt="Safegold">
                 </a>
             </li>
-            <hr>
-            <span class="sg-nav-item">CONTEXTO</span>
+            <hr class="my-1">
+            <span class="sg-contexto sg-nav-item">CONTEXTO</span>
             <li class="sg-hover">
-              <select class="form-control" [(ngModel)]="selectedProjetos" (ngModelChange)="onProjectChange()">
-                  <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
-                  </option>
-              </select>
-          </li>
-          <li class="sg-hover">
-              <select class="form-control" [(ngModel)]="selectedEmpresa" (ngModelChange)="onEmpresaChanged($event)">
-                  <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
-                  </option>
-              </select>
-          </li>
+                <select class="sg-form" [(ngModel)]="selectedProjetos" (ngModelChange)="onProjectChange()">
+                    <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+                    </option>
+                </select>
+            </li>
+            <li class="sg-hover">
+                <select class="sg-form" [(ngModel)]="selectedEmpresa" (ngModelChange)="onEmpresaChanged($event)">
+                    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}
+                    </option>
+                </select>
+            </li>
+            <hr class="my-1">
             <li class="sg-hover">
                 <a href="conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>

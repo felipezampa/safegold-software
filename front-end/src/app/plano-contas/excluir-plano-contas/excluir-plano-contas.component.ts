@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContaAnalitica } from 'src/app/shared';
 import { PlanoContasService } from '../services/plano-contas.service';
 
+
 @Component({
   selector: 'app-excluir-plano-contas',
   templateUrl: './excluir-plano-contas.component.html',

@@ -4,10 +4,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ContaAnalitica } from 'src/app/shared';
 import { InserirEditarPlanoContasComponent } from '../inserir-editar-plano-contas/inserir-editar-plano-contas.component';
-import { PlanoContasService } from '../services/plano-contas.service';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { ExcluirPlanoContasComponent } from '../excluir-plano-contas/excluir-plano-contas.component';
+import { PlanoContasService } from '../services/plano-contas.service';
 
 @Component({
   selector: 'app-listar-plano-contas',
