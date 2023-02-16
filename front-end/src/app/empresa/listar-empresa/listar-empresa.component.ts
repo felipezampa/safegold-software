@@ -93,7 +93,7 @@ export class ListarEmpresaComponent implements OnInit {
       theme: 'plain',
       startY: 35,
     });
-    pdf.save("Relatório.pdf");
+    pdf.save("RelatorioEmpresas.pdf");
   }
 
   salvarExcel(tableData: Array<Empresa>) {
@@ -103,7 +103,7 @@ export class ListarEmpresaComponent implements OnInit {
     const worksheet = XLSX.utils.aoa_to_sheet([columns, ...rows]);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, "Relatório.xlsx");
+    XLSX.writeFile(workbook, "RelatorioEmpresas.xlsx");
   }
 
 }

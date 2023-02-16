@@ -9,8 +9,6 @@ import { ContaAnalitica, SubGrupo } from 'src/app/shared';
 })
 export class PlanoContasService {
 
-
-  planoConta: ContaAnalitica[] = [];
   baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
