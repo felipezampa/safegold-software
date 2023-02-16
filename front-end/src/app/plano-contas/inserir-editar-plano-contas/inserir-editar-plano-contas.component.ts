@@ -31,7 +31,6 @@ export class InserirEditarPlanoContasComponent implements OnInit {
     this.atualizarConta();
     this.selectedCardCod_empresa = this.authService.getCurrentCod_empresa()
     this.selectedCardEmpresa = this.authService.getCurrentNome_empresa()
-
   }
 
 
@@ -85,6 +84,8 @@ export class InserirEditarPlanoContasComponent implements OnInit {
         if (this.idConta != undefined) {
           // Busca o objeto empresa com o ID passado
           this.planoContasService.buscarPlanoContasPorId(this.idConta).subscribe(conta => {
+            console.log(conta);
+            
             // Coloca os valores encontrados no objeto nos campos do form
             this.formPlanoContas.setValue({
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
@@ -106,7 +107,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
 
   listarEmpresas() {
     // Lista todos as empresas para selecionar no input de option
-    this.empresaService.listEmpresas().subscribe(empresas => {
+    this.empresaService.buscarEmpresaPorContexto().subscribe(empresas => {
       this.empresas = empresas;
     });
   }

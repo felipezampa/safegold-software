@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { Empresa } from 'src/app/shared';
+import { AuthService } from 'src/app/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,13 @@ export class EmpresaService {
   get refreshPage$() {
     return this._refreshPage$;
   }
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getCurrentUser() {
     const currentUser = localStorage.getItem('currentUser');
 
     return currentUser ? JSON.parse(currentUser).user_id : null;
   }
-
 
   createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
@@ -67,5 +67,9 @@ export class EmpresaService {
           this._refreshPage$.next();
         })
       );
+  }
+
+  buscarEmpresaPorContexto(): Observable<any> {
+    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto=' + this.authService.getCurrentProjeto(), { headers: this.httpHeaders });
   }
 }

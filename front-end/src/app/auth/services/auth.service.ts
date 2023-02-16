@@ -33,7 +33,6 @@ export class AuthService {
   }
   getCurrentCod_empresa() {
     const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
-
     return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
   }
 
@@ -49,5 +48,9 @@ export class AuthService {
   getUsername() {
     const currentUser = localStorage.getItem('currentUser');
     return currentUser ? JSON.parse(currentUser).first_name : null;
+  }
+  getCurrentProjeto(){
+    const CurrentProjeto = localStorage.getItem('selectedEmpresa');
+    return CurrentProjeto ? JSON.parse(CurrentProjeto).cod_projeto: null;
   }
 }
