@@ -17,16 +17,21 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   @ViewChild('formPlanoContas') formPlanoContas!: NgForm;
   @Input() idConta: number;
   @Input() editMode!: boolean;
+  @Input() cod_empresa!: number;
   empresas: Empresa[] = [];
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route:ActivatedRoute, private authService: AuthService) {
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route: ActivatedRoute, private authService: AuthService) {
+
 
   }
   ngOnInit(): void {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
+
+
+
   }
 
 
@@ -80,8 +85,6 @@ export class InserirEditarPlanoContasComponent implements OnInit {
         if (this.idConta != undefined) {
           // Busca o objeto empresa com o ID passado
           this.planoContasService.buscarPlanoContasPorId(this.idConta).subscribe(conta => {
-            console.log(conta);
-
             // Coloca os valores encontrados no objeto nos campos do form
             this.formPlanoContas.setValue({
               // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
@@ -98,6 +101,18 @@ export class InserirEditarPlanoContasComponent implements OnInit {
         //Mostra a exceção na tela
         this.mensagemErro = '<h4 class="alert alert-danger strong">' + e + '</h4>';
       }
+    } else {
+      //Se for cadastrado coloca a empresa no contexto como padrao no select
+      this.empresaService.buscarEmpresaPorId(this.authService.getCurrentCod_empresa())
+      .subscribe(conta => {
+        // Coloca os valores encontrados no objeto nos campos do form
+        this.formPlanoContas.setValue({
+          // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
+          cod_empresa: conta[0].cod_empresa,
+          desc_conta: null,
+          cod_subgrupo_contas: null
+        });
+      });
     }
   }
 
@@ -108,7 +123,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
     });
   }
 
-  listarSubGrupo(){
+  listarSubGrupo() {
     this.planoContasService.listSubGrupoContas().subscribe(subgrupo => {
       this.subgrupos = subgrupo;
     });

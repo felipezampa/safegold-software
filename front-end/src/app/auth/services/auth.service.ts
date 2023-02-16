@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardService } from './../../dashboard/services/dashboard.service';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,7 +36,7 @@ export class AuthService {
     );
   }
 
-  getCurrentCod_empresa() {
+  getCurrentCod_empresa(): number {
     const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
     return CurrentEmpresa ? JSON.parse(CurrentEmpresa).cod_empresa : null;
   }
