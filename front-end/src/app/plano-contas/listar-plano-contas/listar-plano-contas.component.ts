@@ -8,6 +8,7 @@ import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { ExcluirPlanoContasComponent } from '../excluir-plano-contas/excluir-plano-contas.component';
 import { PlanoContasService } from '../services/plano-contas.service';
+import { AuthService } from 'src/app/auth';
 
 @Component({
   selector: 'app-listar-plano-contas',
@@ -21,7 +22,7 @@ export class ListarPlanoContasComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
 
-  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router:Router) { }
+  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router:Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listarContas();
@@ -48,6 +49,7 @@ export class ListarPlanoContasComponent implements OnInit {
     this.editMode = false;
     const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl', backdrop: 'static' });
     modalRef.componentInstance.editMode = this.editMode;
+    modalRef.componentInstance.cod_empresa = this.authService.getCurrentCod_empresa();
   }
 
   abrirFormAtualizacao(id: number) {

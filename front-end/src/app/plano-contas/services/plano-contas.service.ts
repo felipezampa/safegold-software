@@ -44,10 +44,8 @@ export class PlanoContasService {
       );
   }
 
-  listPlanoContas(): Observable<any> {
+  listPlanoContas(): Observable<ContaAnalitica[]> {
     // Retorna um Observable contendo todas as instancias da API
-    console.log(this.authService.getCurrentCod_empresa());
-
     return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
   }
 
