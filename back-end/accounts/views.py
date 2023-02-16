@@ -43,3 +43,6 @@ class CustomAuthToken(ObtainAuthToken):
             'email': user.email,
             'status': '1'
         })
+    
+
+#login por email

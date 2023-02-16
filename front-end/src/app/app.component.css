@@ -137,3 +137,11 @@ i {
 .sg-contexto {
     margin-left: 20px;
 }
+
+.sg-form option:hover {
+  background-color: red;
+}
+
+#projeto-select option:hover {
+  background-color: red;
+}
