@@ -22,9 +22,6 @@ import { InserirEditarContaFornecedorComponent } from '../inserir-editar-conta-f
 })
 export class ListarContaFornecedorComponent implements OnInit {
 
-  analitica: ContaAnalitica[] = [];
-  empresas: Empresa[] = [];
-  fornecedores : Fornecedor[] = [];
   matrizAnalitica: MatrizAnalitica[] = [];
   isLoading: boolean = false;
   editMode: boolean = false;
@@ -32,10 +29,7 @@ export class ListarContaFornecedorComponent implements OnInit {
   selectedOption: number;
   constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
-
-
   ngOnInit(): void {
-
     this.listarEmpresas();
     this.listarContaFornecedor();
     this.listarFornecedor();
@@ -48,7 +42,6 @@ export class ListarContaFornecedorComponent implements OnInit {
     }
 
   }
-
 
   listarContaFornecedor() {
     this.isLoading = true;
@@ -69,7 +62,6 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.analiticaService.listPlanoContas().subscribe(analitica => {
       this.analitica = analitica
       console.log(this.analitica);
-
     })
   }
 
@@ -77,9 +69,7 @@ export class ListarContaFornecedorComponent implements OnInit {
     // Lista todos os fornecedores para selecionar no input de option
     this.matrizService.listFornecedor().subscribe(fornecedores => {
       this.fornecedores = fornecedores;
-
     });
-
   }
 
   abrirFormCadastro() {
@@ -134,5 +124,9 @@ export class ListarContaFornecedorComponent implements OnInit {
   }
 
 
+  ///////////////////////////////////////////// CRUDUDU /////////////////////////////////////////////
+  analitica: ContaAnalitica[] = [];
+  empresas: Empresa[] = [];
+  fornecedores : Fornecedor[] = [];
 
 }
