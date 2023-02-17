@@ -3,7 +3,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjetoService } from 'src/app/projeto/services/projeto.service';
-import { Projeto } from 'src/app/shared';
 import { EmpresaService } from '../services/empresa.service';
 
 @Component({

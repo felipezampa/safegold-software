@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-inserir-editar-conta-fornecedor',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InserirEditarContaFornecedorComponent implements OnInit {
 
-  constructor() { }
+  @Input() editMode!: boolean;
+  @ViewChild('formContaFornecedor') formContaFornecedor!: NgForm;
+  mensagemErro: string = '';
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+  }
+
+  SalvarForm(dataForm: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }) {
+
+    
   }
 
 }

@@ -21,17 +21,14 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   empresas: Empresa[] = [];
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
+  
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route: ActivatedRoute, private authService: AuthService) {
-
-
   }
+
   ngOnInit(): void {
     this.listarEmpresas();
     this.listarSubGrupo();
     this.atualizarConta();
-
-
-
   }
 
 

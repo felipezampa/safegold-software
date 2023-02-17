@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExcluirContaFornecedorComponent, InserirEditarContaFornecedorComponent, ListarContaFornecedorComponent, MatrizContaFornecedorService } from './index';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { ExcluirContaFornecedorComponent, InserirEditarContaFornecedorComponent,
     ExcluirContaFornecedorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
   ],
   providers: [
     MatrizContaFornecedorService

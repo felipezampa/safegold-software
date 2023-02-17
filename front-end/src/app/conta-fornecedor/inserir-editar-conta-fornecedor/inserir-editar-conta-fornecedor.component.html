@@ -1,1 +1,52 @@
-<p>inserir-editar-conta-fornecedor works!</p>
+<div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 *ngIf="!editMode" id="modalLabel">CADASTRAR VÍNCULO</h5>
+    <h5 *ngIf="editMode" id="modalLabel">EDITAR VÍNCULO</h5>
+</div>
+<div class="modal-body text-center">
+    <form #formContaFornecedor="ngForm" class="px-5">
+        <div class="row mt-2">
+            <span [innerHTML]="mensagemErro"></span>
+            <div class="col-3">
+                <label for="empresa" class="sg-label">Conta Analítica:</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_projeto" ngModel required>
+                    <!-- <option *ngFor="let empresa of projetos_unicos" [value]="empresa.cod_projeto">{{ empresa.projeto }}
+                    </option> -->
+                </select>
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cod_projeto" class="sg-label">Fornecedor:</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_projeto" ngModel required>
+                    <!-- <option *ngFor="let empresa of projetos_unicos" [value]="empresa.cod_projeto">{{ empresa.projeto }}
+                    </option> -->
+                </select>
+            </div>
+            <hr>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3">
+                <label for="cnpj" class="sg-label">Empresa:</label>
+            </div>
+            <div class="col">
+                <select class="sg-select" name="cod_projeto" ngModel required>
+                    <!-- <option *ngFor="let empresa of projetos_unicos" [value]="empresa.cod_projeto">{{ empresa.projeto }}
+                </option> -->
+                </select>
+            </div>
+            <hr>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-center align-items-center">
+    <button *ngIf="!editMode" type="submit" class="btn btn-primary mx-2" (click)="SalvarForm(formContaFornecedor.value)"
+        [disabled]="!formContaFornecedor.valid">Salvar</button>
+    <button *ngIf="editMode" type="submit" class="btn btn-warning mx-2" (click)="SalvarForm(formContaFornecedor.value)"
+        [disabled]="!formContaFornecedor.valid">Atualizar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>
