@@ -282,7 +282,7 @@ class MatrizAnaliticaFornecedor(models.Model):
         db_table = 'matriz_analitica_fornecedor'
         verbose_name_plural = 'Vinculo de Fornecedor á Conta Analitica'
     def __str__(self):
-        return "Empresa: {} // Código Analitico: {} // Fornecedor: {}".format(self.cod_empresa, self.cod_conta_analitica, self.cod_fornecedor)
+        return "Código Analitico: {} // Fornecedor: {}".format(self.cod_conta_analitica, self.cod_fornecedor)
 
 
 

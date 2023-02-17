@@ -1,3 +1,4 @@
+import { Fornecedor } from './../../shared/models/fornecedor.model';
 import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -21,6 +22,10 @@ export class MatrizContaFornecedorService {
   listMatrizAnalitica(): Observable<MatrizAnalitica[]> {
     // Retorna um Observable contendo todas as instancias da API
     return this.http.get<MatrizAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
+  }
+  listFornecedor(): Observable<Fornecedor[]> {
+    // Retorna um Observable contendo todas as instancias da API
+    return this.http.get<Fornecedor[]>('http://localhost:8000/api/fornecedor/' + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
   }
 
   createPlanoContas(value: { cod_empresa: number; cod_conta_analitica: number; cod_subgrupo_contas: number }): Observable<any> {

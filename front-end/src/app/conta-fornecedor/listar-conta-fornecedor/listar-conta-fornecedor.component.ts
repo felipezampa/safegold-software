@@ -1,3 +1,8 @@
+import { PlanoContasService } from './../../plano-contas/services/plano-contas.service';
+import { EmpresaService } from './../../empresa/services/empresa.service';
+import { Empresa } from './../../shared/models/empresa.model';
+import { Fornecedor } from './../../shared/models/fornecedor.model';
+import { ContaAnalitica } from './../../shared/models/plano-contas.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,16 +22,24 @@ import { InserirEditarContaFornecedorComponent } from '../inserir-editar-conta-f
 })
 export class ListarContaFornecedorComponent implements OnInit {
 
+  analitica: ContaAnalitica[] = [];
+  empresas: Empresa[] = [];
+  fornecedores : Fornecedor[] = [];
   matrizAnalitica: MatrizAnalitica[] = [];
   isLoading: boolean = false;
   editMode: boolean = false;
   subscription: Subscription | undefined;
+  selectedOption: number;
+  constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
-  constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router) { }
+
 
   ngOnInit(): void {
-    this.listarContaFornecedor();
 
+    this.listarEmpresas();
+    this.listarContaFornecedor();
+    this.listarFornecedor();
+    this.listarContaAnalitica();
     this.subscription = this.matrizService.refreshPage$.subscribe(() => {
       this.listarContaFornecedor();
     })
@@ -36,6 +49,7 @@ export class ListarContaFornecedorComponent implements OnInit {
 
   }
 
+
   listarContaFornecedor() {
     this.isLoading = true;
     this.matrizService.listMatrizAnalitica()
@@ -43,6 +57,29 @@ export class ListarContaFornecedorComponent implements OnInit {
         this.isLoading = false;
         this.matrizAnalitica = vinculo;
       });
+  }
+  listarEmpresas() {
+    // Lista todos as empresas para selecionar no input de option
+    this.empresaService.buscarEmpresaPorContexto().subscribe(empresas => {
+      this.empresas = empresas;
+
+    });
+  }
+  listarContaAnalitica(){
+    this.analiticaService.listPlanoContas().subscribe(analitica => {
+      this.analitica = analitica
+      console.log(this.analitica);
+
+    })
+  }
+
+  listarFornecedor(){
+    // Lista todos os fornecedores para selecionar no input de option
+    this.matrizService.listFornecedor().subscribe(fornecedores => {
+      this.fornecedores = fornecedores;
+
+    });
+
   }
 
   abrirFormCadastro() {
@@ -95,5 +132,7 @@ export class ListarContaFornecedorComponent implements OnInit {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     XLSX.writeFile(workbook, "RelatorioVinculoContaFornecedores.xlsx");
   }
+
+
 
 }

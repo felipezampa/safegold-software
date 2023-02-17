@@ -48,9 +48,22 @@
                         <tbody>
                             <tr *ngFor="let matriz of matrizAnalitica">
                                 <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
-                                <td>{{ matriz.desc_cod_conta_analitica }}</td>
-                                <td>{{ matriz.desc_fornecedor }}</td>
-                                <td>{{ matriz.empresa }}</td>
+                                <td>
+                                  <select class="sg-select" name="cod_fornecedor" ngModel required>
+                                    <option *ngFor="let analitica of analitica" [value]="analitica.cod_conta_analitica">{{ analitica.desc_conta }}
+                                    </option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <select class="sg-select" name="cod_fornecedor" ngModel required>
+                                    <option value="{{matriz.cod_fornecedor}}">{{matriz.desc_fornecedor}}</option>
+                                    <option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.cod_fornec">{{ fornecedor.fornecedor }}
+                                    </option>
+                                  </select>
+                                </td>
+                                <td>
+                                  {{matriz.empresa}}
+                              </td>
                                 <td class="text-center">
                                     <a type="submit" class="me-3"
                                         (click)="abrirFormAtualizacao(matriz.cod_matriz_analitica_fornecedor)">
