@@ -61,7 +61,6 @@ export class ListarContaFornecedorComponent implements OnInit {
   listarContaAnalitica(){
     this.analiticaService.listPlanoContas().subscribe(analitica => {
       this.analitica = analitica
-      console.log(this.analitica);
     })
   }
 
