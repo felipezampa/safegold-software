@@ -11,9 +11,7 @@ import { MatrizAnalitica } from 'src/app/shared';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
-
 import { ExcluirContaFornecedorComponent } from '../excluir-conta-fornecedor/excluir-conta-fornecedor.component';
-import { InserirEditarContaFornecedorComponent } from '../inserir-editar-conta-fornecedor/inserir-editar-conta-fornecedor.component';
 
 @Component({
   selector: 'app-listar-conta-fornecedor',
@@ -69,19 +67,6 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.matrizService.listFornecedor().subscribe(fornecedores => {
       this.fornecedores = fornecedores;
     });
-  }
-
-  abrirFormCadastro() {
-    this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarContaFornecedorComponent, { size: 'xl', backdrop: 'static' });
-    modalRef.componentInstance.editMode = this.editMode;
-  }
-
-  abrirFormAtualizacao(id: number) {
-    this.editMode = true;
-    const modalRef = this.modalService.open(InserirEditarContaFornecedorComponent, { size: 'xl', backdrop: 'static' });
-    modalRef.componentInstance.idVinculo = id;
-    modalRef.componentInstance.editMode = this.editMode;
   }
 
   deletarModal(matriz: MatrizAnalitica) {
