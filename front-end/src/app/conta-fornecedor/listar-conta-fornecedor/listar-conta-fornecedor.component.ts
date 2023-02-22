@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { PlanoContasService } from './../../plano-contas/services/plano-contas.service';
 import { EmpresaService } from './../../empresa/services/empresa.service';
 import { Empresa } from './../../shared/models/empresa.model';
@@ -6,7 +7,7 @@ import { ContaAnalitica } from './../../shared/models/plano-contas.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { MatrizAnalitica } from 'src/app/shared';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
@@ -21,13 +22,12 @@ import { InserirEditarContaFornecedorComponent } from '../inserir-editar-conta-f
   styleUrls: ['./listar-conta-fornecedor.component.css']
 })
 export class ListarContaFornecedorComponent implements OnInit {
-
+  baseURL = 'http://127.0.0.1:8000/api/matriz_analitica_fornecedor/'
   matrizAnalitica: MatrizAnalitica[] = [];
   isLoading: boolean = false;
   editMode: boolean = false;
   subscription: Subscription | undefined;
-  selectedOption: number;
-  constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
+  constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http : HttpClient) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -128,5 +128,22 @@ export class ListarContaFornecedorComponent implements OnInit {
   analitica: ContaAnalitica[] = [];
   empresas: Empresa[] = [];
   fornecedores : Fornecedor[] = [];
+  selectedOption: any;
+
+
+
+
+  atualizarMatrizAnaliticaFornecedor(id : number){
+    const matriz  = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
+    console.log(matriz);
+
+    // if (matriz){
+    //   this.matrizService.updateMatriz(id).subscribe()
+    // }
+
+
+    }
+
+
 
 }

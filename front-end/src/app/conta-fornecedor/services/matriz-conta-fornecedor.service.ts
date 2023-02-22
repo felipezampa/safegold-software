@@ -2,13 +2,16 @@ import { Fornecedor } from './../../shared/models/fornecedor.model';
 import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
-import { MatrizAnalitica } from 'src/app/shared';
+import { Observable, retry, Subject, tap } from 'rxjs';
+import { MatrizAnalitica, ContaAnalitica } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatrizContaFornecedorService {
+  matrizAnalitica: MatrizAnalitica[] = [];
+  analitica: ContaAnalitica[] = [];
+
 
   baseURL = 'http://127.0.0.1:8000/api/matriz_analitica_fornecedor/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
@@ -49,4 +52,9 @@ export class MatrizContaFornecedorService {
         })
       );
   }
+  updateMatriz(id:number, value: {cod_conta_analitica : number,cod_fornecedor: number, cod_empresa:number }): Observable<any> {
+
+    return this.http.put(this.baseURL + id + '/', value)
+  }
+
 }
