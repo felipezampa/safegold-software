@@ -87,3 +87,14 @@ h2 {
 .card-header {
     background-color: var(--sg-gray);
 }
+
+.sg-select{
+    background-color: transparent;
+    width: auto;
+    border: none;
+    font-weight: 400;
+    width: 100%;
+    transform: scaleX(1);
+    outline: none;
+    margin-bottom: 10px;
+}

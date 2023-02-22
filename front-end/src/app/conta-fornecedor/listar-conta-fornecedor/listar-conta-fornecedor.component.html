@@ -1,8 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around ">
-    <div>
-        <span id="exportar">AÇÕES:</span>
-        <button type="button" class="sg-action-button" (click)="abrirFormCadastro()">Cadastrar</button>
-    </div>
+    <div></div>
     <div></div>
     <div>
         <span id="exportar">EXPORTAR:</span>
@@ -18,9 +15,8 @@
                     <h2 class="text-center">FILTRAR</h2>
                 </div>
                 <div class="row justify-content-between p-3">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Conta" autocomplete="off">
+                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Fornecedor" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -51,17 +47,17 @@
                                 <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
                                 <td>{{ matriz.desc_cod_conta_analitica }}</td>
                                 <td>
-                                  <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">
+                                  <select class="sg-select" name="cod_conta_analitica">
                                     <option *ngFor="let conta of analitica" [value]="conta.cod_conta_analitica">{{ conta.desc_conta }}</option>
                                 </select>
                                 </td>
                                 <td>{{ matriz.desc_fornecedor }}</td>
                                 <td>{{ matriz.empresa }}</td>
                                 <td class="text-center">
-                                    <a type="submit" class="me-3"
+                                    <!-- <a type="submit" class="me-3"
                                         (click)="abrirFormAtualizacao(matriz.cod_matriz_analitica_fornecedor)">
                                         <i class="fa-solid fa-pencil"></i>
-                                    </a>
+                                    </a> -->
                                     <a type="submit" (click)="deletarModal(matriz)">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
