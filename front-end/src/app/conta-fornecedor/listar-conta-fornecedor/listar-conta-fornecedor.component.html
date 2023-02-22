@@ -47,7 +47,7 @@
                                 <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
                                 <td>{{ matriz.desc_cod_conta_analitica }}</td>
                                 <td>
-                                  <select class="sg-select" name="cod_conta_analitica">
+                                  <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">>
                                     <option *ngFor="let conta of analitica" [value]="conta.cod_conta_analitica">{{ conta.desc_conta }}</option>
                                 </select>
                                 </td>

@@ -25,7 +25,7 @@ export class ListarContaFornecedorComponent implements OnInit {
   isLoading: boolean = false;
   editMode: boolean = false;
   subscription: Subscription | undefined;
-  constructor(private matrizService: MatrizContaFornecedorService , private modalService: NgbModal, private router:Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http : HttpClient) { }
+  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -56,13 +56,13 @@ export class ListarContaFornecedorComponent implements OnInit {
 
     });
   }
-  listarContaAnalitica(){
+  listarContaAnalitica() {
     this.analiticaService.listPlanoContas().subscribe(analitica => {
       this.analitica = analitica
     })
   }
 
-  listarFornecedor(){
+  listarFornecedor() {
     // Lista todos os fornecedores para selecionar no input de option
     this.matrizService.listFornecedor().subscribe(fornecedores => {
       this.fornecedores = fornecedores;
@@ -111,23 +111,28 @@ export class ListarContaFornecedorComponent implements OnInit {
   ///////////////////////////////////////////// CRUDUDU /////////////////////////////////////////////
   analitica: ContaAnalitica[] = [];
   empresas: Empresa[] = [];
-  fornecedores : Fornecedor[] = [];
+  fornecedores: Fornecedor[] = [];
   selectedOption: any;
+  matrizAtualizavel: MatrizAnalitica | undefined;
 
 
 
+  atualizarMatrizAnaliticaFornecedor(id: number) {
+    this.matrizAtualizavel = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
 
-  atualizarMatrizAnaliticaFornecedor(id : number){
-    const matriz  = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
-    console.log(matriz);
-
-    // if (matriz){
-    //   this.matrizService.updateMatriz(id).subscribe()
+    // let value: { cod_conta_analitica: number, cod_fornecedor: number, cod_empresa: number }
+    // if (this.matrizAtualizavel != null && this.matrizAtualizavel != undefined) {
+    //   value.cod_conta_analitica = this.matrizAtualizavel?.cod_conta_analitica;
+    //   value.cod_empresa = this.matrizAtualizavel?.cod_empresa;
+    //   value.cod_fornecedor = this.matrizAtualizavel?.cod_fornecedor;
     // }
+    // console.log(this.matrizAtualizavel);
+    if (this.matrizAtualizavel) {
+      this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe(res => {
+        console.log('atualizado', res);
+      }
 
-
+      )
     }
-
-
-
+  }
 }
