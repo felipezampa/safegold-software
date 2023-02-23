@@ -15,8 +15,9 @@
                     <h2 class="text-center">FILTRAR</h2>
                 </div>
                 <div class="row justify-content-between p-3">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Conta" autocomplete="off">
-                    <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Fornecedor" autocomplete="off">
+                  <button (click)="filtroTodos()" [ngClass]="{'active': filtroSelecionado === 'todos'}">Todos</button>
+                  <button (click)="filtroVinculados()" [ngClass]="{'active': filtroSelecionado === 'vinculados'}">Vinculados</button>
+                  <button (click)="filtroNaoVinculados()" [ngClass]="{'active': filtroSelecionado === 'naoVinculados'}">Não vinculados</button>
                 </div>
             </div>
         </div>
@@ -34,20 +35,18 @@
                         id="sg-tabela">
                         <thead class="table-dark">
                             <tr>
-                                <th class="col-1 text-center">ID</th>
                                 <th class="col">Conta Analítica</th>
-                                <th class="col">Conta Analítica select</th>
+                                <th class="col">Conta Analítica</th>
                                 <th class="col">Fornecedor</th>
                                 <th class="col">Empresa</th>
                                 <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let matriz of matrizAnalitica">
+                        <tbody *ngIf="filtroSelecionado === 'todos'">
+                            <tr *ngFor="let matriz of filtroVinculo | orderBy:'vinculo' ">
                                 <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
-                                <td>{{ matriz.desc_cod_conta_analitica }}</td>
                                 <td>
-                                  <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">>
+                                  <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">
                                     <option *ngFor="let conta of analitica" [value]="conta.cod_conta_analitica">{{ conta.desc_conta }}</option>
                                 </select>
                                 </td>
@@ -64,6 +63,48 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tbody *ngIf="filtroSelecionado === 'vinculados'">
+                          <tr *ngFor="let matriz of filtroVinculo | orderBy:'vinculo' ">
+                              <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
+                              <td>
+                                <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">
+                                  <option *ngFor="let conta of analitica" [value]="conta.cod_conta_analitica">{{ conta.desc_conta }}</option>
+                              </select>
+                              </td>
+                              <td>{{ matriz.desc_fornecedor }}</td>
+                              <td>{{ matriz.empresa }}</td>
+                              <td class="text-center">
+                                  <!-- <a type="submit" class="me-3"
+                                      (click)="abrirFormAtualizacao(matriz.cod_matriz_analitica_fornecedor)">
+                                      <i class="fa-solid fa-pencil"></i>
+                                  </a> -->
+                                  <a type="submit" (click)="deletarModal(matriz)">
+                                      <i class="fa-solid fa-trash-can"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                      </tbody>
+                      <tbody *ngIf="filtroSelecionado === 'naoVinculados'">
+                        <tr *ngFor="let matriz of filtroVinculo | orderBy:'vinculo' ">
+                            <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
+                            <td>
+                              <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">
+                                <option *ngFor="let conta of analitica" [value]="conta.cod_conta_analitica">{{ conta.desc_conta }}</option>
+                            </select>
+                            </td>
+                            <td>{{ matriz.desc_fornecedor }}</td>
+                            <td>{{ matriz.empresa }}</td>
+                            <td class="text-center">
+                                <!-- <a type="submit" class="me-3"
+                                    (click)="abrirFormAtualizacao(matriz.cod_matriz_analitica_fornecedor)">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a> -->
+                                <a type="submit" (click)="deletarModal(matriz)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
                     </table>
                     <div *ngIf="isLoading" class="text-center text-dark">
                         <button class="btn btn-warning mt-2" type="button" disabled>

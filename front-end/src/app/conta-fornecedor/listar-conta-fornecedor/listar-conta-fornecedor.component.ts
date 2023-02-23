@@ -13,6 +13,7 @@ import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
 import { ExcluirContaFornecedorComponent } from '../excluir-conta-fornecedor/excluir-conta-fornecedor.component';
+import { OrderByPipe } from '../order-by.pipe';
 
 @Component({
   selector: 'app-listar-conta-fornecedor',
@@ -24,10 +25,15 @@ export class ListarContaFornecedorComponent implements OnInit {
   matrizAnalitica: MatrizAnalitica[] = [];
   isLoading: boolean = false;
   editMode: boolean = false;
+  orderKey: string = '';
+  reverse: boolean = false;
   subscription: Subscription | undefined;
+  filtroVinculo: any [];
+  filtroSelecionado: string = 'todos';
   constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http: HttpClient) { }
 
   ngOnInit(): void {
+    console.log(this.filtroVinculo);
     this.listarEmpresas();
     this.listarContaFornecedor();
     this.listarFornecedor();
@@ -47,7 +53,8 @@ export class ListarContaFornecedorComponent implements OnInit {
       .subscribe(vinculo => {
         this.isLoading = false;
         this.matrizAnalitica = vinculo;
-      });
+      }
+      );
   }
   listarEmpresas() {
     // Lista todos as empresas para selecionar no input de option
@@ -112,7 +119,6 @@ export class ListarContaFornecedorComponent implements OnInit {
   analitica: ContaAnalitica[] = [];
   empresas: Empresa[] = [];
   fornecedores: Fornecedor[] = [];
-  selectedOption: any;
   matrizAtualizavel: MatrizAnalitica | undefined;
 
 
@@ -120,19 +126,34 @@ export class ListarContaFornecedorComponent implements OnInit {
   atualizarMatrizAnaliticaFornecedor(id: number) {
     this.matrizAtualizavel = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
 
-    // let value: { cod_conta_analitica: number, cod_fornecedor: number, cod_empresa: number }
-    // if (this.matrizAtualizavel != null && this.matrizAtualizavel != undefined) {
-    //   value.cod_conta_analitica = this.matrizAtualizavel?.cod_conta_analitica;
-    //   value.cod_empresa = this.matrizAtualizavel?.cod_empresa;
-    //   value.cod_fornecedor = this.matrizAtualizavel?.cod_fornecedor;
-    // }
-    // console.log(this.matrizAtualizavel);
     if (this.matrizAtualizavel) {
-      this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe(res => {
-        console.log('atualizado', res);
+      this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe({
       }
-
       )
+
     }
+
+  }
+
+  // FILTROS
+  filtroVinculados() {
+    this.filtroSelecionado = 'vinculados';
+    this.filtroVinculo = this.matrizAnalitica.filter(
+      matriz => matriz.vinculo == 1
+    );
+  }
+
+  filtroNaoVinculados() {
+    this.filtroSelecionado = 'naoVinculados';
+    this.filtroVinculo = this.matrizAnalitica.filter(
+      matriz => matriz.vinculo === 0
+    );
+  }
+
+  filtroTodos() {
+    this.filtroSelecionado = 'todos';
+    this.filtroVinculo = this.matrizAnalitica.filter(
+      matriz => matriz.vinculo === 1 || matriz.vinculo === 0
+    );
   }
 }

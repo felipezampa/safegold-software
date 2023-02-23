@@ -84,6 +84,8 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MatrizAnaliticaFornecedorSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_matriz_analitica_fornecedor', 'cod_empresa', 'vinculo', 'cod_conta_analitica', 'cod_fornecedor']
+    
+
 
 '''
     @eduardolcordeiro
