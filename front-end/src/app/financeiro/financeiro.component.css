@@ -1,0 +1,152 @@
+/* AS VARIAVEIS ESTÃO DEFINIDAS NO STYLES.CSS NO ATRIBUTO :root */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+p,
+th,
+td,
+h4,
+h1 {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+/***** CLASSES *****/
+.sg-sidebar {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    background-color: #414442;
+    color: white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    z-index: 2;
+}
+
+.sg-nav-item {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.sg-sidebar:hover {
+    width: 320px;
+    transition: all 0.5s ease;
+}
+
+.logo img {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.fa-solid {
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.sg-hover:hover .sg-anchor {
+    color: #eda900;
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.sg-logout {
+    position: absolute;
+    bottom: 0;
+}
+
+.sg-logout:hover a {
+    color: #e62121;
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.sg-content {
+    margin-left: 97px;
+}
+
+
+/***** TAGS HTML *****/
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    /* Remove bullets */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margins */
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    display: inline-flex;
+    margin-left: 6px;
+    width: 300px;
+    padding: 10px;
+}
+
+i {
+    margin-right: 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.sg-form {
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 90%;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 15px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    position: relative;
+
+}
+
+.sg-form option {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sg-contexto {
+    margin-left: 20px;
+}
+
+.sg-form option:hover {
+    background-color: red;
+}
+
+#projeto-select option:hover {
+    background-color: red;
+}
+
+.sg-context {
+    margin-left: 25px;
+}

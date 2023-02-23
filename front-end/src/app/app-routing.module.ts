@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
-import { ListarContaFornecedorComponent } from './conta-fornecedor';
 import { DashboardComponent } from './dashboard';
-import { ListarEmpresaComponent } from './empresa';
-import { ListarPlanoContasComponent } from './plano-contas';
+import { FinanceiroComponent } from './financeiro';
 
 const routes: Routes = [
   {
@@ -16,22 +14,13 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
-
-  {
-    path: 'empresas',
-    component: ListarEmpresaComponent,
-  },
-  {
-    path: 'plano-de-contas',
-    component: ListarPlanoContasComponent,
-  },
-  {
-    path: 'conta-fornecedor',
-    component: ListarContaFornecedorComponent,
-  },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'financeiro',
+    component: FinanceiroComponent,
   },
 ];
 

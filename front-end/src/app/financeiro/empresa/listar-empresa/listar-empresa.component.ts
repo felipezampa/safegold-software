@@ -1,8 +1,7 @@
 import { Router } from '@angular/router';
 import { ExcluirEmpresaComponent, ModalEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from '../index';
 import { Empresa } from 'src/app/shared';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import 'jspdf-autotable';

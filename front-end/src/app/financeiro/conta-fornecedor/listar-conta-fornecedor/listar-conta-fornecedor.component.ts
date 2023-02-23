@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { PlanoContasService } from './../../plano-contas/services/plano-contas.service';
 import { EmpresaService } from './../../empresa/services/empresa.service';
-import { Empresa } from './../../shared/models/empresa.model';
-import { Fornecedor } from './../../shared/models/fornecedor.model';
-import { ContaAnalitica } from './../../shared/models/plano-contas.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription, Observable } from 'rxjs';
-import { MatrizAnalitica } from 'src/app/shared';
+import { Subscription } from 'rxjs';
+import { MatrizAnalitica, ContaAnalitica, Fornecedor, Empresa } from 'src/app/shared';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
