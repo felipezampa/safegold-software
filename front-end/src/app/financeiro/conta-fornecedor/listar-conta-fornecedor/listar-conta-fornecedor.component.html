@@ -14,10 +14,10 @@
                 <div class="card-header">
                     <h2 class="text-center">FILTRAR</h2>
                 </div>
-                <div class="row justify-content-between p-3">
-                  <button (click)="filtroTodos()" [ngClass]="{'active': filtroSelecionado === 'todos'}">Todos</button>
-                  <button (click)="filtroVinculados()" [ngClass]="{'active': filtroSelecionado === 'vinculados'}">Vinculados</button>
-                  <button (click)="filtroNaoVinculados()" [ngClass]="{'active': filtroSelecionado === 'naoVinculados'}">Não vinculados</button>
+                <div class="row justify-content-between p-3 row">
+                  <button (click)="filtroTodos()" [ngClass]="{'active': filtroSelecionado === 'todos'}" class="sg-btn-filter col">Todos</button>
+                  <button (click)="filtroVinculados()" [ngClass]="{'active': filtroSelecionado === 'vinculados'}" class="sg-btn-filter col">Vinculados</button>
+                  <button (click)="filtroNaoVinculados()" [ngClass]="{'active': filtroSelecionado === 'naoVinculados'}" class="sg-btn-filter col">Não vinculados</button>
                 </div>
             </div>
         </div>

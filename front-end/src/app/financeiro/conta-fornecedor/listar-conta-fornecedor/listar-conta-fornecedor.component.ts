@@ -27,7 +27,8 @@ export class ListarContaFornecedorComponent implements OnInit {
   subscription: Subscription | undefined;
   filtroVinculo: any [];
   filtroSelecionado: string = 'todos';
-  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http: HttpClient) { }
+  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, 
+    private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -133,23 +134,29 @@ export class ListarContaFornecedorComponent implements OnInit {
 
   // FILTROS
   filtroVinculados() {
+    this.isLoading = true;
     this.filtroSelecionado = 'vinculados';
     this.filtroVinculo = this.matrizAnalitica.filter(
       matriz => matriz.vinculo == 1
     );
+    this.isLoading = false;
   }
 
   filtroNaoVinculados() {
+    this.isLoading = true;
     this.filtroSelecionado = 'naoVinculados';
     this.filtroVinculo = this.matrizAnalitica.filter(
       matriz => matriz.vinculo === 0
     );
+    this.isLoading = false;
   }
 
   filtroTodos() {
+    this.isLoading = true;
     this.filtroSelecionado = 'todos';
     this.filtroVinculo = this.matrizAnalitica.filter(
       matriz => matriz.vinculo === 1 || matriz.vinculo === 0
     );
+    this.isLoading = false;
   }
 }

@@ -48,22 +48,21 @@ h2 {
     border: 1px solid var(--dark-gray);
 }
 
-.sg-action-button {
-    background-color: #edaa00a6;
+.sg-btn-filter {
+    background-color: #edaa00db;
     color: var(--black);
     border: 1px solid var(--dark-gray);
     font-weight: 600;
-    margin: 10px;
+    margin-right: 50px;
+    margin-left: 50px;
     padding: 5px 25px;
     border-radius: 8px;
     transition: 0.5s;
 }
 
-.sg-action-button:hover {
+.sg-btn-filter:hover {
     background-color: var(--dark-gray);
     color: var(--white);
-    border: 1px solid var(--dark-gray);
-    ;
 }
 
 .sg-filter {
