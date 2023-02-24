@@ -1,37 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { ListarContaFornecedorComponent } from './conta-fornecedor';
+import { LoginComponent } from './auth';
 import { DashboardComponent } from './dashboard';
-import { ListarEmpresaComponent } from './empresa';
-import { ListarPlanoContasComponent } from './plano-contas';
+import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-
-  {
-    path: 'empresas',
-    component: ListarEmpresaComponent,
+    path: 'dashboard', component: DashboardComponent
   },
   {
-    path: 'plano-de-contas',
-    component: ListarPlanoContasComponent,
+    path: 'login', component: LoginComponent,
   },
   {
-    path: 'conta-fornecedor',
-    component: ListarContaFornecedorComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
+    path: 'financeiro',
+    component: FinanceiroComponent, children:[
+      { path: 'empresas', component: ListarEmpresaComponent },
+      { path: 'plano-de-contas', component: ListarPlanoContasComponent },
+      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
+    ]
   },
 ];
 

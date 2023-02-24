@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth';
-import { EmpresaService } from 'src/app/empresa';
 import { Empresa, SubGrupo } from 'src/app/shared';
+import { EmpresaService } from '../../empresa';
 import { PlanoContasService } from '../services/plano-contas.service';
 
 @Component({

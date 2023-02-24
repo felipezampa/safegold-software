@@ -1,4 +1,4 @@
-<!-- <div>
+<div>
     <div *ngIf="currentUser" class="sg-sidebar">
         <ul>
 
@@ -28,19 +28,19 @@
             </li>
             <hr class="my-1">
             <li class="sg-hover">
-                <a href="conta-fornecedor" class="sg-anchor">
+                <a href="financeiro/conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="sg-nav-item">Conta-Fornecedor</span>
                 </a>
             </li>
             <li class="sg-hover">
-                <a href="plano-de-contas" class="sg-anchor">
+                <a href="financeiro/plano-de-contas" class="sg-anchor">
                     <i class="fa-solid fa-list"></i>
                     <span class="sg-nav-item">Plano de Contas</span>
                 </a>
             </li>
             <li class="sg-hover">
-                <a href="empresas" class="sg-anchor">
+                <a href="financeiro/empresas" class="sg-anchor">
                     <i class="fa-solid fa-briefcase"></i>
                     <span class="sg-nav-item">Empresas</span>
                 </a>
@@ -58,13 +58,9 @@
                 </a>
             </li>
         </ul>
-    </div> -->
-    <div>
-        <router-outlet></router-outlet>
-        <a href="financeiro" class="btn btn-primary ms-5 mx-5">Financeiro</a>
-        <a href="financeiro" class="btn btn-danger ms-5 mx-5">Avaliativo</a>
     </div>
-    <!-- <footer class="sg-content text-center mt-2 pt-2 pb-2">
-        Em caso de problemas, entre em contato com o Administrador: failover@safegold.com.br
-    </footer>
-</div> -->
+    <div class="sg-content mb-5">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="sg-content text-center mt-2 pt-2 pb-2">Em caso de problemas, entre em contato com o Administrador: failover@safegold.com.br</footer>
+</div>

@@ -1,17 +1,17 @@
-import { DashboardService } from './dashboard/services/dashboard.service';
 import { AuthService } from 'src/app/auth';
 import { Component, OnInit  } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Empresa, Projeto  } from './shared';
+import { Empresa, Projeto  } from '../shared';
+import { DashboardService } from '../dashboard';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-financeiro',
+  templateUrl: './financeiro.component.html',
+  styleUrls: ['./financeiro.component.css']
 })
-export class AppComponent implements OnInit {
+export class FinanceiroComponent implements OnInit {
 
   currentUser: boolean;
   empresas: Empresa[];
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.setCurrentUser();
     this.firstName = this.authService.getUsername();
     if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/empresas']);
     } else {
       // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
       this.dashboardService.getProjetos(this.authService.getCurrentUser())

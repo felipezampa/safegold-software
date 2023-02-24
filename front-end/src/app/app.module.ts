@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AuthModule, ContaFornecedorModule, DashboardModule, EmpresaModule, PlanoContasModule, ProjetoModule } from './index';
+import { AuthModule, DashboardModule, FinanceiroModule } from './index';
 import { CookieService} from 'ngx-cookie-service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +16,9 @@ import { CookieService} from 'ngx-cookie-service';
     AppRoutingModule,
     FormsModule,
     Ng2SearchPipeModule,
-    EmpresaModule,
-    ProjetoModule,
-    PlanoContasModule,
     AuthModule,
     DashboardModule,
-    ContaFornecedorModule
+    FinanceiroModule
   ],
   providers: [AuthModule, CookieService],
   bootstrap: [AppComponent]

@@ -1,9 +1,8 @@
-import { Fornecedor } from './../../shared/models/fornecedor.model';
 import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry, Subject, tap } from 'rxjs';
-import { MatrizAnalitica, ContaAnalitica } from 'src/app/shared';
+import { MatrizAnalitica, ContaAnalitica, Fornecedor } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'

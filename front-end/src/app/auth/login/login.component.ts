@@ -13,7 +13,7 @@ import { AppComponent } from 'src/app/app.component';
 export class LoginComponent implements OnInit {
 
   myform: FormGroup;
-  constructor(private authService: AuthService, private app: AppComponent, private router:Router, private appComponent: AppComponent) { }
+  constructor(private authService: AuthService, private app: AppComponent, private router: Router, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.myform = new FormGroup({
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
     if (localStorage.getItem('currentUser')) {
       this.router.navigate(['/dashboard']);
+    }
   }
-}
 
   get f() {
     return this.myform.controls;
@@ -33,9 +33,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.f.email.value, this.f.password.value).pipe(first()).subscribe(
       data => {
-        localStorage.setItem("currentUser", JSON.stringify(data));
-        this.app.setCurrentUser();
-        this.appComponent.getProjetos(); // Starta o script de contexto
+        if (data) {
+          localStorage.setItem("currentUser", JSON.stringify(data));
+          this.app.setCurrentUser();
+          this.appComponent.getProjetos(); // Starta o script de contexto
+        } else{
+          console.log("conta nao encontrada");
+        }
       }
     )
   }
