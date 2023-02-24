@@ -25,16 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.setCurrentUser();
     this.firstName = this.authService.getUsername();
-    if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/empresas']);
-    } else {
-      // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
-      this.dashboardService.getProjetos(this.authService.getCurrentUser())
-        .subscribe(data => {
-          this.projetos = data;
-          this.getUniqueProjetos();
-        });
-    }
+
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;

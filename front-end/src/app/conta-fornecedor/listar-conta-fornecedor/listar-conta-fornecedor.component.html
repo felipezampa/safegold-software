@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="filtroSelecionado === 'todos'">
-                            <tr *ngFor="let matriz of filtroVinculo | orderBy:'vinculo' ">
+                            <tr *ngFor="let matriz of matrizAnalitica | orderBy:'vinculo' ">
                                 <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
                                 <td>
                                   <select class="sg-select" name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica" (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)">

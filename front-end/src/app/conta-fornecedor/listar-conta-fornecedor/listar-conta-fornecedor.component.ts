@@ -33,7 +33,6 @@ export class ListarContaFornecedorComponent implements OnInit {
   constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, private empresaService: EmpresaService, private analiticaService: PlanoContasService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    console.log(this.filtroVinculo);
     this.listarEmpresas();
     this.listarContaFornecedor();
     this.listarFornecedor();

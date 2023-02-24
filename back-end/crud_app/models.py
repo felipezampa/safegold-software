@@ -273,7 +273,7 @@ class Fornecedor(models.Model):
 class MatrizAnaliticaFornecedor(models.Model):
     cod_matriz_analitica_fornecedor = models.AutoField(primary_key=True)
     cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
-    vinculo = models.IntegerField(blank=True, null=True)
+    vinculo = models.IntegerField(blank=True, null=True, default= 0 )
     cod_conta_analitica = models.ForeignKey(FinContaAnalitica, models.DO_NOTHING, db_column='cod_conta_analitica', blank=True, null=True)
     cod_fornecedor = models.ForeignKey(Fornecedor, models.DO_NOTHING, db_column='cod_fornecedor', blank=True, null=True)
 
