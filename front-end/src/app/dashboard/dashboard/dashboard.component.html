@@ -1,10 +1,49 @@
 <div class="container">
+  <div class="card-header">
+    <img src="../../../assets/img/Safegold-Logo.svg" alt="" class="header-image">
+
+  </div>
+  
+  <hr>
   <h3>Bem vindo, {{firstName}} </h3>
-  <!-- <h3>Projeto</h3>
-  <select class="form-control" [(ngModel)]="selectedProjetos" (ngModelChange)="onProjectChange()">
-    <option *ngFor="let projeto of projetosUnicos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
-  </select>
-  <h3>Empresas</h3>
-  <select class="form-control" [(ngModel)]="selectedEmpresa" (ngModelChange)="onEmpresaChanged($event)">
-    <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}</option>
-  </select> -->
+  <h4 class="text-center mb-5">Escolha qual Aplicativo deseja acessar</h4>
+  <div class="row d-flex justify-content-center">
+    <a href="financeiro" class="card financeiro col-1 mx-4">
+      <div class="card-header">
+        <h1 class="card-span text-center">Financeiro</h1>
+      </div>
+      <div class="sg-card-body">
+        <ul>
+          <li  class="sg-anchor">
+            <span class="sg-nav-item">Plano de Contas</span>
+          </li>
+          <li  class="sg-anchor">
+            <span class="sg-nav-item">Vínculo de Contas e Fornecedores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Empresas</span>
+          </li>
+        </ul>
+      </div>
+    </a>
+    <a href="financeiro" class="card avaliacao col-1 mx-4">
+      <div class="card-header">
+        <h1 class="card-span text-center">Avaliação de Desempenho</h1>
+      </div>
+      <div class="sg-card-body">
+        <ul>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Autoavaliação de Gestores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Avaliação de Coordenadores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Competências</span>
+          </li>
+        </ul>
+      </div>
+    </a>
+  </div>
+
+</div>
