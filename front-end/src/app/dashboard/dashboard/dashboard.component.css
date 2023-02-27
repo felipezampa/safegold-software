@@ -9,15 +9,15 @@ body {
 }
 
 .financeiro {
-    --bg-color: #eda900;
-    --bg-color-light: #fffcf6;
-    --text-color-hover: #ffffff;
+    --bg-color: #edaa00d0;
+    --bg-color-light: #ececec;
+    --text-color-hover: #414442;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
 .avaliacao {
-    --bg-color: #837fff;
-    --bg-color-light: #fcfcff;
+    --bg-color: #605bff;
+    --bg-color-light: #ececec;
     --text-color-hover: #ffffff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
@@ -52,7 +52,6 @@ body {
     letter-spacing: 2px;
     font-weight: 700;
     color: #2a2a2a;
-    margin-right: 10px;
     transition: color 0.3s ease-out;
     top: 0;
 }
@@ -62,10 +61,16 @@ body {
     display: flex;
     margin: auto;
     padding-top: 10px;
-    background-color: #2a2a2a;
 }
 
-.card:hover p {
+.card:hover h1 {
+    color: var(--text-color-hover);
+}
+
+.card:hover span {
+    color: var(--text-color-hover);
+}
+.card:hover .sg-anchor {
     color: var(--text-color-hover);
 }
 
@@ -80,7 +85,6 @@ body {
 .sg-anchor{
     color: #898989;
 }
-
-.sg-header{
-    background-color: #2a2a2a;
+.sg-card-header{
+    padding-bottom: 50px;
 }
