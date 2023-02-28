@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth';
+import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
 import { DashboardComponent } from './dashboard';
 import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
 
@@ -21,6 +22,15 @@ const routes: Routes = [
       { path: 'plano-de-contas', component: ListarPlanoContasComponent },
       { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
     ]
+  },
+  {
+    path: 'avaliacao',
+    component: AvaliacaoComponent
+    // , children:[
+    //   { path: 'empresas', component: ListarEmpresaComponent },
+    //   { path: 'plano-de-contas', component: ListarPlanoContasComponent },
+    //   { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
+    // ]
   },
 ];
 
