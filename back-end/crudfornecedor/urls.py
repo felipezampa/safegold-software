@@ -38,6 +38,12 @@ router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, 
 
 # AVALIAÇÃO DE DESEMPENHO, MODULO RH
 router.register('auth_user_permission', AuthUserPermissionsViewSet, basename='auth_user_permission')
+router.register('rh_cargos', RHCargoViewSet, basename='rh_cargos')
+router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, basename='rh_classificacao_comportamental')
+router.register('rh_cargo_metas', RhFactCargoMetasViewSet, basename='rh_cargo_metas')
+router.register('rh_indicador_competencia', RhFactComportamentalViewSet, basename='rh_factcomportamental')
+router.register('rh_mapeamento_cargo_competencias',RhMapCargoCompViewSet , basename='rh_mapeamento_cargo_competencias')
+router.register('rh_user_avaliacao',RhUserAvaliacaoViewSet , basename='rh_user_avaliacao')
 
 from crud_app import views
 

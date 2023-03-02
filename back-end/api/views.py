@@ -162,7 +162,42 @@ class UserView(APIView):
 
 class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     queryset = models.AuthUserPermissions.objects.all()
-    serializer_class = serializers.AuthUserPermissionsSerializazers
+    serializer_class = serializers.AuthUserPermissionsSerializers
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id_user', 'financeiro','avaliacao', 'is_head', 'idrh_cargo']
+    filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head', 'idrh_cargo']
     
+class RHCargoViewSet(viewsets.ModelViewSet):
+    queryset = models.RhCargo.objects.all()
+    serializer_class = serializers.RHCargoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'nome_cargo']
+
+class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
+    queryset = models.RhClassificacaoComp.objects.all()
+    serializer_class = serializers.RhClassificacaoCompSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'classificacao']
+
+class RhFactCargoMetasViewSet(viewsets.ModelViewSet):
+    queryset = models.RhFactCargoMetas.objects.all()
+    serializer_class = serializers.RhFactCargoMetasSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','valor_ncf','qtde_indicadores','peso_indicadores']
+
+class RhFactComportamentalViewSet(viewsets.ModelViewSet):
+    queryset = models.RhFactComportamental.objects.all()
+    serializer_class = serializers.RhFactComportamentalSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'indicador', 'competencia']
+
+class RhMapCargoCompViewSet(viewsets.ModelViewSet):
+    queryset = models.RhMapCargoComp.objects.all()
+    serializer_class = serializers.RhMapCargoCompSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','instrucoes']
+
+class RhUserAvaliacaoViewSet(viewsets.ModelViewSet):
+    queryset = models.RhUserAvaliacao.objects.all()
+    serializer_class = serializers.RhUserAvaliacaoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = []

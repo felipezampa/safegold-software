@@ -164,12 +164,52 @@ class FornecedorSerializer(serializers.ModelSerializer):
 # AVALIAÇÃO DE DESEMPENHO, MODULO RH
 
 
-class AuthUserPermissionsSerializazers(serializers.ModelSerializer):
+class AuthUserPermissionsSerializers(serializers.ModelSerializer):
     username = serializers.StringRelatedField(source='id_user.username')
     nome_cargo = serializers.StringRelatedField(source='idrh_cargo.nome_cargo')
     class Meta:
         model = AuthUserPermissions
-        fields = 'id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo','nome_cargo'
+        fields = 'id','id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo','nome_cargo'
 
 
+class RHCargoSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = RhCargo
+        fields = '__all__'
+        
+class RhClassificacaoCompSerializers(serializers.ModelSerializer):
+    class Meta:
+        model =  RhClassificacaoComp
+        fields = '__all__'
 
+class RhFactCargoMetasSerializers(serializers.ModelSerializer):
+    nome_cargo = serializers.StringRelatedField(source='idrh_cargo.nome_cargo')
+    indicador = serializers.StringRelatedField(source = 'idrh_fact_comportamental.indicador')
+    competencia = serializers.StringRelatedField(source = 'idrh_fact_comportamental.competencia')
+    classificacao = serializers.StringRelatedField(source = 'idrh_classificacao_comp.classificacao')
+    class Meta:
+        model =  RhFactCargoMetas
+        fields = 'id', 'idrh_cargo','nome_cargo','idrh_fact_comportamental', 'indicador','competencia','idrh_classificacao_comp','classificacao','valor_ncf','qtde_indicadores','peso_indicadores' 
+
+class RhFactComportamentalSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = RhFactComportamental
+        fields = '__all__'
+
+
+class RhMapCargoCompSerializers(serializers.ModelSerializer):
+    nome_cargo = serializers.StringRelatedField(source='idrh_cargo.nome_cargo')
+    indicador = serializers.StringRelatedField(source = 'idrh_fact_comportamental.indicador')
+    competencia = serializers.StringRelatedField(source = 'idrh_fact_comportamental.competencia')
+    classificacao = serializers.StringRelatedField(source = 'idrh_classificacao_comp.classificacao')
+
+    class Meta:
+        model = RhMapCargoComp
+        fields = 'id', 'idrh_cargo','nome_cargo','idrh_fact_comportamental', 'indicador','competencia','idrh_classificacao_comp','classificacao','instrucoes'
+
+
+class RhUserAvaliacaoSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = RhUserAvaliacao
+        fields = ''
