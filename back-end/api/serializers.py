@@ -120,6 +120,7 @@ class MatrizAnaliticaFornecedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = MatrizAnaliticaFornecedor
         fields = ('cod_matriz_analitica_fornecedor','cod_empresa','empresa','cod_conta_analitica','desc_cod_conta_analitica','cod_fornecedor','desc_fornecedor','vinculo')
+
     def update(self, instance, validated_data):
         instance.vinculo = 1
         if validated_data.get('cod_conta_analitica', None) is not None:
@@ -159,6 +160,15 @@ class FornecedorSerializer(serializers.ModelSerializer):
 
 '''
 
+
+# AVALIAÇÃO DE DESEMPENHO, MODULO RH
+
+
+class AuthUserPermissionsSerializazers(serializers.ModelSerializer):
+    username = serializers.StringRelatedField(source='id_user.username')
+    class Meta:
+        model = AuthUserPermissions
+        fields = 'id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo'
 
 
 

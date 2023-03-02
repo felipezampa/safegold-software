@@ -18,7 +18,23 @@ admin.site.register(ProjetoUser)
 admin.site.register(FinGrupoContas)
 admin.site.register(FinContaAnalitica)
 admin.site.register(FinSubgrupoContas)
+
+
+# Matriz Fornecedor
 admin.site.register(MatrizAnaliticaFornecedor)
 
 admin.site.register(Fornecedor)
+
+
+
+# RH AVALIAÇÃO DE DESEMPENHO
+
+admin.site.register(AuthUserPermissions)
+admin.site.register(RhCargo)
+admin.site.register(RhClassificacaoComp)
+admin.site.register(RhFactCargoMetas)
+admin.site.register(RhFactComportamental)
+admin.site.register(RhMapCargoComp)
+admin.site.register(RhUserAvaliacao)
+
 

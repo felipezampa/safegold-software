@@ -15,38 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import (
-    EmpresaserializerViewSet,
-    ProjetosViewSet,
-    UserViewSet,
-    ProjetoUserViewSet,
-    FinGrupoContasViewSet,
-    FinSubgrupoContasViewSet,
-    FinContaAnaliticaViewSet,
-    MatrizAnaliticaFornecedorViewSet,
-    FornecedorViewset,
-    LoginView,UserView
-)
+from api.views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
 from rest_framework import routers
 
 router = routers.DefaultRouter()
+# EMPRESA E CONTEXTO
 router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
-# router.register('matrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
 router.register('projetos', ProjetosViewSet, basename= 'Projetos')
-# router.register('dimcontas', views.DimcontasViewSet, basename= 'Dimcontas')
 router.register('user', UserViewSet, basename= 'User')
 router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
+
+# PLANO DE CONTAS
 router.register('fin_grupo_contas',FinGrupoContasViewSet, basename='fin_grupo_contas')
 router.register('fin_subgrupo_contas',FinSubgrupoContasViewSet, basename='fin_subgrupo_contas')
 router.register('fin_conta_analitica',FinContaAnaliticaViewSet, basename='fin_conta_analitica')
-router.register('fornecedor',FornecedorViewset, basename='fornecedor')
 
+# FORNECEDOR
+router.register('fornecedor',FornecedorViewset, basename='fornecedor')
 router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, basename='matriz_analitica_fornecedor')
 
-
-
+# AVALIAÇÃO DE DESEMPENHO, MODULO RH
+router.register('auth_user_permission', AuthUserPermissionsViewSet, basename='auth_user_permission')
 
 from crud_app import views
 

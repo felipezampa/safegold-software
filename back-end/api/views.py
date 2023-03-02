@@ -153,3 +153,16 @@ class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
         return Response(token)
+    
+
+
+
+# AVALIAÇÃO DE DESEMPENHO, MODULO RH
+
+
+class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
+    queryset = models.AuthUserPermissions.objects.all()
+    serializer_class = serializers.AuthUserPermissionsSerializazers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_user', 'financeiro','avaliacao', 'is_head', 'idrh_cargo']
+    
