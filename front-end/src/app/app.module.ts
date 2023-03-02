@@ -6,10 +6,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthModule, DashboardModule, FinanceiroModule } from './index';
 import { CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
+import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AvaliacaoComponent
   ],
   imports: [
     BrowserModule,
