@@ -27,7 +27,7 @@ export class ListarContaFornecedorComponent implements OnInit {
   subscription: Subscription | undefined;
   filtroVinculo: any [];
   filtroSelecionado: string = 'todos';
-  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router, 
+  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router,
     private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
   ngOnInit(): void {
@@ -38,9 +38,9 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.subscription = this.matrizService.refreshPage$.subscribe(() => {
       this.listarContaFornecedor();
     })
-    if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/login']);
-    }
+    // if (!localStorage.getItem('currentUser')) {
+    //   this.router.navigate(['/login']);
+    // }
 
   }
 

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.setCurrentUser();
     this.firstName = this.authService.getUsername();
     if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
     } else {
       // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
       this.dashboardService.getProjetos(this.authService.getCurrentUser())
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
     this.onProjectChange();
+
   }
 
 

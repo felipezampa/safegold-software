@@ -35,9 +35,9 @@ export class ListarEmpresaComponent implements OnInit {
       this.listarEmpresa();
     })
 
-    if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/login']);
-    }
+    // if (!localStorage.getItem('currentUser')) {
+    //   this.router.navigate(['/login']);
+    // }
   }
 
   listarEmpresa() {

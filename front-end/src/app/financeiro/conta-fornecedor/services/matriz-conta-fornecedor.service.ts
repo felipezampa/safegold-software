@@ -54,6 +54,11 @@ export class MatrizContaFornecedorService {
   updateMatriz(id:number, value: {cod_conta_analitica : number,cod_fornecedor: number, cod_empresa:number }): Observable<any> {
 
     return this.http.put(this.baseURL + id + '/', value)
+    .pipe(
+      tap(() => {
+        this._refreshPage$.next();
+      })
+    );
   }
 
 }

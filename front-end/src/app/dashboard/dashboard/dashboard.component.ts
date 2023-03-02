@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,18 +19,22 @@ export class DashboardComponent implements OnInit {
   projetosUnicos: any[];
   firstName: string;
 
-  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private cookieService: CookieService) { }
+
 
   ngOnInit() {
     this.firstName = this.authService.getUsername();
     this.getProjetos();
-    if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/empresas']);
-    }
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
     this.onProjectChange()
+    console.log(this.projetos);
+
+
+
+
+
   }
 
   getProjetos() {

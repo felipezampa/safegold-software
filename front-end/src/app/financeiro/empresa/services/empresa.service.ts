@@ -19,11 +19,6 @@ export class EmpresaService {
   }
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getCurrentUser() {
-    const currentUser = localStorage.getItem('currentUser');
-
-    return currentUser ? JSON.parse(currentUser).user_id : null;
-  }
 
   createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
@@ -49,8 +44,7 @@ export class EmpresaService {
 
   listEmpresas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API
-    this.getCurrentUser()
-    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto__id_user='+ this.getCurrentUser(), { headers: this.httpHeaders });
+    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto__id_user='+ this.authService.getCurrentUser(), { headers: this.httpHeaders });
   }
 
   buscarEmpresaPorId(id: number): Observable<any>{

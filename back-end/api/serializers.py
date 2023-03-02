@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from crud_app.models import  *
+from django.contrib.auth import authenticate
+
 '''
 
     @eduardolcordeiro
@@ -71,6 +73,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class ProjetosSerializer(serializers.ModelSerializer):
     id_user = UserSerializer(read_only= True, many=True)
 
@@ -140,11 +143,6 @@ class FornecedorSerializer(serializers.ModelSerializer):
     Autenticação JWT (JSON Web Token)
         - JWT é usado para criar tokens de acesso a um app
         - O servidor gera um token que certifica a identidade do usuário e o envia ao cliente
-
-        Instale o pacote do django-rest-framework-simplejwt:
-
-          '  pip instalar djangorestframework-simplejwt  '
-
         
         adicione ao settings.py 
         
@@ -160,5 +158,7 @@ class FornecedorSerializer(serializers.ModelSerializer):
 
 
 '''
+
+
 
 

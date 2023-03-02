@@ -2,7 +2,9 @@ from django.shortcuts import render
 
 # Create your views here.
 
-
+from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth.models import User
+from api.serializers import UserSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -36,13 +38,13 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
-            'username': user.username,
-            'first_name':user.first_name,
-            'last_name': user.last_name,
             'user_id': user.pk,
-            'email': user.email,
-            'status': '1'
         })
     
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def current_user(request):
+#     serializer = UserSerializer(request.user)
+#     return Response(serializer.data)
 
 #login por email
