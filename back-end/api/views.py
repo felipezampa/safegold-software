@@ -1,10 +1,15 @@
 from crud_app import models
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from api import serializers
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.response import Response
+from rest_framework_jwt.settings import api_settings
+from django.contrib.auth import authenticate
+from rest_framework.views import APIView
+from rest_framework.exceptions import AuthenticationFailed
+import jwt
 '''
     @eduardolcordeiro
 
@@ -114,11 +119,37 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
 
 '''
 
-# from rest_framework_simplejwt.views import TokenObtainPairView
-# from rest_framework.permissions import AllowAny
-# from .serializers import MyTokenObtainPairSerializer
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data['username']
+        password = request.data['password']
 
-# class MyObtainTokenPairView(TokenObtainPairView):
-#     permission_classes = (AllowAny,)
-#     serializer_class = MyTokenObtainPairSerializer
+        user = models.User.objects.filter(username = username).first()
 
+        if user is None:
+            raise AuthenticationFailed('Usuario nao encontrado')
+
+        if not user.check_password(password):
+            raise AuthenticationFailed('senha incorreta')
+
+        payload = {
+            'id_user': user.id,
+            'username': user.first_name,
+            'email': user.email
+        }
+
+        token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
+
+        response = Response()
+
+        response.set_cookie(key='jwt', value=token, httponly=True)
+        response.data = {
+            'jwt': token
+        }
+
+        return response	
+
+class UserView(APIView):
+    def get(self, request):
+        token = request.COOKIES.get('jwt')
+        return Response(token)

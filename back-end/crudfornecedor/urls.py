@@ -24,16 +24,13 @@ from api.views import (
     FinSubgrupoContasViewSet,
     FinContaAnaliticaViewSet,
     MatrizAnaliticaFornecedorViewSet,
-    FornecedorViewset
+    FornecedorViewset,
+    LoginView,UserView
 )
+from rest_framework.authtoken.views import obtain_auth_token
 
 from rest_framework import routers
 
-# from rest_framework_simplejwt.views import(
-#     TokenObtainPairView,
-#     TokenRefreshView,
-
-# )
 router = routers.DefaultRouter()
 router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
 # router.register('matrizContaFornecedor', views.MatrizContaFornecedorViewSet, basename= 'MatrizContaFornecedor')
@@ -59,13 +56,15 @@ urlpatterns = [
     path('admin/',admin.site.urls,name='admin'),
     path('app/',include('crud_app.urls',namespace='crud_app')),
     path('home/', include('usuarios.urls')),
-    path('api/',include(router.urls)),
-    # path('token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+
+
 
 
 
     #rest
     path('api/auth/', include('rest_framework.urls')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('api/',include(router.urls)),
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/userlogged/', UserView.as_view(), name='userview'),
 ]

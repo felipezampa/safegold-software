@@ -3,20 +3,17 @@
     <div class="sg-background">
       <img src="../../../assets/img/Safegold.svg" alt="">
     </div>
-    <form [formGroup]="myform" class="m-5" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()"class="m-5" #loginForm="ngForm">
       <h3 class="text-center sg-header">Faça o Login para poder usar o sistema</h3>
       <div>
         <label for="email" class="text-white">Usuário</label>
-        <input type="text" class="form-control" formControlName="email" placeholder="Digite seu email">
+        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" required>
       </div>
       <div>
         <label for="password" class="text-white">Senha</label>
-        <input type="password" class="form-control" formControlName="password" placeholder="Digite sua senha">
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required>
       </div>
-      <hr class="text-white">
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-warning mt-2">Entrar</button>
-      </div>
+      <button type="submit" class="btn btn-warning mt-2">Login</button>
     </form>
   </div>
 </div>

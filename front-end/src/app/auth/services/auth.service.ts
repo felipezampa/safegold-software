@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { DashboardService } from './../../dashboard/services/dashboard.service';
 import { Observable } from 'rxjs';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
+import { tap } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -18,23 +19,24 @@ const httpOptions = {
 })
 export class AuthService {
 
-  api_url: string = 'http://localhost:8000/';
+  private apiUrl = 'http://localhost:8000/api/login/';
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
+  private jwtHelper = new JwtHelperService();
 
-  login(username:string, password:string){
-    return this.http.post<any>(this.api_url + `accounts/api/auth/`,
-    {username, password}, httpOptions).pipe(
-      map(user => {
-        if (user && user.token){
-          localStorage.setItem("currentUser", JSON.stringify(user));
-          this.dashboardService.getProjetos(user.user_id).subscribe(() => {
-            this.router.navigate(['/dashboard']);
-          });
-        }
-        return user;
-      })
-    );
+
+    logout() {
+      this.cookieService.delete('access_token');
+      this.cookieService.delete('current_user');
+      this.router.navigate(['/login']);
+    }
+
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { username, password })
+
   }
+
+
 
   getCurrentCod_empresa(): number {
     const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
@@ -47,16 +49,42 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).user_id : null;
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const userID = decodeToken.id_user;
+
+    return userID
   }
   getUsername() {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser).first_name : null;
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const username = decodeToken.username;
+
+    return username
   }
   getCurrentProjeto(){
     const CurrentProjeto = localStorage.getItem('selectedEmpresa');
     return CurrentProjeto ? JSON.parse(CurrentProjeto).cod_projeto: null;
   }
 
+
 }
+
+
+
+  // login(username:string, password:string){
+  //   return this.http.post<any>(this.api_url + `accounts/api/auth/`,
+  //   {username, password}, httpOptions).pipe(
+  //     map(user => {
+  //       if (user && user.token){
+  //         localStorage.setItem("currentUser", JSON.stringify(user));
+  //         this.dashboardService.getProjetos(user.user_id).subscribe(() => {
+  //           this.router.navigate(['/dashboard']);
+  //         });
+  //       }
+  //       return user;
+  //     })
+  //   );
+  // }

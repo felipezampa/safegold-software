@@ -25,16 +25,14 @@ export class FinanceiroComponent implements OnInit {
   ngOnInit() {
     this.setCurrentUser();
     this.firstName = this.authService.getUsername();
-    if (!localStorage.getItem('currentUser')) {
-      this.router.navigate(['/empresas']);
-    } else {
+
       // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
-      this.dashboardService.getProjetos(this.authService.getCurrentUser())
-        .subscribe(data => {
-          this.projetos = data;
-          this.getUniqueProjetos();
-        });
-    }
+    this.dashboardService.getProjetos(this.authService.getCurrentUser())
+      .subscribe(data => {
+        this.projetos = data;
+        this.getUniqueProjetos();
+      });
+
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
@@ -47,6 +45,8 @@ export class FinanceiroComponent implements OnInit {
       .subscribe(data => {
         this.projetos = data;
         this.getUniqueProjetos();
+        console.log(this.projetos);
+
       });
   }
   getUniqueProjetos() {
@@ -84,7 +84,7 @@ export class FinanceiroComponent implements OnInit {
   }
 
   setCurrentUser() {
-    if (localStorage.getItem('currentUser') != null) {
+    if (this.authService.getCurrentUser() != null) {
       this.currentUser = true;
     } else {
       this.currentUser = false;
