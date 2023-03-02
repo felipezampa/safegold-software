@@ -166,9 +166,10 @@ class FornecedorSerializer(serializers.ModelSerializer):
 
 class AuthUserPermissionsSerializazers(serializers.ModelSerializer):
     username = serializers.StringRelatedField(source='id_user.username')
+    nome_cargo = serializers.StringRelatedField(source='idrh_cargo.nome_cargo')
     class Meta:
         model = AuthUserPermissions
-        fields = 'id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo'
+        fields = 'id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo','nome_cargo'
 
 
 
