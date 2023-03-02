@@ -6,12 +6,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthModule, DashboardModule, FinanceiroModule } from './index';
 import { CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
+import { AvaliacaoModule } from './avaliacao/avaliacao.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AvaliacaoComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +19,8 @@ import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
     Ng2SearchPipeModule,
     AuthModule,
     DashboardModule,
-    FinanceiroModule
+    FinanceiroModule,
+    AvaliacaoModule
   ],
   providers: [AuthModule, CookieService],
   bootstrap: [AppComponent]
