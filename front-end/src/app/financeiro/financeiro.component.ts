@@ -71,15 +71,6 @@ export class FinanceiroComponent implements OnInit {
 
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('selectedEmpresa');
-    this.cookieService.delete('previousUrl');
-    this.router.navigate(['/login']);
-    this.setCurrentUser();
-    this.selectedProjetos = null ?? 0; // Limpa o contexto selecionado
-    this.selectedEmpresa = null ?? 0;
-  }
 
   setCurrentUser() {
     if (this.authService.getCurrentUser() != null) {
@@ -89,5 +80,14 @@ export class FinanceiroComponent implements OnInit {
       this.selectedProjetos = null ?? 0; // Limpa o contexto selecionado
       this.selectedEmpresa = null ?? 0;
     }
+  }
+
+
+
+  logout() {
+    this.cookieService.delete('jwt','/','localhost',false,'Lax');
+    this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
+    localStorage.removeItem('selectedEmpresa')
+    this.router.navigate(['/login']);
   }
 }

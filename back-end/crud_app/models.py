@@ -298,7 +298,7 @@ class AuthUserPermissions(models.Model):
     financeiro = models.IntegerField(blank=True, null=True)
     avaliacao = models.IntegerField(blank=True, null=True)
     is_head = models.IntegerField(blank=True, null=True)
-    idrh_cargo = models.ForeignKey('RhCargo', models.DO_NOTHING, db_column='idrh_cargo', blank=True, null=True)
+    idrh_cargo = models.ForeignKey('RhCargo', models.DO_NOTHING, db_column='idrh_cargo',default=4, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -310,7 +310,7 @@ class AuthUserPermissions(models.Model):
     
 class RhCargo(models.Model):
     id = models.AutoField(primary_key=True)
-    nome_cargo = models.CharField(max_length=255, blank=True, null=True)
+    nome_cargo = models.CharField(max_length=255, default='Sem Cargo Vinculado')
 
     class Meta:
         managed = False
