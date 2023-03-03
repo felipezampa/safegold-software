@@ -126,39 +126,28 @@ class LoginView(APIView):
 
         user = models.User.objects.filter(username = username).first()
 
-        auth = models.AuthUserPermissions.objects.filter(id_user = user.id)
-
-        for i in auth:
-            cargo = i.idrh_cargo
-            financeiro = i.financeiro
-            avaliacao = i.avaliacao
-            head_de_area = i.is_head
-
-        """
-        Aqui faço uma validação basica onde se o usuario não tiver nenhum sistema de permissionamento vinculado a conta dele
-        automaticamente ele atribue um 0
-        """
         try:
-            financeiro
-        except UnboundLocalError:
-            financeiro = 0
-        try:
-            avaliacao
-        except UnboundLocalError:
-            avaliacao = 0
-        try:
-            head_de_area
-        except UnboundLocalError:
-            head_de_area = 0
+            auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
+            auth_cargo = models.RhCargo.objects.get(nome_cargo = auth.idrh_cargo)
+     
+            cargo_nome = auth_cargo.nome_cargo
+            financeiro = auth.financeiro
+            avaliacao = auth.avaliacao
+            head_de_area = auth.is_head
+            cargo_nome = getattr(auth, 'idrh_cargo', None)
+            if not cargo_nome:
+                sem_cargo = models.RhCargo.objects.get(id=4)
+                auth.idrh_cargo = sem_cargo
+                auth.save()
+                cargo_nome = sem_cargo.nome_cargo
 
-        # if hasattr(auth, 'cargo')
+        except models.AuthUserPermissions.DoesNotExist:
+            # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
+            financeiro = avaliacao = head_de_area = 0
+            cargo_nome = 'Sem cargo vinculado'
+        
 
-        # cargo = models.RhCargo.objects.filter(nome_cargo=cargo).first()
-
-        # if cargo:
-        #     cargo_nome = cargo_nome
-        # else:
-        #     cargo_nome = "Sem Cargo Vinculado"
+            
 
         if user is None:
             raise AuthenticationFailed('Usuario nao encontrado')
@@ -170,10 +159,11 @@ class LoginView(APIView):
             'id_user': user.id,
             'username': user.first_name,
             'email': user.email,
-            # 'cargo': cargo_nome,
+            #'cargo': cargo_nome,
             'acesso_financeiro': financeiro,
             'acesso_avaliacao': avaliacao,
-            'head_de_area': head_de_area
+            'head_de_area': head_de_area,
+            'is_superuser': user.is_superuser
         }
 
         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')

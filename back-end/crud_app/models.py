@@ -316,6 +316,12 @@ class RhCargo(models.Model):
         managed = False
         db_table = 'rh_cargo'
         verbose_name_plural = 'Cargos'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nome_cargo': self.nome_cargo
+        }
 
     def __str__(self):
         return '{}'.format(self.nome_cargo)
