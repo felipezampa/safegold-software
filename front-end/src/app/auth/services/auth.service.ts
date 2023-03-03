@@ -64,6 +64,41 @@ export class AuthService {
 
     return username
   }
+  getUserCargo(){
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const cargo = decodeToken.cargo;
+    console.log(cargo);
+    return cargo
+  }
+  getUserAcessoFin(){
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const acesso_fin = decodeToken.acesso_financeiro;
+    console.log(acesso_fin);
+    return acesso_fin
+
+  }
+  getUserAcessoAv(){
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const acesso_av = decodeToken.acesso_avaliacao;
+    console.log(acesso_av);
+    return acesso_av
+
+  }
+  getUserisHead(){
+    const token = this.cookieService.get('jwt');
+
+    const decodeToken = this.jwtHelper.decodeToken(token)
+    const head_de_area = decodeToken.head_de_area;
+    console.log(head_de_area);
+    return head_de_area
+  }
+
   getCurrentProjeto(){
     const CurrentProjeto = localStorage.getItem('selectedEmpresa');
     return CurrentProjeto ? JSON.parse(CurrentProjeto).cod_projeto: null;

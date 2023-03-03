@@ -126,6 +126,40 @@ class LoginView(APIView):
 
         user = models.User.objects.filter(username = username).first()
 
+        auth = models.AuthUserPermissions.objects.filter(id_user = user.id)
+
+        for i in auth:
+            cargo = i.idrh_cargo
+            financeiro = i.financeiro
+            avaliacao = i.avaliacao
+            head_de_area = i.is_head
+
+        """
+        Aqui faço uma validação basica onde se o usuario não tiver nenhum sistema de permissionamento vinculado a conta dele
+        automaticamente ele atribue um 0
+        """
+        try:
+            financeiro
+        except UnboundLocalError:
+            financeiro = 0
+        try:
+            avaliacao
+        except UnboundLocalError:
+            avaliacao = 0
+        try:
+            head_de_area
+        except UnboundLocalError:
+            head_de_area = 0
+
+        # if hasattr(auth, 'cargo')
+
+        # cargo = models.RhCargo.objects.filter(nome_cargo=cargo).first()
+
+        # if cargo:
+        #     cargo_nome = cargo_nome
+        # else:
+        #     cargo_nome = "Sem Cargo Vinculado"
+
         if user is None:
             raise AuthenticationFailed('Usuario nao encontrado')
 
@@ -135,7 +169,11 @@ class LoginView(APIView):
         payload = {
             'id_user': user.id,
             'username': user.first_name,
-            'email': user.email
+            'email': user.email,
+            # 'cargo': cargo_nome,
+            'acesso_financeiro': financeiro,
+            'acesso_avaliacao': avaliacao,
+            'head_de_area': head_de_area
         }
 
         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')

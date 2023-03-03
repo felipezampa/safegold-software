@@ -306,7 +306,7 @@ class AuthUserPermissions(models.Model):
         verbose_name_plural = 'Permissionamentos por usuario'
     
     def __str__(self):
-        return '{} - {}'.format(self.id_user, self.idrh_cargo)
+        return 'id: {} - cargo: {} - financeiro: {} - avaliacao: {} - head de area: {}'.format(self.id_user, self.idrh_cargo, self.financeiro, self.avaliacao,self.is_head)
     
 class RhCargo(models.Model):
     id = models.AutoField(primary_key=True)
