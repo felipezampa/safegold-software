@@ -1,7 +1,7 @@
 import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, retry, Subject, tap } from 'rxjs';
+import { Observable,  Subject, tap } from 'rxjs';
 import { MatrizAnalitica, ContaAnalitica, Fornecedor } from 'src/app/shared';
 
 @Injectable({

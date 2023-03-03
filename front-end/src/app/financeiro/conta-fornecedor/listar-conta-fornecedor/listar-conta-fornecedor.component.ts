@@ -10,7 +10,6 @@ import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
 import { ExcluirContaFornecedorComponent } from '../excluir-conta-fornecedor/excluir-conta-fornecedor.component';
-import { OrderByPipe } from '../order-by.pipe';
 
 @Component({
   selector: 'app-listar-conta-fornecedor',
@@ -18,16 +17,19 @@ import { OrderByPipe } from '../order-by.pipe';
   styleUrls: ['./listar-conta-fornecedor.component.css']
 })
 export class ListarContaFornecedorComponent implements OnInit {
-  baseURL = 'http://127.0.0.1:8000/api/matriz_analitica_fornecedor/'
+
   matrizAnalitica: MatrizAnalitica[] = [];
   isLoading: boolean = false;
-  editMode: boolean = false;
   orderKey: string = '';
-  reverse: boolean = false;
   subscription: Subscription | undefined;
   filtroVinculo: any [];
   filtroSelecionado: string = 'todos';
-  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal, private router: Router,
+  analitica: ContaAnalitica[] = [];
+  empresas: Empresa[] = [];
+  fornecedores: Fornecedor[] = [];
+  matrizAtualizavel: MatrizAnalitica | undefined;
+
+  constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal,
     private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
   ngOnInit(): void {
@@ -113,13 +115,6 @@ export class ListarContaFornecedorComponent implements OnInit {
 
 
   ///////////////////////////////////////////// CRUDUDU /////////////////////////////////////////////
-  analitica: ContaAnalitica[] = [];
-  empresas: Empresa[] = [];
-  fornecedores: Fornecedor[] = [];
-  matrizAtualizavel: MatrizAnalitica | undefined;
-
-
-
   atualizarMatrizAnaliticaFornecedor(id: number) {
     this.matrizAtualizavel = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
 
@@ -127,7 +122,6 @@ export class ListarContaFornecedorComponent implements OnInit {
       this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe({
       }
       )
-
     }
 
   }

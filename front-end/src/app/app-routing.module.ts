@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'avaliacao',
     component: AvaliacaoComponent
     // , children:[
-    //   { path: 'empresas', component: ListarEmpresaComponent },
+    //   { path: 'autoavaliacao', component: ListarEmpresaComponent },
     //   { path: 'plano-de-contas', component: ListarPlanoContasComponent },
     //   { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
     // ]

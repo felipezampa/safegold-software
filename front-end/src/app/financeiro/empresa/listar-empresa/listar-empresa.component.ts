@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { ExcluirEmpresaComponent, ModalEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from '../index';
 import { Empresa } from 'src/app/shared';
 import { Component, OnInit } from '@angular/core';
@@ -25,8 +24,7 @@ export class ListarEmpresaComponent implements OnInit {
 
   constructor(
     private empresaService: EmpresaService,
-    private modalService: NgbModal,
-    private router :Router) { }
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listarEmpresa();
@@ -34,10 +32,6 @@ export class ListarEmpresaComponent implements OnInit {
     this.subscription = this.empresaService.refreshPage$.subscribe(() => {
       this.listarEmpresa();
     })
-
-    // if (!localStorage.getItem('currentUser')) {
-    //   this.router.navigate(['/login']);
-    // }
   }
 
   listarEmpresa() {
