@@ -64,7 +64,7 @@ export class AuthService {
 
     return username
   }
-  getUserCargo(){
+  getUserCargo(): string{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -72,7 +72,7 @@ export class AuthService {
     console.log(cargo);
     return cargo
   }
-  getUserAcessoFin(){
+  getUserAcessoFin(): number{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -81,7 +81,7 @@ export class AuthService {
     return acesso_fin
 
   }
-  getUserAcessoAv(){
+  getUserAcessoAv(): number{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -90,7 +90,7 @@ export class AuthService {
     return acesso_av
 
   }
-  getUserisHead(){
+  getUserisHead(): number{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
