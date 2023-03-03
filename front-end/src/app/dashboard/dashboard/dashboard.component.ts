@@ -29,12 +29,6 @@ export class DashboardComponent implements OnInit {
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
     this.onProjectChange()
-    console.log(this.projetos);
-
-
-
-
-
   }
 
   getProjetos() {
@@ -62,7 +56,6 @@ export class DashboardComponent implements OnInit {
         });
     }
   }
-
 
   onEmpresaChanged(cod_empresa: number) {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);

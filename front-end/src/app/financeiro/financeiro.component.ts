@@ -45,8 +45,6 @@ export class FinanceiroComponent implements OnInit {
       .subscribe(data => {
         this.projetos = data;
         this.getUniqueProjetos();
-        console.log(this.projetos);
-
       });
   }
   getUniqueProjetos() {

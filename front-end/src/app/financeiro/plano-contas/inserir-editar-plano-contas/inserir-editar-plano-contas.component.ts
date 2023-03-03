@@ -31,12 +31,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
     this.atualizarConta();
   }
 
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////
   SalvarForm(dataForm: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }) {
-    console.log(dataForm);
-
-
     if (!this.editMode) {
       // CADASTRANDO
       try {

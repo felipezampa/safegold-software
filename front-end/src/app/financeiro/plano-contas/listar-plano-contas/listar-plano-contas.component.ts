@@ -22,7 +22,7 @@ export class ListarPlanoContasComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
 
-  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router:Router, private authService: AuthService) { }
+  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listarContas();
@@ -33,7 +33,6 @@ export class ListarPlanoContasComponent implements OnInit {
     // if (!localStorage.getItem('currentUser')) {
     //   this.router.navigate(['/login']);
     // }
-
   }
 
   listarContas() {
