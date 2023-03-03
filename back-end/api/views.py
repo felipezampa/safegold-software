@@ -124,13 +124,12 @@ class LoginView(APIView):
         username = request.data['username']
         password = request.data['password']
 
-        user = models.User.objects.filter(username = username).first()
+        user = models.User.objects.filter(username=username).first()
 
         try:
             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
-            auth_cargo = models.RhCargo.objects.get(nome_cargo = auth.idrh_cargo)
-     
-            cargo_nome = auth_cargo.nome_cargo
+
+            cargo_nome = auth.idrh_cargo.nome_cargo
             financeiro = auth.financeiro
             avaliacao = auth.avaliacao
             head_de_area = auth.is_head
@@ -145,9 +144,15 @@ class LoginView(APIView):
             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
             financeiro = avaliacao = head_de_area = 0
             cargo_nome = 'Sem cargo vinculado'
-        
 
-            
+        if isinstance(cargo_nome, str):
+            cargo_dict = {
+                'nome_cargo': cargo_nome
+            }
+        else:
+            cargo_dict = {
+                'nome_cargo': cargo_nome.nome_cargo
+            }
 
         if user is None:
             raise AuthenticationFailed('Usuario nao encontrado')
@@ -159,7 +164,7 @@ class LoginView(APIView):
             'id_user': user.id,
             'username': user.first_name,
             'email': user.email,
-            #'cargo': cargo_nome,
+            'cargo': cargo_dict,
             'acesso_financeiro': financeiro,
             'acesso_avaliacao': avaliacao,
             'head_de_area': head_de_area,
@@ -175,8 +180,8 @@ class LoginView(APIView):
             'jwt': token
         }
 
-        return response	
-
+        return response
+    
 class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
