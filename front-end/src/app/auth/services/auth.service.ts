@@ -20,7 +20,7 @@ const httpOptions = {
 export class AuthService {
 
   private apiUrl = 'http://localhost:8000/api/login/';
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
   private jwtHelper = new JwtHelperService();
 
 
@@ -68,7 +68,7 @@ export class AuthService {
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
-    const cargo = decodeToken.cargo;
+    const cargo = decodeToken.cargo.nome_cargo;
     console.log(cargo);
     return cargo
   }

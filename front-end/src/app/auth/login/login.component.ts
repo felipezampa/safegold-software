@@ -13,14 +13,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-  private jwtHelper = new JwtHelperService();
+export class LoginComponent {
 
   username: string;
   password: string;
-
   myform: FormGroup;
-  constructor(private authService: AuthService, private app: AppComponent, private router: Router, private appComponent: AppComponent, private cookieService: CookieService, private dashboardService: DashboardService) { }
+
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
+  
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       response => {
