@@ -21,15 +21,18 @@ export class DashboardComponent implements OnInit {
   user_acesso_fin: number;
   user_acesso_av: number;
   user_is_head: number;
+  is_superuser: string;
   constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
 
 
   ngOnInit() {
-    this.user_cargo = this.authService.getUserCargo()
+    this.user_cargo = this.authService.getCargoUser()
     this.user_acesso_fin = this.authService.getUserAcessoFin()
     this.user_acesso_av = this.authService.getUserAcessoAv()
     this.user_is_head = this.authService.getUserisHead()
     this.firstName = this.authService.getUsername();
+    this.is_superuser = this.authService.getIsSuperUser();
+
     this.getProjetos();
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
     this.selectedProjetos = contexto?.cod_projeto;
