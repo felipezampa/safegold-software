@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Empresa, Projeto } from 'src/app/shared';
 import { DashboardService } from '../services/dashboard.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -70,5 +71,30 @@ export class DashboardComponent implements OnInit {
     const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
     localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
+
+  validacaoAcessoFin(){
+    if (this.user_acesso_fin !=1) {
+      Swal.fire({
+        title: "Acesso Negado",
+        text: 'Você Não tem Acesso a essa página',
+        icon:'error'
+      });
+    }else{
+      window.location.href = 'financeiro/empresas'
+    }
+  }
+  validacaoAcessoRH(){
+    if (this.user_acesso_av !=1) {
+      Swal.fire({
+        title: "Acesso Negado",
+        text: 'Você Não tem Acesso a essa página',
+        icon:'error'
+      });
+    }else{
+      window.location.href = 'avaliacao'
+    }
+  }
+
+
 
 }

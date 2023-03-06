@@ -34,6 +34,7 @@
     "ngx-cookie-service": "^15.0.0",
     "ngx-mask": "^15.0.0",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",
     "util": "^0.12.5",
     "xlsx": "^0.18.5",

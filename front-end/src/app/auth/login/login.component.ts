@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { DashboardService } from './../../dashboard/services/dashboard.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -7,6 +8,7 @@ import { first } from 'rxjs/operators'
 import { AppComponent } from 'src/app/app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-login',
@@ -18,9 +20,18 @@ export class LoginComponent{
 
   username: string;
   password: string;
-
+  showErrorMessage = false;
   myform: FormGroup;
   constructor(private authService: AuthService, private app: AppComponent, private router: Router, private appComponent: AppComponent, private cookieService: CookieService, private dashboardService: DashboardService) { }
+
+  ngOnInit(){
+    if (this.authService.isLoggedIn()){
+      this.router.navigate(['/dashboard']);
+    }else{
+      this.showErrorMessage = true;
+    }
+  }
+
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       response => {
@@ -28,14 +39,33 @@ export class LoginComponent{
         this.cookieService.set('jwt', token);
 
         this.dashboardService.getProjetos(this.authService.getCurrentUser()).subscribe(() => {
-          this.router.navigate(['/dashboard']);
-
+          // exibe um alerta de sucesso e redireciona para a página de dashboard
+          Swal.fire({
+            icon: 'success',
+            title: 'Login realizado com sucesso',
+            timer: 1000,
+            showConfirmButton: false
+          }).then(() => {
+            this.router.navigate(['/dashboard']);
+          });
+        });
+      },
+      error => {
+        // exibe um alerta de erro
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao fazer login',
+          text: 'Usuário ou senha incorretos',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
         });
       }
     );
   }
-
-
-
-
 }
+
+
+
+
+
+

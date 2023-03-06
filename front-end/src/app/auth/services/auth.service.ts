@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators'
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { DashboardService } from './../../dashboard/services/dashboard.service';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -108,7 +108,20 @@ export class AuthService {
   }
 
 
-}
+  isLoggedIn(){
+    const token = this.cookieService.get('jwt');
+    return token !== null && token !== '';
+  }
+
+  CanActivate(): boolean{
+    if(this.isLoggedIn()){
+      return true
+    }else{
+      this.router.navigate(['/login']);
+      return false
+    }
+  }
+
 
 
 
@@ -126,3 +139,4 @@ export class AuthService {
   //     })
   //   );
   // }
+}

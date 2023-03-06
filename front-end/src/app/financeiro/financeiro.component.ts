@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Empresa, Projeto  } from '../shared';
 import { DashboardService } from '../dashboard';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -85,9 +86,20 @@ export class FinanceiroComponent implements OnInit {
 
 
   logout() {
-    this.cookieService.delete('jwt','/','localhost',false,'Lax');
-    this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
-    localStorage.removeItem('selectedEmpresa')
-    this.router.navigate(['/login']);
+    Swal.fire({
+      title: 'Tem certeza que deseja sair ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.isConfirmed){
+      this.cookieService.delete('jwt','/','localhost',false,'Lax');
+      this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
+      localStorage.removeItem('selectedEmpresa')
+      this.router.navigate(['/login']);
+
+      }
+    })
   }
 }

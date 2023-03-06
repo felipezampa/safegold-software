@@ -7,7 +7,7 @@
   <h4 class="text-center">Bem vindo, {{firstName}}, {{user_cargo}} </h4>
   <h2 class="text-center mb-5">Escolha qual Aplicativo deseja acessar</h2>
   <div class="row d-flex justify-content-center">
-    <a *ngIf="user_acesso_fin == 1" href="financeiro/empresas" class="card financeiro col-1 mx-4">
+    <a class="card financeiro col-1 mx-4" (click)="validacaoAcessoFin()">
       <div class="sg-card-header">
         <h1 class="card-span text-center">Financeiro</h1>
       </div>
@@ -25,7 +25,7 @@
         </ul>
       </div>
     </a>
-    <a *ngIf="user_acesso_av == 1" href="avaliacao" class="card avaliacao col-1 mx-4">
+    <a class="card avaliacao col-1 mx-4" (click)="validacaoAcessoRH()">
       <div class="sg-card-header">
         <h1 class="card-span text-center">Avaliação de Desempenho</h1>
       </div>
