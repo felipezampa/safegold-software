@@ -20,7 +20,7 @@ const httpOptions = {
 export class AuthService {
 
   private apiUrl = 'http://localhost:8000/api/login/';
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
   private jwtHelper = new JwtHelperService();
 
 

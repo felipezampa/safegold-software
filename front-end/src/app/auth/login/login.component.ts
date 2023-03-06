@@ -15,8 +15,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-  private jwtHelper = new JwtHelperService();
+export class LoginComponent {
 
   username: string;
   password: string;
