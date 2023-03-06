@@ -1,4 +1,3 @@
-import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,7 +21,7 @@ export class DashboardComponent implements OnInit {
   user_acesso_fin: number;
   user_acesso_av: number;
   user_is_head: number;
-  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private cookieService: CookieService) { }
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
 
 
   ngOnInit() {
