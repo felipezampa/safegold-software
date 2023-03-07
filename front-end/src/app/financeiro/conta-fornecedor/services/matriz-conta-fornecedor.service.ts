@@ -1,6 +1,6 @@
 import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter  } from '@angular/core';
 import { Observable,  Subject, tap } from 'rxjs';
 import { MatrizAnalitica, ContaAnalitica, Fornecedor } from 'src/app/shared';
 
@@ -10,6 +10,7 @@ import { MatrizAnalitica, ContaAnalitica, Fornecedor } from 'src/app/shared';
 export class MatrizContaFornecedorService {
   matrizAnalitica: MatrizAnalitica[] = [];
   analitica: ContaAnalitica[] = [];
+
 
 
   baseURL = 'http://127.0.0.1:8000/api/matriz_analitica_fornecedor/'
@@ -60,5 +61,6 @@ export class MatrizContaFornecedorService {
       })
     );
   }
+
 
 }

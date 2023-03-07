@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContaFornecedorModule, EmpresaModule, FinanceiroComponent, PlanoContasModule, ProjetoModule } from './index';
 import { RouterModule } from '@angular/router';
+import { DashboardFinanceiroComponent } from './dashboard-financeiro/dashboard-financeiro.component';
 
 
 @NgModule({
   declarations: [
-    FinanceiroComponent
+    FinanceiroComponent,
+    DashboardFinanceiroComponent
   ],
   imports: [
     CommonModule,

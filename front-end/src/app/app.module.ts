@@ -6,7 +6,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthModule, DashboardModule, FinanceiroModule, AvaliacaoModule } from './index';
 import { CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
     AuthModule,
     DashboardModule,
     FinanceiroModule,
-    AvaliacaoModule
+    AvaliacaoModule,
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [AuthModule, CookieService],
   bootstrap: [AppComponent]

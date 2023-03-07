@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Empresa, Projeto } from 'src/app/shared';
 import { DashboardService } from '../services/dashboard.service';
 import Swal from 'sweetalert2';
+import { MatrizContaFornecedorService } from 'src/app/financeiro/conta-fornecedor';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   user_acesso_av: number;
   user_is_head: number;
   is_superuser: string;
-  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
+
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private fornecedorService: MatrizContaFornecedorService) { }
 
 
   ngOnInit() {
@@ -76,18 +78,18 @@ export class DashboardComponent implements OnInit {
     if (this.user_acesso_fin !=1) {
       Swal.fire({
         title: "Acesso Negado",
-        text: 'Você Não tem Acesso a essa página',
+        text: 'Você não tem acesso a essa página',
         icon:'error'
       });
     }else{
-      window.location.href = 'financeiro/empresas'
+      window.location.href = 'financeiro/dashboard-financeiro'
     }
   }
   validacaoAcessoRH(){
     if (this.user_acesso_av !=1) {
       Swal.fire({
         title: "Acesso Negado",
-        text: 'Você Não tem Acesso a essa página',
+        text: 'Você não tem acesso a essa página',
         icon:'error'
       });
     }else{

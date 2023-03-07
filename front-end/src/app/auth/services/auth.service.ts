@@ -85,7 +85,7 @@ export class AuthService {
     return head_de_area
   }
 
-  getIsSuperUser(): string{
+  getIsSuperUser(){
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)

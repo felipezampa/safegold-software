@@ -21,10 +21,12 @@ export class FinanceiroComponent implements OnInit {
   selectedEmpresa: number;
   projetosUnicos: any[];
   firstName: string;
+  is_superuser: boolean;
 
   constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {
     this.setCurrentUser();
+    this.is_superuser = this.authService.getIsSuperUser();
     this.firstName = this.authService.getUsername();
 
       // chama a função getProjetos novamente para obter os projetos mais recentes do usuário

@@ -30,7 +30,7 @@ export class ListarContaFornecedorComponent implements OnInit {
   matrizAtualizavel: MatrizAnalitica | undefined;
 
   constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal,
-    private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
+    private empresaService: EmpresaService, private analiticaService: PlanoContasService, private fornecedorService: MatrizContaFornecedorService) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -40,9 +40,6 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.subscription = this.matrizService.refreshPage$.subscribe(() => {
       this.listarContaFornecedor();
     })
-    // if (!localStorage.getItem('currentUser')) {
-    //   this.router.navigate(['/login']);
-    // }
 
   }
 

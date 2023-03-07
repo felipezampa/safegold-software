@@ -28,6 +28,12 @@
             </li>
             <hr class="my-1">
             <li class="sg-hover">
+              <a href="financeiro/dashboard-financeiro" class="sg-anchor">
+                  <i class="fa-solid fa-clipboard"></i>
+                  <span class="sg-nav-item">Dashboard</span>
+              </a>
+          </li>
+            <li class="sg-hover">
                 <a href="financeiro/conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="sg-nav-item">Conta-Fornecedor</span>
@@ -45,7 +51,7 @@
                     <span class="sg-nav-item">Empresas</span>
                 </a>
             </li>
-            <li class="sg-hover">
+            <li *ngIf="is_superuser == true" class="sg-hover">
                 <a href="http://127.0.0.1:8000/admin/" class="sg-anchor">
                     <i class="fa-solid fa-lock"></i>
                     <span class="sg-nav-item">Admin</span>

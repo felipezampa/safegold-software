@@ -1,3 +1,4 @@
+import { DashboardFinanceiroComponent } from './financeiro/dashboard-financeiro/dashboard-financeiro.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth';
@@ -21,7 +22,9 @@ const routes: Routes = [
     component: FinanceiroComponent, children:[
       { path: 'empresas', component: ListarEmpresaComponent, canActivate: [AuthGuard] },
       { path: 'plano-de-contas', component: ListarPlanoContasComponent,canActivate: [AuthGuard] },
-      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent,canActivate: [AuthGuard] }
+      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent,canActivate: [AuthGuard] },
+      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent,canActivate: [AuthGuard] },
+
     ],
     canActivate: [AuthGuard]
 
