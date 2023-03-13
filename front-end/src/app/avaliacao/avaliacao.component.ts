@@ -10,30 +10,18 @@ import { AuthService } from '../auth';
   styleUrls: ['./avaliacao.component.css']
 })
 export class AvaliacaoComponent implements OnInit {
-  is_superuser: boolean;
 
-  constructor(private cookieService:CookieService,private router: Router, private authServive: AuthService ) { }
+  isSuperuser: boolean;
+  isHead: boolean;
+
+  constructor(private cookieService:CookieService,private router: Router, private authService: AuthService ) { }
 
   ngOnInit(): void {
-  this.is_superuser = this.authServive.getIsSuperUser();
-
+    this.isSuperuser = this.authService.getIsSuperUser();
+    this.isHead = this.authService.getUserisHead();
   }
   logout() {
-    Swal.fire({
-      title: 'Tem certeza que deseja sair ?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não'
-    }).then((result) => {
-      if (result.isConfirmed){
-      this.cookieService.delete('jwt','/','localhost',false,'Lax');
-      this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
-      localStorage.removeItem('selectedEmpresa')
-      this.router.navigate(['/login']);
-
-      }
-    })
+    this.authService.logout();
   }
 
   setCurrentUser() {

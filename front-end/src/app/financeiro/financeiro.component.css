@@ -116,7 +116,7 @@ i {
     border: none;
     font-size: 1rem;
     font-weight: 500;
-    width: 90%;
+    width: 215px;
     transform: scaleX(1);
     border-bottom: 2px solid #EDA900;
     outline: none;
@@ -136,7 +136,7 @@ i {
 }
 
 .sg-contexto {
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 .sg-form option:hover {

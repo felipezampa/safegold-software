@@ -4,8 +4,17 @@
   </div>
 
   <hr>
-  <h4 class="text-center">Bem vindo, {{firstName}}</h4>
-  <h2 class="text-center mb-5">Escolha qual Aplicativo deseja acessar</h2>
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="text-center col">Bem vindo, {{firstName}}</h4>
+    <div class="col-1 logout">
+      <a type="submit" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket me-1"></i>
+        <span>Sair</span>
+      </a>
+    </div>
+  </div>
+  <h2 class="text-center mb-4">Escolha qual Aplicativo deseja acessar</h2>
   <div class="row d-flex justify-content-center">
     <a class="card financeiro col-1 mx-4" (click)="validacaoAcessoFin()">
       <div class="sg-card-header">
@@ -13,10 +22,10 @@
       </div>
       <div class="sg-card-body">
         <ul>
-          <li  class="sg-anchor">
+          <li class="sg-anchor">
             <span class="sg-nav-item">Plano de Contas</span>
           </li>
-          <li  class="sg-anchor">
+          <li class="sg-anchor">
             <span class="sg-nav-item">Vínculo de Contas e Fornecedores</span>
           </li>
           <li class="sg-anchor">
@@ -44,5 +53,6 @@
       </div>
     </a>
   </div>
-  <footer class="sg-content text-center mt-2 pt-2 pb-2 fixed-bottom">Em caso de problemas, entre em contato com o Administrador: suportebi@safegold.com.br</footer>
+  <footer class="sg-content text-center mt-2 pt-2 pb-2 fixed-bottom">Em caso de problemas, entre em contato com o
+    Administrador: suportebi@safegold.com.br</footer>
 </div>

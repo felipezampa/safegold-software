@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -30,7 +32,23 @@ export class AuthService {
 
   }
 
+  logout(){
+    Swal.fire({
+      title: 'Tem certeza que deseja sair ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.isConfirmed){
+      this.cookieService.delete('jwt','/','localhost',false,'Lax');
+      this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
+      localStorage.removeItem('selectedEmpresa')
+      this.router.navigate(['/login']);
 
+      }
+    })
+  }
 
   getCurrentCod_empresa(): number {
     const CurrentEmpresa = localStorage.getItem('selectedEmpresa');
@@ -58,7 +76,7 @@ export class AuthService {
 
     return username
   }
-  getUserAcessoFin(): number{
+  getUserAcessoFin(): boolean{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -67,7 +85,7 @@ export class AuthService {
     return acesso_fin
 
   }
-  getUserAcessoAv(): number{
+  getUserAcessoAv(): boolean{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -76,7 +94,7 @@ export class AuthService {
     return acesso_av
 
   }
-  getUserisHead(): number{
+  getUserisHead(): boolean{
     const token = this.cookieService.get('jwt');
 
     const decodeToken = this.jwtHelper.decodeToken(token)
@@ -122,21 +140,4 @@ export class AuthService {
     }
   }
 
-
-
-
-  // login(username:string, password:string){
-  //   return this.http.post<any>(this.api_url + `accounts/api/auth/`,
-  //   {username, password}, httpOptions).pipe(
-  //     map(user => {
-  //       if (user && user.token){
-  //         localStorage.setItem("currentUser", JSON.stringify(user));
-  //         this.dashboardService.getProjetos(user.user_id).subscribe(() => {
-  //           this.router.navigate(['/dashboard']);
-  //         });
-  //       }
-  //       return user;
-  //     })
-  //   );
-  // }
 }

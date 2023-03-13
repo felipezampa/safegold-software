@@ -8,3 +8,4 @@ export * from './financeiro.component'
 export * from './conta-fornecedor/listar-conta-fornecedor/listar-conta-fornecedor.component';
 export * from './empresa/listar-empresa/listar-empresa.component';
 export * from './plano-contas/listar-plano-contas/listar-plano-contas.component';
+export * from './dashboard-financeiro/dashboard-financeiro.component';

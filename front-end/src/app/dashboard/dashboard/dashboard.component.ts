@@ -20,9 +20,9 @@ export class DashboardComponent implements OnInit {
   projetosUnicos: any[];
   firstName: string;
   user_cargo: string;
-  user_acesso_fin: number;
-  user_acesso_av: number;
-  user_is_head: number;
+  user_acesso_fin: boolean;
+  user_acesso_av: boolean;
+  user_is_head: boolean;
   is_superuser: string;
 
   constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private fornecedorService: MatrizContaFornecedorService) { }
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
   }
 
   validacaoAcessoFin(){
-    if (this.user_acesso_fin !=1) {
+    if (this.user_acesso_fin != true) {
       Swal.fire({
         title: "Acesso Negado",
         text: 'Você não tem acesso a essa página',
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   validacaoAcessoRH(){
-    if (this.user_acesso_av !=1) {
+    if (this.user_acesso_av != true) {
       Swal.fire({
         title: "Acesso Negado",
         text: 'Você não tem acesso a essa página',
@@ -97,6 +97,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
+  logout(){
+    this.authService.logout();
+  }
 
 }

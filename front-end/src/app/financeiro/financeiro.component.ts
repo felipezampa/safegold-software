@@ -21,12 +21,12 @@ export class FinanceiroComponent implements OnInit {
   selectedEmpresa: number;
   projetosUnicos: any[];
   firstName: string;
-  is_superuser: boolean;
+  isSuperuser: boolean;
 
   constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {
     this.setCurrentUser();
-    this.is_superuser = this.authService.getIsSuperUser();
+    this.isSuperuser = this.authService.getIsSuperUser();
     this.firstName = this.authService.getUsername();
 
       // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
@@ -74,7 +74,6 @@ export class FinanceiroComponent implements OnInit {
 
   }
 
-
   setCurrentUser() {
     if (this.authService.getCurrentUser() != null) {
       this.currentUser = true;
@@ -85,23 +84,7 @@ export class FinanceiroComponent implements OnInit {
     }
   }
 
-
-
   logout() {
-    Swal.fire({
-      title: 'Tem certeza que deseja sair ?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não'
-    }).then((result) => {
-      if (result.isConfirmed){
-      this.cookieService.delete('jwt','/','localhost',false,'Lax');
-      this.cookieService.delete('jwt','/financeiro','localhost',false,'Lax')
-      localStorage.removeItem('selectedEmpresa')
-      this.router.navigate(['/login']);
-
-      }
-    })
+    this.authService.logout();
   }
 }

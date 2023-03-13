@@ -92,3 +92,11 @@ body {
 a{
     cursor: pointer;
 }
+
+.logout{
+    color: #ff1818;
+}
+.logout:hover i{
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
