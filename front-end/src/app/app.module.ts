@@ -6,6 +6,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthModule, DashboardModule, FinanceiroModule } from './index';
 import { CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
+<<<<<<< Updated upstream
+=======
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [

@@ -1,0 +1,47 @@
+<div>
+    <div class="sg-sidebar">
+        <ul>
+
+            <li class="sg-hover">
+                <a href="dashboard" class="logo">
+                    <img src="../assets/img/Safegold.svg" alt="Safegold">
+                </a>
+            </li>
+            <hr>
+            <li class="sg-hover">
+                <a href="financeiro/conta-fornecedor" class="sg-anchor">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <span class="sg-nav-item">Auto-Avaliação</span>
+                </a>
+            </li>
+            <li class="sg-hover">
+                <a href="financeiro/plano-de-contas" class="sg-anchor">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="sg-nav-item">Coordenadores</span>
+                </a>
+            </li>
+            <li class="sg-hover">
+                <a href="financeiro/empresas" class="sg-anchor">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="sg-nav-item">Competências</span>
+                </a>
+            </li>
+            <li *ngIf="isSuperuser == true" class="sg-hover">
+                <a href="http://127.0.0.1:8000/admin/" class="sg-anchor">
+                    <i class="fa-solid fa-lock"></i>
+                    <span class="sg-nav-item">Admin</span>
+                </a>
+            </li>
+            <li class="sg-logout mt-5 pt-5">
+                <a type="submit" (click)="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sg-nav-item">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sg-content mb-5">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="sg-content text-center mt-2 pt-2 pb-2">Em caso de problemas, entre em contato com o Administrador: suportebi@safegold.com.br</footer>
+</div>

@@ -1,4 +1,5 @@
 <div class="container">
+<<<<<<< Updated upstream
   <h3>Bem vindo, {{firstName}} </h3>
   <!-- <h3>Projeto</h3>
   <select class="form-control" [(ngModel)]="selectedProjetos" (ngModelChange)="onProjectChange()">
@@ -8,3 +9,62 @@
   <select class="form-control" [(ngModel)]="selectedEmpresa" (ngModelChange)="onEmpresaChanged($event)">
     <option *ngFor="let empresa of empresas" [value]="empresa.cod_empresa">{{ empresa.empresa }}</option>
   </select> -->
+=======
+  <div>
+    <img src="../../../assets/img/Safegold-Logo.svg" alt="" class="header-image">
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="text-center col">Bem vindo, {{firstName}}</h4>
+    <div class="col-1 logout">
+      <a class="logout" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket pe-1"></i>
+        <span>Sair</span>
+      </a>
+    </div>
+  </div>
+  <h2 class="text-center mb-4">Escolha qual Aplicativo deseja acessar</h2>
+  <div class="row d-flex justify-content-center">
+    <a class="card financeiro col-1 mx-4" (click)="validacaoAcessoFin()">
+      <div class="sg-card-header">
+        <h1 class="card-span text-center">Financeiro</h1>
+      </div>
+      <div class="sg-card-body">
+        <ul>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Plano de Contas</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Vínculo de Contas e Fornecedores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Empresas</span>
+          </li>
+        </ul>
+      </div>
+    </a>
+    <a class="card avaliacao col-1 mx-4" (click)="validacaoAcessoRH()">
+      <div class="sg-card-header">
+        <h1 class="card-span text-center">Avaliação de Desempenho</h1>
+      </div>
+      <div class="sg-card-body">
+        <ul>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Autoavaliação de Gestores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Avaliação de Coordenadores</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Competências</span>
+          </li>
+        </ul>
+      </div>
+    </a>
+  </div>
+  <footer class="sg-content text-center mt-2 pt-2 pb-2 fixed-bottom">Em caso de problemas, entre em contato com o
+    Administrador: suportebi@safegold.com.br</footer>
+</div>
+>>>>>>> Stashed changes

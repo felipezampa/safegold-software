@@ -17,6 +17,16 @@ export class DashboardComponent implements OnInit {
   selectedEmpresa: number;
   projetosUnicos: any[];
   firstName: string;
+<<<<<<< Updated upstream
+=======
+  user_cargo: string;
+  user_acesso_fin: boolean;
+  user_acesso_av: boolean;
+  user_is_head: boolean;
+  is_superuser: boolean;
+
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private fornecedorService: MatrizContaFornecedorService) { }
+>>>>>>> Stashed changes
 
   constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService) { }
 
@@ -64,4 +74,34 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
 
+<<<<<<< Updated upstream
+=======
+  validacaoAcessoFin(){
+    if (this.user_acesso_fin != true) {
+      Swal.fire({
+        title: "Acesso Negado",
+        text: 'Você não tem acesso a essa página',
+        icon:'error'
+      });
+    }else{
+      window.location.href = 'financeiro/dashboard-financeiro'
+    }
+  }
+  validacaoAcessoRH(){
+    if (this.user_acesso_av != true) {
+      Swal.fire({
+        title: "Acesso Negado",
+        text: 'Você não tem acesso a essa página',
+        icon:'error'
+      });
+    }else{
+      window.location.href = 'avaliacao'
+    }
+  }
+
+  logout(){
+    this.authService.logout();
+  }
+
+>>>>>>> Stashed changes
 }

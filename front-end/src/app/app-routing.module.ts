@@ -17,10 +17,29 @@ const routes: Routes = [
   {
     path: 'financeiro',
     component: FinanceiroComponent, children:[
+<<<<<<< Updated upstream
       { path: 'empresas', component: ListarEmpresaComponent },
       { path: 'plano-de-contas', component: ListarPlanoContasComponent },
       { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
     ]
+=======
+      { path: 'empresas', component: ListarEmpresaComponent, canActivate: [AuthGuard] },
+      { path: 'plano-de-contas', component: ListarPlanoContasComponent,canActivate: [AuthGuard] },
+      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent,canActivate: [AuthGuard] },
+      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent,canActivate: [AuthGuard] },
+
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'avaliacao',
+    component: AvaliacaoComponent, children:[
+    //   { path: 'autoavaliacao', component: ListarEmpresaComponent },
+    //   { path: 'plano-de-contas', component: ListarPlanoContasComponent },
+    //   { path: 'conta-fornecedor', component: ListarContaFornecedorComponent }
+    ],
+    canActivate: [AuthGuard]
+>>>>>>> Stashed changes
   },
 ];
 

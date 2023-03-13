@@ -92,4 +92,13 @@ export class FinanceiroComponent implements OnInit {
       this.selectedEmpresa = null ?? 0;
     }
   }
+<<<<<<< Updated upstream
+=======
+
+
+
+  logout() {
+    this.authService.logout();
+  }
+>>>>>>> Stashed changes
 }
