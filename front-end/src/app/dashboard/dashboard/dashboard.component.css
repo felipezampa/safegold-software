@@ -88,3 +88,7 @@ body {
 .sg-card-header{
     padding-bottom: 50px;
 }
+
+a{
+    cursor: pointer;
+}

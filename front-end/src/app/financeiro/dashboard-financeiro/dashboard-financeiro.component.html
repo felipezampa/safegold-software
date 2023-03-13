@@ -1,40 +1,39 @@
 <div class="container-fluid mb-5">
-
-
-<div class="card-header">
-  <h2 class="text-center">Dashboard {{currentEmpresa}}</h2>
-</div>
-<div class="row d-flex justify-content-center">
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Vinculação Conta Analitica a Fornecedores</h5>
-        <div>
-          <p class="card-text">Total de fornecedores: {{ totalFornecedores }}</p>
-          <p class="card-text">Fornecedores com vínculo: {{ fornecedoresComVinculo }}</p>
-          <p class="card-text">Fornecedores sem vínculo: {{ fornecedoresSemVinculo }}</p>
-        </div>
-        <a href="financeiro/conta-fornecedor" class="card-link">Clique para visualizar</a>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="text-center">Dashboard {{currentEmpresa}}</h2>
     </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Agrupamento de Contas Analiticas Vinculadas a Fornecedores</h5>
-        <div *ngFor="let item of ocorrenciasArray">
-          <p  class="card-text">{{ item.descricao }}: {{ item.quantidade }}</p>
+    <div class="row d-flex justify-content-center">
+      <div class="col">
+        <div class="card-body pb-0">
+          <h5 class="card-title">Vinculação Conta Analitica a Fornecedores</h5>
+          <hr>
+          <div>
+            <p>Total de fornecedores: {{ totalFornecedores }}</p>
+            <p>Fornecedores com vínculo: {{ fornecedoresComVinculo }}</p>
+            <p>Fornecedores sem vínculo: {{ fornecedoresSemVinculo }}</p>
+          </div>
+          <a href="financeiro/conta-fornecedor" class="card-link">Clique para visualizar</a>
         </div>
       </div>
+      <div class="col">
+        <div class="card-body pb-0">
+          <h5 class="card-title">Agrupamento de Contas Analiticas Vinculadas a Fornecedores</h5>
+          <hr>
+          <div *ngFor="let item of ocorrenciasArray">
+            <p>{{ item.descricao }}: {{ item.quantidade }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <h5 class="card-title text-center">Grafico de Contas Analiticas Vinculadas a Fornecedores</h5>
+    <div class="row justify-content-center">
+      <div class="col-2"></div>
+      <div class="d-flex justify-content-center col-8">
+        <canvas #barChart></canvas>
+      </div>
+      <div class="col-2"></div>
     </div>
   </div>
-</div>
-<div class="card">
-  <h5 class="card-title card-header text-white">Grafico de Contas Analiticas Vinculadas a Fornecedores</h5>
-  <div class="card-body">
-    <div>
-      <canvas #barChart></canvas>
-    </div>
-  </div>
-</div>
 </div>

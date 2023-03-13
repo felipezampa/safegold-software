@@ -11,6 +11,10 @@ h2 {
     margin: 0;
 }
 
+p{
+    margin-bottom: 10px;
+}
+
 .sg-fixed-nav {
     background-color: var(--background);
     padding: 0px 20px;
@@ -96,4 +100,8 @@ h2 {
     transform: scaleX(1);
     outline: none;
     margin-bottom: 10px;
+}
+
+.sg-grafico{
+    height: 350px;
 }
