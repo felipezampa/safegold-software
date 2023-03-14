@@ -23,7 +23,7 @@ export class FinanceiroComponent implements OnInit {
   firstName: string;
   isSuperuser: boolean;
 
-  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
+  constructor( private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {
     this.setCurrentUser();
     this.isSuperuser = this.authService.getIsSuperUser();

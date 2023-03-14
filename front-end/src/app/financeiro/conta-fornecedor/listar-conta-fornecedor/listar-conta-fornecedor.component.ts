@@ -30,7 +30,7 @@ export class ListarContaFornecedorComponent implements OnInit {
   matrizAtualizavel: MatrizAnalitica | undefined;
 
   constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal,
-    private empresaService: EmpresaService, private analiticaService: PlanoContasService, private fornecedorService: MatrizContaFornecedorService) { }
+    private empresaService: EmpresaService, private analiticaService: PlanoContasService ) { }
 
   ngOnInit(): void {
     this.listarEmpresas();

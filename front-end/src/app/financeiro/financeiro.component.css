@@ -135,10 +135,6 @@ i {
     font-weight: 500;
 }
 
-.sg-contexto {
-    margin-left: 30px;
-}
-
 .sg-form option:hover {
     background-color: red;
 }
@@ -148,5 +144,5 @@ i {
 }
 
 .sg-context {
-    margin-left: 25px;
+    margin-left: 30px;
 }

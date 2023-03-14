@@ -19,9 +19,10 @@ export class LoginComponent {
 
   username: string;
   password: string;
-  showErrorMessage = false;
+  showErrorMessage: boolean = false;
   myform: FormGroup;
-  constructor(private authService: AuthService, private app: AppComponent, private router: Router, private appComponent: AppComponent, private cookieService: CookieService, private dashboardService: DashboardService) { }
+
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
 
   ngOnInit(){
     if (this.authService.isLoggedIn()){
@@ -36,7 +37,6 @@ export class LoginComponent {
       response => {
         const token = response.jwt;
         this.cookieService.set('jwt', token);
-
         this.dashboardService.getProjetos(this.authService.getCurrentUser()).subscribe(() => {
           // exibe um alerta de sucesso e redireciona para a página de dashboard
           Swal.fire({

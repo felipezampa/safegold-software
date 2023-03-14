@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   user_is_head: boolean;
   is_superuser: string;
 
-  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthService, private fornecedorService: MatrizContaFornecedorService) { }
+  constructor( private dashboardService: DashboardService, private authService: AuthService ) { }
 
 
   ngOnInit() {
