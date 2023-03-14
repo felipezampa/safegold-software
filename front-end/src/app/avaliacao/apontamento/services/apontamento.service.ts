@@ -9,7 +9,7 @@ import { Apontamento } from 'src/app/shared';
 })
 export class ApontamentoService {
   empresas: Apontamento[] = [];
-  baseURL = 'http://127.0.0.1:8000/aptoproj/'
+  baseURL = 'http://127.0.0.1:8000/api/rh_apro_gestor/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

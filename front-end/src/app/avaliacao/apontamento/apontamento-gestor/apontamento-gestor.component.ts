@@ -12,19 +12,16 @@ import { ApontamentoService } from '../services/apontamento.service';
 export class ApontamentoGestorComponent implements OnInit {
 
   @ViewChild('formApontamento') formApontamento!: NgForm;
-  apontamento: Apontamento[] = [];
+  apontamentos: Apontamento[] = [];
   isLoading: boolean = false;
   editMode: boolean = false;
   currentApontamentoId?: number;
   subscription: Subscription | undefined;
 
-  constructor(
-    private apontamentoService: ApontamentoService
-  ) { }
+  constructor( private apontamentoService: ApontamentoService ) { }
 
   ngOnInit(): void {
     this.listarApontamento();
-
     this.subscription = this.apontamentoService.refreshPage$.subscribe(() => {
       this.listarApontamento();
     })
@@ -39,7 +36,7 @@ export class ApontamentoGestorComponent implements OnInit {
         //altera a flag para tirar a info de carregamento
         this.isLoading = false;
         //seta no array da instancia os apontamentos recebidos
-        this.apontamento = apontamento;
+        this.apontamentos = apontamento;
       });
   }
 
@@ -47,7 +44,7 @@ export class ApontamentoGestorComponent implements OnInit {
     // Seta a variavel da instancia para quando salvar o form utilizar no metodo put
     this.currentApontamentoId = id;
     // Procura o objeto com o ID igual ao da tabela
-    let currentApontamento = this.apontamento.find((apt) => { return apt.id == id });
+    let currentApontamento = this.apontamentos.find((apt) => { return apt.id == id });
     // Seta os valores encontrados no objeto nos campos do form
     this.formApontamento.setValue({
       story_id: currentApontamento?.story_id,

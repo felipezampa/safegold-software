@@ -9,7 +9,7 @@
             </li>
             <hr>
             <li class="sg-hover">
-                <a href="financeiro/conta-fornecedor" class="sg-anchor">
+                <a href="avaliacao/autoavaliacao" class="sg-anchor">
                     <i class="fa-solid fa-thumbs-up"></i>
                     <span class="sg-nav-item">Auto-Avaliação</span>
                 </a>
@@ -24,6 +24,12 @@
                 <a href="financeiro/empresas" class="sg-anchor">
                     <i class="fa-solid fa-list-check"></i>
                     <span class="sg-nav-item">Competências</span>
+                </a>
+            </li>
+            <li *ngIf="isHead == true" class="sg-hover">
+                <a href="avaliacao/apontamento" class="sg-anchor">
+                    <i class="fa-solid fa-user-clock"></i>
+                    <span class="sg-nav-item">Apontamento</span>
                 </a>
             </li>
             <li *ngIf="isSuperuser == true" class="sg-hover">
