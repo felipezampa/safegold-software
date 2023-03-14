@@ -4,12 +4,14 @@ import { AvaliacaoComponent } from './avaliacao.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AutoAvaliacaoComponent } from './index';
 
 
 
 @NgModule({
   declarations: [
-    AvaliacaoComponent
+    AvaliacaoComponent,
+    AutoAvaliacaoComponent
   ],
   imports: [
     CommonModule,

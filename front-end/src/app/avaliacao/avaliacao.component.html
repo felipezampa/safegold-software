@@ -14,13 +14,13 @@
                     <span class="sg-nav-item">Auto-Avaliação</span>
                 </a>
             </li>
-            <li class="sg-hover">
+            <li *ngIf="isHead == true" class="sg-hover">
                 <a href="financeiro/plano-de-contas" class="sg-anchor">
                     <i class="fa-solid fa-users"></i>
                     <span class="sg-nav-item">Coordenadores</span>
                 </a>
             </li>
-            <li class="sg-hover">
+            <li *ngIf="isSuperuser == true" class="sg-hover">
                 <a href="financeiro/empresas" class="sg-anchor">
                     <i class="fa-solid fa-list-check"></i>
                     <span class="sg-nav-item">Competências</span>
