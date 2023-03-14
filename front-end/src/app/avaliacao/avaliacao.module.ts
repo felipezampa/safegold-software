@@ -4,7 +4,7 @@ import { AvaliacaoComponent } from './avaliacao.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { AutoAvaliacaoComponent, ApontamentoModule } from './index';
+import { AutoAvaliacaoComponent } from './index';
 
 
 
@@ -17,8 +17,7 @@ import { AutoAvaliacaoComponent, ApontamentoModule } from './index';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    ApontamentoModule
+    RouterModule
   ]
 })
 export class AvaliacaoModule { }

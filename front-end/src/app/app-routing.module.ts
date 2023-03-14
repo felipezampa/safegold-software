@@ -6,7 +6,7 @@ import { AuthGuard } from './auth.guard';
 import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
 import { DashboardComponent } from './dashboard';
 import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
-import { ApontamentoGestorComponent, AutoAvaliacaoComponent } from './avaliacao';
+import { AutoAvaliacaoComponent } from './avaliacao';
 
 const routes: Routes = [
   {
@@ -34,7 +34,6 @@ const routes: Routes = [
     path: 'avaliacao',
     component: AvaliacaoComponent, children:[
       { path: 'autoavaliacao', component: AutoAvaliacaoComponent, canActivate: [AuthGuard] },
-      { path: 'apontamento', component: ApontamentoGestorComponent, canActivate: [AuthGuard] }
     ],
     canActivate: [AuthGuard]
   },
