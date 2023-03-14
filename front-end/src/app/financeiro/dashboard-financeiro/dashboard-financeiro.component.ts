@@ -42,8 +42,9 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
           ocorrencias[fornecedor.desc_cod_conta_analitica] = 1;
         }
       });
-      this.ocorrenciasArray = Object.entries(ocorrencias).map(([descricao, quantidade]) => ({ descricao, quantidade }));
-      console.log(this.ocorrenciasArray);
+      this.ocorrenciasArray = Object.entries(ocorrencias).map(([descricao, quantidade]) => ({
+        descricao: descricao === "undefined" ? "Não Vinculados" : descricao,quantidade
+      }));
 
       this.createBarChart();
     });

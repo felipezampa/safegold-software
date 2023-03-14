@@ -233,3 +233,9 @@ class RhUserAvaliacaoViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RhUserAvaliacaoSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = []
+
+class AptoGestorViewSet(viewsets.ModelViewSet):
+    queryset = models.AptoProj.objects.all()
+    serializer_class = serializers.Apto_gestorSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = []

@@ -213,3 +213,8 @@ class RhUserAvaliacaoSerializers(serializers.ModelSerializer):
     class Meta:
         model = RhUserAvaliacao
         fields = ''
+    
+class Apto_gestorSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AptoProj
+        fields = '__all__'

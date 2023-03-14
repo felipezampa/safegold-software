@@ -392,3 +392,17 @@ class RhUserAvaliacao(models.Model):
         verbose_name_plural = 'Avaliação Comportamental - Avaliado (MANUTENÇÃO)'
     def __str__(self):
         return '{} - {}'.format(self.idauth_user_permissions, self.idrh_fact_comportamental)
+
+
+class AptoProj(models.Model):
+    story_id = models.CharField(max_length=4, blank=True, null=True)
+    data_apto = models.DateField(blank=True, null=True)
+    vlr_apto = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+
+
+    class Meta:
+        managed = False
+        db_table = 'apto_proj'
+        verbose_name_plural = 'Apontamento Gestor'
+    def __str__(self):
+        return '{} - {}'.format(self.data_apto, self.vlr_apto)

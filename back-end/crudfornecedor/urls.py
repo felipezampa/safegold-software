@@ -44,6 +44,7 @@ router.register('rh_cargo_metas', RhFactCargoMetasViewSet, basename='rh_cargo_me
 router.register('rh_indicador_competencia', RhFactComportamentalViewSet, basename='rh_factcomportamental')
 router.register('rh_mapeamento_cargo_competencias',RhMapCargoCompViewSet , basename='rh_mapeamento_cargo_competencias')
 router.register('rh_user_avaliacao',RhUserAvaliacaoViewSet , basename='rh_user_avaliacao')
+router.register('rh_apro_gestor',AptoGestorViewSet , basename='rh_apro_gestor')
 
 from crud_app import views
 
