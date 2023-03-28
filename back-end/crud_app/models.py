@@ -253,14 +253,13 @@ class FinContaAnalitica(models.Model):
         return "Empresa: {} // Código Analitico: {} - Descrição: {}".format(self.cod_empresa, self.cod_conta_analitica, self.desc_conta)
 
 class Fornecedor(models.Model):
-    cod_fornecedor = models.AutoField(primary_key=True)
-    cod_empresa = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='cod_empresa', blank=True, null=True)
-    cnpj = models.CharField(max_length=14, blank=True, null=True)
-    empresa = models.CharField(max_length=200, blank=True, null=True)
-    insc_est = models.CharField(max_length=20, blank=True, null=True)
-    matriz = models.CharField(max_length=3, blank=True, null=True)
-    cod_fornec = models.IntegerField(blank=True, null=True)
+    cod_empresa = models.BigIntegerField(blank=True, null=True)
+    cnpj = models.CharField(max_length=255, blank=True, null=True)
+    empresa = models.CharField(max_length=255, blank=True, null=True)
+    insc_est = models.CharField(max_length=255, blank=True, null=True)
+    matriz = models.CharField(max_length=255, blank=True, null=True)
     fornecedor = models.CharField(max_length=255, blank=True, null=True)
+    cod_fornecedor = models.CharField(max_length=255,primary_key=True)
 
     class Meta:
         managed = False

@@ -80,7 +80,7 @@ class FornecedorViewset(viewsets.ModelViewSet):
     queryset = models.Fornecedor.objects.all()
     serializer_class = serializers.FornecedorSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa', 'insc_est', 'matriz', 'cod_fornec', 'fornecedor']
+    filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa', 'insc_est', 'matriz', 'fornecedor']
 
 
 
