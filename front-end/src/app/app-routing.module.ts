@@ -1,12 +1,10 @@
-import { DashboardFinanceiroComponent } from './financeiro/dashboard-financeiro/dashboard-financeiro.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth';
 import { AuthGuard } from './auth.guard';
-import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
+import { LoginComponent, PageNotFoundComponent } from './auth';
 import { DashboardComponent } from './dashboard';
-import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
-import { AutoAvaliacaoComponent } from './avaliacao';
+import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent, DashboardFinanceiroComponent } from './financeiro';
+import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
 
 const routes: Routes = [
   {
@@ -26,7 +24,6 @@ const routes: Routes = [
       { path: 'plano-de-contas', component: ListarPlanoContasComponent,canActivate: [AuthGuard] },
       { path: 'conta-fornecedor', component: ListarContaFornecedorComponent,canActivate: [AuthGuard] },
       { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent,canActivate: [AuthGuard] },
-
     ],
     canActivate: [AuthGuard]
   },
@@ -36,6 +33,9 @@ const routes: Routes = [
       { path: 'autoavaliacao', component: AutoAvaliacaoComponent, canActivate: [AuthGuard] },
     ],
     canActivate: [AuthGuard]
+  },
+  { 
+    path: '**', pathMatch: 'full', component: PageNotFoundComponent 
   },
 ];
 
