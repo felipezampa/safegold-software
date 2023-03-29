@@ -1,21 +1,78 @@
-.sg-background{
+.sg-background {
     background-color: #373935;
-    width: 40rem;
-    display: flex;
+    /* width: 40rem;
+    display: flex;*/
     margin: auto;
     padding-top: 10px;
 }
 
-.sg-login-container{
-    margin-right: 97px;
-    margin-bottom: 90px;
-    background-color: #373935;
-}
 
-.sg-header{
+
+.sg-header {
     color: #EDA900;
 }
 
-.sg-content {
-    margin-left: 97px;
+.sg-login-image-container {
+    background-color: #373935;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7% 4%;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.sg-login-form-container{
+    width: max-content;
+}
+
+.sg-button {
+    background: #EDA900;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: none;
+    padding: 7px 28px;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.6s;
+}
+
+.sg-button:hover {
+    background: #414442;
+}
+.sg-button:disabled {
+    background: #edaa0091;
+}
+
+.sg-input {
+    border: none;
+    background-color: #fafafa;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 100%;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+    transition: 0.6s;
+}
+
+.sg-input[type=text]:focus,
+.sg-input[type=text]:active {
+    transform: scaleX(1);
+    border-bottom: 2px solid #414442;
+    outline: none;
+}
+.sg-input[type=password]:focus,
+.sg-input[type=password]:active {
+    transform: scaleX(1);
+    border-bottom: 2px solid #414442;
+    outline: none;
 }

@@ -24,10 +24,10 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
 
-  ngOnInit(){
-    if (this.authService.isLoggedIn()){
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['/dashboard']);
-    }else{
+    } else {
       this.showErrorMessage = true;
     }
   }
@@ -38,15 +38,16 @@ export class LoginComponent {
         const token = response.jwt;
         this.cookieService.set('jwt', token);
         this.dashboardService.getProjetos(this.authService.getCurrentUser()).subscribe(() => {
-          // exibe um alerta de sucesso e redireciona para a página de dashboard
-          Swal.fire({
-            icon: 'success',
-            title: 'Login realizado com sucesso',
-            timer: 1000,
-            showConfirmButton: false
-          }).then(() => {
-            this.router.navigate(['/dashboard']);
-          });
+          this.router.navigate(['/dashboard']);
+          //exibe um alerta de sucesso e redireciona para a página de dashboard
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Login realizado com sucesso',
+          //   timer: 1000,
+          //   showConfirmButton: false
+          // }).then(() => {
+          //   this.router.navigate(['/dashboard']);
+          // });
         });
       },
       error => {

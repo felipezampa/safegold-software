@@ -1,21 +1,30 @@
-<div class="sg-content mt-5">
-  <div class="sg-login-container card shadow-lg">
-    <div class="sg-background">
-      <img src="../../../assets/img/Safegold.svg" alt="">
+<div class="container mt-5 pt-3">
+  <div class=" card shadow-lg">
+    <div class="row">
+      <div class="col-6 d-flex align-items-center justify-content-center">
+        <div class="w-75">
+          <h4 class="text-center">Faça o Login acessar o sistema</h4>
+          <hr>
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div>
+              <label for="email" class="text-white">Usuário</label>
+              <input type="text" class="sg-input" id="username" name="username" [(ngModel)]="username"
+                placeholder="Email@exemplo.com" required>
+            </div>
+            <div>
+              <label for="password" class="text-white">Senha</label>
+              <input type="password" class="sg-input" id="password" name="password" [(ngModel)]="password"
+                placeholder="Sua senha" required>
+            </div>
+            <div class="text-center mt-5">
+              <button type="submit" class="sg-button mt-2" [disabled]="!loginForm.valid">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-6 sg-login-image-container">
+        <img src="../../../assets/img/Safegold-Logo.svg" alt="Logo Safegold">
+      </div>
     </div>
-    <form (ngSubmit)="onSubmit()"class="m-5 px-5" #loginForm="ngForm">
-      <h4 class="text-center sg-header">Faça o Login para poder usar o sistema</h4>
-      <div>
-        <label for="email" class="text-white">Usuário</label>
-        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" required>
-      </div>
-      <div>
-        <label for="password" class="text-white">Senha</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-warning mt-2">Login</button>
-      </div>
-    </form>
   </div>
 </div>
