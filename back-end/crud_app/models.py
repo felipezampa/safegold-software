@@ -266,7 +266,7 @@ class Fornecedor(models.Model):
         db_table = 'fornecedor'
         verbose_name_plural = 'Fornecedor'
     def __str__(self):
-        return "Fornecedor: {} ".format(self.fornecedor)
+        return "Fornecedor: {} / Empresa: {} ".format(self.fornecedor, self.empresa)
 
 
 class MatrizAnaliticaFornecedor(models.Model):

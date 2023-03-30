@@ -128,6 +128,12 @@ class MatrizAnaliticaFornecedorSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+    
+    def to_representation(self, instance):
+        try:
+            return super().to_representation(instance)
+        except Fornecedor.MultipleObjectsReturned:
+            return {'error': 'Mais de um Fornecedor associado a esta Matriz Analítica.'}
 
 class FornecedorSerializer(serializers.ModelSerializer):
 
