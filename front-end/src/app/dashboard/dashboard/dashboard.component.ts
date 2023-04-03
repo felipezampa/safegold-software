@@ -5,6 +5,8 @@ import { Empresa, Projeto } from 'src/app/shared';
 import { DashboardService } from '../services/dashboard.service';
 import Swal from 'sweetalert2';
 import { MatrizContaFornecedorService } from 'src/app/financeiro/conta-fornecedor';
+import jwtDecode from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,21 +20,29 @@ export class DashboardComponent implements OnInit {
   selectedProjetos: number;
   selectedEmpresa: number;
   projetosUnicos: any[];
-  firstName: string;
+  firstName: string = '';
   user_cargo: string;
   user_acesso_fin: boolean;
   user_acesso_av: boolean;
   user_is_head: boolean;
   is_superuser: string;
 
-  constructor( private dashboardService: DashboardService, private authService: AuthService ) { }
+
+
+  constructor( private dashboardService: DashboardService, private authService: AuthService,private cookieService: CookieService ) {
+   }
 
 
   ngOnInit() {
-    this.user_cargo = this.authService.getCargoUser()
-    this.user_acesso_fin = this.authService.getUserAcessoFin()
-    this.user_acesso_av = this.authService.getUserAcessoAv()
-    this.user_is_head = this.authService.getUserisHead()
+    const jwtCookie = this.cookieService.get('jwt');
+    if (jwtCookie) {
+      const decodedToken = jwtDecode<any>(jwtCookie);
+      this.firstName = decodedToken.first_name;
+    }
+    this.user_cargo = this.authService.getCargoUser();
+    this.user_acesso_fin = this.authService.getUserAcessoFin();
+    this.user_acesso_av = this.authService.getUserAcessoAv();
+    this.user_is_head = this.authService.getUserisHead();
     this.firstName = this.authService.getUsername();
     this.is_superuser = this.authService.getIsSuperUser();
 

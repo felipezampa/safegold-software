@@ -58,11 +58,14 @@ urlpatterns = [
 
 
 
-
     #rest
     path('api/auth/', include('rest_framework.urls')),
     path('accounts/', include('accounts.urls')),
     path('api/',include(router.urls)),
     path('api/login/', LoginView.as_view(), name='login'),
     path('api/userlogged/', UserView.as_view(), name='userview'),
-]
+    path('api/logout/', Logout.as_view(), name='logout'),
+
+    # # path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # # path('api/profile/', ProfileView.as_view(), name='profile'),
+    ]

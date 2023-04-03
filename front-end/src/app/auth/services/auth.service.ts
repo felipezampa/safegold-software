@@ -1,10 +1,13 @@
+import { JwtPayload } from './../../shared/models/payload.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
+import jwtDecode from 'jwt-decode';
 
 const httpOptions = {
 
@@ -24,7 +27,21 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password })
+    return this.http.post<any>(this.apiUrl, { username, password }).pipe(
+      map(response => {
+        const token = response.jwt;
+        const payload = JSON.stringify({
+          id: response.id,
+          username: response.username,
+          email: response.email,
+          is_superuser: response.is_superuser
+        });
+        this.cookieService.deleteAll()
+        this.cookieService.set('jwt', token);
+        this.cookieService.set('payload', payload);
+        return response;
+      })
+    );
   }
 
   logout() {
@@ -36,9 +53,10 @@ export class AuthService {
       cancelButtonText: 'Não'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cookieService.delete('jwt', '/', 'localhost', false, 'Lax');
-        this.cookieService.delete('jwt', '/financeiro', 'localhost', false, 'Lax')
-        localStorage.removeItem('selectedEmpresa')
+        this.deleteAllCookies()
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+
         this.router.navigate(['/login']);
       }
     })
@@ -63,7 +81,7 @@ export class AuthService {
   // -------------- JWT --------------
   getCurrentUser() {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
-    const userID = decodeToken.id_user;
+    const userID = decodeToken.id;
     return userID
   }
   getUsername() {
@@ -105,13 +123,30 @@ export class AuthService {
     return token !== null && token !== '';
   }
 
-  CanActivate(): boolean {
+  canActivate(): boolean {
     if (this.isLoggedIn()) {
-      return true
+      return true;
     } else {
+      this.cookieService.deleteAll();
       this.router.navigate(['/login']);
-      return false
+      return false;
     }
   }
 
+  setOrDeleteCookie(name: string, value?: string) {
+    if (value) {
+      this.cookieService.set(name, value);
+    } else {
+      this.cookieService.delete(name);
+    }
+  }
+
+  deleteAllCookies() {
+    const cookies: {} = this.cookieService.getAll();
+    for (const cookieName in cookies) {
+      if (cookies.hasOwnProperty(cookieName)) {
+        this.cookieService.delete(cookieName);
+      }
+    }
+  }
 }

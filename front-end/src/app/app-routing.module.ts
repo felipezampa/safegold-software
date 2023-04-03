@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth.guard';
 import { LoginComponent, PageNotFoundComponent } from './auth';
 import { DashboardComponent } from './dashboard';
 import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent, DashboardFinanceiroComponent } from './financeiro';
 import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard]
   },
-  { 
-    path: '**', pathMatch: 'full', component: PageNotFoundComponent 
+  {
+    path: '**', pathMatch: 'full', component: PageNotFoundComponent
   },
 ];
 
