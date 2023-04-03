@@ -91,6 +91,8 @@ body {
 
 a{
     cursor: pointer;
+    padding: .2rem 1rem;
+    border-radius: 5px;
 }
 
 .logout{
@@ -102,7 +104,9 @@ a{
     transition: 0.2s ease;
     padding-right: 5px;
 }
-.logout:hover span{
+.logout:hover a{
+    background-color: #ff1818;
+    color: white;
     font-weight: 700;
     transition: 0.2s ease;
 }

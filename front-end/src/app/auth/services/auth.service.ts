@@ -1,4 +1,4 @@
-import { JwtPayload } from './../../shared/models/payload.model';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { map } from 'rxjs/operators';
-import jwtDecode from 'jwt-decode';
+
 
 const httpOptions = {
 
@@ -45,14 +45,20 @@ export class AuthService {
   }
 
   logout() {
+    /**
+     * Funcao de Logout
+     * apresenta o Swal com o select
+     */
     Swal.fire({
-      title: 'Tem certeza que deseja sair ?',
+      title: 'Tem certeza que deseja sair?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sim',
-      cancelButtonText: 'Não'
+      cancelButtonText: 'Não',
+      confirmButtonColor: '#EDA900'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.cookieService.deleteAll();
         this.deleteAllCookies()
         localStorage.removeItem('currentUser');
         localStorage.removeItem('token');
@@ -87,34 +93,40 @@ export class AuthService {
   getUsername() {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const username = decodeToken.username;
+    console.log('getUsername-> '+username);
     return username
   }
   getUserAcessoFin(): boolean {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const acesso_fin = decodeToken.acesso_financeiro;
+    console.log('getUserAcessoFin-> '+acesso_fin);
+    
     return acesso_fin
-
   }
   getUserAcessoAv(): boolean {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const acesso_av = decodeToken.acesso_avaliacao;
+    console.log('getUserAcessoAv-> '+acesso_av);
     return acesso_av
 
   }
   getUserisHead(): boolean {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const head_de_area = decodeToken.head_de_area;
+    console.log('getUserisHead-> '+head_de_area);
     return head_de_area
   }
 
   getIsSuperUser() {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const is_superuser = decodeToken.is_superuser
+    console.log('getIsSuperUser-> '+is_superuser);
     return is_superuser
   }
   getCargoUser(): string {
     const decodeToken = this.jwtHelper.decodeToken(this.jwtToken)
     const cargo = decodeToken.cargo.nome_cargo
+    console.log('getCargoUser-> '+cargo);
     return cargo
   }
 

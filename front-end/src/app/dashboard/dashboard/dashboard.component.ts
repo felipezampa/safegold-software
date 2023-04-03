@@ -27,11 +27,7 @@ export class DashboardComponent implements OnInit {
   user_is_head: boolean;
   is_superuser: string;
 
-
-
-  constructor( private dashboardService: DashboardService, private authService: AuthService,private cookieService: CookieService ) {
-   }
-
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private cookieService: CookieService) { }
 
   ngOnInit() {
     const jwtCookie = this.cookieService.get('jwt');
@@ -84,30 +80,30 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
   }
 
-  validacaoAcessoFin(){
+  validacaoAcessoFin() {
     if (this.user_acesso_fin != true) {
       Swal.fire({
         title: "Acesso Negado",
         text: 'Você não tem acesso a essa página',
-        icon:'error'
+        icon: 'error'
       });
-    }else{
+    } else {
       window.location.href = 'financeiro/dashboard-financeiro'
     }
   }
-  validacaoAcessoRH(){
+  validacaoAcessoRH() {
     if (this.user_acesso_av != true) {
       Swal.fire({
         title: "Acesso Negado",
         text: 'Você não tem acesso a essa página',
-        icon:'error'
+        icon: 'error'
       });
-    }else{
+    } else {
       window.location.href = 'avaliacao'
     }
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 
