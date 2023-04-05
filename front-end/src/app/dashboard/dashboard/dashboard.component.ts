@@ -1,12 +1,10 @@
-import { AuthService } from 'src/app/auth';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Empresa, Projeto } from 'src/app/shared';
-import { DashboardService } from '../services/dashboard.service';
-import Swal from 'sweetalert2';
-import { MatrizContaFornecedorService } from 'src/app/financeiro/conta-fornecedor';
 import jwtDecode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/auth';
+import { Empresa, Projeto } from 'src/app/shared';
+import Swal from 'sweetalert2';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,17 +13,17 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class DashboardComponent implements OnInit {
 
-  projetos: Projeto[];
-  empresas: Empresa[];
-  selectedProjetos: number;
-  selectedEmpresa: number;
-  projetosUnicos: any[];
+  projetos!: Projeto[];
+  empresas!: Empresa[];
+  selectedProjetos!: number;
+  selectedEmpresa!: number;
+  projetosUnicos!: any[];
   firstName: string = '';
-  user_cargo: string;
-  user_acesso_fin: boolean;
-  user_acesso_av: boolean;
-  user_is_head: boolean;
-  is_superuser: string;
+  user_cargo!: string;
+  user_acesso_fin!: boolean;
+  user_acesso_av!: boolean;
+  user_is_head!: boolean;
+  is_superuser!: string;
 
   constructor(private dashboardService: DashboardService, private authService: AuthService, private cookieService: CookieService) { }
 

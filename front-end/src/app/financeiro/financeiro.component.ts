@@ -1,10 +1,7 @@
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
-import { Component, OnInit  } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { Empresa, Projeto  } from '../shared';
 import { DashboardService } from '../dashboard';
-import Swal from 'sweetalert2';
+import { Empresa, Projeto } from '../shared';
 
 
 @Component({
@@ -14,14 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class FinanceiroComponent implements OnInit {
 
-  currentUser: boolean;
-  empresas: Empresa[];
-  projetos: Projeto[];
-  selectedProjetos: number;
-  selectedEmpresa: number;
-  projetosUnicos: any[];
-  firstName: string;
-  isSuperuser: boolean;
+  currentUser!: boolean;
+  empresas!: Empresa[];
+  projetos!: Projeto[];
+  selectedProjetos!: number;
+  selectedEmpresa!: number;
+  projetosUnicos!: any[];
+  firstName!: string;
+  isSuperuser!: boolean;
 
   constructor( private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {

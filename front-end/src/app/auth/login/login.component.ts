@@ -14,10 +14,10 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
+  username!: string;
+  password!: string;
   showErrorMessage: boolean = false;
-  myform: FormGroup;
+  myform!: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
 

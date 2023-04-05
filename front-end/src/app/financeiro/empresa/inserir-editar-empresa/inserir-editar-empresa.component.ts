@@ -13,12 +13,12 @@ import { Empresa } from 'src/app/shared';
 export class InserirEditarEmpresaComponent {
 
   @ViewChild('formEmpresas') formEmpresas!: NgForm;
-  @Input() idEmpresa: number;
+  @Input() idEmpresa!: number;
   @Input() editMode!: boolean;
   empresas: Empresa[] = [];
   mensagemErro: string = '';
-  projetos_unicos: any [];
-  projetos: any[];
+  projetos_unicos!: any [];
+  projetos!: any[];
   constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private projetoService: ProjetoService) { }
 
   ngOnInit(): void {

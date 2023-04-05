@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth';
 import { Empresa, SubGrupo } from 'src/app/shared';
@@ -15,7 +15,7 @@ import { PlanoContasService } from '../services/plano-contas.service';
 export class InserirEditarPlanoContasComponent implements OnInit {
 
   @ViewChild('formPlanoContas') formPlanoContas!: NgForm;
-  @Input() idConta: number;
+  @Input() idConta!: number;
   @Input() editMode!: boolean;
   @Input() cod_empresa!: number;
   empresas: Empresa[] = [];

@@ -1,9 +1,9 @@
-import { DashboardService } from './dashboard/services/dashboard.service';
-import { AuthService } from 'src/app/auth';
-import { Component, OnInit  } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Empresa, Projeto  } from './shared';
+import { AuthService } from 'src/app/auth';
+import { DashboardService } from './dashboard/services/dashboard.service';
+import { Empresa, Projeto } from './shared';
 
 
 @Component({
@@ -13,13 +13,13 @@ import { Empresa, Projeto  } from './shared';
 })
 export class AppComponent implements OnInit {
 
-  currentUser: boolean;
-  empresas: Empresa[];
-  projetos: Projeto[];
-  selectedProjetos: number;
-  selectedEmpresa: number;
-  projetosUnicos: any[];
-  firstName: string;
+  currentUser!: boolean;
+  empresas!: Empresa[];
+  projetos!: Projeto[];
+  selectedProjetos!: number;
+  selectedEmpresa!: number;
+  projetosUnicos!: any[];
+  firstName!: string;
 
   constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {

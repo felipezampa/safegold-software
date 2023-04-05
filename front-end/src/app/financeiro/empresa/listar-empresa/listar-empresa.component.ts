@@ -20,7 +20,7 @@ export class ListarEmpresaComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
   safegoldGerencia: number | undefined = 0;
-  filtro: '';
+  filtro!: '';
 
   constructor(
     private empresaService: EmpresaService,

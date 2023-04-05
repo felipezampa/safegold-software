@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { AuthService } from 'src/app/auth';
 import { MatrizContaFornecedorService } from '../conta-fornecedor';
 import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
 
+Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard-financeiro',
   templateUrl: './dashboard-financeiro.component.html',
@@ -14,9 +14,9 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
   totalFornecedores = 0;
   fornecedoresComVinculo = 0;
   fornecedoresSemVinculo = 0;
-  currentEmpresa: string;
+  currentEmpresa!: string;
   ocorrenciasArray: { descricao: string, quantidade: number }[] = [];
-  @ViewChild('barChart') barChart: ElementRef;
+  @ViewChild('barChart') barChart!: ElementRef;
 
   constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) { }
 

@@ -8,8 +8,8 @@ import { AuthService } from '../auth';
 })
 export class AvaliacaoComponent implements OnInit {
 
-  isSuperuser: boolean;
-  isHead: boolean;
+  isSuperuser!: boolean;
+  isHead!: boolean;
 
   constructor( private authService: AuthService ) { }
 
