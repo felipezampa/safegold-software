@@ -1,15 +1,16 @@
-import { AuthService } from 'src/app/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { ContaAnalitica, SubGrupo } from 'src/app/shared';
+import { AuthService } from 'src/app/auth';
+import { APP_CONFIG, ContaAnalitica, SubGrupo } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanoContasService {
 
-  baseURL = 'http://127.0.0.1:8000/api/fin_conta_analitica/'
+  baseURL = APP_CONFIG.baseURL +'fin_conta_analitica/';
+  baseSubGrupo = APP_CONFIG.baseURL +'fin_subgrupo_contas/';
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
@@ -65,6 +66,6 @@ export class PlanoContasService {
 
   listSubGrupoContas(): Observable<any> {
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<SubGrupo[]>('http://127.0.0.1:8000/api/fin_subgrupo_contas/', { headers: this.httpHeaders });
+    return this.http.get<SubGrupo[]>(this.baseSubGrupo, { headers: this.httpHeaders });
   }
 }

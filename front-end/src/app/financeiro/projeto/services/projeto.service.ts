@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { User, Projeto } from 'src/app/shared';
 import { tap } from 'rxjs/operators';
+import { APP_CONFIG, Projeto, User } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProjetoService {
 
   projetos: Projeto[] = [];
-  baseURL = 'http://127.0.0.1:8000/api/projetos/'
+  baseURL = APP_CONFIG.baseURL + 'projetos/';
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

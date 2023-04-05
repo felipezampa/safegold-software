@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { Empresa } from 'src/app/shared';
 import { AuthService } from 'src/app/auth';
+import { APP_CONFIG, Empresa } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth';
 export class EmpresaService {
 
   empresas: Empresa[] = [];
-  baseURL = 'http://127.0.0.1:8000/api/empresas/'
+  baseURL = APP_CONFIG.baseURL + 'empresas/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

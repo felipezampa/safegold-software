@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { APP_CONFIG } from 'src/app/shared';
 import Swal from 'sweetalert2';
 
 
@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8000/api/login/';
+  private apiUrl = APP_CONFIG.baseURL +'login/';
   private jwtHelper = new JwtHelperService();
   private jwtToken: string;
 
@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
+    console.log(this.apiUrl);   
     return this.http.post<any>(this.apiUrl, { username, password }).pipe(
       map(response => {
         const token = response.jwt;
