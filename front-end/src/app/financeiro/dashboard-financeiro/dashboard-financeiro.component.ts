@@ -9,23 +9,24 @@ Chart.register(...registerables);
   templateUrl: './dashboard-financeiro.component.html',
   styleUrls: ['./dashboard-financeiro.component.css']
 })
-export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
+export class DashboardFinanceiroComponent implements OnInit {
 
   totalFornecedores = 0;
   fornecedoresComVinculo = 0;
   fornecedoresSemVinculo = 0;
   currentEmpresa!: string;
   ocorrenciasArray: { descricao: string, quantidade: number }[] = [];
+  isLoading: boolean = false;
   @ViewChild('barChart') barChart!: ElementRef;
 
-  constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) { }
+  constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) { 
+  }
 
   ngOnInit(): void {
     this.currentEmpresa = this.authService.getCurrentNome_empresa();
-  }
-
-  ngAfterViewInit(): void {
+    this.isLoading = true;
     this.getFornecedores();
+    // this.createBarChart();
   }
 
   getFornecedores(): void {
@@ -33,8 +34,8 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
       this.totalFornecedores = fornecedores.length;
       this.fornecedoresComVinculo = fornecedores.filter(fornecedor => fornecedor.vinculo === 1).length;
       this.fornecedoresSemVinculo = fornecedores.filter(fornecedor => fornecedor.vinculo === 0).length;
-
       const ocorrencias: { [key: string]: number } = {};
+
       fornecedores.forEach(fornecedor => {
         if (ocorrencias[fornecedor.desc_cod_conta_analitica]) {
           ocorrencias[fornecedor.desc_cod_conta_analitica]++;
@@ -45,7 +46,7 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
       this.ocorrenciasArray = Object.entries(ocorrencias).map(([descricao, quantidade]) => ({
         descricao: descricao === "undefined" ? "Não Vinculados" : descricao,quantidade
       }));
-
+      this.isLoading = false;
       this.createBarChart();
     });
   }
@@ -55,9 +56,6 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
     const dados = this.ocorrenciasArray.map(ocorrencia => ocorrencia.quantidade);
     const colors = this.ocorrenciasArray.map(() => this.getRandomColor());
     const fornecedoresData = this.ocorrenciasArray.map(() => this.totalFornecedores);
-
-
-
     new Chart(this.barChart.nativeElement, {
       type: 'bar',
       data: {
@@ -70,15 +68,13 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
         data: fornecedoresData,
         backgroundColor: '#ccc',
         label: 'Total de Fornecedores'
-
       }]
       },
     });
   }
 
-
-
   getRandomColor(): string {
+    // Escolhe cores aleatórias para a visualização dos gráficos
     const letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {

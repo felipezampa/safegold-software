@@ -11,7 +11,7 @@ h2 {
     margin: 0;
 }
 
-p{
+p {
     margin-bottom: 10px;
 }
 
@@ -91,7 +91,7 @@ p{
     background-color: var(--sg-gray);
 }
 
-.sg-select{
+.sg-select {
     background-color: transparent;
     width: auto;
     border: none;
@@ -102,6 +102,32 @@ p{
     margin-bottom: 10px;
 }
 
-.sg-grafico{
+.sg-grafico {
     height: 350px;
+}
+
+a {
+    background: #EDA900;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: none;
+    padding: 7px 28px;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.6s;
+    text-decoration: none;
+    width: fit-content;
+}
+
+a:hover{
+    background: #414442;
 }
