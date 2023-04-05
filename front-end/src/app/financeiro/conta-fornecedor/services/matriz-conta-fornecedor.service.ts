@@ -11,8 +11,8 @@ export class MatrizContaFornecedorService {
 
   matrizAnalitica: MatrizAnalitica[] = [];
   analitica: ContaAnalitica[] = [];
-  baseURL = APP_CONFIG.baseURL + 'matriz_analitica_fornecedor/';
-  baseFornecedor = APP_CONFIG.baseURL + 'fornecedor/';
+  baseURL = APP_CONFIG.baseURL + 'api/matriz_analitica_fornecedor/';
+  baseFornecedor = APP_CONFIG.baseURL + 'api/fornecedor/';
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

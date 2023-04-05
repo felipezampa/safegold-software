@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private apiUrl = APP_CONFIG.baseURL +'login/';
+  private apiUrl = APP_CONFIG.baseURL +'api/login/';
   private jwtHelper = new JwtHelperService();
   private jwtToken: string;
 

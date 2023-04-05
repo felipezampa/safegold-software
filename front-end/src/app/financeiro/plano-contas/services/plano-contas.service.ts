@@ -9,8 +9,8 @@ import { APP_CONFIG, ContaAnalitica, SubGrupo } from 'src/app/shared';
 })
 export class PlanoContasService {
 
-  baseURL = APP_CONFIG.baseURL +'fin_conta_analitica/';
-  baseSubGrupo = APP_CONFIG.baseURL +'fin_subgrupo_contas/';
+  baseURL = APP_CONFIG.baseURL +'api/fin_conta_analitica/';
+  baseSubGrupo = APP_CONFIG.baseURL +'api/fin_subgrupo_contas/';
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

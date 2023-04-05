@@ -8,7 +8,7 @@ import { APP_CONFIG, Empresa } from 'src/app/shared';
 })
 export class DashboardService {
 
-  baseURL = APP_CONFIG.baseURL + 'empresas/';
+  baseURL = APP_CONFIG.baseURL + 'api/empresas/';
 
   constructor(private http: HttpClient) { }
 

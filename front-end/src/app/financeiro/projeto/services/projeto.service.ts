@@ -11,7 +11,7 @@ import { APP_CONFIG, Projeto, User } from 'src/app/shared';
 export class ProjetoService {
 
   projetos: Projeto[] = [];
-  baseURL = APP_CONFIG.baseURL + 'projetos/';
+  baseURL = APP_CONFIG.baseURL + 'api/projetos/';
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

@@ -10,7 +10,7 @@ import { APP_CONFIG, Empresa } from 'src/app/shared';
 export class EmpresaService {
 
   empresas: Empresa[] = [];
-  baseURL = APP_CONFIG.baseURL + 'empresas/'
+  baseURL = APP_CONFIG.baseURL + 'api/empresas/'
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 import { DashboardService } from '../dashboard';
 import { Empresa, Projeto } from '../shared';
-
+import { APP_CONFIG } from '../shared';
 
 @Component({
   selector: 'app-financeiro',
@@ -19,6 +19,7 @@ export class FinanceiroComponent implements OnInit {
   projetosUnicos!: any[];
   firstName!: string;
   isSuperuser!: boolean;
+  adminURL = APP_CONFIG.baseURL;
 
   constructor( private authService:AuthService,private dashboardService: DashboardService ) {}
   ngOnInit() {
