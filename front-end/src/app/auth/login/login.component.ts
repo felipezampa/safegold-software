@@ -17,7 +17,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   showErrorMessage: boolean = false;
-  myform: FormGroup;
+  myform!: FormGroup;
   error: string = '';
   token = '';
 
