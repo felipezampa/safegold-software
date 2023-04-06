@@ -8,9 +8,11 @@ import { CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import { AgendaComponent } from './agenda/agenda.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AgendaComponent
   ],
   imports: [
     BrowserModule,

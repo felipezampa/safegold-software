@@ -22,9 +22,16 @@ body {
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
+.agenda {
+    --bg-color: #006400;
+    --bg-color-light: #ececec;
+    --text-color-hover: #fff;
+    --box-shadow-color: rgba(106, 105, 106, 0.48);
+}
+
 .card {
-    width: 500px;
-    height: 321px;
+    width: 25rem;
+    height: 20rem;
     background: var(--bg-color-light);
     border-top-right-radius: 10px;
     overflow: hidden;

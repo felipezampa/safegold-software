@@ -1,8 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { APP_CONFIG } from 'src/app/shared';
 
 const httpOptions = {
 
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8000/api/';
+  private baseUrl = APP_CONFIG.baseURL + 'api/';
 
   token: string = '';
   private user: any = {};
