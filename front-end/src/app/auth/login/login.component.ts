@@ -30,54 +30,37 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // SÓ PARA TESTAR NO VERCEL, PELO AMOR DE DEUS APAGA ISSO DEPOIS
-    if(this.username == this.password){
-      Swal.fire({
-        icon: 'success',
-        title: 'Login realizado com sucesso',
-        timer: 1000,
-        showConfirmButton: false
-      }).then(() => {
-        this.router.navigate(['/dashboard']);
-        console.log(this.authService.getUsername());
-      });
-    }
-    // SÓ PARA TESTAR NO VERCEL, PELO AMOR DE DEUS APAGA ISSO DEPOIS
-
-
-    // VERSÃO CORRETA AQUIIIIII
-    // this.authService.login(this.username, this.password).subscribe(
-    //   response => {
-    //     //exibe um alerta de sucesso e redireciona para a página de dashboard
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: 'Login realizado com sucesso',
-    //       timer: 1000,
-    //       showConfirmButton: false
-    //     }).then(() => {
-    //       this.router.navigate(['/dashboard']);
-    //       console.log(this.authService.getUsername());
-    //       const token = response.jwt;
-    //       localStorage.setItem('token', token);
-    //     });
-    //     // const navigationExtras: NavigationExtras = {
-    //     //   queryParams: { id },
-    //     // };
-    //     // this.router.navigate(['/dashboard']);
-    //     // console.log(this.authService.getUsername());
-    //   },
-    //   error => {
-    //     // exibe um alerta de erro
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Erro ao fazer login',
-    //       text: 'Usuário ou senha incorretos',
-    //       confirmButtonColor: '#EDA900',
-    //       confirmButtonText: 'Ok'
-    //     });
-    //   }
-    // );
-    // VERSÃO CORRETA AQUIIIIII
+    this.authService.login(this.username, this.password).subscribe(
+      response => {
+        //exibe um alerta de sucesso e redireciona para a página de dashboard
+        Swal.fire({
+          icon: 'success',
+          title: 'Login realizado com sucesso',
+          timer: 1000,
+          showConfirmButton: false
+        }).then(() => {
+          this.router.navigate(['/dashboard']);
+          console.log(this.authService.getUsername());
+          const token = response.jwt;
+          localStorage.setItem('token', token);
+        });
+        // const navigationExtras: NavigationExtras = {
+        //   queryParams: { id },
+        // };
+        // this.router.navigate(['/dashboard']);
+        // console.log(this.authService.getUsername());
+      },
+      error => {
+        // exibe um alerta de erro
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao fazer login',
+          text: 'Usuário ou senha incorretos',
+          confirmButtonColor: '#EDA900',
+          confirmButtonText: 'Ok'
+        });
+      }
+    );
   }
 }
 
