@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   projetosUnicos!: any[];
   firstName!: string;
 
-  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
+  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService, ) {}
   ngOnInit() {
     // this.setCurrentUser();
     // this.firstName = this.authService.getUsername();

@@ -1,7 +1,9 @@
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from 'src/app/auth';
+import { AuthService, LoginComponent } from 'src/app/auth';
 import { Empresa, Projeto } from 'src/app/shared';
 import Swal from 'sweetalert2';
 import { DashboardService } from '../services/dashboard.service';
@@ -24,15 +26,26 @@ export class DashboardComponent implements OnInit {
   user_acesso_av!: boolean;
   user_is_head!: boolean;
   is_superuser!: string;
+  user_id!: number;
 
-  constructor(private dashboardService: DashboardService, private authService: AuthService, private cookieService: CookieService) { }
+
+
+  constructor( private dashboardService: DashboardService, private authService: AuthService) { }
 
   ngOnInit() {
-    const jwtCookie = this.cookieService.get('jwt');
-    if (jwtCookie) {
-      const decodedToken = jwtDecode<any>(jwtCookie);
-      this.firstName = decodedToken.first_name;
-    }
+    const user = this.authService.getUser();
+    console.log(user.id_user);
+    console.log(user.username);
+    console.log(user.email);
+    console.log(user.first_name);
+    console.log(user.last_name);
+    console.log(user.avaliacao);
+    console.log(user.financeiro);
+    console.log(user.head_de_area);
+    console.log(user.superuser);
+    console.log(user.cargo);
+
+
     this.user_cargo = this.authService.getCargoUser();
     this.user_acesso_fin = this.authService.getUserAcessoFin();
     this.user_acesso_av = this.authService.getUserAcessoAv();
@@ -104,5 +117,4 @@ export class DashboardComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-
 }

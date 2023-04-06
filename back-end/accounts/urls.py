@@ -6,8 +6,8 @@ from accounts import views
 
 
 urlpatterns = [
-    path('profile/', views.ProfileView.as_view()),
-    path('api/auth/', views.CustomAuthToken.as_view()),
+    # path('profile/', views.ProfileView.as_view()),
+    # path('api/auth/', views.CustomAuthToken.as_view()),
     #path('api/login/', views.LoginView.as_view()),
     # path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     # path('current_user/', current_user),

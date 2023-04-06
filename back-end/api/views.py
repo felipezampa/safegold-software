@@ -10,6 +10,14 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
+import base64
+from django.conf import settings
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 '''
     @eduardolcordeiro
@@ -120,67 +128,67 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
 
 '''
 
-# class LoginView(APIView):
-#     def post(self, request):
-#         username = request.data['username']
-#         password = request.data['password']
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data['username']
+        password = request.data['password']
 
-#         user = models.User.objects.filter(username=username).first()
+        user = models.User.objects.filter(username=username).first()
 
-#         try:
-#             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
+        try:
+            auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
 
-#             cargo_nome = auth.idrh_cargo.nome_cargo
-#             financeiro = auth.financeiro
-#             avaliacao = auth.avaliacao
-#             head_de_area = auth.is_head
-#             cargo_nome = getattr(auth, 'idrh_cargo', None)
-#             if not cargo_nome:
-#                 sem_cargo = models.RhCargo.objects.get(id=4)
-#                 auth.idrh_cargo = sem_cargo
-#                 auth.save()
-#                 cargo_nome = sem_cargo.nome_cargo
+            cargo_nome = auth.idrh_cargo.nome_cargo
+            financeiro = auth.financeiro
+            avaliacao = auth.avaliacao
+            head_de_area = auth.is_head
+            cargo_nome = getattr(auth, 'idrh_cargo', None)
+            if not cargo_nome:
+                sem_cargo = models.RhCargo.objects.get(id=4)
+                auth.idrh_cargo = sem_cargo
+                auth.save()
+                cargo_nome = sem_cargo.nome_cargo
 
-#         except models.AuthUserPermissions.DoesNotExist:
-#             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
-#             financeiro = avaliacao = head_de_area = 0
-#             cargo_nome = 'Sem cargo vinculado'
+        except models.AuthUserPermissions.DoesNotExist:
+            # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
+            financeiro = avaliacao = head_de_area = 0
+            cargo_nome = 'Sem cargo vinculado'
 
-#         if isinstance(cargo_nome, str):
-#             cargo_dict = {
-#                 'nome_cargo': cargo_nome
-#             }
-#         else:
-#             cargo_dict = {
-#                 'nome_cargo': cargo_nome.nome_cargo
-#             }
+        if isinstance(cargo_nome, str):
+            cargo_dict = {
+                'nome_cargo': cargo_nome
+            }
+        else:
+            cargo_dict = {
+                'nome_cargo': cargo_nome.nome_cargo
+            }
 
-#         if user is None:
-#             raise AuthenticationFailed('Usuario nao encontrado')
+        if user is None:
+            raise AuthenticationFailed('Usuario nao encontrado')
 
-#         if not user.check_password(password):
-#             raise AuthenticationFailed('senha incorreta')
+        if not user.check_password(password):
+            raise AuthenticationFailed('senha incorreta')
 
-#         payload = {
-#             'id_user': user.id,
-#             'username': user.first_name,
-#             'email': user.email,
-#             'cargo': cargo_dict,
-#             'acesso_financeiro': financeiro,
-#             'acesso_avaliacao': avaliacao,
-#             'head_de_area': head_de_area,
-#             'is_superuser': user.is_superuser
-#         }
+        payload = {
+            'id_user': user.id,
+            'username': user.first_name,
+            'email': user.email,
+            'cargo': cargo_dict,
+            'acesso_financeiro': financeiro,
+            'acesso_avaliacao': avaliacao,
+            'head_de_area': head_de_area,
+            'is_superuser': user.is_superuser
+        }
 
-#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
 
-#         response = Response()
+        response = Response()
 
-#         response.data = {
-#             'jwt': token
-#         }
+        response.data = {
+            'jwt': token
+        }
 
-#         return response
+        return response
     
 # class UserView(APIView):
 #     def get(self, request):
@@ -244,18 +252,23 @@ class AptoGestorViewSet(viewsets.ModelViewSet):
 
 
 
+@api_view(['POST'])
+def api_login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        token, _ = Token.objects.get_or_create(user=user)
+        return JsonResponse({'token': token.key})
+    else:
+        return JsonResponse({'error': 'Invalid credentials'})
 
-    ### TESTE
-    from rest_framework.exceptions import AuthenticationFailed
-import jwt, datetime
-
-class LoginView(APIView):
-    def post(self,request):
-        username = request.data['username']
-        password = request.data['password']
-
-        user = models.User.objects.filter(username=username).first()
-        try:
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def api_userlogin(request):
+    user = request.user
+    try:
             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
 
             cargo_nome = auth.idrh_cargo.nome_cargo
@@ -269,72 +282,30 @@ class LoginView(APIView):
                 auth.save()
                 cargo_nome = sem_cargo.nome_cargo
 
-        except models.AuthUserPermissions.DoesNotExist:
+    except models.AuthUserPermissions.DoesNotExist:
             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
             financeiro = avaliacao = head_de_area = 0
             cargo_nome = 'Sem cargo vinculado'
 
-        if isinstance(cargo_nome, str):
+    if isinstance(cargo_nome, str):
             cargo_dict = {
                 'nome_cargo': cargo_nome
             }
-        else:
+    else:
             cargo_dict = {
                 'nome_cargo': cargo_nome.nome_cargo
             }
-
-        if user is None:
-            raise AuthenticationFailed('User not found!')
-        if not user.check_password(password):
-            raise AuthenticationFailed('Senha incorreta')
-        
-        payload = {
-            'id': user.id,
-            'username': user.first_name,
-            'email': user.email,
-            'first_name': user.first_name,
-            'cargo': cargo_dict,
-            'acesso_financeiro': financeiro,
-            'acesso_avaliacao': avaliacao,
-            'head_de_area': head_de_area,
-            'is_superuser': user.is_superuser,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-            'iat': datetime.datetime.utcnow()
-        }
-
-        token = jwt.encode(payload,'secret',algorithm='HS256').decode('utf-8')
-
-        response = Response()
-        response.set_cookie(key='jwt', value=token, httponly=True)
-        response.data = {
-            'jwt': token
-        }
-        
-        return response
-    
-class UserView(APIView):
-    def get(self,request):
-        token = request.COOKIES.get('jwt')
-
-        if not token:
-            raise AuthenticationFailed('token not found!')
-        
-        try:
-            payload = jwt.decode(token, 'secret',algorithm=['HS256'])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('token not found!')
-        
-        user = models.User.objects.filter(id=payload['id']).first()
-
-        serializer = serializers.UserSerializer(user)
-        return Response(serializer.data)
-    
-class Logout(APIView):
-    def post(self,request):
-        response = Response()
-        response.delete_cookie('jwt')
-        response.data =  {
-            'message': 'success'
-        }
-        return response
+    serialized_user = {
+        'id_user': user.id,
+        'username': user.username,
+        'email': user.email,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'cargo': cargo_dict,
+        'financeiro': financeiro,
+        'avaliacao': avaliacao,
+        'head_de_area': head_de_area,
+        'superuser': user.is_superuser
+    }
+    return JsonResponse(serialized_user)
 

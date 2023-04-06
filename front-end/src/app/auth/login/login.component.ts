@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from '../services/auth.service';
-import { DashboardService } from './../../dashboard/services/dashboard.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../services/auth.service';
+
 
 
 @Component({
@@ -12,46 +11,51 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
 
-  username!: string;
-  password!: string;
+export class LoginComponent {
+
+  username: string = '';
+  password: string = '';
   showErrorMessage: boolean = false;
-  myform!: FormGroup;
+  myform: FormGroup;
+  error: string = '';
+  token = '';
 
-  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService, private dashboardService: DashboardService) { }
+
+  user: any = {};
+
+
+
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.showErrorMessage = true;
-    }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.authService.login(this.username, this.password).subscribe(
-      response => {
-        //exibe um alerta de sucesso e redireciona para a página de dashboard
+      data => {
         Swal.fire({
           icon: 'success',
           title: 'Login realizado com sucesso',
           timer: 1000,
           showConfirmButton: false
         }).then(() => {
-          this.router.navigate(['/dashboard']);
-          console.log(this.authService.getUsername());
-          const token = response.jwt;
-          localStorage.setItem('token', token);
+
+          this.token = data.token;
+          this.authService.getUserInfo(this.token).subscribe(
+            user => {
+              this.authService.setUser(user); // armazenando o objeto do usuário no UserService
+              sessionStorage.setItem('user', JSON.stringify(user));
+
+              this.router.navigate(['/dashboard']);
+            }
+
+          );
         });
-        // const navigationExtras: NavigationExtras = {
-        //   queryParams: { id },
-        // };
-        // this.router.navigate(['/dashboard']);
-        // console.log(this.authService.getUsername());
       },
       error => {
-        // exibe um alerta de erro
+        //exibe um alerta de erro
         Swal.fire({
           icon: 'error',
           title: 'Erro ao fazer login',
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit {
         });
       }
     );
+
   }
 }
 
@@ -68,5 +73,36 @@ export class LoginComponent implements OnInit {
 
 
 
-
-
+// onSubmit() {
+//   this.authService.login(this.username, this.password).subscribe(
+//     response => {
+//       //exibe um alerta de sucesso e redireciona para a página de dashboard
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Login realizado com sucesso',
+//         timer: 1000,
+//         showConfirmButton: false
+//       }).then(() => {
+//         this.router.navigate(['/dashboard']);
+//         console.log(this.authService.getUsername());
+//         const token = response.jwt;
+//         localStorage.setItem('token', token);
+//       });
+//       // const navigationExtras: NavigationExtras = {
+//       //   queryParams: { id },
+//       // };
+//       // this.router.navigate(['/dashboard']);
+//       // console.log(this.authService.getUsername());
+//     },
+//     error => {
+//       // exibe um alerta de erro
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Erro ao fazer login',
+//         text: 'Usuário ou senha incorretos',
+//         confirmButtonColor: '#EDA900',
+//         confirmButtonText: 'Ok'
+//       });
+//     }
+//   );
+// }

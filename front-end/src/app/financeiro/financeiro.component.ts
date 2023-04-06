@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 import { DashboardService } from '../dashboard';
-import { Empresa, Projeto } from '../shared';
-import { APP_CONFIG } from '../shared';
+import { APP_CONFIG, Empresa, Projeto } from '../shared';
 
 @Component({
   selector: 'app-financeiro',
@@ -21,7 +20,7 @@ export class FinanceiroComponent implements OnInit {
   isSuperuser!: boolean;
   adminURL = APP_CONFIG.baseURL;
 
-  constructor( private authService:AuthService,private dashboardService: DashboardService ) {}
+  constructor( private authService:AuthService,private dashboardService: DashboardService) {}
   ngOnInit() {
     this.setCurrentUser();
     this.isSuperuser = this.authService.getIsSuperUser();

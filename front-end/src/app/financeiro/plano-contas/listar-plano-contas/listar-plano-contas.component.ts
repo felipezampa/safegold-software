@@ -29,9 +29,6 @@ export class ListarPlanoContasComponent implements OnInit {
     this.subscription = this.planoContasService.refreshPage$.subscribe(() => {
       this.listarContas();
     })
-    // if (!localStorage.getItem('currentUser')) {
-    //   this.router.navigate(['/login']);
-    // }
   }
 
   listarContas() {
