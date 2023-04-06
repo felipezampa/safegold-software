@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth';
+import { AuthService, LoginComponent } from '../auth';
 
 @Component({
   selector: 'app-avaliacao',

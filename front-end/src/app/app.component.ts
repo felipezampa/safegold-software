@@ -1,3 +1,4 @@
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardService } from './dashboard/services/dashboard.service';
 import { AuthService } from 'src/app/auth';
 import { Component, OnInit  } from '@angular/core';
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   projetosUnicos: any[];
   firstName: string;
 
-  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService ) {}
+  constructor(private router: Router, private cookieService: CookieService, private authService:AuthService,private dashboardService: DashboardService, ) {}
   ngOnInit() {
     this.setCurrentUser();
     this.firstName = this.authService.getUsername();
@@ -43,13 +44,13 @@ export class AppComponent implements OnInit {
   }
 
 
-  getProjetos() {
-    this.dashboardService.getProjetos(this.authService.getCurrentUser())
-      .subscribe(data => {
-        this.projetos = data;
-        this.getUniqueProjetos();
-      });
-  }
+   getProjetos() {
+     this.dashboardService.getProjetos(this.authService.getCurrentUser())
+       .subscribe(data => {
+         this.projetos = data;
+         this.getUniqueProjetos();
+       });
+   }
   getUniqueProjetos() {
     this.projetosUnicos = [];
     this.projetos.forEach((projeto) => {
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    sessionStorage.removeItem('user');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('selectedEmpresa');
     this.cookieService.delete('previousUrl');
@@ -85,7 +87,7 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    if (localStorage.getItem('currentUser') != null) {
+    if (sessionStorage.getItem('user') != null) {
       this.currentUser = true;
     } else {
       this.currentUser = false;

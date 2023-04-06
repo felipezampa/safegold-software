@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/auth';
+import { AuthService, LoginComponent } from 'src/app/auth';
 import { Component, OnInit  } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,13 +17,13 @@ export class FinanceiroComponent implements OnInit {
   currentUser: boolean;
   empresas: Empresa[];
   projetos: Projeto[];
-  selectedProjetos: number;
-  selectedEmpresa: number;
+  selectedProjetos: number = 0;
+  selectedEmpresa: number = 0;
   projetosUnicos: any[];
   firstName: string;
   isSuperuser: boolean;
 
-  constructor( private authService:AuthService,private dashboardService: DashboardService ) {}
+  constructor( private authService:AuthService,private dashboardService: DashboardService) {}
   ngOnInit() {
     this.setCurrentUser();
     this.isSuperuser = this.authService.getIsSuperUser();

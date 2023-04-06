@@ -21,6 +21,7 @@ export class DashboardFinanceiroComponent implements OnInit, AfterViewInit {
   constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) { }
 
   ngOnInit(): void {
+
     this.currentEmpresa = this.authService.getCurrentNome_empresa();
   }
 
