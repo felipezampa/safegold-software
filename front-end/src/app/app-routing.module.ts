@@ -4,7 +4,8 @@ import { LoginComponent, PageNotFoundComponent } from './auth';
 import { DashboardComponent } from './dashboard';
 import { FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent, DashboardFinanceiroComponent } from './financeiro';
 import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
-import { AuthGuard } from './auth.guard';
+import { AgendaComponent } from './agenda';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -30,6 +31,13 @@ const routes: Routes = [
   {
     path: 'avaliacao',
     component: AvaliacaoComponent, children:[
+      { path: 'autoavaliacao', component: AutoAvaliacaoComponent, canActivate: [AuthGuard] },
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'agenda',
+    component: AgendaComponent, children:[
       { path: 'autoavaliacao', component: AutoAvaliacaoComponent, canActivate: [AuthGuard] },
     ],
     canActivate: [AuthGuard]

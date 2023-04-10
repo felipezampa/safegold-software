@@ -1,9 +1,5 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthService, LoginComponent } from 'src/app/auth';
+import { AuthService } from 'src/app/auth';
 import { Empresa, Projeto } from 'src/app/shared';
 import Swal from 'sweetalert2';
 import { DashboardService } from '../services/dashboard.service';
@@ -34,25 +30,22 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     const user = this.authService.getUser();
-    console.log(user.id_user);
-    console.log(user.username);
-    console.log(user.email);
-    console.log(user.first_name);
-    console.log(user.last_name);
-    console.log(user.avaliacao);
-    console.log(user.financeiro);
-    console.log(user.head_de_area);
-    console.log(user.superuser);
-    console.log(user.cargo);
-
-
+    // console.log(user.id_user);
+    // console.log(user.username);
+    // console.log(user.email);
+    // console.log(user.first_name);
+    // console.log(user.last_name);
+    // console.log(user.avaliacao);
+    // console.log(user.financeiro);
+    // console.log(user.head_de_area);
+    // console.log(user.superuser);
+    // console.log(user.cargo);
     this.user_cargo = this.authService.getCargoUser();
     this.user_acesso_fin = this.authService.getUserAcessoFin();
     this.user_acesso_av = this.authService.getUserAcessoAv();
     this.user_is_head = this.authService.getUserisHead();
     this.firstName = this.authService.getUsername();
     this.is_superuser = this.authService.getIsSuperUser();
-
     this.getProjetos();
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
     this.selectedProjetos = contexto?.cod_projeto;
@@ -112,6 +105,18 @@ export class DashboardComponent implements OnInit {
     } else {
       window.location.href = 'avaliacao'
     }
+  }
+  validacaoAcessoAgenda() {
+    // if (this.user_acesso_fin != true) {
+    //   Swal.fire({
+    //     title: "Acesso Negado",
+    //     text: 'Você não tem acesso a essa página',
+    //     icon: 'error'
+    //   });
+    // } else {
+    //   window.location.href = 'financeiro/dashboard-financeiro'
+    // }
+    window.location.href = 'agenda'
   }
 
   logout() {

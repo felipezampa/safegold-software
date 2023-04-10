@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AuthModule, DashboardModule, FinanceiroModule, AvaliacaoModule } from './index';
-import { CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
+import { AgendaModule } from './agenda';
 import { AppRoutingModule } from './app-routing.module';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import { AgendaComponent } from './agenda/agenda.component';
+import { AppComponent } from './app.component';
+import { AuthModule, AvaliacaoModule, DashboardModule, FinanceiroModule } from './index';
+
 @NgModule({
   declarations: [
-    AppComponent,
-    AgendaComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +21,7 @@ import { AgendaComponent } from './agenda/agenda.component';
     DashboardModule,
     FinanceiroModule,
     AvaliacaoModule,
-    MatGridListModule,
-    MatCardModule
+    AgendaModule
   ],
   providers: [AuthModule, CookieService],
   bootstrap: [AppComponent]

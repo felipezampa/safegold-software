@@ -16,7 +16,7 @@ body {
 }
 
 .avaliacao {
-    --bg-color: #414442;
+    --bg-color: #5d58ff;
     --bg-color-light: #ececec;
     --text-color-hover: #ffffff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
@@ -43,6 +43,8 @@ body {
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease-out;
     text-decoration: none;
+    /* padding: 0 1rem; */
+    margin: 0 .5rem;
 }
 
 .card:hover {
@@ -77,6 +79,7 @@ body {
 .card:hover span {
     color: var(--text-color-hover);
 }
+
 .card:hover .sg-anchor {
     color: var(--text-color-hover);
 }
@@ -89,31 +92,70 @@ body {
     font-weight: 500;
 }
 
-.sg-anchor{
+.sg-anchor {
     color: #898989;
 }
-.sg-card-header{
+
+.sg-card-header {
     padding-bottom: 50px;
 }
 
-a{
+a {
     cursor: pointer;
     padding: .2rem 1rem;
     border-radius: 5px;
 }
 
-.logout{
+.logout {
     color: #ff1818;
-    
 }
-.logout:hover i{
+
+.logout:hover i {
     transform: scale(1.3);
     transition: 0.2s ease;
     padding-right: 5px;
 }
-.logout:hover a{
+
+.logout:hover a {
     background-color: #ff1818;
     color: white;
     font-weight: 700;
     transition: 0.2s ease;
+}
+
+@media screen and (max-width: 1400px) {
+    .card-span {
+        font-size: 1.5rem;
+    }
+    .card {
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .card-span {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        width: 17rem;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .header-image{
+        width: 20rem; 
+    }
+    .row{
+        display: flex;
+        flex-direction: row;
+    }
+    .card-span {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        width: 30rem;
+        margin-bottom: .7rem;
+    }
 }

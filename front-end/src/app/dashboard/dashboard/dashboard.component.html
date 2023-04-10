@@ -5,9 +5,9 @@
 
   <hr>
   <div class="row">
-    <div class="col-1 col-md-2"></div>
-    <h4 class="text-center col">Bem vindo, {{firstName}}</h4>
-    <div class="col-1 col-md-2 logout">
+    <div class="col-2 col-md-0"></div>
+    <div class="text-center col col-xs-6"><h4>Bem vindo, {{firstName}}</h4></div>
+    <div class="col-2 col-xs-6 logout align-items-center">
       <a type="submit" (click)="logout()">
         <i class="fa-solid fa-right-from-bracket me-1"></i>
         <span>Logout</span>
@@ -16,7 +16,7 @@
   </div>
   <h2 class="text-center mb-4">Escolha qual Aplicativo deseja acessar</h2>
   <div class="row d-flex justify-content-center">
-    <a class="card financeiro col-1" (click)="validacaoAcessoFin()">
+    <a class="card financeiro col-lg-3 col-sm-12" (click)="validacaoAcessoFin()">
       <div class="sg-card-header">
         <h1 class="card-span text-center">Financeiro</h1>
       </div>
@@ -34,7 +34,22 @@
         </ul>
       </div>
     </a>
-    <a class="card avaliacao col-1 mx-5" (click)="validacaoAcessoRH()">
+    <a class="card agenda col-lg-3 col-md-12" (click)="validacaoAcessoAgenda()">
+      <div class="sg-card-header">
+        <h1 class="card-span text-center">Agenda Gestores</h1>
+      </div>
+      <div class="sg-card-body">
+        <ul>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Agenda Semanal</span>
+          </li>
+          <li class="sg-anchor">
+            <span class="sg-nav-item">Agendas passadas</span>
+          </li>
+        </ul>
+      </div>
+    </a>
+    <a class="card avaliacao col-lg-3 col-md-12" (click)="validacaoAcessoRH()">
       <div class="sg-card-header">
         <h1 class="card-span text-center">Avaliação de Desempenho</h1>
       </div>
@@ -52,23 +67,6 @@
         </ul>
       </div>
     </a>
-    <a class="card agenda col-1">
-      <div class="sg-card-header">
-        <h1 class="card-span text-center">Agenda Gestores</h1>
-      </div>
-      <div class="sg-card-body">
-        <ul>
-          <li class="sg-anchor">
-            <span class="sg-nav-item">Autoavaliação de Gestores</span>
-          </li>
-          <li class="sg-anchor">
-            <span class="sg-nav-item">Avaliação de Coordenadores</span>
-          </li>
-          <li class="sg-anchor">
-            <span class="sg-nav-item">Competências</span>
-          </li>
-        </ul>
-      </div>
-    </a>
+    
   </div>
 </div>
