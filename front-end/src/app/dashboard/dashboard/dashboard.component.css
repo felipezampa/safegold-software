@@ -16,7 +16,7 @@ body {
 }
 
 .avaliacao {
-    --bg-color: #5d58ff;
+    --bg-color: #6a65eb;
     --bg-color-light: #ececec;
     --text-color-hover: #ffffff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
@@ -37,8 +37,8 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     position: relative;
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease-out;
@@ -98,6 +98,8 @@ body {
 
 .sg-card-header {
     padding-bottom: 50px;
+    position: sticky;
+    top: 0;
 }
 
 a {
@@ -157,5 +159,11 @@ a {
     .card {
         width: 30rem;
         margin-bottom: .7rem;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .card{
+        height: 7rem;
     }
 }

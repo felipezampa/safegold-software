@@ -4,10 +4,6 @@
     padding-top: 10px;
 }
 
-.sg-header {
-    color: #EDA900;
-}
-
 .sg-login-image-container {
     background-color: #373935;
     display: flex;
@@ -76,6 +72,10 @@
     outline: none;
 }
 
+.sg-margin{
+    margin-top: 4rem;
+}
+
 @media screen and (max-width:500px) {
     .sg-login-image-container {
         border-top-left-radius: 6px;
@@ -84,7 +84,6 @@
     }
 
     .sg-login-image-container {
-        /* width: 10rem; */
         padding: 1rem 5rem;
         align-items: center;
     }
@@ -93,6 +92,9 @@
         font-size: 1.1rem;
     }
 
+    .sg-margin{
+        margin-top: 1.5rem;
+    }
 
     #firstCol {
         order: 2;
