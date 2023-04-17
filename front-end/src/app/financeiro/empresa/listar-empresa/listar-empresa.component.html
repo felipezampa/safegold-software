@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around no-print">
+<nav class="navbar navbar-expand-lg navbar-light sg-fixed-nav justify-content-around">
     <div>
         <span id="exportar">AÇÕES:</span>
         <button type="button" class="sg-action-button" (click)="abrirFormCadastro()">Cadastrar</button>
@@ -11,7 +11,7 @@
     </div>
 </nav>
 <div class="container-fluid mb-5" style="padding-top: 60px;">
-    <div class="row mb-2 no-print">
+    <div class="row mb-2">
         <div class="col">
             <div class="card shadow-lg mx-2">
                 <div class="card-header">
@@ -40,7 +40,7 @@
                                 <th class="col">Projeto</th>
                                 <th class="col-1 text-center">Safegold</th>
                                 <th class="col-2">CNPJ</th>
-                                <th class="col-1 text-center no-print">Ações</th>
+                                <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                 <td class="text-center">{{ empresa.safegold_ger == 1 ? 'Sim' : 'Não' }}</td>
                                 <td>{{ empresa.cnpj != null ? (empresa.cnpj! | mask: '00.000.000/0000-00') : 'None' }}
                                 </td>
-                                <td class="text-center no-print">
+                                <td class="text-center">
                                     <a type="submit" (click)="verModalEmpresa(empresa)">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>

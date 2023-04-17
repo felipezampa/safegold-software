@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ExcluirEmpresaComponent, ModalEmpresaComponent, ListarEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from './index';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { NumericoDirective } from 'src/app/shared/directives';
+import { EmpresaService, ExcluirEmpresaComponent, InserirEditarEmpresaComponent, ListarEmpresaComponent, ModalEmpresaComponent } from './index';
 
 @NgModule({
   declarations: [

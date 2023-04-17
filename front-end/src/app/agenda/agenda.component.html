@@ -1,1 +1,57 @@
-<p>agenda works!</p>
+<div class="container-fluid mb-5" style="padding-top: 20px;">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card shadow-lg">
+                <div class="card-header text-center">
+                    <h2 class="text-center">Bem vindo {{'username'}}</h2>
+                    <!-- <label for="">Preencher a agenda indicando os valores</label> -->
+                    <button type="button" class="sg-action-button col">Preencher Agenda</button>
+                    <button type="button" class="sg-action-button col">Repetir agenda da última semana</button>
+                    <button type="button" class="sg-action-button col">Ver Histórico da Agenda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-lg text-center">
+                <div class="card-header">
+                    <h2 class="text-center">Sua Agenda</h2>
+                </div>
+                <div class="row text-center px-4">
+                    <div class="col-lg-2 col-md-12 bt-card-body" *ngFor="let dia of diasSemana">
+                        <div class="card">
+                            <div class="card-header text-center" id="bt-black-bg">
+                                <h2>{{dia.nome}}</h2>
+                                <h5>{{dia.dia}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row  text-center">
+                                    <div class="row">
+                                        <label for="">Tipo</label>
+                                        <select name="TipoProjeto" id=""></select>
+                                    </div>
+                                    <div class="row">
+                                        <label for="">Projeto</label>
+                                        <select name="TipoProjeto" id="">
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label for="">Atendimento</label>
+                                        <select name="TipoProjeto" id="">
+                                            <option value="" selected>Presencial</option>
+                                            <option value="">Remoto</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
