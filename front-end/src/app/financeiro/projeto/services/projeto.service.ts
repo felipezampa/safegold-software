@@ -38,7 +38,7 @@ export class ProjetoService {
       );
   }
 
-  listProjetos(): Observable<any> {
+  listProjetos(): Observable<Projeto[]> {
     return this.http.get<Projeto[]>(this.baseURL, { headers: this.httpHeaders });
   }
 
