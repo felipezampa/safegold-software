@@ -46,6 +46,16 @@ router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, b
 # router.register('rh_user_avaliacao',RhUserAvaliacaoViewSet , basename='rh_user_avaliacao')
 # router.register('rh_apro_gestor',AptoGestorViewSet , basename='rh_apro_gestor')
 
+
+# AGENDA
+router.register('sg_unidadedenegocios', SgUnidadeNegocioViewSet, basename='sg_unidadedenegocios')
+router.register('sg_area', SgAreaViewSet, basename='sg_area')
+router.register('sg_funcao', SgFuncaoViewSet, basename='sg_funcao')
+router.register('sg_funcao_gestor', SgFuncaoGestorViewSet, basename='sg_funcao_gestor')
+
+
+
+
 from crud_app import views
 
 

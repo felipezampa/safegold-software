@@ -240,3 +240,32 @@ class RhClassificacaoCompSerializers(serializers.ModelSerializer):
 
 
 
+
+
+
+
+################################################################################## MODULO AGENDA ###########################################################################################################################
+class SgUnidadedeNegocioSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = SgUnidadeNegocio
+        fields = '__all__'
+
+
+class SgAreaSerializers(serializers.ModelSerializer):
+    unidade = serializers.StringRelatedField(source='id_unidade.unidade')
+    class Meta:
+        model = SgArea
+        fields =  'id_area', 'id_unidade', 'area', 'unidade'
+
+class SgFuncaoSerializers(serializers.ModelSerializer):
+    area = serializers.StringRelatedField(source='id_area.area')
+    class Meta:
+        model = SgFuncao
+        fields = 'id_funcao','id_area','area','funcao','carga_horaria'
+
+class SgFuncaoGestorSerializers(serializers.ModelSerializer):
+    funcao = serializers.StringRelatedField(source='id_funcao.funcao')
+    username = serializers.StringRelatedField(source='id_user.username')
+    class Meta:
+        model = SgFuncaoGestor
+        fields = 'id_func_gest','id_funcao','funcao', 'id_user','funcao', 'data_inicio','data_fim','username'

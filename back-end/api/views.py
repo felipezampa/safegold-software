@@ -289,3 +289,27 @@ def api_userlogin(request):
     }
     return JsonResponse(serialized_user)
 
+################################################################################## MODULO AGENDA ###########################################################################################################################
+class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
+    queryset = models.SgUnidadeNegocio.objects.all()
+    serializer_class = serializers.SgUnidadedeNegocioSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_unidade','unidade']
+
+class SgAreaViewSet(viewsets.ModelViewSet):
+    queryset = models.SgArea.objects.all()
+    serializer_class = serializers.SgAreaSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_area','id_unidade', 'area']
+
+class SgFuncaoViewSet(viewsets.ModelViewSet):
+    queryset = models.SgFuncao.objects.all()
+    serializer_class = serializers.SgFuncaoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_funcao','id_area','funcao','carga_horaria']
+
+class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
+    queryset = models.SgFuncaoGestor.objects.all()
+    serializer_class = serializers.SgFuncaoGestorSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
