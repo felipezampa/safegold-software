@@ -128,67 +128,67 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
 
 '''
 
-class LoginView(APIView):
-    def post(self, request):
-        username = request.data['username']
-        password = request.data['password']
+# class LoginView(APIView):
+#     def post(self, request):
+#         username = request.data['username']
+#         password = request.data['password']
 
-        user = models.User.objects.filter(username=username).first()
+#         user = models.User.objects.filter(username=username).first()
 
-        try:
-            auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
+#         try:
+#             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
 
-            cargo_nome = auth.idrh_cargo.nome_cargo
-            financeiro = auth.financeiro
-            avaliacao = auth.avaliacao
-            head_de_area = auth.is_head
-            cargo_nome = getattr(auth, 'idrh_cargo', None)
-            if not cargo_nome:
-                sem_cargo = models.RhCargo.objects.get(id=4)
-                auth.idrh_cargo = sem_cargo
-                auth.save()
-                cargo_nome = sem_cargo.nome_cargo
+#             cargo_nome = auth.idrh_cargo.nome_cargo
+#             financeiro = auth.financeiro
+#             avaliacao = auth.avaliacao
+#             head_de_area = auth.is_head
+#             cargo_nome = getattr(auth, 'idrh_cargo', None)
+#             if not cargo_nome:
+#                 sem_cargo = models.RhCargo.objects.get(id=4)
+#                 auth.idrh_cargo = sem_cargo
+#                 auth.save()
+#                 cargo_nome = sem_cargo.nome_cargo
 
-        except models.AuthUserPermissions.DoesNotExist:
-            # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
-            financeiro = avaliacao = head_de_area = 0
-            cargo_nome = 'Sem cargo vinculado'
+#         except models.AuthUserPermissions.DoesNotExist:
+#             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
+#             financeiro = avaliacao = head_de_area = 0
+#             cargo_nome = 'Sem cargo vinculado'
 
-        if isinstance(cargo_nome, str):
-            cargo_dict = {
-                'nome_cargo': cargo_nome
-            }
-        else:
-            cargo_dict = {
-                'nome_cargo': cargo_nome.nome_cargo
-            }
+#         if isinstance(cargo_nome, str):
+#             cargo_dict = {
+#                 'nome_cargo': cargo_nome
+#             }
+#         else:
+#             cargo_dict = {
+#                 'nome_cargo': cargo_nome.nome_cargo
+#             }
 
-        if user is None:
-            raise AuthenticationFailed('Usuario nao encontrado')
+#         if user is None:
+#             raise AuthenticationFailed('Usuario nao encontrado')
 
-        if not user.check_password(password):
-            raise AuthenticationFailed('senha incorreta')
+#         if not user.check_password(password):
+#             raise AuthenticationFailed('senha incorreta')
 
-        payload = {
-            'id_user': user.id,
-            'username': user.first_name,
-            'email': user.email,
-            'cargo': cargo_dict,
-            'acesso_financeiro': financeiro,
-            'acesso_avaliacao': avaliacao,
-            'head_de_area': head_de_area,
-            'is_superuser': user.is_superuser
-        }
+#         payload = {
+#             'id_user': user.id,
+#             'username': user.first_name,
+#             'email': user.email,
+#             'cargo': cargo_dict,
+#             'acesso_financeiro': financeiro,
+#             'acesso_avaliacao': avaliacao,
+#             'head_de_area': head_de_area,
+#             'is_superuser': user.is_superuser
+#         }
 
-        token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
+#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
 
-        response = Response()
+#         response = Response()
 
-        response.data = {
-            'jwt': token
-        }
+#         response.data = {
+#             'jwt': token
+#         }
 
-        return response
+#         return response
     
 # class UserView(APIView):
 #     def get(self, request):
@@ -205,13 +205,9 @@ class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     queryset = models.AuthUserPermissions.objects.all()
     serializer_class = serializers.AuthUserPermissionsSerializers
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head', 'idrh_cargo']
+    filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head']
     
-class RHCargoViewSet(viewsets.ModelViewSet):
-    queryset = models.RhCargo.objects.all()
-    serializer_class = serializers.RHCargoSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'nome_cargo']
+
 
 class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
     queryset = models.RhClassificacaoComp.objects.all()
@@ -219,35 +215,35 @@ class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id', 'classificacao']
 
-class RhFactCargoMetasViewSet(viewsets.ModelViewSet):
-    queryset = models.RhFactCargoMetas.objects.all()
-    serializer_class = serializers.RhFactCargoMetasSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','valor_ncf','qtde_indicadores','peso_indicadores']
+# class RhFactCargoMetasViewSet(viewsets.ModelViewSet):
+#     queryset = models.RhFactCargoMetas.objects.all()
+#     serializer_class = serializers.RhFactCargoMetasSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','valor_ncf','qtde_indicadores','peso_indicadores']
 
-class RhFactComportamentalViewSet(viewsets.ModelViewSet):
-    queryset = models.RhFactComportamental.objects.all()
-    serializer_class = serializers.RhFactComportamentalSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'indicador', 'competencia']
+# class RhFactComportamentalViewSet(viewsets.ModelViewSet):
+#     queryset = models.RhFactComportamental.objects.all()
+#     serializer_class = serializers.RhFactComportamentalSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = ['id', 'indicador', 'competencia']
 
-class RhMapCargoCompViewSet(viewsets.ModelViewSet):
-    queryset = models.RhMapCargoComp.objects.all()
-    serializer_class = serializers.RhMapCargoCompSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','instrucoes']
+# class RhMapCargoCompViewSet(viewsets.ModelViewSet):
+#     queryset = models.RhMapCargoComp.objects.all()
+#     serializer_class = serializers.RhMapCargoCompSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = ['id', 'idrh_cargo','idrh_cargo__nome_cargo','idrh_fact_comportamental', 'idrh_fact_comportamental__indicador','idrh_fact_comportamental__competencia','idrh_classificacao_comp','idrh_classificacao_comp__classificacao','instrucoes']
 
-class RhUserAvaliacaoViewSet(viewsets.ModelViewSet):
-    queryset = models.RhUserAvaliacao.objects.all()
-    serializer_class = serializers.RhUserAvaliacaoSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+# class RhUserAvaliacaoViewSet(viewsets.ModelViewSet):
+#     queryset = models.RhUserAvaliacao.objects.all()
+#     serializer_class = serializers.RhUserAvaliacaoSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = []
 
-class AptoGestorViewSet(viewsets.ModelViewSet):
-    queryset = models.AptoProj.objects.all()
-    serializer_class = serializers.Apto_gestorSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = []
+# class AptoGestorViewSet(viewsets.ModelViewSet):
+#     queryset = models.AptoProj.objects.all()
+#     serializer_class = serializers.Apto_gestorSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = []
 
 
 
@@ -271,37 +267,21 @@ def api_userlogin(request):
     try:
             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
 
-            cargo_nome = auth.idrh_cargo.nome_cargo
             financeiro = auth.financeiro
             avaliacao = auth.avaliacao
             head_de_area = auth.is_head
-            cargo_nome = getattr(auth, 'idrh_cargo', None)
-            if not cargo_nome:
-                sem_cargo = models.RhCargo.objects.get(id=4)
-                auth.idrh_cargo = sem_cargo
-                auth.save()
-                cargo_nome = sem_cargo.nome_cargo
+
 
     except models.AuthUserPermissions.DoesNotExist:
             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
             financeiro = avaliacao = head_de_area = 0
-            cargo_nome = 'Sem cargo vinculado'
 
-    if isinstance(cargo_nome, str):
-            cargo_dict = {
-                'nome_cargo': cargo_nome
-            }
-    else:
-            cargo_dict = {
-                'nome_cargo': cargo_nome.nome_cargo
-            }
     serialized_user = {
         'id_user': user.id,
         'username': user.username,
         'email': user.email,
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'cargo': cargo_dict,
         'financeiro': financeiro,
         'avaliacao': avaliacao,
         'head_de_area': head_de_area,

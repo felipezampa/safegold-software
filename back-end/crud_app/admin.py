@@ -29,12 +29,23 @@ admin.site.register(Fornecedor)
 
 # RH AVALIAÇÃO DE DESEMPENHO
 
-admin.site.register(AuthUserPermissions)
-admin.site.register(RhCargo)
-admin.site.register(RhClassificacaoComp)
-admin.site.register(RhFactCargoMetas)
-admin.site.register(RhFactComportamental)
-admin.site.register(RhMapCargoComp)
-admin.site.register(RhUserAvaliacao)
+# admin.site.register(AuthUserPermissions)
+# admin.site.register(RhClassificacaoComp)
+# admin.site.register(RhFactCargoMetas)
+# admin.site.register(RhFactComportamental)
+# admin.site.register(RhMapCargoComp)
+# admin.site.register(RhUserAvaliacao)
+
+
+
+#AGENDA
+admin.site.register(SgArea)
+admin.site.register(SgAvaliador)
+admin.site.register(SgAvaliadorGestor)
+admin.site.register(SgFuncao)
+admin.site.register(SgFuncaoGestor)
+admin.site.register(SgUnidadeNegocio)
+
+
 
 
