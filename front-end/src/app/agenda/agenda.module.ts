@@ -6,11 +6,15 @@ import { RouterModule } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AgendaComponent } from './index';
+import { AgendaHistoricoComponent } from './agenda-historico/agenda-historico.component';
+import { InserirAgendaComponent } from './inserir-agenda/inserir-agenda.component';
 
 
 @NgModule({
   declarations: [
-    AgendaComponent
+    AgendaComponent,
+    AgendaHistoricoComponent,
+    InserirAgendaComponent
   ],
   imports: [
     CommonModule,
