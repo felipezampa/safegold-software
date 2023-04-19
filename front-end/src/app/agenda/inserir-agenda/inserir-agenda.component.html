@@ -14,16 +14,9 @@
                         <div class="col">
                             <span id="exportar">OPÇÕES:</span>
                             <button type="button" class="sg-action-button col">Repetir agenda da última semana</button>
-                            <button type="button" class="sg-action-button col"
-                                (click)='verModalAgenda()'>Histórico da
+                            <button type="button" class="sg-action-button col" (click)='verModalAgenda()'>Histórico da
                                 Agenda</button>
-
                         </div>
-                        <!-- <div class="col">
-                            <span id="exportar">Filtrar data:</span>
-                            <input type="date" name="diaInicio" [(ngModel)]="diaInicio" id="">
-                            <input type="date" name="diaFim" [(ngModel)]="diaFim" id="">
-                        </div> -->
                     </div>
 
                 </div>
@@ -58,7 +51,8 @@
                                         <small id="emailHelp" class="form-text text-muted text-left">Projeto</small>
                                         <select name="TipoProjeto" id="" placeholder="aaa">
                                             <option value="" selected>Selecione um Projeto</option>
-                                            <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{ projeto.projeto }}
+                                            <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{
+                                                projeto.projeto }}
                                             </option>
                                         </select>
                                     </div>

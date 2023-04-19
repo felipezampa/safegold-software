@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { AgendaService } from '../services/agenda.service';
+
 
 @Component({
   selector: 'app-agenda-historico',
@@ -8,12 +10,38 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AgendaHistoricoComponent implements OnInit {
 
-  // @Input() empresa!: Empresa;
+
   ex = new Array(100);
-  constructor() { }
+  username!: String;
+  diaInicio!: Date;
+  diaFim!: Date;
+  dataFiltrada!: string;
+  constructor(private router: Router, private agendaService: AgendaService) { }
 
   ngOnInit(): void {
+    this.username = 'username'
+    this.atribuirSemanaAtual();
   }
 
+  preencherAgenda() {
+    this.router.navigate(['agenda']);
+    // modalRef.componentInstance.empresa = empresa;
+  }
 
+  filtrarPorData(diaInicio: Date, diaFim: Date) {
+    const dataInicio = diaInicio.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
+    const dataFim = diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
+    console.log('aaa->'+dataInicio);
+    this.dataFiltrada = `${dataInicio} - ${dataFim}`;
+    console.log(this.dataFiltrada);
+    // console.log(this.diaFim);
+  }
+
+  atribuirSemanaAtual(){
+    this.diaInicio = this.agendaService.getDiaInicio();
+    this.diaFim = this.agendaService.getDiaFim();
+    const dataInicioa = this.diaInicio.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
+    const dataFima = this.diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
+    this.dataFiltrada = `${dataInicioa} - ${dataFima}`;
+  }
 }

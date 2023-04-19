@@ -4,7 +4,7 @@
     border: 1px solid var(--dark-gray);
     font-weight: 600;
     margin: 10px;
-    padding: 5px 25px;
+    padding: .3rem 1rem;
     border-radius: 8px;
     transition: 0.5s;
 }
