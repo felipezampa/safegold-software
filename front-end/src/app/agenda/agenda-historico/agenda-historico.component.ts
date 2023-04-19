@@ -16,7 +16,8 @@ export class AgendaHistoricoComponent implements OnInit {
   diaInicio!: Date;
   diaFim!: Date;
   dataFiltrada!: string;
-  constructor(private router: Router, private agendaService: AgendaService) { }
+  
+  constructor(private router: Router, private agendaService: AgendaService,) { }
 
   ngOnInit(): void {
     this.username = 'username'
@@ -44,4 +45,5 @@ export class AgendaHistoricoComponent implements OnInit {
     const dataFima = this.diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     this.dataFiltrada = `${dataInicioa} - ${dataFima}`;
   }
+
 }

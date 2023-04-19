@@ -1,0 +1,21 @@
+select {
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+select option {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+}
+
+small{
+    text-align: left;
+    font-size: .85rem;
+}

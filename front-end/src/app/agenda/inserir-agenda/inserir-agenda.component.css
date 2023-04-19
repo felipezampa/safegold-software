@@ -63,7 +63,7 @@ h5 {
 }
 
 .sg-add-button {
-    background-color: #facc58ce;
+    background-color: #a8ff96ce;
     color: #000;
     border: 0;
     font-weight: 600;
@@ -72,19 +72,9 @@ h5 {
 
 .sg-add-button:hover {
     background-color: #21487B;
-    color: #9CD485;
-}
-
-
-#bt-blue-bg {
-    background-color: #21487B;
     color: #fff;
 }
 
-#bt-black-bg {
-    background-color: #9CD485;
-    color: #000;
-}
 
 .bt-container {
     margin: 0 50px 0 50px;
@@ -103,7 +93,7 @@ h5 {
     padding: 1rem .5rem;
 }
 #sg-agenda-header {
-    background-color: #15803d;
+    background-color: #21487B;
     color: #fff;
 }
 @media screen and (max-width:1363px) {

@@ -8,13 +8,15 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AgendaComponent } from './index';
 import { AgendaHistoricoComponent } from './agenda-historico/agenda-historico.component';
 import { InserirAgendaComponent } from './inserir-agenda/inserir-agenda.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     AgendaComponent,
     AgendaHistoricoComponent,
-    InserirAgendaComponent
+    InserirAgendaComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

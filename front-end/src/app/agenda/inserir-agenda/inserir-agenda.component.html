@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card shadow-lg">
                 <div class="card-header text-center">
-                    <h2 class="text-center">Bem vindo {{'username'}}</h2>
+                    <h2 class="text-center">Bem vindo {{username}}</h2>
                     <!-- <label for="">Preencher a agenda indicando os valores</label> -->
                     <div class="row">
                         <div class="col">
@@ -37,7 +37,10 @@
                                 <h2>{{dia.nome}}</h2>
                                 <h5>{{dia.dia}}</h5>
                             </div>
-                            <div class="card-body">
+                            <div class="card-deck">
+                                <sg-compromisso-card *ngFor="let card of dia.cards"></sg-compromisso-card>
+                              </div>
+                            <!-- <div class="card-body">
                                 <div class="px-2">
                                     <div class="row">
                                         <small id="emailHelp" class="form-text text-muted text-left">Tipo</small>
@@ -64,11 +67,12 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="sg-add-button card-footer" (click)="adicionarProjeto()">
+                            </div> -->
+                            <button class="sg-add-button card-footer" (click)="adicionarProjeto(dia.index)">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
+                        
                     </div>
                 </div>
             </div>
