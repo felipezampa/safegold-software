@@ -1,10 +1,12 @@
-<div class="container-fluid mb-5" style="padding-top: 20px;">
+<div class="container-fluid mb-5" id="historico-agenda">
     <div class="row mb-2">
         <div class="col">
             <div class="card shadow-lg">
-                <div class="card-header text-center">
-                    <h2 class="text-center">Bem vindo {{'username'}}</h2>
+                <div class="card-header text-center" id="sg-agenda-header">
+                    <h2 class="text-center">Bem vindo {{username}}</h2>
                     <!-- <label for="">Preencher a agenda indicando os valores</label> -->
+                </div>
+                <div class="row card-body text-center">
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
                             <span id="exportar">AÇÕES:</span>
@@ -24,7 +26,6 @@
                                 (click)="filtrarPorData(diaInicio,diaFim)">Filtrar</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@
     <div class="row">
         <div class="col">
             <div class="card shadow-lg text-center">
-                <div class="card-header">
+                <div class="card-header" id="sg-agenda-header">
                     <h2 class="text-center">
                         Sua Agenda: {{dataFiltrada}}
                     </h2>

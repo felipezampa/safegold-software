@@ -1,3 +1,16 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#inserir-agenda {
+    padding-top: 1.3rem;
+    --cor-header: #14ed00;
+    --bg-header: #58524c;
+    --cor-card-header: #ed0000;
+    --bg-card-header: #ed8e00;
+    --cor-card-footer: #1e95ad;
+    --bg-card-footer: #a8ff96ce;
+    --cor-action-btn: #000000;
+    --bg-action-btn: #edaa00a6;
+}
+/* -------------------------------------------   TAG  ------------------------------------------- */
 select {
     border: none;
     font-size: 1rem;

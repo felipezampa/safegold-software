@@ -1,31 +1,115 @@
-.sg-action-button {
-    background-color: #edaa00a6;
-    color: var(--black);
-    border: 1px solid var(--dark-gray);
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#inserir-agenda {
+    padding-top: 1.3rem;
+    /* Header Principal dos dois cards */
+    --cor-header: #eda900;
+    --bg-header: #373935;
+    /* Header dos cards de dias */
+    --cor-card-header: #fff;
+    --bg-card-header: #eda900;
+}
+
+.sg-add {
+    /* Botões de adicionar dos cards de dias */
+    --cor-card-footer: #eda900;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #eda900;
+    border-bottom-left-radius: 5px;
+}
+
+.sg-remove {
+    /* Botões de adicionar dos cards de dias */
+    --cor-card-footer: #ff0000;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #ff0000;
+    border-bottom-right-radius: 5px;
+}
+
+#btn-options {
+    /* Botões de action */
+    --cor-action-btn: #373935;
+    --bg-action-btn: #edaa00cc;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
+}
+
+#btn-logout {
+    /* Botões de action */
+    --cor-action-btn: #fff;
+    --bg-action-btn: #ff0000;
+    --hover-cor-action-btn: #fff;
+    --hover-bg-action-btn: #ff0000;
+}
+
+/* -------------------------------------------   ID   ------------------------------------------- */
+#sg-agenda-header {
+    background-color: var(--bg-header);
+    color: var(--cor-header);
+}
+
+#sg-dia-header {
+    background-color: var(--bg-card-header);
+    color: var(--cor-card-header);
+}
+
+#options {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    vertical-align: middle;
+    margin-right: 1.3rem;
+}
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.sg-button {
+    background-color: var(--bg-action-btn);
+    color: var(--cor-action-btn);
+    border: 1px solid var(--cor-action-btn);
     font-weight: 600;
-    margin: 10px;
+    margin: .8rem;
     padding: .3rem 1rem;
     border-radius: 8px;
     transition: 0.5s;
 }
 
-.sg-action-button:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
-    border: 1px solid var(--dark-gray);
-    ;
+.sg-button:hover {
+    background-color: var(--hover-bg-action-btn);
+    color: var(--hover-cor-action-btn);
+    border: 1px solid var(--hover-bg-action-btn);
 }
 
+.sg-footer-button {
+    background-color: var(--bg-card-footer);
+    color: var(--cor-card-footer);
+    border: 0;
+    font-weight: 600;
+    transition: 0.5s;
+}
 
+.sg-footer-button:hover {
+    background-color: var(--hover-bg-card-footer);
+    color: var(--hover-cor-card-footer);
+}
 
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+.sg-card-body {
+    flex-basis: 20%;
+    max-width: 20%;
+    box-sizing: border-box;
+    padding: 1rem .5rem;
+}
 
-.card {
+.card-deck{
+    padding: .5rem 1rem 0 1rem;
+}
+.card-footer {
     padding: 0;
 }
 
+/* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
-    font-family: 'Raleway', sans-serif;
+    font-family: sans-serif;
     text-transform: uppercase;
     font-size: 1.3rem;
     letter-spacing: 2px;
@@ -34,7 +118,7 @@ h2 {
 }
 
 h5 {
-    font-family: 'Raleway', sans-serif;
+    font-family: sans-serif;
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 2px;
@@ -42,65 +126,13 @@ h5 {
     margin: 0;
 }
 
-.sg-fixed-nav {
-    background-color: #E6E7E9;
-    padding: 0px 20px;
-    position: fixed;
-    z-index: 1;
-    justify-content: space-around;
-    display: inline-flex;
-    width: 100% !important;
-}
-
-#exportar {
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1.3rem;
-    vertical-align: middle;
-    margin-right: 1.3rem;
-    padding-bottom: 10%;
-}
-
-.sg-add-button {
-    background-color: #a8ff96ce;
-    color: #000;
-    border: 0;
-    font-weight: 600;
-    transition: 0.5s;
-}
-
-.sg-add-button:hover {
-    background-color: #21487B;
-    color: #fff;
-}
-
-
-.bt-container {
-    margin: 0 50px 0 50px;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1.5rem 2.5rem;
-}
-
-.bt-card-body {
-    flex-basis: 20%;
-    max-width: 20%;
-    box-sizing: border-box;
-    padding: 1rem .5rem;
-}
-#sg-agenda-header {
-    background-color: #21487B;
-    color: #fff;
-}
+/* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width:1363px) {
     #sg-agenda-header h2 {
         font-size: 1.2rem;
     }
-    .bt-card-body {
+
+    .sg-card-body {
         padding: 1rem .25rem;
     }
 }
@@ -112,15 +144,11 @@ h5 {
 }
 
 @media screen and (max-width:991px) {
-    .bt-card-body {
+    .sg-card-body {
         flex-basis: 100%;
         max-width: 100%;
         box-sizing: border-box;
         padding: 1rem .5rem;
-    }
-
-    .bt-card-body {
-        padding: .4rem;
     }
 
     .card-body {
@@ -147,37 +175,4 @@ h5 {
         font-size: 1rem;
         margin: 0;
     }
-}
-
-
-.sg-fixed-nav {
-    /* background-color: var(--background);
-    padding: 0px 20px;
-    position: fixed;
-    z-index: 1; */
-    /* justify-content: space-around; */
-    display: inline-flex;
-    /* width: 100% !important; */
-}
-
-select {
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    width: 100%;
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-    margin-bottom: 10px;
-}
-
-select option {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #000;
-}
-
-small{
-    text-align: left;
-    font-size: .85rem;
 }

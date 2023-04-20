@@ -1,41 +1,14 @@
-<!-- <div class="card-body">
-        <div class="px-2">
-            <div class="row">
-                <small id="emailHelp" class="form-text text-muted text-left">Tipo</small>
-                <select name="TipoProjeto" id="tipoProj">
-                    <option value="" selected>Selecione um Tipo</option>
-                    <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
-                    </option>
-                </select>
-            </div>
-            <div class="row">
-                <small id="emailHelp" class="form-text text-muted text-left">Projeto</small>
-                <select name="TipoProjeto" id="" placeholder="aaa">
-                    <option value="" selected>Selecione um Projeto</option>
-                    <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{
-                        projeto.projeto }}
-                    </option>
-                </select>
-            </div>
-            <div class="row">
-                <small id="emailHelp" class="form-text text-muted text-left">Atendimento</small>
-                <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()>
-                    <option value='Presencial' selected>Presencial</option>
-                    <option value='Remoto'>Remoto</option>
-                </select>
-            </div>
-        </div>
-    </div> -->
-<!-- <hr> -->
 <div class="px-4">
     <div class="row">
-        <small id="emailHelp" class="form-text text-muted text-left">Tipo</small>
+        <small class="form-text text-muted text-left">Tipo</small>
         <select name="TipoProjeto" id="tipoProj">
             <option value="" selected>Selecione um Tipo</option>
+            <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
+            </option>
         </select>
     </div>
     <div class="row">
-        <small id="emailHelp" class="form-text text-muted text-left">Projeto</small>
+        <small class="form-text text-muted text-left">Projeto</small>
         <select name="TipoProjeto" id="" placeholder="aaa">
             <option value="" selected>Selecione um Projeto</option>
             <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
@@ -43,10 +16,19 @@
         </select>
     </div>
     <div class="row">
-        <small id="emailHelp" class="form-text text-muted text-left">Atendimento</small>
+        <small class="form-text text-muted text-left">Atendimento</small>
+        <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
         <select name="TipoProjeto">
             <option value='Presencial' selected>Presencial</option>
             <option value='Remoto'>Remoto</option>
+        </select>
+    </div>
+    <div class="row">
+        <small class="form-text text-muted text-left">Horas</small>
+        <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
+        <select name="TipoProjeto">
+            <option value="" selected>Selecione as horas</option>
+            <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
         </select>
     </div>
     <hr>

@@ -1,24 +1,26 @@
-<div class="container-fluid mb-5" style="padding-top: 20px;">
+<div class="container-fluid mb-5" id="inserir-agenda">
     <div class="row mb-2">
         <div class="col">
             <div class="card shadow-lg">
-                <div class="card-header text-center">
+                <div class="card-header text-center" id="sg-agenda-header">
                     <h2 class="text-center">Bem vindo {{username}}</h2>
-                    <!-- <label for="">Preencher a agenda indicando os valores</label> -->
-                    <div class="row">
-                        <div class="col">
-                            <span id="exportar">VER AGENDA:</span>
-                            <button type="button" class="sg-action-button col">Essa semana</button>
-                            <button type="button" class="sg-action-button col">Semana passada</button>
-                        </div>
-                        <div class="col">
-                            <span id="exportar">OPÇÕES:</span>
-                            <button type="button" class="sg-action-button col">Repetir agenda da última semana</button>
-                            <button type="button" class="sg-action-button col" (click)='verModalAgenda()'>Histórico da
-                                Agenda</button>
-                        </div>
+                </div>
+                <div class="row card-body text-center">
+                    <div class="col">
+                        <span id="options">VER AGENDA:</span>
+                        <button type="button" class="sg-button col" id="btn-options">Essa semana</button>
+                        <button type="button" class="sg-button col" id="btn-options">Semana passada</button>
                     </div>
-
+                    <div class="col">
+                        <span id="options">OPÇÕES:</span>
+                        <button type="button" class="sg-button col" id="btn-options">Repetir agenda da última semana</button>
+                        <button type="button" class="sg-button col" id="btn-options" (click)='verModalAgenda()'>Histórico da
+                            Agenda</button>
+                        <button type="button" (click)="logout()" class="sg-button logout" id="btn-logout">
+                            <i class="fa-solid fa-right-from-bracket me-1"></i>
+                            <span>Logout</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,53 +28,32 @@
     <div class="row">
         <div class="col">
             <div class="card shadow-lg text-center">
-                <div class="card-header">
-                    <h2 class="text-center">Sua Agenda: {{ diaInicio.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}
-                        - {{ diaFim.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}</h2>
+                <div class="card-header" id="sg-agenda-header">
+                    <h2 class="text-center">
+                        Sua Agenda: {{ diaInicio.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}
+                        - {{ diaFim.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}
+                    </h2>
                 </div>
                 <div class="row text-center px-4">
-                    <div class="col-lg-12 bt-card-body" *ngFor="let dia of diasSemana">
+                    <div class="col-lg-12 sg-card-body" *ngFor="let dia of diasSemana">
                         <div class="card">
-                            <div class="card-header text-center" id="sg-agenda-header">
+                            <div class="card-header text-center" id="sg-dia-header">
                                 <h2>{{dia.nome}}</h2>
                                 <h5>{{dia.dia}}</h5>
                             </div>
                             <div class="card-deck">
                                 <sg-compromisso-card *ngFor="let card of dia.cards"></sg-compromisso-card>
-                              </div>
-                            <!-- <div class="card-body">
-                                <div class="px-2">
-                                    <div class="row">
-                                        <small id="emailHelp" class="form-text text-muted text-left">Tipo</small>
-                                        <select name="TipoProjeto" id="tipoProj">
-                                            <option value="" selected>Selecione um Tipo</option>
-                                            <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <small id="emailHelp" class="form-text text-muted text-left">Projeto</small>
-                                        <select name="TipoProjeto" id="" placeholder="aaa">
-                                            <option value="" selected>Selecione um Projeto</option>
-                                            <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{
-                                                projeto.projeto }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <small id="emailHelp" class="form-text text-muted text-left">Atendimento</small>
-                                        <select name="TipoProjeto" id="" placeholder="aaa">
-                                            <option value="" selected>Presencial</option>
-                                            <option value="">Remoto</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <button class="sg-add-button card-footer" (click)="adicionarProjeto(dia.index)">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
+                            </div>
+                            <div class="card-footer">
+                                <button class="sg-footer-button sg-add col-6" (click)="adicionarProjeto(dia.index)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                                <button class="sg-footer-button sg-remove col-6" (click)="removerProjeto(dia.index)">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

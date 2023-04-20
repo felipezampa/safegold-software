@@ -13,10 +13,14 @@ export class CardComponent {
     @Input() atendimento: any;
     novoCompromisso!: { tipo: String, projeto: String, atendimento: String };
     projetos!: Projeto[];
+    tipoAgenda!: String[];
+    horas!: number[];
     constructor(private http: HttpClient, private projetoService: ProjetoService) { }
 
     ngOnInit(): void {
-        this.listProjetos()
+        this.listProjetos();
+        this.tipoAgenda = ['Projeto', 'Administrativo', 'Curso', 'Evento', 'Feriado'];
+        this.horas = [1,2,3,4,5,6,7,8];
     }
 
     salvar() {
@@ -32,8 +36,9 @@ export class CardComponent {
             next: (data: Projeto[]) => {
                 if (data == null) {
                     this.projetos = [];
-                } else {
+                } else {                    
                     this.projetos = data;
+                    console.log(this.projetos);
                     // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
                     this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
                 }

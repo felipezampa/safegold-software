@@ -38,7 +38,8 @@ h2 {
 #filterDate {
     margin: auto;
 }
-#filterDate input{
+
+#filterDate input {
     margin: 0 .2rem;
     border: none;
     background-color: #ffffff11;
@@ -49,14 +50,21 @@ h2 {
     outline: none;
 }
 
-.sg-pagination {
-    color: brown;
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#historico-agenda {
+    padding-top: 1.3rem;
+    /* Header Principal dos dois cards */
+    --cor-header: #eda900;
+    --bg-header: #373935;
 }
 
-.pagination-next>a {
-    display: none;
+/* -------------------------------------------   ID   ------------------------------------------- */
+#sg-agenda-header {
+    background-color: var(--bg-header);
+    color: var(--cor-header);
 }
+/* -------------------------------------------  CLASS ------------------------------------------- */
 
-.pagination-next::after {
-    content: "Próximo";
-}
+/* -------------------------------------------   TAG  ------------------------------------------- */
+
+/* -------------------------------------------  MEDIA ------------------------------------------- */

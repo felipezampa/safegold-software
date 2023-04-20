@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AgendaService } from '../services/agenda.service';
+import { AuthService } from 'src/app/auth';
 
 
 @Component({
@@ -17,10 +18,10 @@ export class AgendaHistoricoComponent implements OnInit {
   diaFim!: Date;
   dataFiltrada!: string;
   
-  constructor(private router: Router, private agendaService: AgendaService,) { }
+  constructor(private router: Router, private agendaService: AgendaService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.username = 'username'
+    this.username = this.authService.getUsername();
     this.atribuirSemanaAtual();
   }
 
@@ -28,7 +29,6 @@ export class AgendaHistoricoComponent implements OnInit {
     this.router.navigate(['agenda']);
     // modalRef.componentInstance.empresa = empresa;
   }
-
   filtrarPorData(diaInicio: Date, diaFim: Date) {
     const dataInicio = diaInicio.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     const dataFim = diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
@@ -45,5 +45,4 @@ export class AgendaHistoricoComponent implements OnInit {
     const dataFima = this.diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     this.dataFiltrada = `${dataInicioa} - ${dataFima}`;
   }
-
 }
