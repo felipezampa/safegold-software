@@ -32,3 +32,9 @@ small{
     text-align: left;
     font-size: .85rem;
 }
+/* -------------------------------------------  MEDIA ------------------------------------------- */
+@media screen and (max-width:1370px) {
+    select, option {
+        font-size: .9rem;
+    }
+}

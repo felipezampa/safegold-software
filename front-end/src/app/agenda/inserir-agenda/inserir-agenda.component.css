@@ -39,8 +39,16 @@
     /* Botões de action */
     --cor-action-btn: #fff;
     --bg-action-btn: #ff0000;
-    --hover-cor-action-btn: #fff;
-    --hover-bg-action-btn: #ff0000;
+    --hover-cor-action-btn: #ff0000;
+    --hover-bg-action-btn: #ffd4d4;
+}
+
+#btn-dashboard {
+    /* Botões de action */
+    --cor-action-btn: #fff;
+    --bg-action-btn: #006eff;
+    --hover-cor-action-btn: #006eff;
+    --hover-bg-action-btn: #c8e0ff;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
@@ -54,30 +62,34 @@
     color: var(--cor-card-header);
 }
 
+#sg-menu {
+    padding: .1rem 1rem .8rem 1rem;
+}
+
 #options {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 2px;
     font-size: 1.3rem;
     vertical-align: middle;
-    margin-right: 1.3rem;
+    /* margin-right: 1.3rem; */
 }
+
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .sg-button {
     background-color: var(--bg-action-btn);
     color: var(--cor-action-btn);
-    border: 1px solid var(--cor-action-btn);
     font-weight: 600;
-    margin: .8rem;
-    padding: .3rem 1rem;
+    margin: auto;
+    padding: .3rem .5rem;
     border-radius: 8px;
     transition: 0.5s;
+    border: none;
 }
 
 .sg-button:hover {
     background-color: var(--hover-bg-action-btn);
     color: var(--hover-cor-action-btn);
-    border: 1px solid var(--hover-bg-action-btn);
 }
 
 .sg-footer-button {
@@ -100,9 +112,10 @@
     padding: 1rem .5rem;
 }
 
-.card-deck{
+.card-deck {
     padding: .5rem 1rem 0 1rem;
 }
+
 .card-footer {
     padding: 0;
 }
@@ -157,6 +170,10 @@ h5 {
 
     .sg-add-button {
         padding: .2rem 0;
+    }
+
+    .sg-button{
+        margin: .3rem;
     }
 
     #sg-agenda-header {
