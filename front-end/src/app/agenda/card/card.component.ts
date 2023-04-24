@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { Projeto } from 'src/app/shared';
 
@@ -23,10 +23,6 @@ export class CardComponent {
         this.horas = [1,2,3,4,5,6,7,8];
     }
 
-    salvar() {
-        console.log('deu boa');
-
-    }
     atualizarCompromisso() {
         this.http.put('/api/compromissos/' + this.compromisso.id, this.compromisso).subscribe();
     }
@@ -47,4 +43,20 @@ export class CardComponent {
         console.log(this.projetos);
     }
 
+
+    // TESTE
+    @Output() adicionarCardEvent = new EventEmitter<any>();
+    @Output() salvarCardEvent = new EventEmitter<any>();
+    @Output() excluirCardEvent = new EventEmitter<any>();
+
+    adicionar() {
+      this.adicionarCardEvent.emit();
+    }
+    
+    salvar() {
+        this.salvarCardEvent.emit();
+    }
+    excluir(){
+        this.excluirCardEvent.emit();
+    }
 }

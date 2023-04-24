@@ -18,6 +18,14 @@
     border-bottom-left-radius: 5px;
 }
 
+.sg-save {
+    /* Botões de salvar dos cards de dias */
+    --cor-card-footer: #00ac00;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #00ac00;
+}
+
 .sg-remove {
     /* Botões de adicionar dos cards de dias */
     --cor-card-footer: #ff0000;
@@ -172,7 +180,7 @@ h5 {
         padding: .2rem 0;
     }
 
-    .sg-button{
+    .sg-button {
         margin: .3rem;
     }
 

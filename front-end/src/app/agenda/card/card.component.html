@@ -33,3 +33,14 @@
     </div>
     <hr>
 </div>
+
+<!-- 
+    Para adicionar ou editar um card dentro do componente card, você pode criar um botão 
+    dentro do próprio card. Quando esse botão for clicado, você pode emitir um evento para 
+    o componente pai informando que foi solicitada a adição ou edição do card.
+    Por exemplo, você pode criar um método adicionarCard() dentro do componente card, que 
+    emite um evento adicionarCardEvent quando é chamado: 
+-->
+<button (click)="adicionar()">Adicionar</button>
+<button (click)="salvar()">Salvar</button>
+<button (click)="excluir()">Excluir</button>

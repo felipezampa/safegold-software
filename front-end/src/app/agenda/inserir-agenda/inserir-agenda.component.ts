@@ -28,7 +28,7 @@ export class InserirAgendaComponent {
   }
 
 
-  verModalAgenda() {
+  verHistorico() {
     this.router.navigate(['historico'], { relativeTo: this.route });
     // modalRef.componentInstance.empresa = empresa;
   }
@@ -57,5 +57,29 @@ export class InserirAgendaComponent {
   }
   logout() {
     this.authService.logout();
+  }
+
+
+
+
+  adicionarCard(indexDia: number) {
+    const novoCard = { /* novo card aqui */ };
+    this.diasSemana[indexDia].cards.push(novoCard);
+  }
+  salvarCard(indexDia: number) {
+    alert('agenda salva obrigado');
+  }
+  excluirCard(indexDia: number) {
+    if (this.diasSemana[indexDia].cards.length > 1) {
+      this.diasSemana[indexDia].cards.pop();
+    } else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Não foi possível excluir',
+        text: 'O dia deve ter ao menos um compromisso!',
+        confirmButtonColor: '#EDA900',
+        confirmButtonText: 'Ok'
+      });
+    }
   }
 }
