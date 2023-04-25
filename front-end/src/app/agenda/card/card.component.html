@@ -1,37 +1,46 @@
-<div class="px-4">
-    <div class="row">
-        <small class="form-text text-muted text-left">Tipo</small>
-        <select name="TipoProjeto" id="tipoProj">
-            <option value="" selected>Selecione um Tipo</option>
-            <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
-            </option>
-        </select>
+<div class="card-deck">
+    <div class="px-4">
+        <div class="row">
+            <small class="form-text text-muted text-left">Tipo</small>
+            <select name="TipoProjeto" id="tipoProj">
+                <option value="" selected>Selecione um Tipo</option>
+                <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
+                </option>
+            </select>
+        </div>
+        <div class="row">
+            <small class="form-text text-muted text-left">Projeto</small>
+            <select [(ngModel)]="projetoSelecionado">
+                <option value="" selected>Selecione Um Projeto</option>
+                <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <small class="form-text text-muted text-left">Atendimento</small>
+            <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
+            <select [(ngModel)]="atendimentoSelecionado">
+                <option value='Presencial'>Presencial</option>
+                <option value='Remoto'>Remoto</option>
+            </select>
+        </div>
+        <div class="row">
+            <small class="form-text text-muted text-left">Horas</small>
+            <select [(ngModel)]="horasSelecionado">
+                <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
+            </select>
+        </div>
     </div>
-    <div class="row">
-        <small class="form-text text-muted text-left">Projeto</small>
-        <select name="TipoProjeto" id="" placeholder="aaa">
-            <option value="" selected>Selecione um Projeto</option>
-            <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
-            </option>
-        </select>
-    </div>
-    <div class="row">
-        <small class="form-text text-muted text-left">Atendimento</small>
-        <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
-        <select name="TipoProjeto">
-            <option value='Presencial' selected>Presencial</option>
-            <option value='Remoto'>Remoto</option>
-        </select>
-    </div>
-    <div class="row">
-        <small class="form-text text-muted text-left">Horas</small>
-        <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
-        <select name="TipoProjeto">
-            <option value="" selected>Selecione as horas</option>
-            <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
-        </select>
-    </div>
-    <hr>
+</div>
+<div class="card-footer">
+    <button class="sg-footer-button sg-add col-4" (click)="adicionar()">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+    <button class="sg-footer-button sg-save col-4" (click)="salvar()">
+        <i class="fa-solid fa-check"></i>
+    </button>
+    <button class="sg-footer-button sg-remove col-4" (click)="excluir()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
 </div>
 
 <!-- 
@@ -41,6 +50,3 @@
     Por exemplo, você pode criar um método adicionarCard() dentro do componente card, que 
     emite um evento adicionarCardEvent quando é chamado: 
 -->
-<button (click)="adicionar()">Adicionar</button>
-<button (click)="salvar()">Salvar</button>
-<button (click)="excluir()">Excluir</button>

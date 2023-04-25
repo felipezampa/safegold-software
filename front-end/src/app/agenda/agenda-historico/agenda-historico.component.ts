@@ -45,4 +45,8 @@ export class AgendaHistoricoComponent implements OnInit {
     const dataFima = this.diaFim.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     this.dataFiltrada = `${dataInicioa} - ${dataFima}`;
   }
+  logout() {
+    this.authService.logout();
+  }
+
 }

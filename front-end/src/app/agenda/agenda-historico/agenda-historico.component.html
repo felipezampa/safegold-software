@@ -4,26 +4,31 @@
             <div class="card shadow-lg">
                 <div class="card-header text-center" id="sg-agenda-header">
                     <h2 class="text-center">Bem vindo {{username}}</h2>
-                    <!-- <label for="">Preencher a agenda indicando os valores</label> -->
                 </div>
-                <div class="row card-body text-center">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4">
-                            <span id="exportar">AÇÕES:</span>
-                            <button type="button" class="sg-action-button col" (click)="preencherAgenda()">Preencher
-                                Agenda</button>
-                        </div>
-                        <div class="col-4">
-                            <span id="exportar">Ver:</span>
-                            <button type="button" class="sg-action-button col">Semana atual</button>
+                <div class="card-body" id="sg-menu">
+                    <div class="row text-center">
+                        <div class="sg-card-header">
+                            <div id="options" class="col-12">VER:</div>
+                            <div class="col-12">
+                                <button type="button" class="sg-action-button col">Semana atual</button>
                             <button type="button" class="sg-action-button col">Semana Passada</button>
+                            </div>
                         </div>
-                        <div class="col-4" id="filterDate">
-                            <span id="exportar">Filtrar data:</span>
-                            <input type="date" name="diaInicio" [(ngModel)]="diaInicio" id="">
+                        <div class="sg-card-header">
+                            <div id="options" class="col-12">FILTRAR DATA:</div>
+                            <div class="col-12">
+                                <input type="date" name="diaInicio" [(ngModel)]="diaInicio" id="">
                             <input type="date" name="diaFim" [(ngModel)]="diaFim" id="">
                             <button type="button" class="sg-action-button col"
                                 (click)="filtrarPorData(diaInicio,diaFim)">Filtrar</button>
+                            </div>
+                        </div>
+                        <div class="sg-card-header">
+                            <div id="options" class="col-12">AÇÕES:</div>
+                            <div class="col-12">
+                                <button type="button" class="sg-action-button col" (click)="preencherAgenda()">Preencher Agenda</button>
+                                <button type="button" (click)="logout()" class="sg-button logout mx-1" id="btn-logout"> <i class="fa-solid fa-right-from-bracket mx-1"></i> <span>Logout</span> </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +55,7 @@
                                 <th>Gestor</th>
                                 <th>Tipo</th>
                                 <th>Projeto</th>
-                                <th>Previsão Horas</th>
+                                <th class="col-1">Previsão Horas</th>
                                 <th>Atendimento</th>
                             </tr>
                         </thead>

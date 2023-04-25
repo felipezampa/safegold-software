@@ -1,38 +1,12 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #inserir-agenda {
-    padding-top: 1.3rem;
+    padding-top: .8rem;
     /* Header Principal dos dois cards */
     --cor-header: #eda900;
     --bg-header: #373935;
     /* Header dos cards de dias */
     --cor-card-header: #fff;
     --bg-card-header: #eda900;
-}
-
-.sg-add {
-    /* Botões de adicionar dos cards de dias */
-    --cor-card-footer: #eda900;
-    --bg-card-footer: #fff;
-    --hover-cor-card-footer: #fff;
-    --hover-bg-card-footer: #eda900;
-    border-bottom-left-radius: 5px;
-}
-
-.sg-save {
-    /* Botões de salvar dos cards de dias */
-    --cor-card-footer: #00ac00;
-    --bg-card-footer: #fff;
-    --hover-cor-card-footer: #fff;
-    --hover-bg-card-footer: #00ac00;
-}
-
-.sg-remove {
-    /* Botões de adicionar dos cards de dias */
-    --cor-card-footer: #ff0000;
-    --bg-card-footer: #fff;
-    --hover-cor-card-footer: #fff;
-    --hover-bg-card-footer: #ff0000;
-    border-bottom-right-radius: 5px;
 }
 
 #btn-options {
@@ -71,7 +45,7 @@
 }
 
 #sg-menu {
-    padding: .1rem 1rem .8rem 1rem;
+    padding: 0rem 1rem;
 }
 
 #options {
@@ -80,7 +54,6 @@
     letter-spacing: 2px;
     font-size: 1.3rem;
     vertical-align: middle;
-    /* margin-right: 1.3rem; */
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
@@ -88,29 +61,18 @@
     background-color: var(--bg-action-btn);
     color: var(--cor-action-btn);
     font-weight: 600;
-    margin: auto;
+    margin: .25rem;
     padding: .3rem .5rem;
+    height: 2.7rem;
     border-radius: 8px;
     transition: 0.5s;
     border: none;
+    width: 15rem;
 }
 
 .sg-button:hover {
     background-color: var(--hover-bg-action-btn);
     color: var(--hover-cor-action-btn);
-}
-
-.sg-footer-button {
-    background-color: var(--bg-card-footer);
-    color: var(--cor-card-footer);
-    border: 0;
-    font-weight: 600;
-    transition: 0.5s;
-}
-
-.sg-footer-button:hover {
-    background-color: var(--hover-bg-card-footer);
-    color: var(--hover-cor-card-footer);
 }
 
 .sg-card-body {
@@ -119,15 +81,12 @@
     box-sizing: border-box;
     padding: 1rem .5rem;
 }
-
-.card-deck {
-    padding: .5rem 1rem 0 1rem;
+.sg-card-header{
+    flex-basis: 33%;
+    max-width: 33%;
+    box-sizing: border-box;
+    padding: .3rem;
 }
-
-.card-footer {
-    padding: 0;
-}
-
 /* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
     font-family: sans-serif;
@@ -148,23 +107,17 @@ h5 {
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
-@media screen and (max-width:1363px) {
+@media screen and (max-width:1600px) {
+    .sg-button {
+        width: 12rem;
+        padding: .3rem;
+    }
+}
+@media screen and (max-width:1275px) {
     #sg-agenda-header h2 {
         font-size: 1.2rem;
     }
 
-    .sg-card-body {
-        padding: 1rem .25rem;
-    }
-}
-
-@media screen and (max-width:1229px) {
-    #sg-agenda-header h2 {
-        font-size: .84rem;
-    }
-}
-
-@media screen and (max-width:991px) {
     .sg-card-body {
         flex-basis: 100%;
         max-width: 100%;
@@ -172,12 +125,26 @@ h5 {
         padding: 1rem .5rem;
     }
 
+    .sg-button{
+        width: 10rem;
+        font-size: .8rem;
+        padding: .2rem;
+        /* height: 3rem; */
+    }
+}
+@media screen and (max-width:1081px) {
+    .sg-button{
+        width: 9rem;
+        font-size: .8rem;
+        padding: .1rem;
+        /* height: 3rem; */
+    }
+}
+
+@media screen and (max-width:991px) {
+
     .card-body {
         padding: .3rem 1rem .7rem 1rem;
-    }
-
-    .sg-add-button {
-        padding: .2rem 0;
     }
 
     .sg-button {
@@ -200,4 +167,31 @@ h5 {
         font-size: 1rem;
         margin: 0;
     }
+}
+
+@media screen and (max-width:790px) {
+    .card-header{
+        padding: .2rem;
+    }
+    #options {
+        font-size: 1.1rem;
+    }
+    .sg-card-header{
+        flex-basis: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: .2rem .5rem;
+        margin: .2rem 0;
+    }
+    .sg-button{
+        font-size: .8rem;
+        padding: 0rem;
+        margin: 0rem;
+    }
+}
+@media screen and (max-width:469px) {
+    #options {
+        font-size: .8rem;
+    }
+    
 }

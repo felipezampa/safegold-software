@@ -14,4 +14,11 @@ export class AgendaService {
   getDiaFim(): Date{
     return  new Date('2023-04-21');
   }
+
+  saveAgenda(){
+    //this.http.post
+  }
+  excluirAgenda(){
+    //this.http.delete
+  }
 }

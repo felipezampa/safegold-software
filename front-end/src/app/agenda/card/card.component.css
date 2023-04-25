@@ -10,6 +10,33 @@
     --cor-action-btn: #000000;
     --bg-action-btn: #edaa00a6;
 }
+
+.sg-add {
+    /* Botões de adicionar dos cards de dias */
+    --cor-card-footer: #eda900;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #eda900;
+    border-bottom-left-radius: 5px;
+}
+
+.sg-save {
+    /* Botões de salvar dos cards de dias */
+    --cor-card-footer: #00ac00;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #00ac00;
+}
+
+.sg-remove {
+    /* Botões de remover dos cards de dias */
+    --cor-card-footer: #ff0000;
+    --bg-card-footer: #fff;
+    --hover-cor-card-footer: #fff;
+    --hover-bg-card-footer: #ff0000;
+    border-bottom-right-radius: 5px;
+}
+
 /* -------------------------------------------   TAG  ------------------------------------------- */
 select {
     border: none;
@@ -28,13 +55,44 @@ select option {
     color: #000;
 }
 
-small{
+small {
     text-align: left;
     font-size: .85rem;
 }
+
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.sg-footer-button {
+    background-color: var(--bg-card-footer);
+    color: var(--cor-card-footer);
+    border: 0;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.sg-footer-button:hover {
+    background-color: var(--hover-bg-card-footer);
+    color: var(--hover-cor-card-footer);
+}
+
+.card-footer {
+    padding: 0;
+}
+
+.card-deck {
+    padding: .5rem 1rem 0 1rem;
+    border-top: 1px solid #0000002d;
+}
+
 /* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width:1370px) {
-    select, option {
+    select,
+    option {
         font-size: .9rem;
+    }
+}
+
+@media screen and (max-width:790px) {
+    .sg-footer-button {
+        padding: .5rem 0;
     }
 }
