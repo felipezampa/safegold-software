@@ -18,6 +18,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta, date
 
 '''
     @eduardolcordeiro
@@ -313,3 +314,64 @@ class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.SgFuncaoGestorSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
+    
+class AgFactAgendaViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AgFactAgendaSerializer
+    queryset = models.AgFactAgenda.objects.all()
+
+    def list(self, request):
+        year_start, year_end = self.get_year_range(date.today().year)
+        agendas_ano = models.AgFactAgenda.objects.filter(data__range=[year_start, year_end])
+        serializer = serializers.AgFactAgendaSerializer(agendas_ano, many=True)
+        return Response(serializer.data)
+
+    def get_year_range(self, year):
+        start = date(year, 1, 1)
+        end = date(year, 12, 31)
+        return start, end
+
+
+class CurrentWeekAgendaViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AgFactAgendaSerializer
+    queryset = models.AgFactAgenda.objects.all()
+
+    def list(self, request):
+        week_start, week_end = self.get_week_range(date.today())
+        agendas_semana = models.AgFactAgenda.objects.filter(data__range=[week_start, week_end])
+        serializer = serializers.AgFactAgendaSerializer(agendas_semana, many=True)
+        return Response(serializer.data)
+
+    def get_week_range(self, date_obj):
+        start = date_obj - timedelta(days=date_obj.weekday())
+        end = start + timedelta(days=6)
+        return start, end
+
+class LastWeekAgendaViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AgFactAgendaSerializer
+    queryset = models.AgFactAgenda.objects.all()
+
+    def list(self, request):
+        week_start, week_end = self.get_week_range(date.today() - timedelta(weeks=1))
+        agendas_semana = models.AgFactAgenda.objects.filter(data__range=[week_start, week_end])
+        serializer = serializers.AgFactAgendaSerializer(agendas_semana, many=True)
+        return Response(serializer.data)
+
+    def get_week_range(self, date_obj):
+        start = date_obj - timedelta(days=date_obj.weekday())
+        end = start + timedelta(days=6)
+        return start, end
+
+class NextWeekAgendaViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AgFactAgendaSerializer
+    queryset = models.AgFactAgenda.objects.all()
+
+    def list(self, request):
+        week_start, week_end = self.get_week_range(date.today() + timedelta(weeks=1))
+        agendas_semana = models.AgFactAgenda.objects.filter(data__range=[week_start, week_end])
+        serializer = serializers.AgFactAgendaSerializer(agendas_semana, many=True)
+        return Response(serializer.data)
+
+    def get_week_range(self, date_obj):
+        start = date_obj - timedelta(days=date_obj.weekday())
+        end = start + timedelta(days=6)
+        return start, end

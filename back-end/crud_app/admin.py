@@ -45,7 +45,8 @@ admin.site.register(SgAvaliadorGestor)
 admin.site.register(SgFuncao)
 admin.site.register(SgFuncaoGestor)
 admin.site.register(SgUnidadeNegocio)
-
+admin.site.register(AgFactAgenda)
+admin.site.register(AgTipo)
 
 
 

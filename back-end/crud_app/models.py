@@ -463,3 +463,29 @@ class SgUnidadeNegocio(models.Model):
         db_table = 'sg_unidade_negocio'
     def __str__(self):
         return '{} - {}'.format(self.id_unidade, self.unidade)
+    
+class AgTipo(models.Model):
+    id_tipo = models.AutoField(primary_key=True)
+    tipo = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ag_tipo'
+
+    def __str__(self):
+        return '{} - {}'.format(self.id_tipo, self.tipo)
+
+class AgFactAgenda(models.Model):
+    cod_agenda = models.AutoField(primary_key=True)
+    data = models.DateField(blank=True, null=True)
+    dia_semana = models.CharField(max_length=255, blank=True, null=True)
+    tipo = models.ForeignKey('AgTipo', models.DO_NOTHING, db_column='tipo', blank=True, null=True)
+    projetos = models.ForeignKey('Projetos', models.DO_NOTHING, db_column='projetos', blank=True, null=True)
+    atendimento = models.CharField(max_length=255, blank=True, null=True)
+    horas = models.CharField(max_length=255, blank=True, null=True)
+    sg_funcao_gestor = models.ForeignKey('SgFuncaoGestor', models.DO_NOTHING, db_column='sg_funcao_gestor', blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'ag_fact_agenda'
+    def __str__(self):
+        return '{}/{} - {} . {} '.format(self.data, self.dia_semana, self.projetos, self.sg_funcao_gestor)
