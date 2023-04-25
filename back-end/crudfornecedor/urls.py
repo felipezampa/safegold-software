@@ -52,6 +52,10 @@ router.register('sg_unidadedenegocios', SgUnidadeNegocioViewSet, basename='sg_un
 router.register('sg_area', SgAreaViewSet, basename='sg_area')
 router.register('sg_funcao', SgFuncaoViewSet, basename='sg_funcao')
 router.register('sg_funcao_gestor', SgFuncaoGestorViewSet, basename='sg_funcao_gestor')
+router.register('ag_agenda', AgFactAgendaViewSet, basename='ag_agenda')
+router.register('ag_semana_atual', CurrentWeekAgendaViewSet, basename='ag_semana_atual')
+router.register('ag_semana_passada', LastWeekAgendaViewSet, basename='ag_semana_passada')
+router.register('ag_semana_proxima', NextWeekAgendaViewSet, basename='ag_semana_proxima')
 
 
 
