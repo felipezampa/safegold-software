@@ -271,6 +271,10 @@ class SgFuncaoGestorSerializers(serializers.ModelSerializer):
     class Meta:
         model = SgFuncaoGestor
         fields = 'id_func_gest','id_funcao','funcao', 'id_user','funcao', 'data_inicio','data_fim','username','area','unidade_de_negocios'
+class AgTipoSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AgTipo
+        fields = '__all__'
 
 class AgFactAgendaSerializer(serializers.ModelSerializer):
     funcao_gestor = serializers.SerializerMethodField()

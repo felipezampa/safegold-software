@@ -314,6 +314,12 @@ class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.SgFuncaoGestorSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
+
+class AgTipoViewSet(viewsets.ModelViewSet):
+    queryset = models.AgTipo.objects.all()
+    serializer_class = serializers.AgTipoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_tipo','tipo']
     
 class AgFactAgendaViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AgFactAgendaSerializer
