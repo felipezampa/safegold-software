@@ -10,22 +10,34 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">VER AGENDA:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button mx-1" id="btn-options">Essa semana</button>
-                                <button class="sg-button mx-1" id="btn-options">Próxima semana</button>
+                                <button type="button" class="sg-button mx-1" id="btn-options">
+                                    <i class="fa-solid fa-hourglass-start mx-1"></i>
+                                    <span>Essa semana</span>
+                                </button>
+                                <button class="sg-button mx-1" id="btn-options">
+                                    <i class="fa-solid fa-forward mx-1"></i>
+                                    <span>Próxima semana</span>
+                                </button>
                             </div>
                         </div>
                         <div class="sg-card-header">
                             <div id="options" class="col-12">OPÇÕES:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button  mx-1" id="btn-options">Repetir última semana</button>
-                                <button type="button" class="sg-button  mx-1" id="btn-options" routerLink="/agenda/historico">Histórico da Agenda</button>
+                                <button type="button" class="sg-button  mx-1" id="btn-options">
+                                    <i class="fa-solid fa-repeat mx-1"></i>
+                                    <span>Repetir agenda</span>
+                                </button>
+                                <button type="button" class="sg-button  mx-1" id="btn-options" routerLink="/agenda/historico">
+                                    <i class="fa-solid fa-clock-rotate-left mx-1"></i>
+                                    <span>Histórico da Agenda</span>
+                                </button>
                             </div>
                         </div>
                         <div class="sg-card-header">
                             <div id="options" class="col-12">AÇÕES:</div>
                             <div class="col-12">
-                                <button type="button" routerLink="/dashboard" class="sg-button logout mx-1" id="btn-dashboard"> <i class="fa-solid fa-home mx-1"></i> <span>Dashboard</span> </button>
-                                <button type="button" (click)="logout()" class="sg-button logout mx-1" id="btn-logout"> <i class="fa-solid fa-right-from-bracket mx-1"></i> <span>Logout</span> </button>
+                                <button type="button" routerLink="/dashboard" class="sg-button mx-1" id="btn-dashboard"> <i class="fa-solid fa-home mx-1"></i> <span>Dashboard</span> </button>
+                                <button type="button" (click)="logout()" class="sg-button mx-1" id="btn-logout"> <i class="fa-solid fa-right-from-bracket mx-1"></i> <span>Logout</span> </button>
                             </div>
                         </div>
                     </div>
