@@ -23,9 +23,12 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">FILTRAR DATA:</div>
                             <div class="col-12" id="filterDate">
-                                <input type="date" name="diaInicio" [(ngModel)]="diaInicio" class="col-4">
-                                <input type="date" name="diaFim" [(ngModel)]="diaFim" class="col-4">
-                                <button type="button" class="sg-filter-button col-2" id="btn-filter" (click)="filtrarPorData(diaInicio,diaFim)">
+                                <div>
+                                    <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
+                                    <input type="date" name="diaFim" [(ngModel)]="diaFim">
+                                </div>
+                                <button type="button" class="sg-filter-button" id="btn-filter"
+                                    (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
                                     <span>Filtrar</span>
                                 </button>
@@ -39,9 +42,9 @@
                                     <span>Preencher Agenda</span>
                                 </button>
                                 <button type="button" (click)="logout()" class="sg-button logout mx-1" id="btn-logout">
-                                    <i class="fa-solid fa-right-from-bracket mx-1"></i> 
+                                    <i class="fa-solid fa-right-from-bracket mx-1"></i>
                                     <span>Logout</span>
-                                 </button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -57,37 +60,39 @@
                         Sua Agenda: {{dataFiltrada}}
                     </h2>
                 </div>
-                <div class="row text-center px-4 py-3">
-                    <table class="table table-striped table-Light table-bordered mb-3 table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Data</th>
-                                <th>Dia da Semana</th>
-                                <th>Unidade de Negócio</th>
-                                <th>Área</th>
-                                <th>Função</th>
-                                <th>Gestor</th>
-                                <th>Tipo</th>
-                                <th>Projeto</th>
-                                <th>Previsão Horas</th>
-                                <th>Atendimento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let i of ex">
-                                <td>26/10/2022</td>
-                                <td>Quarta-feira</td>
-                                <td>Safegold Performance</td>
-                                <td>BI</td>
-                                <td>DEV</td>
-                                <td>Aderlian Lange</td>
-                                <td>Projeto</td>
-                                <td>HDS</td>
-                                <td>8</td>
-                                <td>Remoto</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="card-body table-responsive-lg">
+                    <div class="row sg-table">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Dia da Semana</th>
+                                    <th>Unidade de Negócio</th>
+                                    <th>Área</th>
+                                    <th>Função</th>
+                                    <th>Gestor</th>
+                                    <th>Tipo</th>
+                                    <th>Projeto</th>
+                                    <th>Previsão Horas</th>
+                                    <th>Atendimento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ag of agenda">
+                                    <td>{{ag.data}}</td>
+                                    <td>{{ag.dia}}</td>
+                                    <td>{{ag.unidade}}</td>
+                                    <td>{{ag.area}}</td>
+                                    <td>{{ag.funcao}}</td>
+                                    <td>{{ag.gestor}}</td>
+                                    <td>{{ag.tipo}}</td>
+                                    <td>{{ag.projeto}}</td>
+                                    <td>{{ag.horas}}</td>
+                                    <td>{{ag.atendimento}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

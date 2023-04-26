@@ -1,0 +1,76 @@
+{
+    "agenda": [
+        {
+            "cod_agenda": 4856,
+            "data": "2022-12-20T23:24:49.110Z",
+            "dia_semana": "terça-feira",
+            "tipo": {
+                "id_tipo": 1,
+                "tipo": "Férias"
+            },
+            "projeto": {
+                "cod_projeto": 4,
+                "projeto": "BRAZILIAN PET FOODS",
+                "ativo": 1,
+                "safegold_ger": 1,
+                "data_criacao": "2022-07-19T11:06:21.313486-03:00",
+                "data_atualiza": "2022-07-19T11:08:02.795913-03:00",
+                "id_user": [
+                    {
+                        "id": 1,
+                        "password": "pbkdf2_sha256$390000$RjQw6U1APEQgUWrpA7Mvq1$ao7mSYpDmkiO+dgCyIstOFwUNoWUABzKYq/9pPanS2w=",
+                        "last_login": "2022-10-24T15:23:52.170371-03:00",
+                        "is_superuser": false,
+                        "username": "zampa",
+                        "first_name": null,
+                        "last_name": null,
+                        "email": null,
+                        "is_staff": false,
+                        "is_active": true,
+                        "date_joined": "2022-10-24T15:23:13.967984-03:00",
+                        "groups": [],
+                        "user_permissions": []
+                    },
+                    {
+                        "id": 9,
+                        "password": "pbkdf2_sha256$390000$qgcYysWqcebSDiErqV274q$mQzJ6OIUPoSwbbMb6by2HoD4Y+CgWJkpEdUlCgF7aSk=",
+                        "last_login": null,
+                        "is_superuser": false,
+                        "username": "rhoden@safegold.com.br",
+                        "first_name": "Adilson Rhoden",
+                        "last_name": null,
+                        "email": "rhoden@safegold.com.br",
+                        "is_staff": false,
+                        "is_active": true,
+                        "date_joined": "2022-11-03T14:55:23-03:00",
+                        "groups": [],
+                        "user_permissions": []
+                    },
+                    {
+                        "id": 2,
+                        "password": "pbkdf2_sha256$390000$3jGYZvDf5eRhAGJjSICEZa$vIXOxkvKwccrm/xkZJdsV5C7zsUoZB90s3CLk7/uXrU=",
+                        "last_login": "2023-04-25T14:23:03.039287-03:00",
+                        "is_superuser": true,
+                        "username": "admin@admin.com",
+                        "first_name": "admin",
+                        "last_name": "admin",
+                        "email": "admin@admin.com",
+                        "is_staff": true,
+                        "is_active": true,
+                        "date_joined": "2022-11-01T16:39:10-03:00",
+                        "groups": [],
+                        "user_permissions": []
+                    }
+                ]
+            },
+            "atendimento": "Presencial",
+            "horas": 4,
+            "funcao_gestor": {
+                "id_funcao": null,
+                "id_user": null,
+                "data_inicio": null,
+                "data_fim": null
+            }
+        }
+    ]
+}

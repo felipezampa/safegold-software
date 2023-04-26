@@ -1,34 +1,11 @@
-#exportar {
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1.3rem;
-    vertical-align: middle;
-    margin-right: 1.3rem;
-    padding-bottom: 10%;
-}
-
-#filterDate {
-    margin: auto;
-}
-
-#filterDate input {
-    margin: 0 .2rem;
-    border: none;
-    background-color: #ffffff11;
-    font-size: 1rem;
-    font-weight: 500;
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-}
-
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #historico-agenda {
     padding-top: .8rem;
     /* Header Principal dos dois cards */
     --cor-header: #eda900;
     --bg-header: #373935;
+    --header-tabela: #2e3241;
+    --border-tabela: #cecece;
 }
 
 #btn-filter {
@@ -51,8 +28,8 @@
     /* Botões de action */
     --cor-action-btn: #fff;
     --bg-action-btn: #ff0000;
-    --hover-cor-action-btn: #ff0000;
-    --hover-bg-action-btn: #ffd4d4;
+    --hover-cor-action-btn: #fff;
+    --hover-bg-action-btn: #7d0000;
 }
 
 #btn-agenda {
@@ -79,6 +56,31 @@
 
 #sg-menu {
     padding: 0rem 1rem;
+}
+
+#exportar {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    vertical-align: middle;
+    margin-right: 1.3rem;
+    padding-bottom: 10%;
+}
+
+#filterDate {
+    margin: auto;
+}
+
+#filterDate input {
+    margin: 0 .2rem;
+    border: none;
+    background-color: #ffffff11;
+    font-size: 1rem;
+    font-weight: 500;
+    transform: scaleX(1);
+    border-bottom: 2px solid #EDA900;
+    outline: none;
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
@@ -125,11 +127,15 @@
     padding: .3rem;
 }
 
-/* -------------------------------------------   TAG  ------------------------------------------- */
-td {
-    padding: .4rem;
+.sg-table {
+    border-radius: 6px;
+    margin: 1.5rem 1.5rem;
+    text-align: center;
 }
-
+.card-body{
+    padding: 0;
+}
+/* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
@@ -140,7 +146,20 @@ h2 {
 }
 
 table {
+    border-collapse: collapse;
     border-radius: 5px;
+    overflow: hidden;
+}
+
+td {
+    border: 1px solid var(--border-tabela);
+    padding: .4rem;
+}
+
+thead {
+    background-color: var(--header-tabela);
+    color: #fff;
+    border-radius: 6px;
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
@@ -161,5 +180,38 @@ table {
         font-size: .8rem;
         padding: .2rem;
         /* height: 3rem; */
+    }
+}
+
+@media screen and (max-width:991px) {
+    tr{
+        font-size: .9rem;
+    }
+    .sg-table {
+        margin:.75rem 0;
+    }
+}
+
+@media screen and (max-width:790px) {
+    .card-header {
+        padding: .2rem;
+    }
+
+    #options {
+        font-size: 1.1rem;
+    }
+
+    .sg-card-header {
+        flex-basis: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: .2rem .5rem;
+        margin: .2rem 0;
+    }
+
+    .sg-button {
+        font-size: .8rem;
+        padding: 0rem;
+        margin: 0rem;
     }
 }

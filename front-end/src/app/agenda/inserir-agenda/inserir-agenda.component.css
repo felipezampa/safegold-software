@@ -197,9 +197,8 @@ h5 {
     }
 }
 
-@media screen and (max-width:469px) {
+@media screen and (max-width:470px) {
     #options {
         font-size: .8rem;
     }
-
 }

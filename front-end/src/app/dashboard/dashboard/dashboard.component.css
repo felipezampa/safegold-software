@@ -1,11 +1,6 @@
-body {
-    background: #000000;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+#dashboard {
     height: 100vh;
-    font-family: "Open Sans";
+    /* background-color: #14013b; */
 }
 
 .financeiro {
@@ -23,7 +18,7 @@ body {
 }
 
 .agenda {
-    --bg-color: #006400;
+    --bg-color: #006eff;
     --bg-color-light: #ececec;
     --text-color-hover: #fff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
