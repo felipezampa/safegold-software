@@ -1,5 +1,6 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #inserir-agenda {
+    height: 100vh;
     padding-top: .8rem;
     /* Header Principal dos dois cards */
     --cor-header: #eda900;
@@ -20,17 +21,17 @@
 #btn-logout {
     /* Botões de action */
     --cor-action-btn: #fff;
-    --bg-action-btn: #ff0000;
+    --bg-action-btn: #a83131;
     --hover-cor-action-btn: #fff;
-    --hover-bg-action-btn: #7d0000;
+    --hover-bg-action-btn: #4e0000;
 }
 
 #btn-dashboard {
     /* Botões de action */
     --cor-action-btn: #fff;
-    --bg-action-btn: #006eff;
+    --bg-action-btn: #0d4287;
     --hover-cor-action-btn: #fff;
-    --hover-bg-action-btn: #00357a;
+    --hover-bg-action-btn: #00214c;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
