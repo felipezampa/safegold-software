@@ -1,7 +1,6 @@
 <div>
-    <div *ngIf="currentUser" class="sg-sidebar">
+    <div *ngIf="currentUser" class="sg-sidebar" id="sidebar">
         <ul>
-
             <li class="sg-hover">
                 <a href="dashboard" class="logo">
                     <img src="../assets/img/Safegold.svg" alt="Safegold">
@@ -9,7 +8,7 @@
             </li>
             <hr class="my-1">
             <li class="sg-hover">
-                <a class="sg-context">
+                <a class="sg-contexto">
                     <i class="fa-solid fa-layer-group align-middle"></i>
                     <span class="sg-nav-item">
                         <select id="projeto-select" class="sg-form" [(ngModel)]="selectedProjetos"
@@ -28,11 +27,17 @@
             </li>
             <hr class="my-1">
             <li class="sg-hover">
-              <a href="financeiro/dashboard-financeiro" class="sg-anchor">
-                  <i class="fa-solid fa-clipboard"></i>
-                  <span class="sg-nav-item">Dashboard</span>
-              </a>
-          </li>
+                <a href="dashboard" class="sg-anchor">
+                    <i class="fa-solid fa-home"></i>
+                    <span class="sg-nav-item">Home</span>
+                </a>
+            </li>
+            <li class="sg-hover">
+                <a href="financeiro/dashboard-financeiro" class="sg-anchor">
+                    <i class="fa-solid fa-clipboard"></i>
+                    <span class="sg-nav-item">Dashboard</span>
+                </a>
+            </li>
             <li class="sg-hover">
                 <a href="financeiro/conta-fornecedor" class="sg-anchor">
                     <i class="fa-solid fa-person-chalkboard"></i>

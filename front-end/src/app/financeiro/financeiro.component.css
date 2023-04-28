@@ -1,128 +1,47 @@
-/* AS VARIAVEIS ESTÃO DEFINIDAS NO STYLES.CSS NO ATRIBUTO :root */
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
-
-p,
-th,
-td,
-h4,
-h1 {
-    font-family: 'Noto Sans', sans-serif;
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#sidebar {
+    --minimizado-sidebar: 5.625rem;
+    --hover-sidebar: 20rem;
+    --bg-sidebar: #414442;
+    --cor-sidebar: #ffffff;
+    --hover-icon: #EDA900;
+    --hover-logout: #E62121;
 }
 
-/***** CLASSES *****/
-.sg-sidebar {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    box-sizing: border-box;
-    font-family: "Raleway", sans-serif;
-    background-color: #414442;
-    color: white;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    height: 100vh;
-    width: 90px;
-    overflow: hidden;
-    transition: width 0.2s linear;
-    z-index: 2;
-}
-
-.sg-nav-item {
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.fa-solid {
     position: relative;
-    font-family: 'Raleway', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-}
-
-.sg-sidebar:hover {
-    width: 320px;
-    transition: all 0.5s ease;
+    width: 4.375rem;
+    height: 2.5rem;
+    top: 1.25rem;
+    font-size: 1.25rem;
+    text-align: center;
 }
 
 .logo img {
     width: 100%;
-    margin-top: 15px;
-}
-
-.fa-solid {
-    position: relative;
-    width: 70px;
-    height: 40px;
-    top: 20px;
-    font-size: 20px;
-    text-align: center;
-}
-
-.sg-hover:hover .sg-anchor {
-    color: #eda900;
-    transform: scale(1.1);
-    transition: 0.2s ease;
-}
-
-.sg-logout {
-    position: absolute;
-    bottom: 0;
-}
-
-.sg-logout:hover a {
-    color: #e62121;
-    transform: scale(1.1);
-    transition: 0.2s ease;
+    margin-top: 0.938rem;
 }
 
 .sg-content {
-    margin-left: 97px;
+    margin-left: 6.125rem;
 }
 
-
-/***** TAGS HTML *****/
-ul {
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
-    /* Remove bullets */
-    padding: 0;
-    /* Remove padding */
-    margin: 0;
-    /* Remove margins */
-}
-
-a {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    display: inline-flex;
-    margin-left: 6px;
-    width: 300px;
-    padding: 10px;
-}
-
-i {
-    margin-right: 10px;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+.sg-contexto {
+    margin-left: 1.875rem;
 }
 
 .sg-form {
     border: none;
     font-size: 1rem;
     font-weight: 500;
-    width: 215px;
+    width: calc(var(--hover-sidebar) - 6.25rem);
     transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
+    border-bottom: 2px solid var(--hover-icon);
     outline: none;
-    margin-bottom: 5px;
-    margin-left: 20px;
-    margin-right: 15px;
+    margin-bottom: 0.313rem;
+    margin-left: 1.25rem;
+    margin-right: 1rem;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -135,14 +54,82 @@ i {
     font-weight: 500;
 }
 
-.sg-form option:hover {
-    background-color: red;
+.sg-hover:hover .sg-anchor {
+    color: var(--hover-icon);
+    transform: scale(1.1);
+    transition: 0.2s ease;
 }
 
-#projeto-select option:hover {
-    background-color: red;
+.sg-logout:hover a {
+    color: var(--hover-logout);
+    transform: scale(1.1);
+    transition: 0.2s ease;
 }
 
-.sg-context {
-    margin-left: 30px;
+.sg-logout {
+    position: absolute;
+    bottom: 0;
+}
+
+.sg-nav-item {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.sg-sidebar {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    position: fixed;
+    height: 100vh;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    width: var(--minimizado-sidebar);
+    overflow: hidden;
+    transition: width 0.2s linear;
+    background-color: var(--bg-sidebar);
+    color: var(--cor-sidebar);
+}
+
+.sg-sidebar:hover {
+    width: var(--hover-sidebar);
+    transition: all 0.5s ease;
+}
+
+/* -------------------------------------------   TAG  ------------------------------------------- */
+a {
+    text-decoration: none;
+    color: var(--cor-sidebar);
+    font-size: 0.875rem;
+    display: inline-flex;
+    margin-left: 0.375rem;
+    width: calc(var(--hover-sidebar) - 1.25rem);
+    padding: .5rem;
+}
+
+i {
+    margin-right: 0.625rem;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }

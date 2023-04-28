@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth';
 import { Empresa, SubGrupo } from 'src/app/shared';
@@ -22,7 +21,7 @@ export class InserirEditarPlanoContasComponent implements OnInit {
   subgrupos: SubGrupo[] = [];
   mensagemErro: string = '';
   
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private planoContasService: PlanoContasService, private authService: AuthService) {
   }
 
   ngOnInit(): void {

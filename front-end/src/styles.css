@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+:root {
+  --sg-yellow: #EDA900;
+  --sg-gray: #373935;
+  --sg-white: #E6E7E9;
+  --black: #000;
+  --white: #fff;
+  --cor-footer: #fff;
+}
+
 html,body{
   margin: 0;
   height: 100%;
@@ -6,28 +16,16 @@ html,body{
   flex-direction: column;
   min-height: 100vh;
 }
-
+/* -------------------------------------------  CLASS ------------------------------------------- */
 .sg-footer {
-  background: #fff;
+  background: var(--cor-footer);
   text-align: center;
   width: 100%;
   padding-bottom: 1rem;
   margin-top: auto;
 }
 
-:root {
-  --sg-yellow: #EDA900;
-  --sg-gray: #373935;
-  --sg-white: #E6E7E9;
-  --black: #000;
-  --white: #fff;
-  --table-light-gray: #ececec;
-  --background: #f7f7f7;
-  --dark-gray: #323232;
-  --sidebar-primaria: #fff;
-  --sidebar-hover: #eda900;
-}
-
+/* ----------------------------------------  FONTAWESOME  --------------------------------------- */
 .fa-trash-can {
   color: #ff4242;
   transition: 0.3s;
@@ -56,25 +54,21 @@ html,body{
 }
 
 
-/* width */
+/* -----------------------------------------  SCROLLBAR  -----------------------------------------*/
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #F5F5F5;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background-color: #353333;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
 }
-
