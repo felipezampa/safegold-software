@@ -51,8 +51,7 @@
             <div class="card shadow-lg text-center">
                 <div class="card-header" id="sg-agenda-header">
                     <h2 class="text-center">
-                        Sua Agenda: {{ diaInicio.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}
-                        - {{ diaFim.toLocaleDateString('pt-BR') | mask: 'd0/M0/0000' }}
+                        Sua Agenda: : {{diaInicio | date: 'dd/MM/yyyy'}} - {{diaFim | date: 'dd/MM/yyyy'}}
                     </h2>
                 </div>
                 <div class="row px-4">

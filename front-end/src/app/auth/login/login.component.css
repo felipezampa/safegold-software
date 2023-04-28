@@ -4,15 +4,7 @@
     padding-top: 10px;
 }
 
-.sg-login-image-container {
-    background-color: #373935;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 9rem 6rem;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
+
 
 .sg-login-form-container {
     width: max-content;
@@ -69,12 +61,21 @@
     outline: none;
 }
 
-.sg-margin{
-    margin-top: 4rem;
-}
-.sg-login-image-container img{
+
+.sg-login-image-container img {
     width: 30rem;
+
 }
+
+.sg-login-image-container {
+    padding: 9rem 6rem;
+    /* background-color: #373935; */
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
 @media screen and (max-width:991px) {
     .sg-login-image-container {
         border-top-left-radius: 6px;
@@ -84,14 +85,16 @@
         align-items: center;
         /* width: 10rem; */
     }
-    .sg-login-image-container img{
+
+    .sg-login-image-container img {
         width: 15rem;
     }
-    .sg-input{
+
+    .sg-input {
         font-size: 1.1rem;
     }
 
-    .sg-margin{
+    .sg-margin {
         margin-top: 1.5rem;
     }
 
@@ -105,6 +108,23 @@
         order: 1;
         display: flex;
     }
+    input{
+        margin-top: 1rem;
+    }
 }
 
-@media screen and (max-width:500px) {}
+@media screen and (max-width:500px) {
+    .sg-login-image-container img {
+        width: 9rem;
+    }
+}
+
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#sg-login {
+    height: 100vh;
+}
+
+
+.sg-background{
+    background-color: #373935;
+}

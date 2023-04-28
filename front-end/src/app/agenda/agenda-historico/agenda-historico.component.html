@@ -10,11 +10,11 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">VER:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button col" id="btn-semana">
+                                <button type="button" class="sg-button col mx-1" id="btn-semana">
                                     <i class="fa-regular fa-calendar-days mx-1"></i>
                                     <span>Semana Atual</span>
                                 </button>
-                                <button type="button" class="sg-button col" id="btn-semana">
+                                <button type="button" class="sg-button col mx-1" id="btn-semana">
                                     <i class="fa-solid fa-backward mx-1"></i>
                                     <span>Semana Passada</span>
                                 </button>
@@ -23,10 +23,8 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">FILTRAR DATA:</div>
                             <div class="col-12" id="filterDate">
-                                <div>
-                                    <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
-                                    <input type="date" name="diaFim" [(ngModel)]="diaFim">
-                                </div>
+                                <input type="date" name="diaInicio" [(ngModel)]="diaInicio" [value]="diaInicio">
+                                <input type="date" name="diaFim" [(ngModel)]="diaFim" [value]="diaFim">
                                 <button type="button" class="sg-filter-button" id="btn-filter"
                                     (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
@@ -37,7 +35,7 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">AÇÕES:</div>
                             <div class="col-12">
-                                <button type="button" id="btn-agenda" class="sg-button col" (click)="preencherAgenda()">
+                                <button type="button" id="btn-agenda" class="sg-button col mx-1" (click)="preencherAgenda()">
                                     <i class="fa-solid fa-pen mx-1"></i>
                                     <span>Preencher Agenda</span>
                                 </button>
@@ -57,7 +55,7 @@
             <div class="card shadow-lg text-center">
                 <div class="card-header" id="sg-agenda-header">
                     <h2 class="text-center">
-                        Sua Agenda: {{dataFiltrada}}
+                        Sua Agenda: {{diaInicio | date: 'dd/MM/yyyy'}} - {{diaFim | date: 'dd/MM/yyyy'}}
                     </h2>
                 </div>
                 <div class="card-body table-responsive-lg">
