@@ -1,5 +1,5 @@
 <h1>SG Software</h1>
-Software desenvolvido por @felipezampa e @Duduelc7 para a Safegold com o objetivo de CRUD de empresas, projetos, e plano de contas
+Software desenvolvido por @felipezampa e @Duduelc7 para a Safegold
 
 <h2>Versões utilizadas no software</h2>
 Angular: 14.2.8  </br>

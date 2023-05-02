@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgendaComponent, AgendaHistoricoComponent } from './agenda';
-import { LoginComponent, PageNotFoundComponent } from './auth';
-import { AuthGuard } from './auth/auth.guard';
+import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent } from './agenda';
+import { LoginComponent, PageNotFoundComponent, AuthGuard } from './auth';
 import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
 import { DashboardComponent } from './dashboard';
 import { DashboardFinanceiroComponent, FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
-import { InserirAgendaComponent } from './agenda/inserir-agenda/inserir-agenda.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,18 +12,18 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'financeiro',
-    component: FinanceiroComponent, children:[
+    component: FinanceiroComponent, children: [
       { path: '', component: DashboardFinanceiroComponent, canActivate: [AuthGuard] },
       { path: 'empresas', component: ListarEmpresaComponent, canActivate: [AuthGuard] },
-      { path: 'plano-de-contas', component: ListarPlanoContasComponent,canActivate: [AuthGuard] },
-      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent,canActivate: [AuthGuard] },
-      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent,canActivate: [AuthGuard] },
+      { path: 'plano-de-contas', component: ListarPlanoContasComponent, canActivate: [AuthGuard] },
+      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent, canActivate: [AuthGuard] },
+      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent, canActivate: [AuthGuard] },
     ],
     canActivate: [AuthGuard]
   },
   {
     path: 'agenda',
-    component: AgendaComponent, children:[
+    component: AgendaComponent, children: [
       { path: '', component: InserirAgendaComponent, canActivate: [AuthGuard] },
       { path: 'historico', component: AgendaHistoricoComponent, canActivate: [AuthGuard] },
     ],
@@ -33,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'avaliacao',
-    component: AvaliacaoComponent, children:[
+    component: AvaliacaoComponent, children: [
       { path: 'autoavaliacao', component: AutoAvaliacaoComponent, canActivate: [AuthGuard] },
     ],
     canActivate: [AuthGuard]

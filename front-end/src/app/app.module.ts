@@ -3,15 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CookieService } from 'ngx-cookie-service';
-import { AgendaModule } from './agenda';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthModule, AvaliacaoModule, DashboardModule, FinanceiroModule } from './index';
+import { AgendaModule, AppComponent, AppRoutingModule, AuthModule, AvaliacaoModule, DashboardModule, FinanceiroModule } from './index';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

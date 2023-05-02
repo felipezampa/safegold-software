@@ -23,4 +23,13 @@ export class SwalFacade {
         });
     }
 
+    static alerta(titulo: string, texto?: string): Promise<any> {
+        return Swal.fire({
+            icon: 'warning',
+            title: titulo,
+            text: texto,
+            confirmButtonColor: '#EDA900',
+            confirmButtonText: 'Ok'
+        });
+    }
 }

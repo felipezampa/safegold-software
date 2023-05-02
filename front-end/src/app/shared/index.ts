@@ -1,6 +1,8 @@
-export * from './models';
+// Pastas
 export * from './directives';
+export * from './models';
 export * from './pipes';
-export * from './shared.module';
+// Arquivos
 export * from './app_config';
+export * from './shared.module';
 export * from './swal-facade';
