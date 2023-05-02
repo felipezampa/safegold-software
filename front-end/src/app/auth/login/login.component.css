@@ -1,27 +1,58 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#sg-login {
+    height: 100vh;
+    --background-color: #373935;
+    --login-btn: #EDA900;
+    --hover-btn: #414442;
+    --disabled-btn: #edaa0091;
+    --input-cor: #EDA900;
+    --input-hover: #414442;
+    --input-bg: #fafafa;
+}
+
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.input-with-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-with-icon input[type="password"] {
+    padding-right: 30px;
+    /* Ajuste o valor da padding-right para acomodar o tamanho do ícone */
+}
+
+.input-with-icon i {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    right: 0.625rem;
+    /* Ajuste o valor da right para ajustar a posição do ícone */
+    width: 1.25rem;
+    /* Ajuste o valor da largura para o tamanho do ícone */
+    height: 1.25rem;
+    /* Ajuste o valor da altura para o tamanho do ícone */
+    cursor: pointer;
+}
+
 .sg-background {
-    background-color: #373935;
+    background-color: var(--background-color);
     margin: auto;
     padding-top: 10px;
 }
 
-
-
-.sg-login-form-container {
-    width: max-content;
-}
-
 .sg-button {
-    background: #EDA900;
+    background: var(--login-btn);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     border: none;
-    padding: 7px 28px;
+    padding: .5rem 1.75rem;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 600;
     letter-spacing: 1px;
     text-align: center;
-    color: #FFFFFF;
+    color: var(--white);
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -31,61 +62,52 @@
 }
 
 .sg-button:hover {
-    background: #414442;
+    background: var(--hover-btn);
 }
 
 .sg-button:disabled {
-    background: #edaa0091;
+    background: var(--disabled-btn);
 }
 
-#sg-senha {
-    --width-input: 90%;
-    margin-top: 1rem;
+.sg-login-form-container {
+    width: max-content;
 }
-
-#sg-email {
-    --width-input: 100%;
-}
-
-.sg-input {
-    border: none;
-    background-color: #fafafa;
-    font-size: 1.2rem;
-    font-weight: 500;
-    width: var(--width-input);
-    width: 100%;
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-    transition: 0.6s;
-}
-
-.sg-input[type=text]:focus,
-.sg-input[type=text]:active {
-    border-bottom: 2px solid #414442;
-    outline: none;
-}
-
-.sg-input[type=password]:focus,
-.sg-input[type=password]:active {
-    border-bottom: 2px solid #414442;
-    outline: none;
-}
-
 
 .sg-login-image-container img {
     width: 30rem;
-
 }
 
 .sg-login-image-container {
     padding: 9rem 6rem;
-    /* background-color: #373935; */
     justify-content: center;
     align-items: center;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
 
+.sg-input {
+    border: none;
+    background-color: var(--input-bg);
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 100%;
+    border-bottom: 2px solid var(--input-cor);
+    outline: none;
+    transition: 0.6s;
+    margin-top: 1rem;
+}
+
+.sg-input[type=text]:focus,
+.sg-input[type=text]:active {
+    border-bottom: 2px solid var(--input-hover);
+}
+
+.sg-input[type=password]:focus,
+.sg-input[type=password]:active {
+    border-bottom: 2px solid var(--input-hover);
+}
+
+/* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width:991px) {
     .sg-login-image-container {
         border-top-left-radius: 6px;
@@ -93,7 +115,6 @@
         margin-bottom: 1rem;
         padding: 1rem 0;
         align-items: center;
-        /* width: 10rem; */
     }
 
     .sg-login-image-container img {
@@ -128,39 +149,4 @@
     .sg-login-image-container img {
         width: 9rem;
     }
-}
-
-.input-with-icon {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
-
-.input-with-icon input[type="password"] {
-    padding-right: 30px;
-    /* Ajuste o valor da padding-right para acomodar o tamanho do ícone */
-}
-
-.input-with-icon i {
-    position: absolute;
-    top: 70%;
-    transform: translateY(-50%);
-    right: 10px;
-    /* Ajuste o valor da right para ajustar a posição do ícone */
-    width: 20px;
-    /* Ajuste o valor da largura para o tamanho do ícone */
-    height: 20px;
-    /* Ajuste o valor da altura para o tamanho do ícone */
-
-    cursor: pointer;
-}
-
-/* -------------------------------------------  MAIN  ------------------------------------------- */
-#sg-login {
-    height: 100vh;
-}
-
-
-.sg-background {
-    background-color: #373935;
 }

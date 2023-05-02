@@ -8,11 +8,11 @@
             <hr>
             <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
               <div>
-                <input type="text" class="sg-input" id="sg-email" name="username" [(ngModel)]="username"
+                <input type="text" class="sg-input" name="username" [(ngModel)]="username"
                   placeholder="Email@exemplo.com" required>
               </div>
               <div class="input-with-icon">
-                <input type="password" class="sg-input" id="sg-senha" name="password" [(ngModel)]="password"
+                <input type="password" class="sg-input" name="password" [(ngModel)]="password"
                   placeholder="Sua senha" required>
                   <i class="fa fa-eye" (click)="mostrarSenha()"></i>
               </div>

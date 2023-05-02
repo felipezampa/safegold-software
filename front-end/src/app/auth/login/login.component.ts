@@ -46,6 +46,7 @@ export class LoginComponent {
       }
     )
   }
+  
   mostrarSenha() {
     this.showPassword = !this.showPassword;
     let tipoInput = document.getElementById('sg-senha');
