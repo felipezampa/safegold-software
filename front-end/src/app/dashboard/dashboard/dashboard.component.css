@@ -1,6 +1,8 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
 #dashboard {
     height: 100vh;
-    /* background-color: #14013b; */
+    --logout: #ff1818;
+    --card-title-color: #2a2a2a;
 }
 
 .financeiro {
@@ -24,6 +26,7 @@
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
+/* -------------------------------------------  CLASS ------------------------------------------- */
 .card {
     width: 25rem;
     height: 20rem;
@@ -38,15 +41,17 @@
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease-out;
     text-decoration: none;
-    /* padding: 0 1rem; */
     margin: 0 .5rem;
 }
 
 .card:hover {
     background: var(--bg-color);
     transform: translateY(-5px) scale(1.005) translateZ(0);
-    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
-        0 24px 46px var(--box-shadow-color);
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 24px 46px var(--box-shadow-color);
+}
+
+.card:hover h1 {
+    color: var(--text-color-hover);
 }
 
 .card-span {
@@ -55,7 +60,7 @@
     font-size: 1.7rem;
     letter-spacing: 2px;
     font-weight: 700;
-    color: #2a2a2a;
+    color: var(--card-title-color);
     transition: color 0.3s ease-out;
     top: 0;
 }
@@ -64,52 +69,17 @@
     width: 40rem;
     display: flex;
     margin: auto;
-    padding-top: 10px;
-}
-
-.card:hover h1 {
-    color: var(--text-color-hover);
-}
-
-.card:hover span {
-    color: var(--text-color-hover);
-}
-
-.card:hover .sg-anchor {
-    color: var(--text-color-hover);
-}
-
-.sg-nav-item {
-    position: relative;
-    font-family: 'Raleway', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    font-weight: 500;
-}
-
-.sg-anchor {
-    color: #898989;
-}
-
-.sg-card-header {
-    padding-bottom: 50px;
-    position: sticky;
-    top: 0;
-}
-
-a {
-    cursor: pointer;
-    padding: .2rem 1rem;
-    border-radius: 5px;
+    padding-top: 0.625rem;
 }
 
 .logout {
-    color: #ff1818;
+    color: var(--logout);
 }
 
-.logout a{
-    border: 1px solid #ff1818;
+.logout a {
+    border: 1px solid var(--logout);
 }
+
 .logout:hover i {
     transform: scale(1.3);
     transition: 0.2s ease;
@@ -117,16 +87,25 @@ a {
 }
 
 .logout:hover a {
-    background-color: #ff1818;
-    color: white;
+    background-color: var(--logout);
+    color: var(--white);
     font-weight: 700;
     transition: 0.2s ease;
 }
 
+/* -------------------------------------------   TAG  ------------------------------------------- */
+a {
+    cursor: pointer;
+    padding: .2rem 1rem;
+    border-radius: 5px;
+}
+
+/* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width: 1400px) {
     .card-span {
         font-size: 1.5rem;
     }
+
     .card {
         width: 20rem;
     }
@@ -143,16 +122,19 @@ a {
 }
 
 @media screen and (max-width: 991px) {
-    #dashboard{
+    #dashboard {
         margin: none;
     }
-    .header-image{
-        width: 17rem; 
+
+    .header-image {
+        width: 17rem;
     }
-    .row{
+
+    .row {
         display: flex;
         flex-direction: row;
     }
+
     .card-span {
         font-size: 1.2rem;
     }
@@ -161,13 +143,14 @@ a {
         width: 20rem;
         margin-bottom: .7rem;
     }
-    .logout{
+
+    .logout {
         text-align: center;
     }
 }
 
 @media screen and (max-width:500px) {
-    .card{
+    .card {
         height: 11rem;
     }
 }
