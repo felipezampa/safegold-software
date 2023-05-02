@@ -38,11 +38,21 @@
     background: #edaa0091;
 }
 
+#sg-senha {
+    --width-input: 90%;
+    margin-top: 1rem;
+}
+
+#sg-email {
+    --width-input: 100%;
+}
+
 .sg-input {
     border: none;
     background-color: #fafafa;
     font-size: 1.2rem;
     font-weight: 500;
+    width: var(--width-input);
     width: 100%;
     border-bottom: 2px solid #EDA900;
     outline: none;
@@ -108,7 +118,8 @@
         order: 1;
         display: flex;
     }
-    input{
+
+    input {
         margin-top: 1rem;
     }
 }
@@ -119,12 +130,37 @@
     }
 }
 
+.input-with-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-with-icon input[type="password"] {
+    padding-right: 30px;
+    /* Ajuste o valor da padding-right para acomodar o tamanho do ícone */
+}
+
+.input-with-icon i {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    right: 10px;
+    /* Ajuste o valor da right para ajustar a posição do ícone */
+    width: 20px;
+    /* Ajuste o valor da largura para o tamanho do ícone */
+    height: 20px;
+    /* Ajuste o valor da altura para o tamanho do ícone */
+
+    cursor: pointer;
+}
+
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #sg-login {
     height: 100vh;
 }
 
 
-.sg-background{
+.sg-background {
     background-color: #373935;
 }

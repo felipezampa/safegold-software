@@ -26,6 +26,10 @@ html,body{
 }
 
 /* ----------------------------------------  FONTAWESOME  --------------------------------------- */
+.fa-solid, .fa{
+  cursor: pointer;
+}
+
 .fa-trash-can {
   color: #ff4242;
   transition: 0.3s;
@@ -52,7 +56,6 @@ html,body{
 .fa-pencil:hover {
   color: #000;
 }
-
 
 /* -----------------------------------------  SCROLLBAR  -----------------------------------------*/
 ::-webkit-scrollbar {

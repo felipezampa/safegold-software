@@ -15,6 +15,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   showErrorMessage: boolean = false;
+  showPassword: boolean = false;
   myform!: FormGroup;
   error: string = '';
   token = '';
@@ -22,8 +23,7 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSubmit(): void {
     this.authService.login(this.username, this.password).subscribe(
@@ -45,5 +45,15 @@ export class LoginComponent {
         }
       }
     )
+  }
+  mostrarSenha() {
+    this.showPassword = !this.showPassword;
+    let tipoInput = document.getElementById('sg-senha');
+  
+    if (this.showPassword) {
+      tipoInput?.setAttribute('type', 'text');
+    } else {
+      tipoInput?.setAttribute('type', 'password');
+    }
   }
 }
