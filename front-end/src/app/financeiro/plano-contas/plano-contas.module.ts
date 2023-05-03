@@ -6,6 +6,7 @@ import { ExcluirPlanoContasComponent, InserirEditarPlanoContasComponent, ListarP
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+
 @NgModule({
   declarations: [
     ListarPlanoContasComponent,

@@ -11,7 +11,6 @@
     <h3>Essa ação é permanente e não poderá ser desfeita</h3>
 </div>
 <div class="modal-footer justify-content-center align-items-center">
-    <button type="submit" class="btn btn-outline-danger mx-2"
-        (click)="excluirEmpresa(matriz.cod_matriz_analitica_fornecedor)">Excluir Vínculo</button>
-    <button type="button" class="btn btn-outline-dark mx-2" (click)="activeModal.close()">Cancelar</button>
+    <button class="sg-button" id="btn-excluir" (click)="excluir(matriz.cod_matriz_analitica_fornecedor)">Excluir Vínculo</button>
+    <button class="sg-button" id="btn-fechar" (click)="activeModal.close()">Cancelar</button>
 </div>

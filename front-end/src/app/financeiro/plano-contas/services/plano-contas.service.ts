@@ -9,17 +9,16 @@ import { APP_CONFIG, ContaAnalitica, SubGrupo } from 'src/app/shared';
 })
 export class PlanoContasService {
 
-  baseURL = APP_CONFIG.baseURL +'api/fin_conta_analitica/';
-  baseSubGrupo = APP_CONFIG.baseURL +'api/fin_subgrupo_contas/';
-  httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
+  private baseURL = APP_CONFIG.baseURL +'api/fin_conta_analitica/';
+  private baseSubGrupo = APP_CONFIG.baseURL +'api/fin_subgrupo_contas/';
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
+
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   get refreshPage$() {
     return this._refreshPage$;
   }
-  constructor(private http: HttpClient, private authService: AuthService) { }
-
-
 
   createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST

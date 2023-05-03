@@ -6,6 +6,22 @@
     --input-border: #EDA900;
 }
 
+#btn-salvar {
+    /* Botões de action */
+    --cor-action-btn: #373935;
+    --bg-action-btn: #edaa00cc;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
+}
+
+#btn-fechar {
+    /* Botões de action */
+    --cor-action-btn: #373935;
+    --bg-action-btn: #c1c1c1;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
+}
+
 /* -------------------------------------------   ID   ------------------------------------------- */
 #modalLabel {
     color: var(--sg-yellow);
@@ -14,6 +30,23 @@
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .modal-header {
     background-color: var(--sg-gray);
+}
+
+.sg-button {
+    cursor: pointer;
+    background-color: var(--bg-action-btn);
+    color: var(--cor-action-btn);
+    font-weight: 600;
+    margin: 0.625rem;
+    padding: .3rem 1.5rem;
+    border-radius: 8px;
+    transition: 0.5s;
+    border: none;
+}
+
+.sg-button:hover {
+    background-color: var(--hover-bg-action-btn);
+    color: var(--hover-cor-action-btn);
 }
 
 .sg-gerencia {

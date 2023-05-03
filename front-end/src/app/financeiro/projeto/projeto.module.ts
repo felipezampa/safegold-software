@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProjetoService } from './services/projeto.service';
-
+import { ProjetoService } from './index';
 
 
 @NgModule({
@@ -12,9 +11,7 @@ import { ProjetoService } from './services/projeto.service';
     CommonModule,
     FormsModule,
     HttpClientModule
-  ], 
-  providers: [
-    ProjetoService,
-  ]
+  ],
+  providers: [ProjetoService]
 })
 export class ProjetoModule { }

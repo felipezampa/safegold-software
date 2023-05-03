@@ -1,22 +1,50 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
+#modal-empresa{
+    --cor-action-btn: #373935;
+    --bg-action-btn: #c1c1c1;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
+    --hr-color: #686868;
+}
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.modal-header {
+    background-color: var(--sg-gray);
+}
+
+.sg-button {
+    cursor: pointer;
+    background-color: var(--bg-action-btn);
+    color: var(--cor-action-btn);
+    font-weight: 600;
+    margin: 0.625rem;
+    padding: .3rem 1.5rem;
+    border-radius: 8px;
+    transition: 0.5s;
+    border: none;
+}
+
+.sg-button:hover {
+    background-color: var(--hover-bg-action-btn);
+    color: var(--hover-cor-action-btn);
+}
+
+/* -------------------------------------------   ID   ------------------------------------------- */
+#modalLabel {
+    color: var(--sg-yellow);
+}
+
+/* -------------------------------------------   TAG  ------------------------------------------- */
 h5 {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
     font-size: 1.2rem;
     letter-spacing: 2px;
     font-weight: 700;
-    color: #686868;
+    color: var(--hr-color);
 }
 
-.modal-header{
-    background-color: var(--sg-gray);
-}
-
-#modalLabel{
-    color: var(--sg-yellow);    
-}
-
-hr{
+hr {
     margin-bottom: 10px;
 }

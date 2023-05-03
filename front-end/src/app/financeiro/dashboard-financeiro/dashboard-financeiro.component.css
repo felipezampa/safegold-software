@@ -1,9 +1,49 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
+#dashboard-financeiro {
+    height: 100vh;
+    padding-top: 3rem;
+}
+
+#btn-main {
+    /* Botões de action */
+    --cor-action-btn: #373935;
+    --bg-action-btn: #edaa00cc;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
+}
+
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.card-header {
+    background-color: var(--sg-gray);
+}
+
+.sg-button {
+    background-color: var(--bg-action-btn);
+    color: var(--cor-action-btn);
+    font-weight: 600;
+    margin: 0.625rem;
+    padding: .3rem 1.5rem;
+    border-radius: 8px;
+    transition: 0.5s;
+    border: none;
+}
+
+.sg-button:hover {
+    background-color: var(--hover-bg-action-btn);
+    color: var(--hover-cor-action-btn);
+}
+
+.sg-grafico {
+    height: 22rem;
+}
+
+/* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     letter-spacing: 2px;
     font-weight: 700;
     color: var(--sg-gray);
@@ -13,121 +53,4 @@ h2 {
 
 p {
     margin-bottom: 10px;
-}
-
-.sg-fixed-nav {
-    background-color: var(--background);
-    padding: 0px 20px;
-    position: fixed;
-    z-index: 1;
-    justify-content: space-around;
-    display: inline-flex;
-    width: 100% !important;
-}
-
-#exportar {
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1.3rem;
-    vertical-align: middle;
-    margin-right: 1.3rem;
-    padding-bottom: 10%;
-}
-
-.sg-button {
-    background-color: #9fcaa8cc;
-    color: var(--black);
-    border: 1px solid var(--dark-gray);
-    font-weight: 600;
-    margin: 10px;
-    padding: 5px 25px;
-    border-radius: 8px;
-    transition: 0.5s;
-}
-
-.sg-button:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
-    border: 1px solid var(--dark-gray);
-}
-
-.sg-btn-filter {
-    background-color: #edaa00db;
-    color: var(--black);
-    border: 1px solid var(--dark-gray);
-    font-weight: 600;
-    margin-right: 50px;
-    margin-left: 50px;
-    padding: 5px 25px;
-    border-radius: 8px;
-    transition: 0.5s;
-}
-
-.sg-btn-filter:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
-}
-
-.sg-filter {
-    border: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    width: 90%;
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-    background-color: #f8f7f7;
-}
-
-.sg-filter[type=text]:focus,
-.sg-filter[type=text]:active {
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-}
-
-.card-header {
-    background-color: var(--sg-gray);
-}
-
-.sg-select {
-    background-color: transparent;
-    width: auto;
-    border: none;
-    font-weight: 400;
-    width: 100%;
-    transform: scaleX(1);
-    outline: none;
-    margin-bottom: 10px;
-}
-
-.sg-grafico {
-    height: 350px;
-}
-
-a {
-    background: #EDA900;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-    border: none;
-    padding: 7px 28px;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.6s;
-    text-decoration: none;
-    width: fit-content;
-}
-
-a:hover{
-    background: #414442;
 }

@@ -1,12 +1,11 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
-import { ContaAnalitica } from 'src/app/shared';
-import { AuthService } from 'src/app/auth';
-import { InserirEditarPlanoContasComponent, ExcluirPlanoContasComponent, PlanoContasService } from '../index';
 import 'jspdf-autotable';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth';
+import { ContaAnalitica } from 'src/app/shared';
 import * as XLSX from 'xlsx';
+import { ExcluirPlanoContasComponent, InserirEditarPlanoContasComponent, PlanoContasService } from '../index';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class ListarPlanoContasComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
 
-  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private router: Router, private authService: AuthService) { }
+  constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listarContas();
@@ -42,14 +41,14 @@ export class ListarPlanoContasComponent implements OnInit {
 
   abrirFormCadastro() {
     this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl', backdrop: 'static' });
+    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl'});
     modalRef.componentInstance.editMode = this.editMode;
     modalRef.componentInstance.cod_empresa = this.authService.getCurrentCod_empresa();
   }
 
   abrirFormAtualizacao(id: number) {
     this.editMode = true;
-    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl', backdrop: 'static' });
+    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl'});
     modalRef.componentInstance.idConta = id;
     modalRef.componentInstance.editMode = this.editMode;
   }

@@ -44,10 +44,10 @@
         </form>
     </div>
     <div class="modal-footer justify-content-center align-items-center">
-        <button *ngIf="!editMode" type="submit" class="btn btn-primary mx-2" (click)="SalvarForm(formPlanoContas.value)"
+        <button *ngIf="!editMode" type="submit" class="sg-button" id="btn-salvar" (click)="SalvarForm(formPlanoContas.value)"
             [disabled]="!formPlanoContas.valid">Salvar</button>
-        <button *ngIf="editMode" type="submit" class="btn btn-warning mx-2" (click)="SalvarForm(formPlanoContas.value)"
+        <button *ngIf="editMode" type="submit" class="sg-button" id="btn-salvar" (click)="SalvarForm(formPlanoContas.value)"
             [disabled]="!formPlanoContas.valid">Atualizar</button>
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+        <button type="button" class="sg-button" id="btn-fechar" (click)="activeModal.close()">Fechar</button>
     </div>
 </div>

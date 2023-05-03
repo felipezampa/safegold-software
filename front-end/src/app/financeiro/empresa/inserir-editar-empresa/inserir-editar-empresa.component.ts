@@ -17,9 +17,8 @@ export class InserirEditarEmpresaComponent {
   @Input() editMode!: boolean;
   empresas: Empresa[] = [];
   mensagemErro: string = '';
-  projetos_unicos!: any [];
-  projetos!: any[];
-  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService, private projetoService: ProjetoService) { }
+  projetos_unicos!: any[];
+  constructor(public activeModal: NgbActiveModal, private empresaService: EmpresaService) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -102,9 +101,12 @@ export class InserirEditarEmpresaComponent {
       this.getUniqueProjetos()
     });
   }
+  
   getUniqueProjetos() {
+    // Lista os projetos
     this.projetos_unicos = [];
     this.empresas.forEach((empresas) => {
+      // Busca projeto que da empresa editavel
       if (!this.projetos_unicos.find(p => p.cod_projeto === empresas.cod_projeto)) {
         this.projetos_unicos.push(empresas);
       }

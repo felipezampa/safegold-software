@@ -1,26 +1,28 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
-h2 {
-    font-family: 'Raleway', sans-serif;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    color: var(--sg-gray);
-    color: var(--sg-yellow);
-    margin: 0;
+#listar-conta-fornecedor {
+    --background: #f8f7f7;
+    height: 100vh;
 }
 
-.sg-fixed-nav {
-    background-color: var(--background);
-    padding: 0px 20px;
-    position: fixed;
-    z-index: 1;
-    justify-content: space-around;
-    display: inline-flex;
-    width: 100% !important;
+#btn-options {
+    /* Botões de action */
+    --cor-action-btn: #373935;
+    --bg-action-btn: #edaa00cc;
+    --hover-bg-action-btn: #373935;
+    --hover-cor-action-btn: #fff;
 }
 
+#btn-export {
+    /* Botões de action */
+    --cor-action-btn: #fff;
+    --bg-action-btn: #0d4287;
+    --hover-cor-action-btn: #fff;
+    --hover-bg-action-btn: #00214c;
+}
+
+/* -------------------------------------------   ID   ------------------------------------------- */
 #exportar {
     text-transform: uppercase;
     font-weight: 700;
@@ -31,69 +33,59 @@ h2 {
     padding-bottom: 10%;
 }
 
-.sg-button {
-    background-color: #9fcaa8cc;
-    color: var(--black);
-    border: 1px solid var(--dark-gray);
-    font-weight: 600;
-    margin: 10px;
-    padding: 5px 25px;
-    border-radius: 8px;
-    transition: 0.5s;
-}
-
-.sg-button:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
-    border: 1px solid var(--dark-gray);
-}
-
-.sg-btn-filter {
-    background-color: #edaa00db;
-    color: var(--black);
-    border: 1px solid var(--dark-gray);
-    font-weight: 600;
-    margin-right: 50px;
-    margin-left: 50px;
-    padding: 5px 25px;
-    border-radius: 8px;
-    transition: 0.5s;
-}
-
-.sg-btn-filter:hover {
-    background-color: var(--dark-gray);
-    color: var(--white);
-}
-
-.sg-filter {
-    border: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    width: 90%;
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-    background-color: #f8f7f7;
-}
-
-.sg-filter[type=text]:focus,
-.sg-filter[type=text]:active {
-    transform: scaleX(1);
-    border-bottom: 2px solid #EDA900;
-    outline: none;
-}
-
+/* -------------------------------------------  CLASS ------------------------------------------- */
 .card-header {
     background-color: var(--sg-gray);
 }
 
-.sg-select{
+.sg-button {
+    background-color: var(--bg-action-btn);
+    color: var(--cor-action-btn);
+    font-weight: 600;
+    margin: 0.625rem;
+    padding: .3rem 1.5rem;
+    border-radius: 8px;
+    transition: 0.5s;
+    border: none;
+}
+
+.sg-button:hover {
+    background-color: var(--hover-bg-action-btn);
+    color: var(--hover-cor-action-btn);
+}
+
+.sg-container-tabela {
+    padding-top: 3.5rem;
+}
+
+.sg-fixed-nav {
+    background-color: var(--background);
+    padding: 0rem 1.25rem;
+    position: fixed;
+    z-index: 1;
+    justify-content: space-around;
+    display: inline-flex;
+    width: 100% !important;
+}
+
+.sg-select {
     background-color: transparent;
     width: auto;
     border: none;
     font-weight: 400;
     width: 100%;
-    transform: scaleX(1);
     outline: none;
-    margin-bottom: 10px;
+    margin-bottom: 0.6rem;
+}
+
+/* -------------------------------------------   TAG  ------------------------------------------- */
+h2 {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--sg-gray);
+    color: var(--sg-yellow);
+    margin: 0;
 }

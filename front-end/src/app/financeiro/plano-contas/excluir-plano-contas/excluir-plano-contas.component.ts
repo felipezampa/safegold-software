@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ContaAnalitica } from 'src/app/shared';
+import { ContaAnalitica, SwalFacade } from 'src/app/shared';
 import { PlanoContasService } from '../services/plano-contas.service';
 
 
@@ -19,7 +19,15 @@ export class ExcluirPlanoContasComponent implements OnInit {
   }
 
   excluir(id: number) {
-    this.service.deletePlanoContas(id).subscribe();
-    this.activeModal.close();
+    this.service.deletePlanoContas(id).subscribe(
+      {
+        next: () => {
+          this.activeModal.close();
+        },
+        error: () => {
+          SwalFacade.erro("Ocorreu um erro ao tentar excluir", "Se o erro persistir entre em contato com o administrador");
+        }
+      }
+    );
   }
 }

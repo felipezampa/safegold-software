@@ -21,10 +21,11 @@
 .logo img {
     width: 100%;
     margin-top: 0.938rem;
+    margin-left: .3rem;
 }
 
 .sg-content {
-    margin-left: 6.125rem;
+    margin-left: 5.8rem;
 }
 
 .sg-contexto {

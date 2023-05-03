@@ -1,17 +1,16 @@
-import { ExcluirEmpresaComponent, ModalEmpresaComponent, InserirEditarEmpresaComponent, EmpresaService } from '../index';
-import { Empresa } from 'src/app/shared';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import 'jspdf-autotable';
+import { Subscription } from 'rxjs';
+import { Empresa } from 'src/app/shared';
 import * as XLSX from 'xlsx';
+import { EmpresaService, ExcluirEmpresaComponent, InserirEditarEmpresaComponent, ModalEmpresaComponent } from '../index';
 
 @Component({
   selector: 'app-listar-empresa',
   templateUrl: './listar-empresa.component.html',
   styleUrls: ['./listar-empresa.component.css']
 })
-
 
 export class ListarEmpresaComponent implements OnInit {
 
@@ -22,13 +21,10 @@ export class ListarEmpresaComponent implements OnInit {
   safegoldGerencia: number | undefined = 0;
   filtro!: '';
 
-  constructor(
-    private empresaService: EmpresaService,
-    private modalService: NgbModal) { }
+  constructor( private empresaService: EmpresaService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listarEmpresa();
-
     this.subscription = this.empresaService.refreshPage$.subscribe(() => {
       this.listarEmpresa();
     })
@@ -44,24 +40,29 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   abrirFormCadastro() {
+    // Abre o formulario para cadastrar com a flag de edicao falsa
     this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
+    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl'});
     modalRef.componentInstance.editMode = this.editMode;
   }
 
   abrirFormAtualizacao(id: number) {
+    // Abre o formulario para cadastrar com a flag de edicao verdadeira
     this.editMode = true;
-    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl', backdrop: 'static' });
+    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl'});
+    // Adicionar o ID do objeto a ser editado
     modalRef.componentInstance.idEmpresa = id;
     modalRef.componentInstance.editMode = this.editMode;
   }
 
   verModalEmpresa(empresa: Empresa) {
+    // Modal simples para visualizacao
     const modalRef = this.modalService.open(ModalEmpresaComponent, { size: 'xl' });
     modalRef.componentInstance.empresa = empresa;
   }
 
   deletarModalEmpresa(empresa: Empresa) {
+    // Modal para deletar passando o objeto como parametro
     const modalRef = this.modalService.open(ExcluirEmpresaComponent, { size: 'xl' });
     modalRef.componentInstance.empresa = empresa;
   }

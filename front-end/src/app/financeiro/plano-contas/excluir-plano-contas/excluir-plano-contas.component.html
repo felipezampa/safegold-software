@@ -6,6 +6,6 @@
     <h3>Essa ação é permanente e não poderá ser desfeita</h3>
 </div>
 <div class="modal-footer justify-content-center align-items-center">
-    <button type="submit" class="btn btn-outline-danger mx-2" (click)="excluir(conta.cod_conta_analitica)">Excluir Conta Analítica</button>
-    <button type="button" class="btn btn-outline-dark mx-2" (click)="activeModal.close()">Cancelar</button>
+    <button class="sg-button" id="btn-excluir" (click)="excluir(conta.cod_conta_analitica)">Excluir Conta Analítica</button>
+    <button class="sg-button" id="btn-fechar" (click)="activeModal.close()">Fechar</button>
 </div>

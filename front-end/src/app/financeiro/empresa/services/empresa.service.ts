@@ -9,17 +9,16 @@ import { APP_CONFIG, Empresa } from 'src/app/shared';
 })
 export class EmpresaService {
 
-  empresas: Empresa[] = [];
-  baseURL = APP_CONFIG.baseURL + 'api/empresas/'
-  httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
+  private baseURL = APP_CONFIG.baseURL + 'api/empresas/'
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
+
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   get refreshPage$() {
     return this._refreshPage$;
   }
-  constructor(private http: HttpClient, private authService: AuthService) { }
-
-
+  
   createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value)

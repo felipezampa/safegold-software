@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatrizAnalitica } from 'src/app/shared';
+import { MatrizAnalitica, SwalFacade } from 'src/app/shared';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
 
 @Component({
@@ -16,8 +16,16 @@ export class ExcluirContaFornecedorComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  excluirEmpresa(id: number) {
-    this.matrizService.deleteEmpresa(id).subscribe();
-    this.activeModal.close();
+  excluir(id: number) {
+    this.matrizService.deleteEmpresa(id).subscribe(
+      {
+        next: () => {
+          this.activeModal.close();
+        },
+        error: () => {
+          SwalFacade.erro("Ocorreu um erro ao tentar excluir", "Se o erro persistir entre em contato com o administrador");
+        }
+      }
+    );
   }
 }

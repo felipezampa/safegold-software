@@ -23,11 +23,9 @@ export class DashboardFinanceiroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.currentEmpresa = this.authService.getCurrentNome_empresa();
     this.isLoading = true;
     this.getFornecedores();
-    // this.createBarChart();
   }
 
   getFornecedores(): void {

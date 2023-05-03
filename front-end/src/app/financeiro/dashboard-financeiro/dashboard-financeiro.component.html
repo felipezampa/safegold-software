@@ -1,4 +1,4 @@
-<div class="container-fluid mb-5  pt-3">
+<div class="container-fluid" id="dashboard-financeiro">
   <div class="card">
     <div class="card-header">
       <h2 class="text-center">Dashboard {{currentEmpresa}}</h2>
@@ -13,7 +13,7 @@
               <p>Total de fornecedores: {{ totalFornecedores }}</p>
               <p>Fornecedores com vínculo: {{ fornecedoresComVinculo }}</p>
               <p>Fornecedores sem vínculo: {{ fornecedoresSemVinculo }}</p>
-              <a href="financeiro/conta-fornecedor" class="card-link text-center">Visualizar vínculos</a>
+              <button class="sg-button" id="btn-main" routerLink="financeiro/conta-fornecedor">Visualizar vínculos</button>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
             <div *ngFor="let item of ocorrenciasArray">
               <p>{{ item.descricao }}: {{ item.quantidade }}</p>
             </div>
-            <a href="financeiro/conta-fornecedor" class="card-link text-center">Visualizar Contas</a>
+            <button class="sg-button" id="btn-main" routerLink="financeiro/plano-de-contas">Visualizar Contas</button>
           </div>
         </div>
         <hr class="mt-3">
