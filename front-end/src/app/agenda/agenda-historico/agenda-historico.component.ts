@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AgendaService } from '../services/agenda.service';
 import { AuthService } from 'src/app/auth';
-import { NgForm } from '@angular/forms';
+import { AgendaService } from '../services/agenda.service';
 
 
 @Component({
@@ -24,11 +23,6 @@ export class AgendaHistoricoComponent implements OnInit {
     this.username = this.authService.getUsername();
     this.listarAgenda();
     this.atribuirSemanaAtual();
-  }
-
-  preencherAgenda() {
-    this.router.navigate(['agenda']);
-    // modalRef.componentInstance.empresa = empresa;
   }
 
   filtrarPorData(ini: Date, fim: Date) {

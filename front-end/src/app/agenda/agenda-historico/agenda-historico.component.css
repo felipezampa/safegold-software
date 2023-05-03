@@ -65,10 +65,9 @@
     margin: 0 .2rem;
     width: 35%;
     border: none;
-    background-color: #ffffff11;
     font-size: 1rem;
     font-weight: 500;
-    border-bottom: 2px solid #EDA900;
+    border-bottom: 2px solid var(--cor-header);
     outline: none;
 }
 
@@ -101,7 +100,6 @@
     border-radius: 8px;
     transition: 0.5s;
     border: none;
-    /* width: 15rem; */
 }
 
 .sg-filter-button:hover {
@@ -121,9 +119,11 @@
     margin: 1rem 1.3rem;
     text-align: center;
 }
-.card-body{
+
+.card-body {
     padding: 0;
 }
+
 /* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
     font-family: 'Raleway', sans-serif;
@@ -172,12 +172,14 @@ thead {
 }
 
 @media screen and (max-width:991px) {
-    tr{
+    tr {
         font-size: .9rem;
     }
+
     .sg-table {
-        margin:.75rem 0;
+        margin: .75rem 0;
     }
+
     .card-body {
         padding: .3rem 0 .7rem 0;
     }
@@ -202,6 +204,7 @@ thead {
         font-size: 1rem;
         margin: 0;
     }
+
     #filterDate input {
         width: 65%;
     }
@@ -229,6 +232,7 @@ thead {
         padding: 0rem;
         margin: 0rem;
     }
+
     #filterDate input {
         width: 30%;
         font-size: .8rem;

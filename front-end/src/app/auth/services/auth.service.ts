@@ -10,14 +10,16 @@ import { APP_CONFIG } from 'src/app/shared';
 export class AuthService {
 
   private baseUrl = APP_CONFIG.baseURL + 'api/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private user: any = {};
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
     const body = { username, password };
-    return this.http.post(this.baseUrl + 'login/', body, { headers: this.httpHeaders });
+    return this.http.post(this.baseUrl + 'login/', body, { headers });
   }
 
   getUserInfo(token: string): Observable<any> {

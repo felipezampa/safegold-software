@@ -17,7 +17,6 @@
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Atendimento</small>
-            <!-- <select name="TipoProjeto" [(ngModel)]="atendimento" (ngModelChange)="atualizarAtendimento()> -->
             <select [(ngModel)]="atendimentoSelecionado">
                 <option value='Presencial'>Presencial</option>
                 <option value='Remoto'>Remoto</option>
@@ -42,11 +41,3 @@
         <i class="fa-solid fa-xmark"></i>
     </button>
 </div>
-
-<!-- 
-    Para adicionar ou editar um card dentro do componente card, você pode criar um botão 
-    dentro do próprio card. Quando esse botão for clicado, você pode emitir um evento para 
-    o componente pai informando que foi solicitada a adição ou edição do card.
-    Por exemplo, você pode criar um método adicionarCard() dentro do componente card, que 
-    emite um evento adicionarCardEvent quando é chamado: 
--->

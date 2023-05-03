@@ -12,13 +12,13 @@ export class CardComponent {
     @Output() adicionarCardEvent = new EventEmitter<any>();
     @Output() salvarCardEvent = new EventEmitter<any>();
     @Output() excluirCardEvent = new EventEmitter<any>();
-    // IndexCartão
     projetos!: Projeto[];
     tipoAgenda!: String[];
     horas!: number[];
     projetoSelecionado!: Projeto | String;
     atendimentoSelecionado!: String;
     horasSelecionado!: Number;
+
     constructor(private projetoService: ProjetoService) { }
 
     ngOnInit(): void {
