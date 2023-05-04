@@ -11,23 +11,27 @@ export class MatrizContaFornecedorService {
 
   private baseURL = APP_CONFIG.baseURL + 'api/matriz_analitica_fornecedor/';
   private baseFornecedor = APP_CONFIG.baseURL + 'api/fornecedor/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
+  // private httpHeaders = new HttpHeaders({ 'Content-Type': 'application', 'Authorization': 'Token ' + this.authService.getTokenUser()});
   private _refreshPage$ = new Subject<void>();
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService,) { }
 
   get refreshPage$() {
     return this._refreshPage$;
   }
 
   listMatrizAnalitica(): Observable<MatrizAnalitica[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<MatrizAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
+    return this.http.get<MatrizAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers});
   }
 
   listFornecedor(): Observable<Fornecedor[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<Fornecedor[]>(this.baseFornecedor + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
+    return this.http.get<Fornecedor[]>(this.baseFornecedor + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers});
   }
 
   createPlanoContas(value: { cod_empresa: number; cod_conta_analitica: number; cod_subgrupo_contas: number }): Observable<any> {

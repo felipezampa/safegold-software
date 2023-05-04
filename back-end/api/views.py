@@ -15,10 +15,11 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta, date
+from rest_framework.authentication import TokenAuthentication
 
 '''
     @eduardolcordeiro
@@ -32,7 +33,10 @@ from datetime import datetime, timedelta, date
         - search_fields = Recebe uma lista dos campos que serão filtrados no campo de search
 
 '''
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class EmpresaserializerViewSet(viewsets.ModelViewSet):
+
     queryset = models.Empresas.objects.all()
     serializer_class = serializers.EmpresasSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -42,8 +46,10 @@ class EmpresaserializerViewSet(viewsets.ModelViewSet):
 
 
     
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class ProjetosViewSet(viewsets.ModelViewSet):
+
     queryset = models.Projetos.objects.all()
     serializer_class = serializers.ProjetosSerializer
     filter_backends = [DjangoFilterBackend]
@@ -56,6 +62,8 @@ class ProjetosViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
     filter_backends = [DjangoFilterBackend]
@@ -65,28 +73,38 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class ProjetoUserViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.ProjetoUser.objects.all()
     serializer_class = serializers.ProjetoUserSerializer
 
 class FinGrupoContasViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.FinGrupoContas.objects.all()
     serializer_class = serializers.FinGrupoContasSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_grupo_contas','desc_grupo_contas', 'permite_vinculo', 'sumario']
 
 class FinSubgrupoContasViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.FinSubgrupoContas.objects.all()
     serializer_class = serializers.FinSubgrupoContasSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_subgrupo_contas', 'desc_subgrupo_contas', 'cod_grupo_contas']
 
 class FinContaAnaliticaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.FinContaAnalitica.objects.all()
     serializer_class = serializers.FinContaAnaliticaSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_empresa', 'cod_conta_analitica', 'desc_conta','cod_subgrupo_contas']
 
 class FornecedorViewset(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.Fornecedor.objects.all()
     serializer_class = serializers.FornecedorSerializer
     filter_backends = [DjangoFilterBackend]
@@ -95,6 +113,8 @@ class FornecedorViewset(viewsets.ModelViewSet):
 
 
 class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.MatrizAnaliticaFornecedor.objects.all()
     serializer_class = serializers.MatrizAnaliticaFornecedorSerializer
     filter_backends = [DjangoFilterBackend]
@@ -129,80 +149,14 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
 
 '''
 
-# class LoginView(APIView):
-#     def post(self, request):
-#         username = request.data['username']
-#         password = request.data['password']
-
-#         user = models.User.objects.filter(username=username).first()
-
-#         try:
-#             auth = models.AuthUserPermissions.objects.get(id_user=user.pk)
-
-#             cargo_nome = auth.idrh_cargo.nome_cargo
-#             financeiro = auth.financeiro
-#             avaliacao = auth.avaliacao
-#             head_de_area = auth.is_head
-#             cargo_nome = getattr(auth, 'idrh_cargo', None)
-#             if not cargo_nome:
-#                 sem_cargo = models.RhCargo.objects.get(id=4)
-#                 auth.idrh_cargo = sem_cargo
-#                 auth.save()
-#                 cargo_nome = sem_cargo.nome_cargo
-
-#         except models.AuthUserPermissions.DoesNotExist:
-#             # Se o objeto AuthUserPermissions não existir, define todas as variáveis ​​como zero ou "Sem cargo vinculado"
-#             financeiro = avaliacao = head_de_area = 0
-#             cargo_nome = 'Sem cargo vinculado'
-
-#         if isinstance(cargo_nome, str):
-#             cargo_dict = {
-#                 'nome_cargo': cargo_nome
-#             }
-#         else:
-#             cargo_dict = {
-#                 'nome_cargo': cargo_nome.nome_cargo
-#             }
-
-#         if user is None:
-#             raise AuthenticationFailed('Usuario nao encontrado')
-
-#         if not user.check_password(password):
-#             raise AuthenticationFailed('senha incorreta')
-
-#         payload = {
-#             'id_user': user.id,
-#             'username': user.first_name,
-#             'email': user.email,
-#             'cargo': cargo_dict,
-#             'acesso_financeiro': financeiro,
-#             'acesso_avaliacao': avaliacao,
-#             'head_de_area': head_de_area,
-#             'is_superuser': user.is_superuser
-#         }
-
-#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
-
-#         response = Response()
-
-#         response.data = {
-#             'jwt': token
-#         }
-
-#         return response
-    
-# class UserView(APIView):
-#     def get(self, request):
-#         token = request.COOKIES.get('jwt')
-#         return Response(token)
-    
-
 
 
 # AVALIAÇÃO DE DESEMPENHO, MODULO RH
 
 
 class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.AuthUserPermissions.objects.all()
     serializer_class = serializers.AuthUserPermissionsSerializers
     filter_backends = [DjangoFilterBackend]
@@ -211,6 +165,8 @@ class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
 
 
 class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.RhClassificacaoComp.objects.all()
     serializer_class = serializers.RhClassificacaoCompSerializers
     filter_backends = [DjangoFilterBackend]
@@ -286,11 +242,14 @@ def api_userlogin(request):
         'financeiro': financeiro,
         'avaliacao': avaliacao,
         'head_de_area': head_de_area,
-        'superuser': user.is_superuser
+        'superuser': user.is_superuser,
+        'token': request.auth.key
     }
     return JsonResponse(serialized_user)
 
 ################################################################################## MODULO AGENDA ###########################################################################################################################
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
     queryset = models.SgUnidadeNegocio.objects.all()
     serializer_class = serializers.SgUnidadedeNegocioSerializers
@@ -298,30 +257,39 @@ class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id_unidade','unidade']
 
 class SgAreaViewSet(viewsets.ModelViewSet):
+
     queryset = models.SgArea.objects.all()
+
     serializer_class = serializers.SgAreaSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_area','id_unidade', 'area']
 
 class SgFuncaoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.SgFuncao.objects.all()
     serializer_class = serializers.SgFuncaoSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_funcao','id_area','funcao','carga_horaria']
 
 class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = models.SgFuncaoGestor.objects.all()
     serializer_class = serializers.SgFuncaoGestorSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
 
 class AgTipoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = models.AgTipo.objects.all()
     serializer_class = serializers.AgTipoSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_tipo','tipo']
     
 class AgFactAgendaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     serializer_class = serializers.AgFactAgendaSerializer
     queryset = models.AgFactAgenda.objects.all()
 
@@ -338,6 +306,8 @@ class AgFactAgendaViewSet(viewsets.ModelViewSet):
 
 
 class CurrentWeekAgendaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     serializer_class = serializers.AgFactAgendaSerializer
     queryset = models.AgFactAgenda.objects.all()
 
@@ -353,6 +323,8 @@ class CurrentWeekAgendaViewSet(viewsets.ModelViewSet):
         return start, end
 
 class LastWeekAgendaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     serializer_class = serializers.AgFactAgendaSerializer
     queryset = models.AgFactAgenda.objects.all()
 
@@ -368,6 +340,8 @@ class LastWeekAgendaViewSet(viewsets.ModelViewSet):
         return start, end
 
 class NextWeekAgendaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     serializer_class = serializers.AgFactAgendaSerializer
     queryset = models.AgFactAgenda.objects.all()
 

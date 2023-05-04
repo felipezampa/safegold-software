@@ -43,13 +43,17 @@ export class PlanoContasService {
   }
 
   listPlanoContas(): Observable<ContaAnalitica[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
+    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers });
   }
 
   buscarPlanoContasPorId(id: number): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //trazer os dados de uma unica instancia
-    return this.http.get<ContaAnalitica>(this.baseURL + '?cod_conta_analitica=' + id, { headers: this.httpHeaders })
+    return this.http.get<ContaAnalitica>(this.baseURL + '?cod_conta_analitica=' + id, { headers })
   }
 
   deletePlanoContas(id: number) {
@@ -64,7 +68,9 @@ export class PlanoContasService {
   }
 
   listSubGrupoContas(): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<SubGrupo[]>(this.baseSubGrupo, { headers: this.httpHeaders });
+    return this.http.get<SubGrupo[]>(this.baseSubGrupo, { headers});
   }
 }

@@ -18,7 +18,7 @@ export class EmpresaService {
   get refreshPage$() {
     return this._refreshPage$;
   }
-  
+
   createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value)
@@ -42,13 +42,17 @@ export class EmpresaService {
   }
 
   listEmpresas(): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto__id_user='+ this.authService.getCurrentUser(), { headers: this.httpHeaders });
+    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto__id_user='+ this.authService.getCurrentUser(), { headers });
   }
 
   buscarEmpresaPorId(id: number): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //trazer os dados de uma unica empresa
-    return this.http.get<Empresa>(this.baseURL + '?cod_empresa=' + id, { headers: this.httpHeaders })
+    return this.http.get<Empresa>(this.baseURL + '?cod_empresa=' + id, { headers })
   }
 
   deleteEmpresa(id: number) {
@@ -63,6 +67,8 @@ export class EmpresaService {
   }
 
   buscarEmpresaPorContexto(): Observable<any> {
-    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto=' + this.authService.getCurrentProjeto(), { headers: this.httpHeaders });
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto=' + this.authService.getCurrentProjeto(), { headers });
   }
 }
