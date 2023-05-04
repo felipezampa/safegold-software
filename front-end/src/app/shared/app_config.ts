@@ -1,3 +1,3 @@
 export const APP_CONFIG = {
-    baseURL:'http://localhost:8000/'
+    baseURL:'https://safegold.pythonanywhere.com/'
 }
