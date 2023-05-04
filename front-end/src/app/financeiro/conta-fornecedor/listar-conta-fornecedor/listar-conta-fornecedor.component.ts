@@ -17,18 +17,18 @@ import { PlanoContasService } from './../../plano-contas/services/plano-contas.s
 export class ListarContaFornecedorComponent implements OnInit {
 
   matrizAnalitica: MatrizAnalitica[] = [];
+
   isLoading: boolean = false;
-  orderKey: string = '';
   subscription: Subscription | undefined;
-  filtroVinculo!: any [];
+  filtroVinculo!: any[];
   filtroSelecionado: string = 'todos';
   analitica: ContaAnalitica[] = [];
   empresas: Empresa[] = [];
   fornecedores: Fornecedor[] = [];
   matrizAtualizavel: MatrizAnalitica | undefined;
-
+  filtroNome!: string;
   constructor(private matrizService: MatrizContaFornecedorService, private modalService: NgbModal,
-    private empresaService: EmpresaService, private analiticaService: PlanoContasService ) { }
+    private empresaService: EmpresaService, private analiticaService: PlanoContasService) { }
 
   ngOnInit(): void {
     this.listarEmpresas();
@@ -47,9 +47,11 @@ export class ListarContaFornecedorComponent implements OnInit {
       .subscribe(vinculo => {
         this.isLoading = false;
         this.matrizAnalitica = vinculo;
+        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''));
       }
       );
   }
+
   listarEmpresas() {
     // Lista todos as empresas para selecionar no input de option
     this.empresaService.buscarEmpresaPorContexto().subscribe(empresas => {
@@ -57,6 +59,7 @@ export class ListarContaFornecedorComponent implements OnInit {
 
     });
   }
+
   listarContaAnalitica() {
     this.analiticaService.listPlanoContas().subscribe(analitica => {
       this.analitica = analitica
@@ -108,8 +111,6 @@ export class ListarContaFornecedorComponent implements OnInit {
     XLSX.writeFile(workbook, "RelatorioVinculoContaFornecedores.xlsx");
   }
 
-
-  ///////////////////////////////////////////// CRUDUDU /////////////////////////////////////////////
   atualizarMatrizAnaliticaFornecedor(id: number) {
     this.matrizAtualizavel = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
 
@@ -122,30 +123,82 @@ export class ListarContaFornecedorComponent implements OnInit {
   }
 
   // FILTROS
-  filtroVinculados() {
+  filtrarVinculados() {
+    // Esvazia o array das matrizes
+    this.matrizAnalitica = [];
+    this.filtroNome = '';
+    // Flag de carregamento
     this.isLoading = true;
+    // Flag para indicar filtro selecionado
     this.filtroSelecionado = 'vinculados';
-    this.filtroVinculo = this.matrizAnalitica.filter(
-      matriz => matriz.vinculo == 1
-    );
-    this.isLoading = false;
+    // Lista todas as matrizes e filtra as que tem vinculo ( == 1)
+    this.matrizService.listMatrizAnalitica()
+      .subscribe(vinculo => {
+        this.matrizAnalitica = vinculo.filter(
+          matriz => matriz.vinculo == 1
+        );
+        // Ordena por nome crescente
+        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
+        this.isLoading = false;
+      });
   }
 
-  filtroNaoVinculados() {
+  filtrarNaoVinculados() {
+    // Esvazia o array das matrizes
+    this.matrizAnalitica = [];
+    this.filtroNome = '';
+    // Flag de carregamento
     this.isLoading = true;
+    // Flag para indicar filtro selecionado
     this.filtroSelecionado = 'naoVinculados';
-    this.filtroVinculo = this.matrizAnalitica.filter(
-      matriz => matriz.vinculo === 0
-    );
-    this.isLoading = false;
+    // Lista todas as matrizes e filtra as que nao tem vinculo ( == 0)
+    this.matrizService.listMatrizAnalitica()
+      .subscribe(vinculo => {
+        this.matrizAnalitica = vinculo.filter(
+          matriz => matriz.vinculo == 0
+        );
+        // Ordena por nome crescente
+        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
+        this.isLoading = false;
+      });
   }
 
-  filtroTodos() {
+  filtrarTodos() {
+    // Esvazia o array das matrizes
+    this.matrizAnalitica = [];
+    this.filtroNome = '';
+    // Flag de carregamento
     this.isLoading = true;
+    // Flag para indicar filtro selecionado
     this.filtroSelecionado = 'todos';
-    this.filtroVinculo = this.matrizAnalitica.filter(
-      matriz => matriz.vinculo === 1 || matriz.vinculo === 0
-    );
-    this.isLoading = false;
+    // Lista todas as matrizes sem filtro especifico
+    this.matrizService.listMatrizAnalitica()
+      .subscribe(vinculo => {
+        this.matrizAnalitica = vinculo;
+        // Ordena por nome crescente
+        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''));
+        this.isLoading = false;
+      });
   }
+
+  filtrarFornecedor() {
+    // Esvazia o array das matrizes
+    this.matrizAnalitica = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    // Flag para indicar filtro selecionado
+    this.filtroSelecionado = '';
+    this.matrizService.listMatrizAnalitica()
+      .subscribe(filtroNome => {
+        this.matrizAnalitica = filtroNome.filter(
+          // Compara filtro com o array tudo em lowercase
+          matriz => matriz.desc_fornecedor.toLowerCase().includes(this.filtroNome.toLowerCase())
+        );
+        // Ordena por nome crescente
+        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
+        this.isLoading = false;
+      });
+  }
+
+
 }
