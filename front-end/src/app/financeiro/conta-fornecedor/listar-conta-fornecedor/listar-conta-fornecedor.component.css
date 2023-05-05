@@ -43,10 +43,12 @@
     color: var(--sg-yellow);
     transition: 0.5s;
 }
+
 .fa-magnifying-glass:hover {
     transform: scale(1.3);
     color: var(--sg-gray);
 }
+
 .input-with-icon {
     position: relative;
     display: inline-block;

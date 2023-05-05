@@ -1,48 +1,104 @@
 <div class="container-fluid" id="dashboard-financeiro">
-  <div class="card">
-    <div class="card-header">
-      <h2 class="text-center">Dashboard {{currentEmpresa}}</h2>
-    </div>
-    <div class="card-body">
-      <div *ngIf="!isLoading" class="row d-flex justify-content-center">
-        <div class="col">
-          <div class="card-body pb-0">
-            <h5 class="card-title">Vinculação Conta Analitica a Fornecedores</h5>
-            <hr>
-            <div>
-              <p>Total de fornecedores: {{ totalFornecedores }}</p>
-              <p>Fornecedores com vínculo: {{ fornecedoresComVinculo }}</p>
-              <p>Fornecedores sem vínculo: {{ fornecedoresSemVinculo }}</p>
-              <button class="sg-button" id="btn-main" routerLink="financeiro/conta-fornecedor">Visualizar vínculos</button>
+  <div class="row mb-4">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Bem vindo {{'username'}} </h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4 px-5 align-items-center">
+              <div class="text-center sg-card-welcome">
+                <h4>Conta-Fornecedor</h4>
+                <p>Vínculo de contas analíticas a Fornecedores</p>
+              </div>
+            </div>
+            <div class="col-4 px-5 align-items-center">
+              <div class="text-center sg-card-welcome">
+                <h4>Plano de Contas</h4>
+                <p>Cadastro, Edição, Leitura e Exclusão de contas analíticas</p>
+              </div>
+            </div>
+            <div class="col-4 px-5">
+              <div class="text-center sg-card-welcome">
+                <h4>Empresas</h4>
+                <p>Cadastro, Edição, Leitura e Exclusão de empresas</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card-body pb-0">
-            <h5 class="card-title">Agrupamento de Contas Analiticas Vinculadas a Fornecedores</h5>
-            <hr>
-            <div *ngFor="let item of ocorrenciasArray">
-              <p>{{ item.descricao }}: {{ item.quantidade }}</p>
-            </div>
-            <button class="sg-button" id="btn-main" routerLink="financeiro/plano-de-contas">Visualizar Contas</button>
-          </div>
-        </div>
-        <hr class="mt-3">
-      </div>
-      <h5 *ngIf="!isLoading" class="card-title text-center">Grafico de Contas Analiticas Vinculadas a Fornecedores</h5>
-      <div *ngIf="isLoading" class="card-body text-center text-dark">
-        <button class="btn btn-lg btn-warning mt-5" type="button" disabled>
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          Carregando dados...
-        </button>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-2"></div>
-        <div class="d-flex justify-content-center col-8">
-          <canvas #barChart></canvas>
-        </div>
-        <div class="col-2"></div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Dashboard {{currentEmpresa}} </h2>
+        </div>
+        <div class="card-body row">
+          <div *ngIf="isLoading" class="card-body text-center text-dark">
+            <button class="btn btn-lg btn-warning mt-5" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Carregando dados...
+            </button>
+          </div>
+          <!--  <div *ngIf="!isLoading" class="row d-flex justify-content-center"> -->
+          <div class="col-4">
+            <div class="card-body pb-0">
+              <h5 class="card-title text-center">Vinculação Conta a Fornecedores</h5>
+              <hr>
+              <div *ngIf="!isLoading">
+                <div id="sg-card-matriz">
+                  <p>Total de fornecedores: <strong>{{ totalFornecedores }}</strong></p>
+                  <p>Fornecedores com vínculo: <strong>{{ fornecedoresComVinculo }}</strong></p>
+                  <p>Fornecedores sem vínculo: <strong>{{ fornecedoresSemVinculo }}</strong></p>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="sg-button" id="btn-main" routerLink="/financeiro/conta-fornecedor">Visualizar
+                    vínculos</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card-body">
+              <h5 class="card-title text-center">Gráfico Conta Analitica a Fornecedores</h5>
+              <hr>
+              <div class="chart-container text-center" id="sg-card-grafico">
+                <canvas #barChart></canvas>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-4">
+            <div class="card-body pb-0">
+              <h5 class="card-title text-center">Cinco contas com mais vínculos</h5>
+              <hr>
+              <div *ngIf="!isLoading">
+                <div id="sg-card-contas">
+                  <div *ngFor="let item of ocorrenciasArray;  let i=index">
+                    <p *ngIf="i<5">{{i+1}}. {{ item.descricao }}: {{ item.quantidade }}</p>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="sg-button" id="btn-main" routerLink="/financeiro/plano-de-contas">Visualizar
+                    Contas</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<div class="col chart-container sg-grafico">
+  <canvas #barChart></canvas>
 </div>

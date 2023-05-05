@@ -47,6 +47,7 @@ export class ListarContaFornecedorComponent implements OnInit {
       .subscribe(vinculo => {
         this.isLoading = false;
         this.matrizAnalitica = vinculo;
+        this.filtroSelecionado = 'todos';
         this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''));
       }
       );
@@ -115,9 +116,7 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.matrizAtualizavel = this.matrizAnalitica.find(m => m.cod_matriz_analitica_fornecedor === id);
 
     if (this.matrizAtualizavel) {
-      this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe({
-      }
-      )
+      this.matrizService.updateMatriz(id, this.matrizAtualizavel).subscribe({})
     }
 
   }

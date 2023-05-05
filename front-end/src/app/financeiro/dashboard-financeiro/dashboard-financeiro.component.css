@@ -1,9 +1,14 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 
 #dashboard-financeiro {
     height: 100vh;
     padding-top: 1rem;
+    margin-bottom: 5rem;
+    --card-cor-before: #fff;
+    --card-bg-before: #373935;
+    --card-cor-hover: #eda900;
 }
 
 #btn-main {
@@ -17,6 +22,11 @@
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .card-header {
     background-color: var(--sg-gray);
+}
+
+.fa-solid {
+    font-size: 2.4rem;
+    margin: 1.7rem;
 }
 
 .sg-button {
@@ -35,8 +45,43 @@
     color: var(--hover-cor-action-btn);
 }
 
-.sg-grafico {
-    height: 22rem;
+.sg-card-welcome {
+    padding: 0 6rem;
+    border-radius: 10px;
+    filter: drop-shadow(0 5px 10px 0 #ffffff);
+    background-color: var(--card-bg-before);
+    color: var(--card-cor-before);
+    padding: .5rem;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.sg-card-welcome:hover {
+    color: #ffffff;
+}
+
+.sg-card-welcome::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -15px;
+    left: -15px;
+    background: var(--card-cor-hover);
+    height: 220px;
+    width: 25px;
+    border-radius: 32px;
+    transform: scale(0.2);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+}
+
+.sg-card-welcome:hover::before {
+    transition-delay: 0.2s;
+    transform: scale(40.2);
 }
 
 /* -------------------------------------------   TAG  ------------------------------------------- */
@@ -46,11 +91,27 @@ h2 {
     font-size: 1.3rem;
     letter-spacing: 2px;
     font-weight: 700;
-    color: var(--sg-gray);
     color: var(--sg-yellow);
     margin: 0;
 }
 
-p {
-    margin-bottom: 10px;
+.sg-grafico{
+    z-index: 3;
+}
+
+#sg-card-contas{
+    height: 15rem;
+}
+#sg-card-matriz{
+    height: 15rem;
+}
+
+#sg-card-grafico{
+    justify-content: center;
+    margin: auto;
+    height: 23rem;
+}
+canvas{
+    margin: auto;
+    height: max-content;
 }

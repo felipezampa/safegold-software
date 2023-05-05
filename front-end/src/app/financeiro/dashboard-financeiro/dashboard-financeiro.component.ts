@@ -17,15 +17,17 @@ export class DashboardFinanceiroComponent implements OnInit {
   currentEmpresa!: string;
   ocorrenciasArray: { descricao: string, quantidade: number }[] = [];
   isLoading: boolean = false;
+  username!: String;
   @ViewChild('barChart') barChart!: ElementRef;
 
-  constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) { 
+  constructor(private matrizContaFornecedorService: MatrizContaFornecedorService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.currentEmpresa = this.authService.getCurrentNome_empresa();
     this.isLoading = true;
     this.getFornecedores();
+    this.username = this.authService.getUsername();
   }
 
   getFornecedores(): void {
@@ -43,7 +45,7 @@ export class DashboardFinanceiroComponent implements OnInit {
         }
       });
       this.ocorrenciasArray = Object.entries(ocorrencias).map(([descricao, quantidade]) => ({
-        descricao: descricao === "undefined" ? "Não Vinculados" : descricao,quantidade
+        descricao: descricao === "undefined" ? "Não Vinculados" : descricao, quantidade
       }));
       this.isLoading = false;
       this.createBarChart();
@@ -51,35 +53,18 @@ export class DashboardFinanceiroComponent implements OnInit {
   }
 
   createBarChart(): void {
-    const labels = this.ocorrenciasArray.map(ocorrencia => ocorrencia.descricao);
-    const dados = this.ocorrenciasArray.map(ocorrencia => ocorrencia.quantidade);
-    const colors = this.ocorrenciasArray.map(() => this.getRandomColor());
-    const fornecedoresData = this.ocorrenciasArray.map(() => this.totalFornecedores);
+    const labels = ["Fornecedores com Vínculo", "Fornecedores sem Vínculo"];
+    const dados = [this.fornecedoresComVinculo, this.fornecedoresSemVinculo];
+    const colors = ["#3F8091", "#DC9451"];
     new Chart(this.barChart.nativeElement, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: labels,
         datasets: [{
           data: dados,
           backgroundColor: colors
-        },
-        {
-        data: fornecedoresData,
-        backgroundColor: '#ccc',
-        label: 'Total de Fornecedores'
-      }]
+        }]
       },
     });
   }
-
-  getRandomColor(): string {
-    // Escolhe cores aleatórias para a visualização dos gráficos
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
 }
