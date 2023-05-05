@@ -80,6 +80,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 
+
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = (

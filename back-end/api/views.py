@@ -60,7 +60,8 @@ class ProjetosViewSet(viewsets.ModelViewSet):
 
 
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -71,13 +72,16 @@ class UserViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class ProjetoUserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = models.ProjetoUser.objects.all()
     serializer_class = serializers.ProjetoUserSerializer
+@authentication_classes([TokenAuthentication])
 
+@permission_classes([IsAuthenticated])
 class FinGrupoContasViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -86,6 +90,8 @@ class FinGrupoContasViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_grupo_contas','desc_grupo_contas', 'permite_vinculo', 'sumario']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class FinSubgrupoContasViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -94,6 +100,8 @@ class FinSubgrupoContasViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_subgrupo_contas', 'desc_subgrupo_contas', 'cod_grupo_contas']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class FinContaAnaliticaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -102,6 +110,8 @@ class FinContaAnaliticaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_empresa', 'cod_conta_analitica', 'desc_conta','cod_subgrupo_contas']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class FornecedorViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -111,7 +121,8 @@ class FornecedorViewset(viewsets.ModelViewSet):
     filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa', 'insc_est', 'matriz', 'fornecedor']
 
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -153,7 +164,8 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
 
 # AVALIAÇÃO DE DESEMPENHO, MODULO RH
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -163,7 +175,8 @@ class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head']
     
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -256,6 +269,8 @@ class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_unidade','unidade']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class SgAreaViewSet(viewsets.ModelViewSet):
 
     queryset = models.SgArea.objects.all()
@@ -264,6 +279,8 @@ class SgAreaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_area','id_unidade', 'area']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class SgFuncaoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -272,6 +289,8 @@ class SgFuncaoViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_funcao','id_area','funcao','carga_horaria']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -280,13 +299,17 @@ class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class AgTipoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = models.AgTipo.objects.all()
     serializer_class = serializers.AgTipoSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_tipo','tipo']
-    
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])   
 class AgFactAgendaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -304,7 +327,8 @@ class AgFactAgendaViewSet(viewsets.ModelViewSet):
         end = date(year, 12, 31)
         return start, end
 
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class CurrentWeekAgendaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -321,7 +345,8 @@ class CurrentWeekAgendaViewSet(viewsets.ModelViewSet):
         start = date_obj - timedelta(days=date_obj.weekday())
         end = start + timedelta(days=6)
         return start, end
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class LastWeekAgendaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -338,7 +363,8 @@ class LastWeekAgendaViewSet(viewsets.ModelViewSet):
         start = date_obj - timedelta(days=date_obj.weekday())
         end = start + timedelta(days=6)
         return start, end
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class NextWeekAgendaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
