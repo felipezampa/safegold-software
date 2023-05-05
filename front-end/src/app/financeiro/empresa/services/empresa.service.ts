@@ -10,7 +10,6 @@ import { APP_CONFIG, Empresa } from 'src/app/shared';
 export class EmpresaService {
 
   private baseURL = APP_CONFIG.baseURL + 'api/empresas/'
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -20,8 +19,10 @@ export class EmpresaService {
   }
 
   createEmpresa(value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable apos executar o metodo POST
-    return this.http.post(this.baseURL, value)
+    return this.http.post(this.baseURL, value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -31,8 +32,10 @@ export class EmpresaService {
   }
 
   updateEmpresa(id: number, value: { cod_projeto: number; empresa: string; cnpj: string; safegold_ger: number }): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable apos executar o metodo PUT
-    return this.http.put(this.baseURL + id + '/', value)
+    return this.http.put(this.baseURL + id + '/', value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
@@ -56,8 +59,10 @@ export class EmpresaService {
   }
 
   deleteEmpresa(id: number) {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //Deleta uma instancia da API
-    return this.http.delete(this.baseURL + id + '/')
+    return this.http.delete(this.baseURL + id + '/', {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {

@@ -21,7 +21,9 @@ export class ProjetoService {
   }
 
   createProjeto(value: { cod_projeto: number; projeto: string; ativo: number; safegold_ger: number; id_user: User }): Observable<any> {
-    return this.http.post(this.baseURL, value)
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.post(this.baseURL, value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -31,7 +33,9 @@ export class ProjetoService {
   }
 
   updateProjeto(id: number | undefined, value: { cod_projeto: number; projeto: string; ativo: number; safegold_ger: number; id_user: User }): Observable<any> {
-    return this.http.put(this.baseURL + id + '/', value)
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.put(this.baseURL + id + '/', value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for alterada
       .pipe(
         tap(() => {
@@ -47,7 +51,9 @@ export class ProjetoService {
   }
 
   deleteProjeto(id: number) {
-    return this.http.delete(this.baseURL + id + '/')
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.delete(this.baseURL + id + '/', {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for deletada
       .pipe(
         tap(() => {

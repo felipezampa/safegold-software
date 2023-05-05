@@ -35,8 +35,10 @@ export class MatrizContaFornecedorService {
   }
 
   createPlanoContas(value: { cod_empresa: number; cod_conta_analitica: number; cod_subgrupo_contas: number }): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable apos executar o metodo POST
-    return this.http.post(this.baseURL, value)
+    return this.http.post(this.baseURL, value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -46,8 +48,10 @@ export class MatrizContaFornecedorService {
   }
 
   deleteEmpresa(id: number) {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Deleta uma instancia da API
-    return this.http.delete(this.baseURL + id + '/')
+    return this.http.delete(this.baseURL + id + '/', {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
@@ -57,8 +61,10 @@ export class MatrizContaFornecedorService {
   }
 
   updateMatriz(id: number, value: { cod_conta_analitica: number, cod_fornecedor: number, cod_empresa: number }): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Atualiza uma instancia da API
-    return this.http.put(this.baseURL + id + '/', value)
+    return this.http.put(this.baseURL + id + '/', value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {

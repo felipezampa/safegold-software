@@ -20,7 +20,7 @@ export class PlanoContasService {
   }
 
   createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
 
     // Retorna um Observable apos executar o metodo POST
     return this.http.post(this.baseURL, value, {headers})
@@ -34,7 +34,9 @@ export class PlanoContasService {
 
   updatePlanoContas(id: number, value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo PUT
-    return this.http.put(this.baseURL + id + '/', value)
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.put(this.baseURL + id + '/', value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
@@ -58,8 +60,10 @@ export class PlanoContasService {
   }
 
   deletePlanoContas(id: number) {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //Deleta uma instancia da API
-    return this.http.delete(this.baseURL + id + '/')
+    return this.http.delete(this.baseURL + id + '/', {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
