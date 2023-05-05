@@ -11,7 +11,6 @@ export class PlanoContasService {
 
   private baseURL = APP_CONFIG.baseURL +'api/fin_conta_analitica/';
   private baseSubGrupo = APP_CONFIG.baseURL +'api/fin_subgrupo_contas/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -21,8 +20,10 @@ export class PlanoContasService {
   }
 
   createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable apos executar o metodo POST
-    return this.http.post(this.baseURL, value)
+    return this.http.post(this.baseURL, value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -33,7 +34,9 @@ export class PlanoContasService {
 
   updatePlanoContas(id: number, value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
     // Retorna um Observable apos executar o metodo PUT
-    return this.http.put(this.baseURL + id + '/', value)
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.put(this.baseURL + id + '/', value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
@@ -43,18 +46,24 @@ export class PlanoContasService {
   }
 
   listPlanoContas(): Observable<ContaAnalitica[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers: this.httpHeaders });
+    return this.http.get<ContaAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers });
   }
 
   buscarPlanoContasPorId(id: number): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //trazer os dados de uma unica instancia
-    return this.http.get<ContaAnalitica>(this.baseURL + '?cod_conta_analitica=' + id, { headers: this.httpHeaders })
+    return this.http.get<ContaAnalitica>(this.baseURL + '?cod_conta_analitica=' + id, { headers })
   }
 
   deletePlanoContas(id: number) {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+
     //Deleta uma instancia da API
-    return this.http.delete(this.baseURL + id + '/')
+    return this.http.delete(this.baseURL + id + '/', {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
       .pipe(
         tap(() => {
@@ -64,7 +73,9 @@ export class PlanoContasService {
   }
 
   listSubGrupoContas(): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable contendo todas as instancias da API
-    return this.http.get<SubGrupo[]>(this.baseSubGrupo, { headers: this.httpHeaders });
+    return this.http.get<SubGrupo[]>(this.baseSubGrupo, { headers});
   }
 }
