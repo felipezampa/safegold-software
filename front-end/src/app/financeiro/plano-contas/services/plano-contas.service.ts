@@ -11,7 +11,6 @@ export class PlanoContasService {
 
   private baseURL = APP_CONFIG.baseURL +'api/fin_conta_analitica/';
   private baseSubGrupo = APP_CONFIG.baseURL +'api/fin_subgrupo_contas/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -21,8 +20,10 @@ export class PlanoContasService {
   }
 
   createPlanoContas(value: { cod_empresa: number; desc_conta: string; cod_subgrupo_contas: number }): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
     // Retorna um Observable apos executar o metodo POST
-    return this.http.post(this.baseURL, value)
+    return this.http.post(this.baseURL, value, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
