@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 import { AuthService } from 'src/app/auth';
 import { MatrizContaFornecedorService } from '../conta-fornecedor';
-import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 @Component({
@@ -53,9 +53,9 @@ export class DashboardFinanceiroComponent implements OnInit {
   }
 
   createBarChart(): void {
-    const labels = ["Fornecedores com Vínculo", "Fornecedores sem Vínculo"];
+    const labels = ["Fornecedores com vínculo", "Fornecedores sem vínculo"];
     const dados = [this.fornecedoresComVinculo, this.fornecedoresSemVinculo];
-    const colors = ["#3F8091", "#DC9451"];
+    const colors = ["#006472", "#EDA900"];
     new Chart(this.barChart.nativeElement, {
       type: 'doughnut',
       data: {

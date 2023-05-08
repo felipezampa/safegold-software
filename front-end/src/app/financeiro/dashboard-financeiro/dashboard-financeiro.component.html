@@ -3,7 +3,7 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <h2 class="text-center">Bem vindo {{'username'}} </h2>
+          <h2 class="text-center">Bem vindo {{username}} </h2>
         </div>
         <div class="card-body">
           <div class="row">
@@ -43,18 +43,27 @@
               Carregando dados...
             </button>
           </div>
-          <!--  <div *ngIf="!isLoading" class="row d-flex justify-content-center"> -->
           <div class="col-4">
-            <div class="card-body pb-0">
+            <div class="card-body pb-0" *ngIf="!isLoading">
               <h5 class="card-title text-center">Vinculação Conta a Fornecedores</h5>
               <hr>
-              <div *ngIf="!isLoading">
+              <div>
                 <div id="sg-card-matriz">
-                  <p>Total de fornecedores: <strong>{{ totalFornecedores }}</strong></p>
-                  <p>Fornecedores com vínculo: <strong>{{ fornecedoresComVinculo }}</strong></p>
-                  <p>Fornecedores sem vínculo: <strong>{{ fornecedoresSemVinculo }}</strong></p>
+                  <div class="row">
+                    <div class="col-8" id="sg-dash-labels">Total de fornecedores:</div>
+                    <div class="col-4" id="sg-dash-value">{{ totalFornecedores }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-8" id="sg-dash-labels">Fornecedores sem vínculo:</div>
+                    <div class="col-4" id="sg-dash-value">{{ fornecedoresSemVinculo }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-8" id="sg-dash-labels">Fornecedores com vínculo:</div>
+                    <div class="col-4" id="sg-dash-value">{{ fornecedoresComVinculo }}</div>
+                  </div>
                 </div>
-                <div class="card-footer text-center">
+                <div class="text-center">
+                  <hr>
                   <button class="sg-button" id="btn-main" routerLink="/financeiro/conta-fornecedor">Visualizar
                     vínculos</button>
                 </div>
@@ -63,42 +72,34 @@
           </div>
           <div class="col-4">
             <div class="card-body">
-              <h5 class="card-title text-center">Gráfico Conta Analitica a Fornecedores</h5>
-              <hr>
+              <h5 class="card-title text-center" *ngIf="!isLoading">Gráfico Conta Analitica a Fornecedores</h5>
+              <hr *ngIf="!isLoading">
               <div class="chart-container text-center" id="sg-card-grafico">
                 <canvas #barChart></canvas>
               </div>
-
             </div>
-
           </div>
           <div class="col-4">
-            <div class="card-body pb-0">
+            <div class="card-body pb-0" *ngIf="!isLoading">
               <h5 class="card-title text-center">Cinco contas com mais vínculos</h5>
               <hr>
-              <div *ngIf="!isLoading">
+              <div>
                 <div id="sg-card-contas">
-                  <div *ngFor="let item of ocorrenciasArray;  let i=index">
-                    <p *ngIf="i<5">{{i+1}}. {{ item.descricao }}: {{ item.quantidade }}</p>
+                  <div class="row" *ngFor="let item of ocorrenciasArray;  let i=index">
+                    <div class="col-8" id="sg-dash-labels" *ngIf="i<5">{{ item.descricao }}:</div>
+                    <div class="col-4" id="sg-dash-value" *ngIf="i<5">{{ item.quantidade }}</div>
                   </div>
                 </div>
-                <div class="card-footer text-center">
+                <div class="text-center">
+                  <hr>
                   <button class="sg-button" id="btn-main" routerLink="/financeiro/plano-de-contas">Visualizar
                     Contas</button>
                 </div>
               </div>
             </div>
           </div>
-          <!-- </div> -->
-          
-
         </div>
       </div>
     </div>
   </div>
-
-
-</div>
-<div class="col chart-container sg-grafico">
-  <canvas #barChart></canvas>
 </div>
