@@ -21,7 +21,7 @@ export class ListarEmpresaComponent implements OnInit {
   safegoldGerencia: number | undefined = 0;
   filtroEmpresa!: string;
   filtroProjeto!: string;
-  filtroTodos!: boolean;
+  filtroTodos: boolean = true;
 
   constructor(private empresaService: EmpresaService, private modalService: NgbModal) { }
 
@@ -103,10 +103,11 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   filtrarEmpresa() {
-    // Esvazia o array das matrizes
+    // Esvazia o array
     this.empresas = [];
     // Flag de carregamento
     this.isLoading = true;
+    this.filtroTodos = false;
     if (this.filtroEmpresa != '') {
       this.empresaService.listEmpresas()
         .subscribe(filtroEmpresa => {
@@ -124,14 +125,15 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   filtrarProjeto() {
-    // Esvazia o array das matrizes
+    // Esvazia o array
     this.empresas = [];
     // Flag de carregamento
     this.isLoading = true;
+    this.filtroTodos = false;
     if (this.filtroProjeto != '') {
       this.empresaService.listEmpresas()
-        .subscribe(filtroProjeto => {
-          this.empresas = filtroProjeto.filter(
+        .subscribe(filtro => {
+          this.empresas = filtro.filter(
             // Compara filtro com o array tudo em lowercase
             proj => proj.projeto.toLowerCase().includes(this.filtroProjeto.toLowerCase())
           );
@@ -145,6 +147,21 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   filtrarTodos() {
-
+    this.filtroProjeto = '';
+    this.filtroEmpresa = '';
+    // Esvazia o array das matrizes
+    this.empresas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    // Flag para indicar filtro selecionado
+    this.filtroTodos = true;
+    // Lista todas as matrizes sem filtro especifico
+    this.empresaService.listEmpresas()
+      .subscribe(filtro => {
+        this.empresas = filtro;
+        // Ordena por nome crescente
+        this.empresas.sort((a, b) => (a.empresa ?? '').localeCompare(b.empresa ?? ''))
+        this.isLoading = false;
+      });
   }
 }

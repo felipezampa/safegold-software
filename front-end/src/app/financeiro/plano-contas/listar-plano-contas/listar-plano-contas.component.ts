@@ -19,6 +19,9 @@ export class ListarPlanoContasComponent implements OnInit {
   isLoading: boolean = false;
   editMode: boolean = false;
   subscription: Subscription | undefined;
+  filtroSubGrupo!: string;
+  filtroConta!: string;
+  filtroTodos: boolean = true;
 
   constructor(private planoContasService: PlanoContasService, private modalService: NgbModal, private authService: AuthService) { }
 
@@ -41,14 +44,14 @@ export class ListarPlanoContasComponent implements OnInit {
 
   abrirFormCadastro() {
     this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl'});
+    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl' });
     modalRef.componentInstance.editMode = this.editMode;
     modalRef.componentInstance.cod_empresa = this.authService.getCurrentCod_empresa();
   }
 
   abrirFormAtualizacao(id: number) {
     this.editMode = true;
-    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl'});
+    const modalRef = this.modalService.open(InserirEditarPlanoContasComponent, { size: 'xl' });
     modalRef.componentInstance.idConta = id;
     modalRef.componentInstance.editMode = this.editMode;
   }
@@ -91,4 +94,66 @@ export class ListarPlanoContasComponent implements OnInit {
     XLSX.writeFile(workbook, "RelatorioPlanoContas.xlsx");
   }
 
+  filtrarConta(){
+    // Esvazia o array
+    this.planoContas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    this.filtroTodos = false;
+    if (this.filtroConta != '') {
+      this.planoContasService.listPlanoContas()
+        .subscribe(filtro => {
+          this.planoContas = filtro.filter(
+            // Compara filtro com o array tudo em lowercase
+            emp => emp.desc_conta.toLowerCase().includes(this.filtroConta.toLowerCase())
+          );
+          // Ordena por nome crescente
+          this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
+          this.isLoading = false;
+        });
+    } else {
+      this.listarContas();
+    }
+  }
+
+  filtrarSubGrupo(){
+    // Esvazia o array
+    this.planoContas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    this.filtroTodos = false;
+    if (this.filtroConta != '') {
+      this.planoContasService.listPlanoContas()
+        .subscribe(filtro => {
+          this.planoContas = filtro.filter(
+            // Compara filtro com o array tudo em lowercase
+            emp => emp.desc_subgrupo.toLowerCase().includes(this.filtroConta.toLowerCase())
+          );
+          // Ordena por nome crescente
+          this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
+          this.isLoading = false;
+        });
+    } else {
+      this.listarContas();
+    }
+  }
+
+  filtrarTodos(){
+    this.filtroConta = '';
+    this.filtroSubGrupo = '';
+    // Esvazia o array das matrizes
+    this.planoContas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    // Flag para indicar filtro selecionado
+    this.filtroTodos = true;
+    // Lista todas as matrizes sem filtro especifico
+    this.planoContasService.listPlanoContas()
+      .subscribe(filtro => {
+        this.planoContas = filtro;
+        // Ordena por nome crescente
+        this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
+        this.isLoading = false;
+      });
+  }
 }

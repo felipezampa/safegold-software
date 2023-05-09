@@ -18,10 +18,19 @@
                     <div class="card-header">
                         <h2 class="text-center">FILTRAR</h2>
                     </div>
-                    <div class="row justify-content-between p-3">
-                        <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
-                        <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
-                        <input type="text" class="sg-filter col mx-5" placeholder="Filtrar Dados" autocomplete="off">
+                    <div class="row justify-content-center card-body p-1">
+                        <div class="col-4 d-flex align-items-center input-with-icon">
+                            <input type="text" class="sg-input" [(ngModel)]="filtroConta"
+                                placeholder="Filtrar Conta" (keyup.enter)="filtrarConta()">
+                            <i class="fa-solid fa-magnifying-glass" (click)="filtrarConta()"></i>
+                        </div>
+                        <div class="col-4 d-flex align-items-center input-with-icon">
+                            <input type="text" class="sg-input" [(ngModel)]="filtroSubGrupo"
+                                placeholder="Filtrar Sub-Grupo" (keyup.enter)="filtrarSubGrupo()">
+                            <i class="fa-solid fa-magnifying-glass" (click)="filtrarSubGrupo()"></i>
+                        </div>
+                        <button (click)="filtrarTodos()" [disabled]="filtroTodos" class="sg-button col-3"
+                            id="btn-options">Todos</button>
                     </div>
                 </div>
             </div>
