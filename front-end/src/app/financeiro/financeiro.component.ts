@@ -53,6 +53,8 @@ export class FinanceiroComponent implements OnInit {
       if (!this.projetosUnicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
         this.projetosUnicos.push(projeto);
       }
+      // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
+      this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
     });
   }
   onProjectChange() {

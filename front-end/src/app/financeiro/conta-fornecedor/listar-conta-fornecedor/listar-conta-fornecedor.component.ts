@@ -185,19 +185,24 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.matrizAnalitica = [];
     // Flag de carregamento
     this.isLoading = true;
-    // Flag para indicar filtro selecionado
-    this.filtroSelecionado = '';
-    this.matrizService.listMatrizAnalitica()
-      .subscribe(filtroNome => {
-        this.matrizAnalitica = filtroNome.filter(
-          // Compara filtro com o array tudo em lowercase
-          matriz => matriz.desc_fornecedor.toLowerCase().includes(this.filtroNome.toLowerCase())
-        );
-        // Ordena por nome crescente
-        this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
-        this.isLoading = false;
-      });
+
+    if (this.filtroNome != '') {
+      // Flag para indicar filtro selecionado
+      this.filtroSelecionado = '';
+      this.matrizService.listMatrizAnalitica()
+        .subscribe(filtro => {
+          this.matrizAnalitica = filtro.filter(
+            // Compara filtro com o array tudo em lowercase
+            matriz => matriz.desc_fornecedor.toLowerCase().includes(this.filtroNome.toLowerCase())
+          );
+          // Ordena por nome crescente
+          this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
+          this.isLoading = false;
+        });
+    } else {
+      this.filtroSelecionado = 'todos';
+      this.filtrarTodos();
+    }
+
   }
-
-
 }

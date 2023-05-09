@@ -32,11 +32,11 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="card">
+      <div class="card mb-5">
         <div class="card-header">
           <h2 class="text-center">Dashboard {{currentEmpresa}} </h2>
         </div>
-        <div class="card-body row">
+        <div class="card-body pb-0 row">
           <div *ngIf="isLoading" class="card-body text-center text-dark">
             <button class="btn btn-lg btn-warning mt-5" type="button" disabled>
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="card-body">
+            <div class="card-body pb-0">
               <h5 class="card-title text-center" *ngIf="!isLoading">Gráfico Conta Analitica a Fornecedores</h5>
               <hr *ngIf="!isLoading">
               <div class="chart-container text-center" id="sg-card-grafico">
@@ -86,7 +86,7 @@
               <div>
                 <div id="sg-card-contas">
                   <div class="row" *ngFor="let item of ocorrenciasArray;  let i=index">
-                    <div class="col-8" id="sg-dash-labels" *ngIf="i<5">{{ item.descricao }}:</div>
+                    <div class="col-8" id="sg-dash-labels" *ngIf="i<5">{{i+1}}. {{ item.descricao }}:</div>
                     <div class="col-4" id="sg-dash-value" *ngIf="i<5">{{ item.quantidade }}</div>
                   </div>
                 </div>

@@ -7,21 +7,21 @@
 
 .financeiro {
     --bg-color: #edaa00d0;
-    --bg-color-light: #ececec;
+    --bg-color-light: #4144423a;
     --text-color-hover: #414442;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
-.avaliacao {
-    --bg-color: #6a65eb;
-    --bg-color-light: #ececec;
-    --text-color-hover: #ffffff;
+.agenda {
+    --bg-color: #005248;
+    --bg-color-light: #4144423a;
+    --text-color-hover: #fff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
-.agenda {
-    --bg-color: #006eff;
-    --bg-color-light: #ececec;
+.avaliacao {
+    --bg-color: #9A7C4E;
+    --bg-color-light: #4144423a;
     --text-color-hover: #fff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }

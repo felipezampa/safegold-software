@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 :root {
+  /* cores sg */
   --sg-yellow: #EDA900;
   --sg-gray: #373935;
-  --sg-white: #E6E7E9;
+  --sg-green: #005248;
+  --sg-white: #FFEDCB;
+  --sg-brown: #9A7C4E;
+  /* outros */
   --black: #000;
   --white: #fff;
   --cor-footer: #fff;

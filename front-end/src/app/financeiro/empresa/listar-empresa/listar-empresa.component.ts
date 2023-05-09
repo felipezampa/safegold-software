@@ -19,9 +19,11 @@ export class ListarEmpresaComponent implements OnInit {
   editMode: boolean = false;
   subscription: Subscription | undefined;
   safegoldGerencia: number | undefined = 0;
-  filtro!: '';
+  filtroEmpresa!: string;
+  filtroProjeto!: string;
+  filtroTodos!: boolean;
 
-  constructor( private empresaService: EmpresaService, private modalService: NgbModal) { }
+  constructor(private empresaService: EmpresaService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listarEmpresa();
@@ -42,14 +44,14 @@ export class ListarEmpresaComponent implements OnInit {
   abrirFormCadastro() {
     // Abre o formulario para cadastrar com a flag de edicao falsa
     this.editMode = false;
-    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl'});
+    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl' });
     modalRef.componentInstance.editMode = this.editMode;
   }
 
   abrirFormAtualizacao(id: number) {
     // Abre o formulario para cadastrar com a flag de edicao verdadeira
     this.editMode = true;
-    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl'});
+    const modalRef = this.modalService.open(InserirEditarEmpresaComponent, { size: 'xl' });
     // Adicionar o ID do objeto a ser editado
     modalRef.componentInstance.idEmpresa = id;
     modalRef.componentInstance.editMode = this.editMode;
@@ -100,4 +102,49 @@ export class ListarEmpresaComponent implements OnInit {
     XLSX.writeFile(workbook, "RelatorioEmpresas.xlsx");
   }
 
+  filtrarEmpresa() {
+    // Esvazia o array das matrizes
+    this.empresas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    if (this.filtroEmpresa != '') {
+      this.empresaService.listEmpresas()
+        .subscribe(filtroEmpresa => {
+          this.empresas = filtroEmpresa.filter(
+            // Compara filtro com o array tudo em lowercase
+            emp => emp.empresa.toLowerCase().includes(this.filtroEmpresa.toLowerCase())
+          );
+          // Ordena por nome crescente
+          this.empresas.sort((a, b) => (a.empresa ?? '').localeCompare(b.empresa ?? ''))
+          this.isLoading = false;
+        });
+    } else {
+      this.listarEmpresa();
+    }
+  }
+
+  filtrarProjeto() {
+    // Esvazia o array das matrizes
+    this.empresas = [];
+    // Flag de carregamento
+    this.isLoading = true;
+    if (this.filtroProjeto != '') {
+      this.empresaService.listEmpresas()
+        .subscribe(filtroProjeto => {
+          this.empresas = filtroProjeto.filter(
+            // Compara filtro com o array tudo em lowercase
+            proj => proj.projeto.toLowerCase().includes(this.filtroProjeto.toLowerCase())
+          );
+          // Ordena por nome crescente
+          this.empresas.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''))
+          this.isLoading = false;
+        });
+    } else {
+      this.listarEmpresa();
+    }
+  }
+
+  filtrarTodos() {
+
+  }
 }

@@ -44,7 +44,7 @@ export class EmpresaService {
       );
   }
 
-  listEmpresas(): Observable<any> {
+  listEmpresas(): Observable<Empresa[]> {
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
 
     // Retorna um Observable contendo todas as instancias da API
