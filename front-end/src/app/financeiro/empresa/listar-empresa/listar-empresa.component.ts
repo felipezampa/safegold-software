@@ -102,47 +102,27 @@ export class ListarEmpresaComponent implements OnInit {
     XLSX.writeFile(workbook, "RelatorioEmpresas.xlsx");
   }
 
-  filtrarEmpresa() {
-    // Esvazia o array
-    this.empresas = [];
-    // Flag de carregamento
-    this.isLoading = true;
-    this.filtroTodos = false;
-    if (this.filtroEmpresa != '') {
-      this.empresaService.listEmpresas()
-        .subscribe(filtroEmpresa => {
-          this.empresas = filtroEmpresa.filter(
-            // Compara filtro com o array tudo em lowercase
-            emp => emp.empresa.toLowerCase().includes(this.filtroEmpresa.toLowerCase())
-          );
-          // Ordena por nome crescente
-          this.empresas.sort((a, b) => (a.empresa ?? '').localeCompare(b.empresa ?? ''))
-          this.isLoading = false;
-        });
-    } else {
-      this.listarEmpresa();
-    }
-  }
-
-  filtrarProjeto() {
-    // Esvazia o array
-    this.empresas = [];
-    // Flag de carregamento
-    this.isLoading = true;
-    this.filtroTodos = false;
-    if (this.filtroProjeto != '') {
-      this.empresaService.listEmpresas()
-        .subscribe(filtro => {
-          this.empresas = filtro.filter(
-            // Compara filtro com o array tudo em lowercase
-            proj => proj.projeto.toLowerCase().includes(this.filtroProjeto.toLowerCase())
-          );
-          // Ordena por nome crescente
-          this.empresas.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''))
-          this.isLoading = false;
-        });
-    } else {
-      this.listarEmpresa();
+  filtrarEmpresa(event: Event) {
+    if (event != undefined) {
+      // Esvazia o array
+      this.empresas = [];
+      // Flag de carregamento
+      this.isLoading = true;
+      this.filtroTodos = false;
+      if (this.filtroEmpresa != '') {
+        this.empresaService.listEmpresas()
+          .subscribe(filtroEmpresa => {
+            this.empresas = filtroEmpresa.filter(
+              // Compara filtro com o array tudo em lowercase
+              emp => emp.empresa.toLowerCase().includes(this.filtroEmpresa.toLowerCase())
+            );
+            // Ordena por nome crescente
+            this.empresas.sort((a, b) => (a.empresa ?? '').localeCompare(b.empresa ?? ''))
+            this.isLoading = false;
+          });
+      } else {
+        this.listarEmpresa();
+      }
     }
   }
 

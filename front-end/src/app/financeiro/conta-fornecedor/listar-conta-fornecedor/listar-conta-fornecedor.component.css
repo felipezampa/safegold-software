@@ -39,16 +39,6 @@
     background-color: var(--sg-gray);
 }
 
-.fa-magnifying-glass {
-    color: var(--sg-yellow);
-    transition: 0.5s;
-}
-
-.fa-magnifying-glass:hover {
-    transform: scale(1.3);
-    color: var(--sg-gray);
-}
-
 .input-with-icon {
     position: relative;
     display: inline-block;
@@ -60,6 +50,7 @@
 }
 
 .input-with-icon i {
+    color: var(--sg-yellow);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -69,7 +60,7 @@
     /* Ajuste o valor da largura para o tamanho do ícone */
     height: 1.25rem;
     /* Ajuste o valor da altura para o tamanho do ícone */
-    cursor: pointer;
+    cursor: default;
 }
 
 .sg-button {

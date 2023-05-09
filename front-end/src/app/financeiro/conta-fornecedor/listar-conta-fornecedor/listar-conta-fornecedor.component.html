@@ -18,8 +18,8 @@
                     <div class="row justify-content-between px-4">
                         <div class="col-4 d-flex align-items-center input-with-icon">
                             <input type="text" class="sg-input" [(ngModel)]="filtroNome"
-                                placeholder="Filtrar Fornecedor" (keyup.enter)="filtrarFornecedor()">
-                            <i class="fa-solid fa-magnifying-glass" (click)="filtrarFornecedor()"></i>
+                                placeholder="Filtrar Fornecedor" (input)="filtrarFornecedor($event)">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div class="col-8">
                             <div class="row">

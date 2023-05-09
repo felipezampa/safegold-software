@@ -94,51 +94,31 @@ export class ListarPlanoContasComponent implements OnInit {
     XLSX.writeFile(workbook, "RelatorioPlanoContas.xlsx");
   }
 
-  filtrarConta(){
-    // Esvazia o array
-    this.planoContas = [];
-    // Flag de carregamento
-    this.isLoading = true;
-    this.filtroTodos = false;
-    if (this.filtroConta != '') {
-      this.planoContasService.listPlanoContas()
-        .subscribe(filtro => {
-          this.planoContas = filtro.filter(
-            // Compara filtro com o array tudo em lowercase
-            emp => emp.desc_conta.toLowerCase().includes(this.filtroConta.toLowerCase())
-          );
-          // Ordena por nome crescente
-          this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
-          this.isLoading = false;
-        });
-    } else {
-      this.listarContas();
+  filtrarConta(event: Event) {
+    if (event != undefined) {
+      // Esvazia o array
+      this.planoContas = [];
+      // Flag de carregamento
+      this.isLoading = true;
+      this.filtroTodos = false;
+      if (this.filtroConta != '') {
+        this.planoContasService.listPlanoContas()
+          .subscribe(filtro => {
+            this.planoContas = filtro.filter(
+              // Compara filtro com o array tudo em lowercase
+              emp => emp.desc_conta.toLowerCase().includes(this.filtroConta.toLowerCase())
+            );
+            // Ordena por nome crescente
+            this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
+            this.isLoading = false;
+          });
+      } else {
+        this.listarContas();
+      }
     }
   }
 
-  filtrarSubGrupo(){
-    // Esvazia o array
-    this.planoContas = [];
-    // Flag de carregamento
-    this.isLoading = true;
-    this.filtroTodos = false;
-    if (this.filtroConta != '') {
-      this.planoContasService.listPlanoContas()
-        .subscribe(filtro => {
-          this.planoContas = filtro.filter(
-            // Compara filtro com o array tudo em lowercase
-            emp => emp.desc_subgrupo.toLowerCase().includes(this.filtroConta.toLowerCase())
-          );
-          // Ordena por nome crescente
-          this.planoContas.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
-          this.isLoading = false;
-        });
-    } else {
-      this.listarContas();
-    }
-  }
-
-  filtrarTodos(){
+  filtrarTodos() {
     this.filtroConta = '';
     this.filtroSubGrupo = '';
     // Esvazia o array das matrizes

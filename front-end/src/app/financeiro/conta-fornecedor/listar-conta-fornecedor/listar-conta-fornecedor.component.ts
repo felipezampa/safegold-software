@@ -180,29 +180,29 @@ export class ListarContaFornecedorComponent implements OnInit {
       });
   }
 
-  filtrarFornecedor() {
-    // Esvazia o array das matrizes
-    this.matrizAnalitica = [];
-    // Flag de carregamento
-    this.isLoading = true;
-
-    if (this.filtroNome != '') {
-      // Flag para indicar filtro selecionado
-      this.filtroSelecionado = '';
-      this.matrizService.listMatrizAnalitica()
-        .subscribe(filtro => {
-          this.matrizAnalitica = filtro.filter(
-            // Compara filtro com o array tudo em lowercase
-            matriz => matriz.desc_fornecedor.toLowerCase().includes(this.filtroNome.toLowerCase())
-          );
-          // Ordena por nome crescente
-          this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
-          this.isLoading = false;
-        });
-    } else {
-      this.filtroSelecionado = 'todos';
-      this.filtrarTodos();
+  filtrarFornecedor(event: Event) {
+    if (event != undefined) {
+      // Esvazia o array das matrizes
+      this.matrizAnalitica = [];
+      // Flag de carregamento
+      this.isLoading = true;
+      if (this.filtroNome != '') {
+        // Flag para indicar filtro selecionado
+        this.filtroSelecionado = '';
+        this.matrizService.listMatrizAnalitica()
+          .subscribe(filtro => {
+            this.matrizAnalitica = filtro.filter(
+              // Compara filtro com o array tudo em lowercase
+              matriz => matriz.desc_fornecedor.toLowerCase().includes(this.filtroNome.toLowerCase())
+            );
+            // Ordena por nome crescente
+            this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''))
+            this.isLoading = false;
+          });
+      } else {
+        this.filtroSelecionado = 'todos';
+        this.filtrarTodos();
+      }
     }
-
   }
 }

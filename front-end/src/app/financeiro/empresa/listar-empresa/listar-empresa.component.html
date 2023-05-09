@@ -19,17 +19,12 @@
                         <h2 class="text-center">FILTRAR</h2>
                     </div>
                     <div class="row justify-content-center card-body p-1">
-                        <div class="col-4 d-flex align-items-center input-with-icon">
-                            <input type="text" class="sg-input" [(ngModel)]="filtroProjeto"
-                                placeholder="Filtrar Projeto" (keyup.enter)="filtrarProjeto()">
-                            <i class="fa-solid fa-magnifying-glass" (click)="filtrarProjeto()"></i>
-                        </div>
-                        <div class="col-4 d-flex align-items-center input-with-icon">
+                        <div class="col-5 d-flex align-items-center input-with-icon">
                             <input type="text" class="sg-input" [(ngModel)]="filtroEmpresa"
-                                placeholder="Filtrar Empresa" (keyup.enter)="filtrarEmpresa()">
-                            <i class="fa-solid fa-magnifying-glass" (click)="filtrarEmpresa()"></i>
+                                placeholder="Filtrar Empresa" (input)="filtrarEmpresa($event)">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <button (click)="filtrarTodos()" [disabled]="filtroTodos" class="sg-button col-3"
+                        <button (click)="filtrarTodos()" [disabled]="filtroTodos" class="sg-button col-4"
                             id="btn-options">Todos</button>
                     </div>
                 </div>
