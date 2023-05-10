@@ -1,0 +1,32 @@
+<table class="table table-bordered table-dark">
+    <thead>
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Descrição</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td> <!-- cod_grupo_contas -->
+            <td>Contas a pagar</td> <!-- desc_grupo_contas  -->
+            <td class="text-center col-1">
+                <a type="submit">
+                    <i class="fa-solid fa-plus" (click)="adicionarSubGrupo()"></i>
+                </a>
+                <a type="submit" class="mx-3">
+                    <i class="fa-solid fa-pencil" (click)="editarSubGrupo()"></i>
+                </a>
+                <a type="submit">
+                    <i class="fa-solid fa-trash-can" (click)="excluirSubGrupo()"></i>
+                </a>
+            </td>
+        </tr>
+        <!-- Adiciona uma nova linha para cada novo componente app-sub-grupo-conta -->
+        <tr *ngFor="let sb of subgrupos">
+            <td colspan="3">
+                <app-sub-grupo-conta></app-sub-grupo-conta>
+            </td>
+        </tr>
+    </tbody>
+</table>

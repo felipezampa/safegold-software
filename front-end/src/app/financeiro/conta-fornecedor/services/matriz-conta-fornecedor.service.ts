@@ -11,7 +11,6 @@ export class MatrizContaFornecedorService {
 
   private baseURL = APP_CONFIG.baseURL + 'api/matriz_analitica_fornecedor/';
   private baseFornecedor = APP_CONFIG.baseURL + 'api/fornecedor/';
-  // private httpHeaders = new HttpHeaders({ 'Content-Type': 'application', 'Authorization': 'Token ' + this.authService.getTokenUser()});
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService,) { }
@@ -43,19 +42,6 @@ export class MatrizContaFornecedorService {
       .pipe(
         tap(() => {
           this.refreshPage$.next();
-        })
-      );
-  }
-
-  deleteEmpresa(id: number) {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
-
-    // Deleta uma instancia da API
-    return this.http.delete(this.baseURL + id + '/', {headers})
-      // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
-      .pipe(
-        tap(() => {
-          this._refreshPage$.next();
         })
       );
   }

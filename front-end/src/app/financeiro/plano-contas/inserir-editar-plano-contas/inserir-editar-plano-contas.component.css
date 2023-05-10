@@ -12,6 +12,7 @@
     --bg-action-btn: #edaa00cc;
     --hover-bg-action-btn: #373935;
     --hover-cor-action-btn: #fff;
+    --disabled-cor: #edaa0075;
 }
 
 #btn-fechar {
@@ -48,7 +49,11 @@
     background-color: var(--hover-bg-action-btn);
     color: var(--hover-cor-action-btn);
 }
-
+.sg-button:disabled {
+    cursor: not-allowed;
+    background-color: var(--disabled-cor);
+    color: var(--cor-action-btn);
+}
 .sg-gerencia {
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
