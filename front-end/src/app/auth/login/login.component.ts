@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalFacade } from 'src/app/shared';
 import { AuthService } from '../services/auth.service';
+import { catchError, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -26,30 +28,36 @@ export class LoginComponent {
   ngOnInit() { }
 
   onSubmit(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      data => {
-        if (data) {
-          SwalFacade.sucesso("Login realizado com sucesso")
-            .then(() => {
-              this.token = data.token;
-              this.authService.getUserInfo(this.token).subscribe(
-                user => {
-                  this.authService.setUser(user); // armazenando o objeto do usuário no UserService
-                  sessionStorage.setItem('user', JSON.stringify(user));
-                  this.router.navigate(['/dashboard']);
-                }
-              );
-            });
-        } else {
+    this.authService.login(this.username, this.password)
+      .subscribe({
+        next: (data) => {
+          if (data.token != null) { // verifica se a resposta HTTP tem status 200 (OK)
+            SwalFacade.sucesso("Login realizado com sucesso")
+              .then(() => {
+                this.token = data.token;
+                this.authService.getUserInfo(this.token).subscribe(
+                  user => {
+                    this.authService.setUser(user); // armazenando o objeto do usuário no UserService
+                    sessionStorage.setItem('user', JSON.stringify(user));
+                    this.router.navigate(['/dashboard']);
+                  }
+                );
+              });
+          } else {
+            SwalFacade.erro("Erro ao fazer login", "Usuário ou senha incorretos");
+          }
+        },
+        error: () => {
           SwalFacade.erro("Erro ao fazer login", "Usuário ou senha incorretos");
         }
-      }
-    )
+      })
   }
+
+
   mostrarSenha() {
     this.showPassword = !this.showPassword;
     let tipoInput = document.getElementById('sg-senha');
-  
+
     if (this.showPassword) {
       tipoInput?.setAttribute('type', 'text');
     } else {
