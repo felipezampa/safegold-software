@@ -132,8 +132,8 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.filtroSelecionado = 'vinculados';
     // Lista todas as matrizes e filtra as que tem vinculo ( == 1)
     this.matrizService.listMatrizAnalitica()
-      .subscribe(vinculo => {
-        this.matrizAnalitica = vinculo.filter(
+      .subscribe(filtro => {
+        this.matrizAnalitica = filtro.filter(
           matriz => matriz.vinculo == 1
         );
         // Ordena por nome crescente
@@ -152,8 +152,8 @@ export class ListarContaFornecedorComponent implements OnInit {
     this.filtroSelecionado = 'naoVinculados';
     // Lista todas as matrizes e filtra as que nao tem vinculo ( == 0)
     this.matrizService.listMatrizAnalitica()
-      .subscribe(vinculo => {
-        this.matrizAnalitica = vinculo.filter(
+      .subscribe(filtro => {
+        this.matrizAnalitica = filtro.filter(
           matriz => matriz.vinculo == 0
         );
         // Ordena por nome crescente
