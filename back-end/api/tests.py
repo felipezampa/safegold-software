@@ -11,8 +11,10 @@ response = requests.post('https://safegold.pythonanywhere.com/api/login/', data=
 token = response.json()['token']
 # faça uma solicitação GET para acessar uma API protegida
 headers = {'Authorization': f'Token {token}'}
-response = requests.get('https://safegold.pythonanywhere.com/api/projetos/', headers=headers)
+response = requests.get('http://127.0.0.1:8000/api/matriz_analitica_fornecedor/', headers=headers)
 print(response.json())
 
 
 
+
+# %%

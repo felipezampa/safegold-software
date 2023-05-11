@@ -363,6 +363,7 @@ class LastWeekAgendaViewSet(viewsets.ModelViewSet):
         start = date_obj - timedelta(days=date_obj.weekday())
         end = start + timedelta(days=6)
         return start, end
+    
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 class NextWeekAgendaViewSet(viewsets.ModelViewSet):

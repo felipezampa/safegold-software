@@ -256,14 +256,15 @@ class Fornecedor(models.Model):
     cod_empresa = models.BigIntegerField(blank=True, null=True)
     cnpj = models.CharField(max_length=255, blank=True, null=True)
     empresa = models.CharField(max_length=255, blank=True, null=True)
-    insc_est = models.CharField(max_length=255, blank=True, null=True)
+    id_fornecedor = models.CharField(max_length=255, blank=True, null=True)
     matriz = models.CharField(max_length=255, blank=True, null=True)
     fornecedor = models.CharField(max_length=255, blank=True, null=True)
     cod_fornecedor = models.CharField(max_length=255,primary_key=True)
 
+
     class Meta:
         managed = False
-        db_table = 'fornecedor'
+        db_table = 'fornecedores_geral'
         verbose_name_plural = 'Fornecedor'
     def __str__(self):
         return "Fornecedor: {} / Empresa: {} ".format(self.fornecedor, self.empresa)
@@ -275,6 +276,9 @@ class MatrizAnaliticaFornecedor(models.Model):
     vinculo = models.IntegerField(blank=True, null=True, default= 0 )
     cod_conta_analitica = models.ForeignKey(FinContaAnalitica, models.DO_NOTHING, db_column='cod_conta_analitica', blank=True, null=True)
     cod_fornecedor = models.ForeignKey(Fornecedor, models.DO_NOTHING, db_column='cod_fornecedor', blank=True, null=True)
+    fornecedor = models.CharField(max_length=255, blank=True, null=True)
+    cnpj = models.CharField(max_length=255, blank=True, null=True)
+    empresa = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
