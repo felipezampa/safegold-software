@@ -23,7 +23,10 @@ export class FinanceiroComponent implements OnInit {
   currentRoute!: string;
 
   constructor(private authService: AuthService, private dashboardService: DashboardService, private router: Router) { }
+
   ngOnInit() {
+    // Atualiza a opcao da sidebar pela primeira vez
+    this.currentRoute = this.router.url;
     // Observer para ver quando o usuario muda de tela e atualizar a sidebar
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -46,8 +49,6 @@ export class FinanceiroComponent implements OnInit {
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
     this.onProjectChange();
-
-
   }
 
 
