@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 import { DashboardService } from '../dashboard';
 import { APP_CONFIG, Empresa, Projeto } from '../shared';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-financeiro',
@@ -19,14 +20,22 @@ export class FinanceiroComponent implements OnInit {
   firstName!: string;
   isSuperuser!: boolean;
   adminURL = APP_CONFIG.baseURL;
+  currentRoute!: string;
 
-  constructor( private authService:AuthService,private dashboardService: DashboardService) {}
+  constructor(private authService: AuthService, private dashboardService: DashboardService, private router: Router) { }
   ngOnInit() {
+    // Observer para ver quando o usuario muda de tela e atualizar a sidebar
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Atualiza rota atual a variavel
+        this.currentRoute = event.url;
+      }
+    });
     this.setCurrentUser();
     this.isSuperuser = this.authService.getIsSuperUser();
     this.firstName = this.authService.getUsername();
 
-      // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
+    // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
     this.dashboardService.getProjetos(this.authService.getCurrentUser())
       .subscribe(data => {
         this.projetos = data;
@@ -37,6 +46,8 @@ export class FinanceiroComponent implements OnInit {
     this.selectedProjetos = contexto?.cod_projeto;
     this.selectedEmpresa = contexto?.cod_empresa;
     this.onProjectChange();
+
+
   }
 
 

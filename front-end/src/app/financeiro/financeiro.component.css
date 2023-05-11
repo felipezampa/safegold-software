@@ -5,6 +5,7 @@
     --bg-sidebar: #414442;
     --cor-sidebar: #ffffff;
     --hover-icon: #EDA900;
+    --disabled-icon: #6e7e83;
     --hover-logout: #E62121;
 }
 
@@ -22,6 +23,21 @@
     width: 100%;
     margin-top: 0.938rem;
     margin-left: .3rem;
+}
+
+.sg-anchor:hover {
+    color: var(--hover-icon);
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.sg-anchor:disabled {
+    color: var(--disabled-icon);
+    cursor: default;
+    transform: scale(1);
+}
+.sg-anchor:disabled i{
+    cursor: default;
 }
 
 .sg-content {
@@ -53,12 +69,6 @@
 .sg-form option {
     font-size: 0.9rem;
     font-weight: 500;
-}
-
-.sg-hover:hover .sg-anchor {
-    color: var(--hover-icon);
-    transform: scale(1.1);
-    transition: 0.2s ease;
 }
 
 .sg-logout:hover a {
@@ -107,7 +117,8 @@
 }
 
 /* -------------------------------------------   TAG  ------------------------------------------- */
-a {
+a,
+button {
     text-decoration: none;
     color: var(--cor-sidebar);
     font-size: 0.875rem;
@@ -115,6 +126,8 @@ a {
     margin-left: 0.375rem;
     width: calc(var(--hover-sidebar) - 1.25rem);
     padding: .5rem;
+    background: none;
+    border: none;
 }
 
 i {

@@ -27,34 +27,34 @@
             </li>
             <hr class="my-1">
             <li class="sg-hover">
-                <a href="dashboard" class="sg-anchor">
+                <button routerLink="dashboard" class="sg-anchor">
                     <i class="fa-solid fa-home"></i>
                     <span class="sg-nav-item">Home</span>
-                </a>
+                </button>
             </li>
             <li class="sg-hover">
-                <a href="financeiro/dashboard-financeiro" class="sg-anchor">
+                <button routerLink="/financeiro/dashboard-financeiro" class="sg-anchor" [disabled]="currentRoute == '/financeiro/dashboard-financeiro'">
                     <i class="fa-solid fa-clipboard"></i>
                     <span class="sg-nav-item">Dashboard</span>
-                </a>
+                </button>
             </li>
             <li class="sg-hover">
-                <a href="financeiro/conta-fornecedor" class="sg-anchor">
+                <button routerLink="/financeiro/conta-fornecedor" class="sg-anchor" [disabled]="currentRoute == '/financeiro/conta-fornecedor'">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="sg-nav-item">Conta-Fornecedor</span>
-                </a>
+                </button>
             </li>
-            <li class="sg-hover">
-                <a href="financeiro/plano-de-contas" class="sg-anchor">
+            <li class="sg-hover" >
+                <button routerLink="/financeiro/plano-de-contas" class="sg-anchor" [disabled]="currentRoute == '/financeiro/plano-de-contas'">
                     <i class="fa-solid fa-list-ol"></i>
                     <span class="sg-nav-item">Plano de Contas</span>
-                </a>
+                </button>
             </li>
             <li class="sg-hover">
-                <a href="financeiro/empresas" class="sg-anchor">
+                <button routerLink="/financeiro/empresas" class="sg-anchor" [disabled]="currentRoute == '/financeiro/empresas'">
                     <i class="fa-solid fa-handshake"></i>
                     <span class="sg-nav-item">Empresas</span>
-                </a>
+                </button>
             </li>
             <li *ngIf="isSuperuser == true" class="sg-hover">
                 <a href="{{adminURL}}/admin/" class="sg-anchor">
