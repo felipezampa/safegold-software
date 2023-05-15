@@ -10,11 +10,11 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">VER AGENDA:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button mx-1" id="btn-options">
+                                <button type="button" class="sg-button mx-1" id="btn-options" (click)="getCurrentWeekDays()" [disabled]="semanaSelecionada == 'atual'">
                                     <i class="fa-solid fa-hourglass-start mx-1"></i>
                                     <span>Essa semana</span>
                                 </button>
-                                <button class="sg-button mx-1" id="btn-options">
+                                <button class="sg-button mx-1" id="btn-options" (click)="getNextWeekDays()" [disabled]="semanaSelecionada == 'proxima'">
                                     <i class="fa-solid fa-forward mx-1"></i>
                                     <span>Próxima semana</span>
                                 </button>
@@ -62,7 +62,7 @@
                                 <h5>{{dia.dia}}</h5>
                             </div>
                             <div class="card-deck">
-                                <sg-compromisso-card (adicionarCardEvent)="adicionarCard(dia.index)"
+                                <sg-compromisso-card #card (adicionarCardEvent)="adicionarCard(dia.index)"
                                     (salvarCardEvent)="salvarCard(dia.index, i)"
                                     (excluirCardEvent)="excluirCard(dia.index, i)"
                                     *ngFor="let card of dia.cards; let i = index;">

@@ -1,34 +1,33 @@
 <div class="card-deck">
-    <div class="px-4">
+    <form #formAgenda="ngForm" class="px-4">
         <div class="row">
             <small class="form-text text-muted text-left">Tipo</small>
             <select name="TipoProjeto" id="tipoProj">
-                <option value="" selected>Selecione um Tipo</option>
-                <option *ngFor="let tipo of tipoAgenda" [value]="tipo">{{ tipo }}
+                <option *ngFor="let tipo of tipoAgenda" [value]="tipo" [selected]="tipo.includes('Projeto')">{{ tipo }}
                 </option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Projeto</small>
-            <select [(ngModel)]="projetoSelecionado">
+            <select [(ngModel)]="projetoSelecionado" name="projeto">
                 <option value="" selected>Selecione Um Projeto</option>
                 <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Atendimento</small>
-            <select [(ngModel)]="atendimentoSelecionado">
-                <option value='Presencial'>Presencial</option>
-                <option value='Remoto'>Remoto</option>
+            <select [(ngModel)]="atendimentoSelecionado" name="atendimentoSelecionado">
+                <option value='Remoto' selected>Remoto</option>
+                <option value='Presencial'>Presencial</option>     
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Horas</small>
-            <select [(ngModel)]="horasSelecionado">
+            <select [(ngModel)]="horasSelecionado" name="horasSelecionado">
                 <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
             </select>
         </div>
-    </div>
+    </form>
 </div>
 <div class="card-footer">
     <button class="sg-footer-button sg-add col-4" (click)="adicionar()">

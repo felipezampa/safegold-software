@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { Projeto } from 'src/app/shared';
 
@@ -12,12 +13,14 @@ export class CardComponent {
     @Output() adicionarCardEvent = new EventEmitter<any>();
     @Output() salvarCardEvent = new EventEmitter<any>();
     @Output() excluirCardEvent = new EventEmitter<any>();
+    @ViewChild('formAgenda') formAgenda!: NgForm;
     projetos!: Projeto[];
     tipoAgenda!: String[];
     horas!: number[];
     projetoSelecionado!: Projeto | String;
     atendimentoSelecionado!: String;
     horasSelecionado!: Number;
+    
 
     constructor(private projetoService: ProjetoService) { }
 

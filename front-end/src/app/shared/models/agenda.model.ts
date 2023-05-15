@@ -1,17 +1,21 @@
-export interface Agenda {
-    cod_agenda: number
-    data: Date
-    dia_semana: string
-    tipo: string
-    projetos: string
-    atendimento: string
-    horas: number
-    funcao_gestor: FuncaoGestor
+export class Agenda {
+    constructor(
+        public cod_agenda?: number,
+        public data?: Date,
+        public dia_semana?: string,
+        public tipo?: string,
+        public projetos?: string,
+        public atendimento?: string,
+        public horas?: number,
+        public funcao_gestor?: FuncaoGestor
+    ) { }
 }
 
-export interface FuncaoGestor {
-    id_funcao: number
-    id_user: number
-    data_inicio: Date
-    data_fim: Date
+export class FuncaoGestor {
+    constructor(
+        public id_funcao: number,
+        public id_user: number,
+        public data_inicio: Date,
+        public data_fim: Date
+    ) { }
 }

@@ -82,6 +82,7 @@
 .sg-button:disabled {
     background-color: var(--disabled-bg);
     color: var(--hover-cor-action-btn);
+    cursor: not-allowed;
 }
 
 .sg-button:disabled:hover {
