@@ -98,6 +98,7 @@ export class AuthService {
     const is_superuser = currentUser ? JSON.parse(currentUser).superuser : null;
     return is_superuser;
   }
+  
   getTokenUser() {
     const currentUser = sessionStorage.getItem('user');
     const token = currentUser ? JSON.parse(currentUser).token : null;

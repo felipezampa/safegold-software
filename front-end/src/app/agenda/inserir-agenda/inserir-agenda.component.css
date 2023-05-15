@@ -16,6 +16,7 @@
     --bg-action-btn: #edaa00cc;
     --hover-bg-action-btn: #373935;
     --hover-cor-action-btn: #fff;
+    --disabled-cor: #636363;
 }
 
 #btn-logout {
@@ -74,6 +75,12 @@
 .sg-button:hover {
     background-color: var(--hover-bg-action-btn);
     color: var(--hover-cor-action-btn);
+}
+
+.sg-button:disabled {
+    cursor: not-allowed;
+    background-color: var(--disabled-cor);
+    color: var(--white);
 }
 
 .sg-card-body {
