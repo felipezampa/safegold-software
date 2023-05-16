@@ -55,6 +55,7 @@
                                     <th class="col">Conta Analítica</th>
                                     <th class="col">Fornecedor</th>
                                     <th class="col">Empresa</th>
+                                    <th class="col-1 text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +71,11 @@
                                     </td>
                                     <td>{{ matriz.desc_fornecedor }}</td>
                                     <td>{{ matriz.empresa }}</td>
+                                    <td class="text-center">
+                                        <a type="submit" (click)="deletarModal(matriz)">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

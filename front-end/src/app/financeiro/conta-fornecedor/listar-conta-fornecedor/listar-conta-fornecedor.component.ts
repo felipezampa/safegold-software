@@ -4,6 +4,7 @@ import 'jspdf-autotable';
 import { Subscription } from 'rxjs';
 import { ContaAnalitica, Empresa, Fornecedor, MatrizAnalitica } from 'src/app/shared';
 import * as XLSX from 'xlsx';
+import { ExcluirContaFornecedorComponent } from '../excluir-conta-fornecedor/excluir-conta-fornecedor.component';
 import { MatrizContaFornecedorService } from '../services/matriz-conta-fornecedor.service';
 import { EmpresaService } from './../../empresa/services/empresa.service';
 import { PlanoContasService } from './../../plano-contas/services/plano-contas.service';
@@ -115,6 +116,10 @@ export class ListarContaFornecedorComponent implements OnInit {
 
   }
 
+  deletarModal(matriz: MatrizAnalitica) {
+    const modalRef = this.modalService.open(ExcluirContaFornecedorComponent, { size: 'xl' });
+    modalRef.componentInstance.matriz = matriz;
+  }
   // FILTROS
   filtrarVinculados() {
     // Esvazia o array das matrizes
