@@ -20,6 +20,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta, date
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import action
 
 '''
     @eduardolcordeiro
@@ -131,7 +132,17 @@ class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_matriz_analitica_fornecedor', 'cod_empresa', 'vinculo', 'cod_conta_analitica', 'cod_fornecedor']
     
+    @action(detail=True, methods=['patch'])
+    def update_fields(self, request, pk=None):
+        instance = self.get_object()
 
+        instance.cod_conta_analitica = None
+        instance.vinculo = 0
+
+        instance.save()
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 '''
     @eduardolcordeiro
