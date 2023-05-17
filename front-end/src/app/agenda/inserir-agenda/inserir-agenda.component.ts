@@ -14,18 +14,19 @@ import * as moment from 'moment';
   styleUrls: ['./inserir-agenda.component.css']
 })
 export class InserirAgendaComponent {
-  diasSemana: { index: number, nome: String, dia: String, cards: any[] }[] = [
-    { index: 0, nome: 'Segunda', dia: '17/04', cards: [] },
-    { index: 1, nome: 'Terça', dia: '18/04', cards: [] },
-    { index: 2, nome: 'Quarta', dia: '19/04', cards: [] },
-    { index: 3, nome: 'Quinta', dia: '20/04', cards: [] },
-    { index: 4, nome: 'Sexta', dia: '21/04', cards: [] }
+  diasSemana: { index: number, nome: String, dia: Date, cards: any[] }[] = [
+    { index: 0, nome: 'Segunda', dia: new Date('2023-04-17'), cards: [] },
+    { index: 1, nome: 'Terça', dia: new Date('2023-04-18'), cards: [] },
+    { index: 2, nome: 'Quarta', dia: new Date('2023-04-19'), cards: [] },
+    { index: 3, nome: 'Quinta', dia: new Date('2023-04-20'), cards: [] },
+    { index: 4, nome: 'Sexta', dia: new Date('2023-04-21'), cards: [] }
   ];
   @ViewChild('card') card!: CardComponent;
   diaInicio: Date = new Date('2023-04-17');
   diaFim: Date = new Date('2023-04-21');
   username!: String;
-  semanaSelecionada: string = 'atual';
+  semanaSelecionada: string = 'proxima';
+
   constructor(private authService: AuthService, private agendaService: AgendaService) { }
 
   ngOnInit(): void {
@@ -70,76 +71,46 @@ export class InserirAgendaComponent {
       SwalFacade.erro("Não foi possível excluir", "O dia deve ter ao menos um compromisso!");
     }
   }
-  // getCurrentWeekDays(): Date[] {
-  getCurrentWeekDays() {
-    this.semanaSelecionada = 'atual';
-    // const now = new Date();
-    // const dayOfWeek = now.getDay();
-    // const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-    // const monday = new Date(now.setDate(diff));
-    // const friday = new Date(now.setDate(diff + 4));
-    // console.log('seg-> ' + monday);
-    // console.log('ter-> ' + new Date(monday.getTime() + 24 * 60 * 60 * 1000));
-    // console.log('qua-> ' + new Date(monday.getTime() + 2 * 24 * 60 * 60 * 1000));
-    // console.log('qui-> ' + new Date(monday.getTime() + 3 * 24 * 60 * 60 * 1000));
-    // console.log('sex-> ' + friday);
-    // return [monday, new Date(monday.getTime() + 24 * 60 * 60 * 1000), new Date(monday.getTime() + 2 * 24 * 60 * 60 * 1000), new Date(monday.getTime() + 3 * 24 * 60 * 60 * 1000), friday];
-    const now = new Date();
-    const dayOfWeek = now.getDay();
-    const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-    const monday = new Date(now.setDate(diff));
 
-    const weekdays = [
-      'SEGUNDA',
-      'TERÇA',
-      'QUARTA',
-      'QUINTA',
-      'SEXTA'
-    ];
-    const weekDaysFormatted = weekdays.map((day, index) => {
-      const date = index === 4 ? new Date(monday.getTime() + 4 * 24 * 60 * 60 * 1000) : new Date(monday.getTime() + index * 24 * 60 * 60 * 1000);
-      const formattedDate = moment(date).locale('pt-br').format('DD/MM/YYYY');
-      const [dia, data, ano] = `${day} ${formattedDate}`.split(' ');
-      return { dia, data };
+  verSemanaAtual() {
+    // Flag do Botao
+    this.semanaSelecionada = 'atual';
+    // Prepara as datas da semana que vem
+    var curr = new Date; // pega data atual
+    var first = curr.getDate() - curr.getDay(); // Primeiro eh o dia do mes - o dia da semana
+    first++; // Adiciona um dia para pegar segunda-feira
+    var last = first + 4; // Pega o ultimo dia da semana (sexta)
+    // Cria objetos date e modifica os atributos
+    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
+    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
+    this.diaFim = new Date(lastday); // Converte para o atributo da classe
+    // Loop para alterar as datas dos cards
+    this.diasSemana.forEach((dia) => {
+      let firstdayCard = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+      dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
+      first++; // Incrementa a data
     });
-    this.diaInicio = new Date(Object.values(weekDaysFormatted)[0].data);
-    this.diaFim = new Date(Object.values(weekDaysFormatted)[4].data);
-    console.log( new Date(Object.values(weekDaysFormatted)[0].data));
-    console.log( new Date(Object.values(weekDaysFormatted)[4].data));
-    console.log(weekDaysFormatted);
   }
 
-  // getNextWeekDays(): Date[] {
-  getNextWeekDays() {
+  verProximaSemana() {
+    // Flag do Botao
     this.semanaSelecionada = 'proxima';
-    // const now = new Date();
-    // now.setDate(now.getDate() + 7); // adicionar uma semana
-    // const dayOfWeek = now.getDay();
-    // const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-    // const monday = new Date(now.setDate(diff));
-    // const friday = new Date(now.setDate(diff + 4));
-    // return [monday, new Date(monday.getTime() + 24 * 60 * 60 * 1000), new Date(monday.getTime() + 2 * 24 * 60 * 60 * 1000), new Date(monday.getTime() + 3 * 24 * 60 * 60 * 1000), friday];
-    const now = new Date();
-    now.setDate(now.getDate() + 7);
-    const dayOfWeek = now.getDay();
-    const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-    const monday = new Date(now.setDate(diff));
-
-    const weekdays = [
-      'SEGUNDA',
-      'TERÇA',
-      'QUARTA',
-      'QUINTA',
-      'SEXTA'
-    ];
-    const weekDaysFormatted = weekdays.map((day, index) => {
-      const date = index === 4 ? new Date(monday.getTime() + 4 * 24 * 60 * 60 * 1000) : new Date(monday.getTime() + index * 24 * 60 * 60 * 1000);
-      const formattedDate = moment(date).locale('pt-br').format('DD/MM/YYYY');
-      const [dia, data, ano] = `${day} ${formattedDate}`.split(' ');
-      return { dia, data };
+    // Prepara as datas da semana que vem
+    let curr = new Date; // pega data atual
+    let first = curr.getDate() - curr.getDay(); // Primeiro eh o dia do mes - o dia da semana
+    first += 8; // Adiciona uma semana para a frente
+    let last = first + 4; // Pega o ultimo dia da semana (sexta)
+    // Cria objetos date e modifica os atributos
+    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
+    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
+    this.diaFim = new Date(lastday); // Converte para o atributo da classe
+    // Loop para alterar as datas dos cards
+    this.diasSemana.forEach((dia) => {
+      let firstdayCard = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+      dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
+      first++; // Incrementa a data
     });
-
-    console.log(weekDaysFormatted);
-
   }
 }

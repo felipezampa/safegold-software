@@ -10,11 +10,11 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">VER AGENDA:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button mx-1" id="btn-options" (click)="getCurrentWeekDays()" [disabled]="semanaSelecionada == 'atual'">
+                                <button type="button" class="sg-button mx-1" id="btn-options" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
                                     <i class="fa-solid fa-hourglass-start mx-1"></i>
                                     <span>Essa semana</span>
                                 </button>
-                                <button class="sg-button mx-1" id="btn-options" (click)="getNextWeekDays()" [disabled]="semanaSelecionada == 'proxima'">
+                                <button class="sg-button mx-1" id="btn-options" (click)="verProximaSemana()" [disabled]="semanaSelecionada == 'proxima'">
                                     <i class="fa-solid fa-forward mx-1"></i>
                                     <span>Próxima semana</span>
                                 </button>
@@ -59,7 +59,7 @@
                         <div class="card">
                             <div class="card-header" id="sg-dia-header">
                                 <h2>{{dia.nome}}</h2>
-                                <h5>{{dia.dia}}</h5>
+                                <h5>{{dia.dia | date: 'dd/MM/yyyy'}}</h5>
                             </div>
                             <div class="card-deck">
                                 <sg-compromisso-card #card (adicionarCardEvent)="adicionarCard(dia.index)"
