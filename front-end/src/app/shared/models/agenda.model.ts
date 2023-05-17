@@ -19,3 +19,10 @@ export class FuncaoGestor {
         public data_fim: Date
     ) { }
 }
+
+export class TipoAgenda {
+    constructor(
+        public id_tipo: number,
+        public tipo: string
+    ) { }
+}

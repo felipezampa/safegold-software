@@ -2,15 +2,15 @@
     <form #formAgenda="ngForm" class="px-4">
         <div class="row">
             <small class="form-text text-muted text-left">Tipo</small>
-            <select name="TipoProjeto" id="tipoProj">
-                <option *ngFor="let tipo of tipoAgenda" [value]="tipo" [selected]="tipo.includes('Projeto')">{{ tipo }}
+            <select [(ngModel)]="tipoSelecionado" name="tipoSelecionado">
+                <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo" [selected]="tipo.id_tipo === 10">{{ tipo.tipo }}
                 </option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Projeto</small>
-            <select [(ngModel)]="projetoSelecionado" name="projeto">
-                <option value="" selected>Selecione Um Projeto</option>
+            <select [(ngModel)]="projetoSelecionado" name="projetoSelecionado">
+                <option value="" [selected]="projetoSelecionado === ''"> --- </option>
                 <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
             </select>
         </div>

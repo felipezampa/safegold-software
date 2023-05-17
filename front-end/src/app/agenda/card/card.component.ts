@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Projeto } from 'src/app/shared';
+import { Projeto, TipoAgenda } from 'src/app/shared';
+import { AgendaService } from '../services/agenda.service';
 
 @Component({
     selector: 'sg-compromisso-card',
@@ -14,22 +15,27 @@ export class CardComponent {
     @Output() salvarCardEvent = new EventEmitter<any>();
     @Output() excluirCardEvent = new EventEmitter<any>();
     @ViewChild('formAgenda') formAgenda!: NgForm;
+
     projetos!: Projeto[];
-    tipoAgenda!: String[];
+    tipoAgenda!: TipoAgenda[];
     horas!: number[];
+
     projetoSelecionado!: Projeto | String;
     atendimentoSelecionado!: String;
     horasSelecionado!: Number;
-    
+    tipoSelecionado!: TipoAgenda;
 
-    constructor(private projetoService: ProjetoService) { }
+    constructor(private projetoService: ProjetoService, private agendaService: AgendaService) { }
 
     ngOnInit(): void {
         this.projetoSelecionado = '';
         this.atendimentoSelecionado = 'Presencial';
+        this.tipoSelecionado = { id_tipo: 1, tipo: 'Projeto' };
         this.horasSelecionado = 8;
         this.listProjetos();
-        this.tipoAgenda = ['Projeto', 'Administrativo', 'Curso', 'Evento', 'Feriado'];
+        this.agendaService.listTipo().subscribe({
+            next: (tipo: any[]) => this.tipoAgenda = tipo
+        });
         this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
@@ -52,7 +58,7 @@ export class CardComponent {
     }
 
     salvar() {
-        this.salvarCardEvent.emit();
+        this.salvarCardEvent.emit(this.formAgenda);
     }
     excluir() {
         this.excluirCardEvent.emit();

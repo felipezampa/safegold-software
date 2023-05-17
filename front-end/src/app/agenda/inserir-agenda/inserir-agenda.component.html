@@ -62,8 +62,9 @@
                                 <h5>{{dia.dia | date: 'dd/MM/yyyy'}}</h5>
                             </div>
                             <div class="card-deck">
-                                <sg-compromisso-card #card (adicionarCardEvent)="adicionarCard(dia.index)"
-                                    (salvarCardEvent)="salvarCard(dia.index, i)"
+                                <sg-compromisso-card #card 
+                                    (adicionarCardEvent)="adicionarCard(dia.index)"
+                                    (salvarCardEvent)="salvarCard(dia.index, i,$event)"
                                     (excluirCardEvent)="excluirCard(dia.index, i)"
                                     *ngFor="let card of dia.cards; let i = index;">
                                 </sg-compromisso-card>

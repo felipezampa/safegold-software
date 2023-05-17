@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth';
-import { Agenda, FuncaoGestor, SwalFacade } from 'src/app/shared';
-import { AgendaService } from '../services/agenda.service';
+import { SwalFacade } from 'src/app/shared';
 import { CardComponent } from '../card/card.component';
-import { Subscription } from 'rxjs';
-// import moment from 'moment';
+import { AgendaService } from '../services/agenda.service';
+import { FormGroup } from '@angular/forms';
 import 'moment/locale/pt-br';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-inserir-agenda',
@@ -50,16 +48,32 @@ export class InserirAgendaComponent {
     this.diasSemana[indexDia].cards.push(novoCard);
   }
 
-  salvarCard(indexDia: number, indexCard: number) {
+  salvarCard(indexDia: number, indexCard: number, formulario: FormGroup) {
     const idGestor = this.authService.getCurrentUser();
     this.agendaService.getFuncaoGestor(idGestor).subscribe({
       next: gestor => console.log(gestor)
     });
+    // console.log( this.card);
+
     // const agenda = new Agenda();
     // agenda. = 
     // const data = this.card.formAgenda != undefined ? this.card.formAgenda.value : '';
-    // console.log(indexDia, indexCard, data);
+    console.log(formulario.value);
+    // let aaa = formulario.value.tipoSelecionado
+    // let agenda: {
+    //   Data: aaa,
+    //   // DiadaSemana: String, 
+    //   // UnidadedeNegócio: Date, 
+    //   // area: String, 
+    //   // funcao: String, 
+    //   // gestor:String,
+    //   // tipo: String,
+    //   // projeto:String,
+    //   // horas:String,
+    //   // atendimento:String
+    // }
 
+    //       const car = {type:"Fiat", model:"500", color:"white"};
     // this.agendaService.saveAgenda();
   }
 
