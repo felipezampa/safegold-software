@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth';
-import { SwalFacade } from 'src/app/shared';
+import { DiaSemana, SwalFacade } from 'src/app/shared';
 import { CardComponent } from '../card/card.component';
 import { AgendaService } from '../services/agenda.service';
 import { FormGroup } from '@angular/forms';
@@ -12,7 +12,7 @@ import 'moment/locale/pt-br';
   styleUrls: ['./inserir-agenda.component.css']
 })
 export class InserirAgendaComponent {
-  diasSemana: { index: number, nome: String, dia: Date, cards: any[] }[] = [
+  diasSemana: DiaSemana[] = [
     { index: 0, nome: 'Segunda', dia: new Date('2023-04-17'), cards: [] },
     { index: 1, nome: 'Terça', dia: new Date('2023-04-18'), cards: [] },
     { index: 2, nome: 'Quarta', dia: new Date('2023-04-19'), cards: [] },
@@ -20,16 +20,17 @@ export class InserirAgendaComponent {
     { index: 4, nome: 'Sexta', dia: new Date('2023-04-21'), cards: [] }
   ];
   @ViewChild('card') card!: CardComponent;
-  diaInicio: Date = new Date('2023-04-17');
-  diaFim: Date = new Date('2023-04-21');
+  diaInicio!: Date;
+  diaFim!: Date;
   username!: String;
-  semanaSelecionada: string = 'proxima';
+  semanaSelecionada!: String;
 
   constructor(private authService: AuthService, private agendaService: AgendaService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUsername();
     this.criarPrimeiroCard();
+    this.verSemanaAtual();
   }
 
   criarPrimeiroCard() {

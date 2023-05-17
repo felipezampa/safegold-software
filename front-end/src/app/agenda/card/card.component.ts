@@ -28,14 +28,12 @@ export class CardComponent {
     constructor(private projetoService: ProjetoService, private agendaService: AgendaService) { }
 
     ngOnInit(): void {
+        this.listProjetos();
+        this.listTipo();
         this.projetoSelecionado = '';
         this.atendimentoSelecionado = 'Presencial';
         this.tipoSelecionado = { id_tipo: 1, tipo: 'Projeto' };
         this.horasSelecionado = 8;
-        this.listProjetos();
-        this.agendaService.listTipo().subscribe({
-            next: (tipo: any[]) => this.tipoAgenda = tipo
-        });
         this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
     }
 
@@ -53,6 +51,18 @@ export class CardComponent {
         });
     }
 
+    listTipo() {
+        this.agendaService.listTipo().subscribe({
+            next: (tipo: any[]) => {
+                if (tipo == null) {
+                    this.tipoAgenda = [];
+                } else {
+                    this.tipoAgenda = tipo
+                }
+            }
+        });
+    }
+
     adicionar() {
         this.adicionarCardEvent.emit();
     }
@@ -60,6 +70,7 @@ export class CardComponent {
     salvar() {
         this.salvarCardEvent.emit(this.formAgenda);
     }
+
     excluir() {
         this.excluirCardEvent.emit();
     }
