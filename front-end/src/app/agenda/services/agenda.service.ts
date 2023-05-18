@@ -24,7 +24,7 @@ export class AgendaService {
   saveAgenda(data: any) {
     console.log(data);
     
-    //this.http.post
+    return this.http.post('http://localhost:3000/Agenda', data);
   }
   excluirAgenda() {
     //this.http.delete2

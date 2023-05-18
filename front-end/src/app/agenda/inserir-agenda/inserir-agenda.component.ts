@@ -64,7 +64,7 @@ export class InserirAgendaComponent {
           const novoObjeto = { funcao_gestor: gestor[0] };
           console.log(novoObjeto);
           var objetoCombinado = { ...novoObjeto, ...formulario.value, ...this.obterDia(indexDia) };
-          this.agendaService.saveAgenda(objetoCombinado);
+          this.agendaService.saveAgenda(objetoCombinado).subscribe();
           // console.log(objetoCombinado);
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
