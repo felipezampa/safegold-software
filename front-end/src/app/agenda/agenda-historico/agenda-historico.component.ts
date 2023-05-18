@@ -16,13 +16,14 @@ export class AgendaHistoricoComponent implements OnInit {
   diaInicio!: Date;
   diaFim!: Date;
   dataFiltrada!: string;
+  semanaSelecionada!: String;
 
   constructor(private agendaService: AgendaService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUsername();
     this.listarAgenda();
-    this.atribuirSemanaAtual();
+    this.verSemanaAtual();
   }
 
   filtrarPorData(ini: Date, fim: Date) {
@@ -30,14 +31,54 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
   }
 
-  atribuirSemanaAtual() {
-    this.diaInicio = this.agendaService.getDiaInicio();
-    this.diaFim = this.agendaService.getDiaFim();
-  }
   logout() {
     this.authService.logout();
   }
+  verSemanaAtual() {
+    // Flag do Botao
+    this.semanaSelecionada = 'atual';
+    // Prepara as datas da semana que vem
+    var curr = new Date; // pega data atual
+    var first = curr.getDate() - curr.getDay(); // Primeiro eh o dia do mes - o dia da semana
+    first++; // Adiciona um dia para pegar segunda-feira
+    var last = first + 4; // Pega o ultimo dia da semana (sexta)
+    // Cria objetos date e modifica os atributos
+    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
+    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
+    this.diaFim = new Date(lastday); // Converte para o atributo da classe
+    // Loop para alterar as datas dos cards
+    // this.diasSemana.forEach((dia) => {
+    //   let firstdayCard = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    //   dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
+    //   first++; // Incrementa a data
+    // });
+    // // Remove os cartões da semana que vem e adiciona novos para semana atual
+    // this.criarPrimeiroCard();
+  }
 
+  verSemanaPassada() {
+    // Flag do Botao
+    this.semanaSelecionada = 'passada';
+    // Prepara as datas da semana que vem
+    let curr = new Date; // pega data atual
+    let first = curr.getDate() - curr.getDay(); // Primeiro eh o dia do mes - o dia da semana
+    first += 8; // Adiciona uma semana para a frente
+    let last = first + 4; // Pega o ultimo dia da semana (sexta)
+    // Cria objetos date e modifica os atributos
+    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
+    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
+    this.diaFim = new Date(lastday); // Converte para o atributo da classe
+    // // Loop para alterar as datas dos cards
+    // this.diasSemana.forEach((dia) => {
+    //   let firstdayCard = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
+    //   dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
+    //   first++; // Incrementa a data
+    // });
+    // // Remove os cartões da semana atual e adiciona novos para semana que vem
+    // this.criarPrimeiroCard();
+  }
   listarAgenda() {
     this.agenda = [
       { data: "2023-04-26", dia: "Quarta-Feira", unidade: "Safegold Perfomance", area: "BI", funcao: "DEV", gestor: "Sergio Moro", tipo: "Projeto", projeto: "NOMA", horas: 8, atendimento: "Remoto" },

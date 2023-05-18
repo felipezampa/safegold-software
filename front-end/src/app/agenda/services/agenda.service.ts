@@ -8,37 +8,29 @@ import { AuthService } from 'src/app/auth';
 })
 export class AgendaService {
 
-  private baseUrl = APP_CONFIG.baseURL + 'api/';
-  private funcaoGestor = APP_CONFIG.baseURL + 'api/';
+  private tipoUrl = APP_CONFIG.baseURL + 'api/ag_tipo/';
+  private funcaoGestorUrl = APP_CONFIG.baseURL + 'api/sg_funcao_gestor/?id_user=';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-
-  getDiaInicio(): Date {
-    return new Date('2023-04-17');
-  }
-  getDiaFim(): Date {
-    return new Date('2023-04-21');
-  }
-
   saveAgenda(data: any) {
-    console.log(data);
-    
     return this.http.post('http://localhost:3000/Agenda', data);
   }
+
+  updateAgenda(data: any) {
+    // IMPLEMENTAR NO FUTURO
+  }
   excluirAgenda() {
-    //this.http.delete2
+    // IMPLEMENTAR NO FUTURO
   }
 
   getFuncaoGestor(idGestor: number): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
-    let url = APP_CONFIG.baseURL + 'api/sg_funcao_gestor/?id_user=' + idGestor
-    return this.http.get(url, { headers });
+    return this.http.get(this.funcaoGestorUrl + idGestor, { headers });
   }
 
-  listTipo(): Observable<any>{
+  listTipo(): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
-    let url = APP_CONFIG.baseURL + '/api/ag_tipo/';
-    return this.http.get(url,{headers});
+    return this.http.get(this.tipoUrl, { headers });
   }
 }

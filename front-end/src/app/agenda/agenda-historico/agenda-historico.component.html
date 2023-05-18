@@ -10,11 +10,11 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">VER AGENDA:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button col mx-1" id="btn-semana">
+                                <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
                                     <i class="fa-regular fa-calendar-days mx-1"></i>
                                     <span>Semana Atual</span>
                                 </button>
-                                <button type="button" class="sg-button col mx-1" id="btn-semana">
+                                <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaPassada()" [disabled]="semanaSelecionada == 'passada'">
                                     <i class="fa-solid fa-backward mx-1"></i>
                                     <span>Semana Passada</span>
                                 </button>
