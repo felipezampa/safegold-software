@@ -10,7 +10,7 @@
         <div class="row">
             <small class="form-text text-muted text-left">Projeto</small>
             <select [(ngModel)]="projetoSelecionado" name="projetoSelecionado">
-                <option value="" [selected]="projetoSelecionado === ''"> --- </option>
+                <option value="" [ngValue]="null"> --- </option>
                 <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
             </select>
         </div>

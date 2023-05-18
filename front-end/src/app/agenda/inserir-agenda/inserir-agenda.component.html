@@ -64,7 +64,7 @@
                             <div class="card-deck">
                                 <sg-compromisso-card #card 
                                     (adicionarCardEvent)="adicionarCard(dia.index)"
-                                    (salvarCardEvent)="salvarCard(dia.index, i,$event)"
+                                    (salvarCardEvent)="salvarCard(dia.index,$event)"
                                     (excluirCardEvent)="excluirCard(dia.index, i)"
                                     *ngFor="let card of dia.cards; let i = index;">
                                 </sg-compromisso-card>

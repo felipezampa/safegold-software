@@ -20,7 +20,7 @@ export class CardComponent {
     tipoAgenda!: TipoAgenda[];
     horas!: number[];
 
-    projetoSelecionado!: Projeto | String;
+    projetoSelecionado!: Projeto | null;
     atendimentoSelecionado!: String;
     horasSelecionado!: Number;
     tipoSelecionado!: TipoAgenda;
@@ -30,9 +30,9 @@ export class CardComponent {
     ngOnInit(): void {
         this.listProjetos();
         this.listTipo();
-        this.projetoSelecionado = '';
+        this.projetoSelecionado = null;
         this.atendimentoSelecionado = 'Presencial';
-        this.tipoSelecionado = { id_tipo: 1, tipo: 'Projeto' };
+        this.tipoSelecionado = { id_tipo: 10, tipo: 'Projeto' };
         this.horasSelecionado = 8;
         this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
     }

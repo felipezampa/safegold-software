@@ -36,6 +36,9 @@ export class InserirAgendaComponent {
   criarPrimeiroCard() {
     // Permite iniciar a agenda com um card para cada dia
     for (let index = 0; index < this.diasSemana.length; index++) {
+      // Esvazia os cartoes existentes / esquecidos
+      this.diasSemana[index].cards = [];
+      // Adiciona um em cada dia
       this.adicionarCard(index);
     }
   }
@@ -46,36 +49,29 @@ export class InserirAgendaComponent {
 
   adicionarCard(indexDia: number) {
     const novoCard = {};
-    this.diasSemana[indexDia].cards.push(novoCard);
+    if (this.diasSemana[indexDia].cards.length <= 8) {
+      this.diasSemana[indexDia].cards.push(novoCard);
+    } else {
+      SwalFacade.erro("Não foi possível adicionar", "O dia deve não pode ter mais que 8 compromissos!");
+    }
   }
 
-  salvarCard(indexDia: number, indexCard: number, formulario: FormGroup) {
-    const idGestor = this.authService.getCurrentUser();
-    this.agendaService.getFuncaoGestor(idGestor).subscribe({
-      next: gestor => console.log(gestor)
-    });
-    // console.log( this.card);
-
-    // const agenda = new Agenda();
-    // agenda. = 
-    // const data = this.card.formAgenda != undefined ? this.card.formAgenda.value : '';
-    console.log(formulario.value);
-    // let aaa = formulario.value.tipoSelecionado
-    // let agenda: {
-    //   Data: aaa,
-    //   // DiadaSemana: String, 
-    //   // UnidadedeNegócio: Date, 
-    //   // area: String, 
-    //   // funcao: String, 
-    //   // gestor:String,
-    //   // tipo: String,
-    //   // projeto:String,
-    //   // horas:String,
-    //   // atendimento:String
-    // }
-
-    //       const car = {type:"Fiat", model:"500", color:"white"};
-    // this.agendaService.saveAgenda();
+  salvarCard(indexDia: number, formulario: FormGroup) {
+    if (formulario.value.projetoSelecionado != undefined) {
+      const idGestor = this.authService.getCurrentUser();
+      this.agendaService.getFuncaoGestor(idGestor).subscribe({
+        next: gestor => {
+          const novoObjeto = { funcao_gestor: gestor[0] };
+          console.log(novoObjeto);
+          var objetoCombinado = { ...novoObjeto, ...formulario.value, ...this.obterDia(indexDia) };
+          this.agendaService.saveAgenda(objetoCombinado);
+          // console.log(objetoCombinado);
+        },
+        error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+      });
+    } else {
+      SwalFacade.erro("Não foi possível salvar", "Selecione um projeto!");
+    }
   }
 
   excluirCard(indexDia: number, indexCard: number) {
@@ -106,6 +102,8 @@ export class InserirAgendaComponent {
       dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
       first++; // Incrementa a data
     });
+    // Remove os cartões da semana que vem e adiciona novos para semana atual
+    this.criarPrimeiroCard();
   }
 
   verProximaSemana() {
@@ -127,5 +125,29 @@ export class InserirAgendaComponent {
       dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
       first++; // Incrementa a data
     });
+    // Remove os cartões da semana atual e adiciona novos para semana que vem
+    this.criarPrimeiroCard();
+  }
+
+  obterDia(numeroDia: number): { dia: string; data: Date } | undefined {
+    /* 
+     Metodo simples que recebe o numero do card que foi utilizado como parametro
+     */
+    let dataDia = this.diasSemana[numeroDia].dia
+    switch (numeroDia) {
+      case 0:
+        return { dia: 'Segunda-Feira', data: dataDia };
+      case 1:
+        return { dia: 'Terça-Feira', data: dataDia };
+      case 2:
+        return { dia: 'Quarta-Feira', data: dataDia };
+      case 3:
+        return { dia: 'Quinta-Feira', data: dataDia };
+      case 4:
+        return { dia: 'Sexta-Feira', data: dataDia };
+      default:
+        return undefined;
+    }
   }
 }
+

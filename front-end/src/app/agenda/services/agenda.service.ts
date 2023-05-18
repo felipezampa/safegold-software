@@ -21,11 +21,13 @@ export class AgendaService {
     return new Date('2023-04-21');
   }
 
-  saveAgenda() {
+  saveAgenda(data: any) {
+    console.log(data);
+    
     //this.http.post
   }
   excluirAgenda() {
-    //this.http.delete
+    //this.http.delete2
   }
 
   getFuncaoGestor(idGestor: number): Observable<any> {
