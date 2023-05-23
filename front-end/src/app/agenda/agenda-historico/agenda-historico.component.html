@@ -23,10 +23,9 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">FILTRAR DATA:</div>
                             <div class="col-12" id="filterDate">
-                                <input type="date" name="diaInicio" [(ngModel)]="diaInicio" [value]="diaInicio">
-                                <input type="date" name="diaFim" [(ngModel)]="diaFim" [value]="diaFim">
-                                <button type="button" class="sg-filter-button" id="btn-filter"
-                                    (click)="filtrarPorData(diaInicio,diaFim)">
+                                <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
+                                <input type="date" name="diaFim" [(ngModel)]="diaFim">
+                                <button type="button" class="sg-filter-button" id="btn-filter" (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
                                     <span>Filtrar</span>
                                 </button>
