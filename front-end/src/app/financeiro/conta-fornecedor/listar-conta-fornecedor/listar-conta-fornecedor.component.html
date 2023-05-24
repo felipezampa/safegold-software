@@ -51,7 +51,6 @@
                             id="sg-tabela">
                             <thead class="table-dark">
                                 <tr>
-                                    <th class="col-1 text-center">ID</th>
                                     <th class="col">Conta Analítica</th>
                                     <th class="col">Fornecedor</th>
                                     <th class="col">Empresa</th>
@@ -60,7 +59,6 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let matriz of matrizAnalitica | orderBy:'vinculo' ">
-                                    <td class="text-center">{{ matriz.cod_matriz_analitica_fornecedor }}</td>
                                     <td>
                                         <select name="cod_conta_analitica" [(ngModel)]="matriz.cod_conta_analitica"
                                             (ngModelChange)="atualizarMatrizAnaliticaFornecedor(matriz.cod_matriz_analitica_fornecedor)"

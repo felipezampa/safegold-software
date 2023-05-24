@@ -49,6 +49,9 @@ export class ListarContaFornecedorComponent implements OnInit {
         this.matrizAnalitica = vinculo;
         this.filtroSelecionado = 'todos';
         this.matrizAnalitica.sort((a, b) => (a.desc_fornecedor ?? '').localeCompare(b.desc_fornecedor ?? ''));
+        this.matrizAnalitica.filter(
+          matriz => matriz.cod_matriz_analitica_fornecedor !== null
+        );
       }
       );
   }
@@ -63,7 +66,8 @@ export class ListarContaFornecedorComponent implements OnInit {
 
   listarContaAnalitica() {
     this.analiticaService.listPlanoContas().subscribe(analitica => {
-      this.analitica = analitica
+      this.analitica = analitica;
+      this.analitica.sort((a, b) => (a.desc_conta ?? '').localeCompare(b.desc_conta ?? ''))
     })
   }
 
