@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body table-responsive-lg">
                     <div class="row sg-table">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover"  *ngIf="agenda.length > 1  && !mensagemErro">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -74,8 +74,8 @@
                                     <th>Atendimento</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr *ngFor="let ag of agenda">
+                            <tbody *ngFor="let ag of agenda">
+                                <tr>
                                     <td>{{ag.data}}</td>
                                     <td>{{ag.dia}}</td>
                                     <td>{{ag.unidade}}</td>
@@ -89,6 +89,14 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div *ngIf="agenda.length < 1 && !mensagemErro">
+                            <h5><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h5>
+                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
+                                <i class="fa-regular fa-calendar-days mx-1"></i>
+                                <span>Semana Atual</span>
+                            </button>
+                        </div>
+                        <span [innerHTML]="mensagemErro"></span>
                     </div>
                 </div>
             </div>

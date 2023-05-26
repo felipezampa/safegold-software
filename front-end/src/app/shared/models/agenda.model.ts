@@ -1,15 +1,15 @@
-export class Agenda {
-    constructor(
-        public cod_agenda?: number,
-        public data?: Date,
-        public dia_semana?: string,
-        public tipo?: string,
-        public projetos?: string,
-        public atendimento?: string,
-        public horas?: number,
-        public funcao_gestor?: FuncaoGestor
-    ) { }
-}
+// export class Agenda {
+//     constructor(
+//         public cod_agenda?: number,
+//         public data?: Date,
+//         public dia_semana?: string,
+//         public tipo?: string,
+//         public projetos?: string,
+//         public atendimento?: string,
+//         public horas?: number,
+//         public funcao_gestor?: FuncaoGestor
+//     ) { }
+// }
 
 export class FuncaoGestor {
     constructor(
@@ -35,3 +35,4 @@ export class DiaSemana {
         public cards: any[]
     ) { }
 }
+export interface Agenda{ data: string, dia: string, unidade: string, area: string, funcao: string, gestor: string, tipo: string, projeto: string, horas: number, atendimento: string }
