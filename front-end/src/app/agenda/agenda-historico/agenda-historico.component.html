@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body table-responsive-lg">
                     <div class="row sg-table">
-                        <table class="table table-striped table-hover"  *ngIf="agenda.length > 1  && !mensagemErro">
+                        <table class="table table-hover"  *ngIf="agenda.length > 1  && !mensagemErro">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -74,8 +74,8 @@
                                     <th>Atendimento</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let ag of agenda">
-                                <tr>
+                            <tbody *ngFor="let ag of agenda; let even = even">
+                                <tr  [ngStyle]="fazerTabelaListrada(even)">
                                     <td>{{ag.data}}</td>
                                     <td>{{ag.dia}}</td>
                                     <td>{{ag.unidade}}</td>
@@ -97,6 +97,13 @@
                             </button>
                         </div>
                         <span [innerHTML]="mensagemErro"></span>
+                        <div *ngIf="mensagemErro">
+                            <h5><strong>Deseja ver a semana atual?</strong></h5>
+                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
+                                <i class="fa-regular fa-calendar-days mx-1"></i>
+                                <span>Semana Atual</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
