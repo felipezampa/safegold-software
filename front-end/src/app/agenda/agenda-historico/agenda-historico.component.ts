@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth';
 import { Agenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { formatDate } from '@angular/common';
+
 @Component({
   selector: 'app-agenda-historico',
   templateUrl: './agenda-historico.component.html',
@@ -11,28 +12,33 @@ import { formatDate } from '@angular/common';
 export class AgendaHistoricoComponent implements OnInit {
 
   agenda!: Agenda[];
-  username!: String;
-  diaInicio!: Date;
-  diaFim!: Date;
-  dataFiltrada!: string;
-  semanaSelecionada!: String;
+  username!: string;
+  // Importante que as datas tenham tipo string minusculo e nao o objeto String senao da erro
+  diaInicio!: Date | string;
+  diaFim!: Date | string;
+  semanaSelecionada!: string;
   mensagemErro: string = '';
 
   constructor(private agendaService: AgendaService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    // Nome do usuario para mostrar no header do primeiro cartao
     this.username = this.authService.getUsername();
     this.listarAgenda();
+    // Garante que as datas que aparecam sejam as da semana atual
     this.verSemanaAtual();
   }
 
-  filtrarAgenda(inicio: Date | String, fim: Date | String) {
+  filtrarAgenda(inicio: Date | string, fim: Date | string) {
     // Lista todos os dados da agenda
     this.agendaService.listAgendaHistorico().subscribe(filtro => {
       // Filtro de data, so traz os dados que estao entre a dataInicio e dataFim
       this.agenda = filtro.filter(
+        // Filtra os dias que estejam entre data inicio e data fim
         (ag: any) => ag.data >= inicio && ag.data <= fim
       );
+      // Ordena de forma crescente
+      this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime());
     });
   }
 
@@ -40,28 +46,50 @@ export class AgendaHistoricoComponent implements OnInit {
     this.authService.logout();
   }
 
-  filtrarPorData(ini: Date, fim: Date) {
+  listarAgenda() {
+    // Faz um GET dos dados da agenda
+    this.agendaService.listAgendaHistorico().subscribe({
+      next: agenda => {
+        // Atribui o dado retornado ao atributo de instancia
+        this.agenda = agenda;
+      }
+    });
+  }
+
+  fazerTabelaListrada(isEven: boolean): object {
+    // Maneira mais facil que eu encontrei de deixar a tabela listrada
+    // As classes CSS / BStrap por algum motivo nao estavam funcionando
+    if (isEven) {
+      return { 'background-color': '#f2f2f2' };
+    } else {
+      return {};
+    }
+  }
+
+  filtrarPorData(ini: Date | string, fim: Date | string) {
     // Limpa a flag dos botões selecionados
     this.semanaSelecionada = '';
     try {
       if (ini > fim) {
+        // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas erradas
         throw new Error('Data inicial não pode ser maior que a data final');
       } else if (ini == fim) {
+        // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas iguais
         throw new Error('As datas de inicio e fim não podem ser iguais');
       } else {
+        // Caso nosso usuario tenha sido inteligente o suficiente chegamos aqui
         this.mensagemErro = '';
         // Atribui os valores dos inputs nos atributos locais
         this.diaFim = fim;
         this.diaInicio = ini;
       }
     } catch (e) {
-      //Mostra a exceção na tela
+      //  Mostra a exceção na tela para o usuario
       this.mensagemErro = '<h4 class="alert alert-danger strong">' + e + '</h4>';
     } finally {
       // Faz a chamada do metodo de filtro personalizado
       this.filtrarAgenda(ini, fim);
     }
-
   }
 
   verSemanaAtual() {
@@ -70,24 +98,27 @@ export class AgendaHistoricoComponent implements OnInit {
     // Flag caso tenha erros
     this.mensagemErro = '';
     // pega data atual
-    var curr = new Date;
+    let currentDate = new Date;
     // Primeiro eh o dia do mes - o dia da semana
-    var first = curr.getDate() - curr.getDay();
+    let first = currentDate.getDate() - currentDate.getDay();
     // Adiciona um dia para pegar segunda-feira
     first++;
     // Pega o ultimo dia da semana (sexta)
-    var last = first + 4;
+    let last = first + 4;
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.setDate(first)).toUTCString();
-    let lastday = new Date(curr.setDate(last)).toUTCString();
-    // Converte para os atributos da classe
-    this.diaInicio = new Date(firstday);
-    this.diaFim = new Date(lastday);
-
+    let firstday = new Date(currentDate.setDate(first)).toUTCString();
+    let lastday = new Date(currentDate.setDate(last)).toUTCString();
+    // Constantes para formatacao das datas
     const format = 'yyyy-MM-dd';
     const locale = 'en-US';
+    // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
     const ini = formatDate(new Date(firstday), format, locale);
     const fim = formatDate(new Date(lastday), format, locale);
+    // Infelizmente o tipo utilizado so pode ser utilizado como string
+    // por isso os atributos sao Date | string
+    this.diaInicio = ini;
+    this.diaFim = fim;
+    // Faz a chamada do metodo de filtro personalizado
     this.filtrarAgenda(ini, fim);
   }
 
@@ -97,59 +128,25 @@ export class AgendaHistoricoComponent implements OnInit {
     // Flag caso tenha erros
     this.mensagemErro = '';
     // Prepara as datas da semana que vem
-    var curr = new Date; // pega data atual
-    var first = curr.getDate() - curr.getDay() - 7; // Primeiro eh o dia do mes - o dia da semana
-    first++; // Adiciona um dia para pegar segunda-feira
-    var last = first + 4; // Pega o ultimo dia da semana (sexta)
+    var curr = new Date;
+    // Primeiro eh o dia do mes - o dia da semana
+    var first = curr.getDate() - curr.getDay() - 7; 
+    first++;
+    var last = first + 4; 
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
-    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
-    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
-    this.diaFim = new Date(lastday); // Converte para o atributo da classe
-
+    let firstday = new Date(curr.setDate(first)).toUTCString(); 
+    let lastday = new Date(curr.setDate(last)).toUTCString();
+    // Constantes para formatacao das datas
     const format = 'yyyy-MM-dd';
     const locale = 'en-US';
+    // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
     const ini = formatDate(new Date(firstday), format, locale);
     const fim = formatDate(new Date(lastday), format, locale);
+    // Infelizmente o tipo utilizado so pode ser utilizado como string
+    // por isso os atributos sao Date | string
+    this.diaInicio = ini;
+    this.diaFim = fim;
+    // Faz a chamada do metodo de filtro personalizado
     this.filtrarAgenda(ini, fim);
-  }
-
-  verProximaSemana() {
-    // Flag do Botao
-    this.semanaSelecionada = 'proxima';
-    // Flag caso tenha erros
-    this.mensagemErro = '';
-    // Prepara as datas da semana que vem
-    let curr = new Date; // pega data atual
-    let first = curr.getDate() - curr.getDay(); // Primeiro eh o dia do mes - o dia da semana
-    first += 8; // Adiciona uma semana para a frente
-    let last = first + 4; // Pega o ultimo dia da semana (sexta)
-    // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.getFullYear(), curr.getMonth(), first).toUTCString(); // Variavel de data
-    let lastday = new Date(curr.getFullYear(), curr.getMonth(), last).toUTCString(); // Variavel de data
-    this.diaInicio = new Date(firstday); // Converte para o atributo da classe
-    this.diaFim = new Date(lastday); // Converte para o atributo da classe
-    const format = 'yyyy-MM-dd';
-    const locale = 'en-US';
-    const ini = formatDate(new Date(firstday), format, locale);
-    const fim = formatDate(new Date(lastday), format, locale);
-    this.filtrarAgenda(ini, fim);
-  }
-  listarAgenda() {
-    this.agendaService.listAgendaHistorico().subscribe({
-      next: agenda => {
-        console.log(agenda);
-        this.agenda = agenda;
-        console.log(this.agenda);
-      }
-    });
-
-  }
-  fazerTabelaListrada(isEven: boolean): object {
-    if (isEven) {
-      return { 'background-color': '#f2f2f2' };
-    } else {
-      return {};
-    }
   }
 }

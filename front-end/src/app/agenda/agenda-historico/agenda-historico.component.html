@@ -74,8 +74,8 @@
                                     <th>Atendimento</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let ag of agenda; let even = even">
-                                <tr  [ngStyle]="fazerTabelaListrada(even)">
+                            <tbody>
+                                <tr *ngFor="let ag of agenda; let even = even"  [ngStyle]="fazerTabelaListrada(even)">
                                     <td>{{ag.data}}</td>
                                     <td>{{ag.dia}}</td>
                                     <td>{{ag.unidade}}</td>
@@ -89,12 +89,16 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div *ngIf="agenda.length < 1 && !mensagemErro">
+                        <div *ngIf="agenda.length < 1 && !mensagemErro && semanaSelecionada != 'atual'">
                             <h5><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h5>
                             <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
                                 <i class="fa-regular fa-calendar-days mx-1"></i>
                                 <span>Semana Atual</span>
                             </button>
+                        </div>
+                        <div *ngIf="agenda.length < 1 && !mensagemErro && semanaSelecionada == 'atual'">
+                            <h3><strong>Semana atual não possui dados!</strong></h3>
+                            <h5><strong>Se o erro persistir entre em contato com o suporte: suportebi@safegold.com.br</strong></h5>
                         </div>
                         <span [innerHTML]="mensagemErro"></span>
                         <div *ngIf="mensagemErro">
