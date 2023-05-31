@@ -1,27 +1,28 @@
 {
   "Agenda": [
     {
-      "id": 1,
-      "atendimentoSelecionado": "Presencial",
-      "horasSelecionado": 8,
-      "projetoSelecionado": "19",
-      "tipoSelecionado": {
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "tipo": {
         "id_tipo": 10,
         "tipo": "Projeto"
       },
-      "data": "2023-05-16T13:16:26-03:00",
-      "dia": "Terça-Feira",
-      "funcao_gestor": {
-        "area": "Administrador",
-        "data_fim": null,
-        "data_inicio": "2023-05-17",
-        "funcao": "ADM Software",
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "id_user": 2,
-        "unidade_de_negocios": "Safegold Perfomance",
-        "username": "admin"
-      }
+      "cod_projeto": "64",
+      "atendimento": "Presencial",
+      "horas": 8,
+      "projeto": "AGROSS",
+      "dia": "Quinta-Feira",
+      "data": "2023-06-01",
+      "id": 1
     },
     {
       "funcao_gestor": {
@@ -35,15 +36,16 @@
         "area": "Administrador",
         "unidade_de_negocios": "Safegold Perfomance"
       },
-      "tipoSelecionado": {
+      "tipo": {
         "id_tipo": 10,
         "tipo": "Projeto"
       },
-      "projetoSelecionado": "64",
-      "atendimentoSelecionado": "Presencial",
-      "horasSelecionado": 8,
-      "dia": "Terça-Feira",
-      "data": "2023-05-16T17:23:25.000Z",
+      "cod_projeto": "56",
+      "atendimento": "Presencial",
+      "horas": 8,
+      "projeto": "PARMISSIMO",
+      "dia": "Quarta-Feira",
+      "data": "2023-05-31",
       "id": 2
     },
     {
@@ -58,15 +60,16 @@
         "area": "Administrador",
         "unidade_de_negocios": "Safegold Perfomance"
       },
-      "tipoSelecionado": {
+      "tipo": {
         "id_tipo": 10,
         "tipo": "Projeto"
       },
-      "projetoSelecionado": "17",
-      "atendimentoSelecionado": "Presencial",
-      "horasSelecionado": 8,
-      "dia": "Quarta-Feira",
-      "data": "2023-05-17T17:23:25.000Z",
+      "cod_projeto": "64",
+      "atendimento": "Presencial",
+      "horas": 8,
+      "projeto": "AGROSS",
+      "dia": "Sexta-Feira",
+      "data": "2023-06-02",
       "id": 3
     }
   ]

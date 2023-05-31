@@ -12,6 +12,14 @@ import { AgendaService } from '../services/agenda.service';
   styleUrls: ['./inserir-agenda.component.css']
 })
 export class InserirAgendaComponent {
+
+  @ViewChild('card') card!: CardComponent;
+  diaInicio!: Date;
+  diaFim!: Date;
+  username!: String;
+  semanaSelecionada!: String;
+  // Nao eh uma boa pratica fazer isso aqui embaixo, mas a maneira mais estavel que encontrei
+  // Entao ja comeco atribuindo os dias no array, passando uns dias so pra inicializar
   diasSemana: DiaSemana[] = [
     { index: 0, nome: 'Segunda', dia: new Date('2023-04-17'), cards: [] },
     { index: 1, nome: 'Terça', dia: new Date('2023-04-18'), cards: [] },
@@ -19,11 +27,6 @@ export class InserirAgendaComponent {
     { index: 3, nome: 'Quinta', dia: new Date('2023-04-20'), cards: [] },
     { index: 4, nome: 'Sexta', dia: new Date('2023-04-21'), cards: [] }
   ];
-  @ViewChild('card') card!: CardComponent;
-  diaInicio!: Date;
-  diaFim!: Date;
-  username!: String;
-  semanaSelecionada!: String;
 
   constructor(private authService: AuthService, private agendaService: AgendaService) { }
 
@@ -63,9 +66,15 @@ export class InserirAgendaComponent {
         next: gestor => {
           const novoObjeto = { funcao_gestor: gestor[0] };
           var objetoCombinado = { ...novoObjeto, ...formulario, ...this.obterDia(indexDia) };
-          // this.agendaService.saveAgenda(objetoCombinado).subscribe();
+          this.agendaService.salvarAgenda(objetoCombinado).subscribe();
           console.log(objetoCombinado);
-          SwalFacade.sucesso( this.obterDia(indexDia)?.data +' - '+ this.obterDia(indexDia)?.dia,'Agenda salva com sucesso!');
+          const format = 'dd/MM/yyyy';
+          const locale = 'en-US';
+          // Obtem a data atraves do cartao do dia
+          let dataDia = this.diasSemana[indexDia].dia
+          // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
+          const dataFiltrada = formatDate(new Date(dataDia), format, locale);
+          SwalFacade.sucesso(this.obterDia(indexDia)?.dia + '  |  ' + dataFiltrada, 'Agenda salva com sucesso!');
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
