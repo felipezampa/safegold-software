@@ -3,13 +3,13 @@ import Swal from 'sweetalert2';
 
 export class SwalFacade {
 
-  static erro(titulo: string, texto: string): Promise<any> {
+  static erro(titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top',
       showConfirmButton: false,
       timer: 5000,
-      background: '#ff0000',
+      background: '#DD0707',
       color: '#ffffff',
       iconColor: '#ffffff',
       timerProgressBar: true,
