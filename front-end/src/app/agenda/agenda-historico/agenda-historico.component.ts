@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
-import { Agenda } from 'src/app/shared';
+import { Agenda, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { formatDate } from '@angular/common';
 
@@ -11,13 +11,12 @@ import { formatDate } from '@angular/common';
 })
 export class AgendaHistoricoComponent implements OnInit {
 
-  agenda!: Agenda[];
+  agenda: Agenda[] = [];
   username!: string;
   // Importante que as datas tenham tipo string minusculo e nao o objeto String senao da erro
   diaInicio!: Date | string;
   diaFim!: Date | string;
   semanaSelecionada!: string;
-  mensagemErro: string = '';
 
   constructor(private agendaService: AgendaService, private authService: AuthService) { }
 
@@ -29,27 +28,21 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   listarAgenda(inicio: Date | string, fim: Date | string) {
+    const dataInicio = typeof inicio === 'string' ? new Date(inicio) : inicio;
+    const dataFim = typeof fim === 'string' ? new Date(fim) : fim;
+
     // Lista todos os dados da agenda
-    this.agendaService.TESTEAGENDA().subscribe(filtro => {
-      // Filtro de data, so traz os dados que estao entre a dataInicio e dataFim
-      this.agenda = filtro;
-      this.agenda.filter(
-        // Filtra os dias que estejam entre data inicio e data fim
-        (ag: any) =>{
-          const format = 'yyyy-MM-dd';
-          const locale = 'en-US';
-          // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
-          const dataFiltrada = formatDate(new Date(ag.data), format, locale);
-          dataFiltrada >= inicio && ag.data <= fim
-          console.log(ag);  
-        }
-      )
-      console.log(filtro); //u
+    this.agendaService.listarAgenda().subscribe(filtro => {
+      // Filtro de data, só traz os dados que estão entre a dataInicio e dataFim
+      this.agenda = filtro.filter((ag: any) => {
+        const data = new Date(ag.data);
+        return data >= dataInicio && data <= dataFim;
+      });
+
       // Ordena de forma crescente
       this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime());
     });
   }
-
   logout() {
     this.authService.logout();
   }
@@ -67,34 +60,26 @@ export class AgendaHistoricoComponent implements OnInit {
   filtrarPorData(ini: Date | string, fim: Date | string) {
     // Limpa a flag dos botões selecionados
     this.semanaSelecionada = '';
-    try {
-      if (ini > fim) {
-        // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas erradas
-        throw new Error('Data inicial não pode ser maior que a data final');
-      } else if (ini == fim) {
-        // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas iguais
-        throw new Error('As datas de inicio e fim não podem ser iguais');
-      } else {
-        // Caso nosso usuario tenha sido inteligente o suficiente chegamos aqui
-        this.mensagemErro = '';
-        // Atribui os valores dos inputs nos atributos locais
-        this.diaFim = fim;
-        this.diaInicio = ini;
-      }
-    } catch (e) {
-      //  Mostra a exceção na tela para o usuario
-      this.mensagemErro = '<h4 class="alert alert-danger strong">' + e + '</h4>';
-    } finally {
-      // Faz a chamada do metodo de filtro personalizado
+
+    if (ini > fim) {
+      // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas erradas
+      SwalFacade.erro('Erro no filtro','Data inicial não pode ser maior que a data final');
+    } else if (ini == fim) {
+      // Teste para ver se o usuario tem QI maior que 50 e nao vai colocar as datas iguais
+      SwalFacade.erro('Erro no filtro','As datas de inicio e fim não podem ser iguais');
+    } else {
+      // Caso nosso usuario tenha sido inteligente o suficiente chegamos aqui
+      // Atribui os valores dos inputs nos atributos locais
+      this.diaFim = fim;
+      this.diaInicio = ini;
       this.listarAgenda(ini, fim);
     }
+
   }
 
   verSemanaAtual() {
     // Flag do Botao
     this.semanaSelecionada = 'atual';
-    // Flag caso tenha erros
-    this.mensagemErro = '';
     // pega data atual
     let currentDate = new Date;
     // Primeiro eh o dia do mes - o dia da semana
@@ -123,16 +108,14 @@ export class AgendaHistoricoComponent implements OnInit {
   verSemanaPassada() {
     // Flag do Botao
     this.semanaSelecionada = 'passada';
-    // Flag caso tenha erros
-    this.mensagemErro = '';
     // Prepara as datas da semana que vem
     var curr = new Date;
     // Primeiro eh o dia do mes - o dia da semana
-    var first = curr.getDate() - curr.getDay() - 7; 
+    var first = curr.getDate() - curr.getDay() - 7;
     first++;
-    var last = first + 4; 
+    var last = first + 4;
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.setDate(first)).toUTCString(); 
+    let firstday = new Date(curr.setDate(first)).toUTCString();
     let lastday = new Date(curr.setDate(last)).toUTCString();
     // Constantes para formatacao das datas
     const format = 'yyyy-MM-dd';

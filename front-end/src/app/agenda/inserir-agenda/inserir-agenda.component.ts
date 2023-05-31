@@ -31,15 +31,6 @@ export class InserirAgendaComponent {
     this.username = this.authService.getUsername();
     this.criarPrimeiroCard();
     this.verSemanaAtual();
-    this.TESTEAGENDA();
-  }
-
-  TESTEAGENDA() {
-    // Faz um GET dos dados da agenda
-    this.agendaService.TESTEAGENDA().subscribe({
-      next: (agendaArray: Agenda[]) => {
-      }
-    });
   }
 
   criarPrimeiroCard() {
@@ -72,7 +63,7 @@ export class InserirAgendaComponent {
         next: gestor => {
           const novoObjeto = { funcao_gestor: gestor[0] };
           var objetoCombinado = { ...novoObjeto, ...formulario, ...this.obterDia(indexDia) };
-          this.agendaService.saveAgenda(objetoCombinado).subscribe();
+          // this.agendaService.saveAgenda(objetoCombinado).subscribe();
           console.log(objetoCombinado);
           SwalFacade.sucesso( this.obterDia(indexDia)?.data +' - '+ this.obterDia(indexDia)?.dia,'Agenda salva com sucesso!');
         },

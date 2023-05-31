@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body table-responsive-lg">
                     <div class="row sg-table">
-                        <table class="table table-hover" *ngIf="agenda.length >= 1  && !mensagemErro">
+                        <table class="table table-hover" *ngIf="agenda.length >= 1">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -89,24 +89,16 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div *ngIf="agenda.length < 1 && !mensagemErro && semanaSelecionada != 'atual'">
+                        <div *ngIf="agenda.length < 1 && semanaSelecionada != 'atual'">
                             <h5><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h5>
                             <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
                                 <i class="fa-regular fa-calendar-days mx-1"></i>
                                 <span>Semana Atual</span>
                             </button>
                         </div>
-                        <div *ngIf="agenda.length < 1 && !mensagemErro && semanaSelecionada == 'atual'">
+                        <div *ngIf="agenda.length < 1 && semanaSelecionada == 'atual'">
                             <h3><strong>Semana atual não possui dados!</strong></h3>
                             <h5><strong>Se o erro persistir entre em contato com o suporte: suportebi@safegold.com.br</strong></h5>
-                        </div>
-                        <span [innerHTML]="mensagemErro"></span>
-                        <div *ngIf="mensagemErro">
-                            <h5><strong>Deseja ver a semana atual?</strong></h5>
-                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
-                                <i class="fa-regular fa-calendar-days mx-1"></i>
-                                <span>Semana Atual</span>
-                            </button>
                         </div>
                     </div>
                 </div>
