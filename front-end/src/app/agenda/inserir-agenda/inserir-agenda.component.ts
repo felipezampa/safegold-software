@@ -1,10 +1,10 @@
+import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import 'moment/locale/pt-br';
 import { AuthService } from 'src/app/auth';
-import { DiaSemana, SwalFacade } from 'src/app/shared';
+import { Agenda, DiaSemana, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { CardComponent } from '../card/card.component';
 import { AgendaService } from '../services/agenda.service';
-import { FormGroup } from '@angular/forms';
-import 'moment/locale/pt-br';
 
 @Component({
   selector: 'app-inserir-agenda',
@@ -31,6 +31,15 @@ export class InserirAgendaComponent {
     this.username = this.authService.getUsername();
     this.criarPrimeiroCard();
     this.verSemanaAtual();
+    this.TESTEAGENDA();
+  }
+
+  TESTEAGENDA() {
+    // Faz um GET dos dados da agenda
+    this.agendaService.TESTEAGENDA().subscribe({
+      next: (agendaArray: Agenda[]) => {
+      }
+    });
   }
 
   criarPrimeiroCard() {
@@ -56,16 +65,16 @@ export class InserirAgendaComponent {
     }
   }
 
-  salvarCard(indexDia: number, formulario: FormGroup) {
-    if (formulario.value.projetoSelecionado != undefined) {
+  salvarCard(indexDia: number, formulario: { tipo: TipoAgenda, cod_projeto: string, atendimento: string, horas: number, projeto: string }) {
+    if (formulario.cod_projeto != undefined) {
       const idGestor = this.authService.getCurrentUser();
       this.agendaService.getFuncaoGestor(idGestor).subscribe({
         next: gestor => {
           const novoObjeto = { funcao_gestor: gestor[0] };
-          console.log(novoObjeto);
-          var objetoCombinado = { ...novoObjeto, ...formulario.value, ...this.obterDia(indexDia) };
+          var objetoCombinado = { ...novoObjeto, ...formulario, ...this.obterDia(indexDia) };
           this.agendaService.saveAgenda(objetoCombinado).subscribe();
-          // console.log(objetoCombinado);
+          console.log(objetoCombinado);
+          SwalFacade.sucesso( this.obterDia(indexDia)?.data +' - '+ this.obterDia(indexDia)?.dia,'Agenda salva com sucesso!');
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
@@ -92,15 +101,14 @@ export class InserirAgendaComponent {
     first++; // Adiciona um dia para pegar segunda-feira
     let last = first + 4; // Pega o ultimo dia da semana (sexta)
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
-    let lastday = new Date(curr.setDate(last)).toUTCString(); // Variavel de data
+    let firstday = new Date(curr.getFullYear(), curr.getMonth(), first).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.getFullYear(), curr.getMonth(), last).toUTCString(); // Variavel de data
     this.diaInicio = new Date(firstday); // Converte para o atributo da classe
     this.diaFim = new Date(lastday); // Converte para o atributo da classe
     // Loop para alterar as datas dos cards
-    this.diasSemana.forEach((dia) => {
-      let firstdayCard = new Date(curr.setDate(first)).toUTCString(); // Variavel de data
-      dia.dia = new Date(firstdayCard); // Atribui o dia no objeto dia para a data
-      first++; // Incrementa a data
+    this.diasSemana.forEach((dia, index) => {
+      let newDate = new Date(curr.getFullYear(), curr.getMonth(), first + index);
+      dia.dia = newDate;
     });
     // Remove os cartões da semana que vem e adiciona novos para semana atual
     this.criarPrimeiroCard();
@@ -128,28 +136,33 @@ export class InserirAgendaComponent {
     this.diasSemana.forEach((dia, index) => {
       let newDate = new Date(curr.getFullYear(), curr.getMonth(), first + index);
       dia.dia = newDate;
-      console.log(newDate);
     });
     // Remove os cartões da semana atual e adiciona novos para semana que vem
     this.criarPrimeiroCard();
   }
 
-  obterDia(numeroDia: number): { dia: string; data: Date } | undefined {
+  obterDia(numeroDia: number): { dia: string; data: string } | undefined {
     /* 
      Metodo simples que recebe o numero do card que foi utilizado como parametro
      */
+    // Variaveis de formatacao
+    const format = 'yyyy-MM-dd';
+    const locale = 'en-US';
+    // Obtem a data atraves do cartao do dia
     let dataDia = this.diasSemana[numeroDia].dia
+    // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
+    const dataFiltrada = formatDate(new Date(dataDia), format, locale);
     switch (numeroDia) {
       case 0:
-        return { dia: 'Segunda-Feira', data: dataDia };
+        return { dia: 'Segunda-Feira', data: dataFiltrada };
       case 1:
-        return { dia: 'Terça-Feira', data: dataDia };
+        return { dia: 'Terça-Feira', data: dataFiltrada };
       case 2:
-        return { dia: 'Quarta-Feira', data: dataDia };
+        return { dia: 'Quarta-Feira', data: dataFiltrada };
       case 3:
-        return { dia: 'Quinta-Feira', data: dataDia };
+        return { dia: 'Quinta-Feira', data: dataFiltrada };
       case 4:
-        return { dia: 'Sexta-Feira', data: dataDia };
+        return { dia: 'Sexta-Feira', data: dataFiltrada };
       default:
         return undefined;
     }

@@ -33,6 +33,9 @@ export class AgendaService {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.tipoUrl, { headers });
   }
+  TESTEAGENDA(): Observable<any>{
+    return this.http.get('http://localhost:3000/Agenda');
+  }
 
   listAgendaHistorico(): Observable<any>{
     // temporario usando o of pra criar um observable

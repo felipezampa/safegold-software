@@ -2,28 +2,31 @@
     <form #formAgenda="ngForm" class="px-4">
         <div class="row">
             <small class="form-text text-muted text-left">Tipo</small>
-            <select [(ngModel)]="tipoSelecionado" name="tipoSelecionado">
-                <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo" [selected]="tipo.id_tipo === 10">{{ tipo.tipo }}
+            <select [(ngModel)]="tipoSelecionado" name="tipo">
+                <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo" [selected]="tipo.id_tipo === 10">{{
+                    tipo.tipo }}
                 </option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Projeto</small>
-            <select [(ngModel)]="projetoSelecionado" name="projetoSelecionado">
+            <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
                 <option value="" [ngValue]="null"> --- </option>
-                <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}</option>
+                <option *ngFor="let projeto of projetos"
+                    [value]="projeto.cod_projeto">{{projeto.projeto}}
+                </option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Atendimento</small>
-            <select [(ngModel)]="atendimentoSelecionado" name="atendimentoSelecionado">
+            <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
                 <option value='Remoto' selected>Remoto</option>
-                <option value='Presencial'>Presencial</option>     
+                <option value='Presencial'>Presencial</option>
             </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Horas</small>
-            <select [(ngModel)]="horasSelecionado" name="horasSelecionado">
+            <select [(ngModel)]="horasSelecionado" name="horas">
                 <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
             </select>
         </div>

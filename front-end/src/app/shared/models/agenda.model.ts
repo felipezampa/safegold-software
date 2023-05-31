@@ -13,10 +13,15 @@
 
 export class FuncaoGestor {
     constructor(
+        public id_func_gest: number,
         public id_funcao: number,
+        public funcao: string,
         public id_user: number,
-        public data_inicio: Date,
-        public data_fim: Date
+        public data_inicio: string,
+        public data_fim: string | null,
+        public username: string,
+        public area: string,
+        public unidade_de_negocios: string
     ) { }
 }
 
@@ -35,4 +40,14 @@ export class DiaSemana {
         public cards: any[]
     ) { }
 }
-export interface Agenda{ data: string, dia: string, unidade: string, area: string, funcao: string, gestor: string, tipo: string, projeto: string, horas: number, atendimento: string }
+export interface Agenda {
+    funcao_gestor: FuncaoGestor
+    tipo: TipoAgenda
+    cod_projeto: string
+    atendimento: string
+    horas: number
+    projeto: string
+    dia: string
+    data: string
+    id: number
+}

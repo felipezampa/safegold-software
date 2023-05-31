@@ -24,19 +24,27 @@ export class AgendaHistoricoComponent implements OnInit {
   ngOnInit(): void {
     // Nome do usuario para mostrar no header do primeiro cartao
     this.username = this.authService.getUsername();
-    this.listarAgenda();
     // Garante que as datas que aparecam sejam as da semana atual
     this.verSemanaAtual();
   }
 
-  filtrarAgenda(inicio: Date | string, fim: Date | string) {
+  listarAgenda(inicio: Date | string, fim: Date | string) {
     // Lista todos os dados da agenda
-    this.agendaService.listAgendaHistorico().subscribe(filtro => {
+    this.agendaService.TESTEAGENDA().subscribe(filtro => {
       // Filtro de data, so traz os dados que estao entre a dataInicio e dataFim
-      this.agenda = filtro.filter(
+      this.agenda = filtro;
+      this.agenda.filter(
         // Filtra os dias que estejam entre data inicio e data fim
-        (ag: any) => ag.data >= inicio && ag.data <= fim
-      );
+        (ag: any) =>{
+          const format = 'yyyy-MM-dd';
+          const locale = 'en-US';
+          // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
+          const dataFiltrada = formatDate(new Date(ag.data), format, locale);
+          dataFiltrada >= inicio && ag.data <= fim
+          console.log(ag);  
+        }
+      )
+      console.log(filtro); //u
       // Ordena de forma crescente
       this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime());
     });
@@ -44,16 +52,6 @@ export class AgendaHistoricoComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-  }
-
-  listarAgenda() {
-    // Faz um GET dos dados da agenda
-    this.agendaService.listAgendaHistorico().subscribe({
-      next: agenda => {
-        // Atribui o dado retornado ao atributo de instancia
-        this.agenda = agenda;
-      }
-    });
   }
 
   fazerTabelaListrada(isEven: boolean): object {
@@ -88,7 +86,7 @@ export class AgendaHistoricoComponent implements OnInit {
       this.mensagemErro = '<h4 class="alert alert-danger strong">' + e + '</h4>';
     } finally {
       // Faz a chamada do metodo de filtro personalizado
-      this.filtrarAgenda(ini, fim);
+      this.listarAgenda(ini, fim);
     }
   }
 
@@ -119,7 +117,7 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.filtrarAgenda(ini, fim);
+    this.listarAgenda(ini, fim);
   }
 
   verSemanaPassada() {
@@ -147,6 +145,6 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.filtrarAgenda(ini, fim);
+    this.listarAgenda(ini, fim);
   }
 }

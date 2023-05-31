@@ -11,7 +11,6 @@ import { APP_CONFIG, Projeto, User } from 'src/app/shared';
 export class ProjetoService {
 
   private baseURL = APP_CONFIG.baseURL + 'api/projetos/';
-  // private httpHeaders = new HttpHeaders({ 'Content-Type': 'application' });
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -48,6 +47,12 @@ export class ProjetoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.get<Projeto[]>(this.baseURL, { headers});
+  }
+
+  buscarProjeto(id: number): Observable<Projeto[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+
+    return this.http.get<Projeto[]>(this.baseURL + id + '/', { headers});
   }
 
   deleteProjeto(id: number) {

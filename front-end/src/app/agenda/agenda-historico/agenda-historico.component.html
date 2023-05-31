@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body table-responsive-lg">
                     <div class="row sg-table">
-                        <table class="table table-hover"  *ngIf="agenda.length > 1  && !mensagemErro">
+                        <table class="table table-hover" *ngIf="agenda.length >= 1  && !mensagemErro">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -76,13 +76,13 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let ag of agenda; let even = even"  [ngStyle]="fazerTabelaListrada(even)">
-                                    <td>{{ag.data}}</td>
+                                    <td>{{ag.data | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{ag.dia}}</td>
-                                    <td>{{ag.unidade}}</td>
-                                    <td>{{ag.area}}</td>
-                                    <td>{{ag.funcao}}</td>
-                                    <td>{{ag.gestor}}</td>
-                                    <td>{{ag.tipo}}</td>
+                                    <td>{{ag.funcao_gestor.unidade_de_negocios}}</td>
+                                    <td>{{ag.funcao_gestor.area}}</td>
+                                    <td>{{ag.funcao_gestor.funcao}}</td>
+                                    <td>{{ag.funcao_gestor.username}}</td>
+                                    <td>{{ag.tipo.tipo}}</td>
                                     <td>{{ag.projeto}}</td>
                                     <td>{{ag.horas}}</td>
                                     <td>{{ag.atendimento}}</td>
