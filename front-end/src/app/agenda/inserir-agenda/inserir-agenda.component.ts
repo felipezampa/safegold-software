@@ -1,6 +1,5 @@
 import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import 'moment/locale/pt-br';
 import { AuthService } from 'src/app/auth';
 import { Agenda, DiaSemana, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { CardComponent } from '../card/card.component';
@@ -34,6 +33,7 @@ export class InserirAgendaComponent {
     this.username = this.authService.getUsername();
     this.criarPrimeiroCard();
     this.verSemanaAtual();
+    this.teste();
   }
 
   criarPrimeiroCard() {
@@ -49,7 +49,34 @@ export class InserirAgendaComponent {
   logout() {
     this.authService.logout();
   }
-
+  teste(): Agenda{
+    const novoCard: Agenda = 
+    {
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "tipo": {
+        "id_tipo": 10,
+        "tipo": "Projeto"
+      },
+      "cod_projeto": "42",
+      "atendimento": "Presencial",
+      "horas": 4,
+      "projeto": "JN FERRAMENTARIA",
+      "dia": "Terça-Feira",
+      "data": "2023-05-30",
+      "id": 4
+    };
+    return novoCard;
+  }
   adicionarCard(indexDia: number) {
     const novoCard = {};
     if (this.diasSemana[indexDia].cards.length <= 8) {

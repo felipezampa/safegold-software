@@ -56,9 +56,17 @@ export class AgendaHistoricoComponent implements OnInit {
     this.authService.logout();
   }
 
+  /**
+   * Maneira mais facil que eu encontrei de deixar a tabela listrada
+   * As classes CSS / BStrap por algum motivo nao estavam funcionando 
+   * a opcao escolhida pelo usuario.
+   * 
+   * @param isEven Testa se a linha é par.
+   *
+   */
   fazerTabelaListrada(isEven: boolean): object {
-    // Maneira mais facil que eu encontrei de deixar a tabela listrada
-    // As classes CSS / BStrap por algum motivo nao estavam funcionando
+    // 
+    // 
     if (isEven) {
       return { 'background-color': '#f2f2f2' };
     } else {
@@ -97,8 +105,8 @@ export class AgendaHistoricoComponent implements OnInit {
     // Pega o ultimo dia da semana (sexta)
     let last = first + 4;
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(currentDate.setDate(first)).toUTCString();
-    let lastday = new Date(currentDate.setDate(last)).toUTCString();
+    let firstday = new Date(currentDate.getFullYear(), currentDate.getMonth(), first).toUTCString(); // Variavel de data
+    let lastday = new Date(currentDate.getFullYear(), currentDate.getMonth(), last).toUTCString(); // Variavel de data
     // Constantes para formatacao das datas
     const format = 'yyyy-MM-dd';
     const locale = 'en-US';
@@ -123,8 +131,8 @@ export class AgendaHistoricoComponent implements OnInit {
     first++;
     var last = first + 4;
     // Cria objetos date e modifica os atributos
-    let firstday = new Date(curr.setDate(first)).toUTCString();
-    let lastday = new Date(curr.setDate(last)).toUTCString();
+    let firstday = new Date(curr.getFullYear(), curr.getMonth(), first).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.getFullYear(), curr.getMonth(), last).toUTCString(); // Variavel de data
     // Constantes para formatacao das datas
     const format = 'yyyy-MM-dd';
     const locale = 'en-US';
