@@ -4,14 +4,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent, CardComponent } from './index';
+import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent, CardComponent, ModalAgendaComponent } from './index';
 
 @NgModule({
   declarations: [
     AgendaComponent,
     AgendaHistoricoComponent,
     InserirAgendaComponent,
-    CardComponent
+    CardComponent,
+    ModalAgendaComponent
   ],
   imports: [
     CommonModule,

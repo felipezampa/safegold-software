@@ -34,7 +34,7 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">AÇÕES:</div>
                             <div class="col-12">
-                                <button type="button" id="btn-semana" class="sg-button col mx-1" routerLink="/agenda">
+                                <button type="button" id="btn-semana" class="sg-button col mx-1" (click)="preencherAgenda()">
                                     <i class="fa-solid fa-pen mx-1"></i>
                                     <span>Preencher Agenda</span>
                                 </button>
@@ -75,7 +75,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let ag of agenda; let even = even"  [ngStyle]="fazerTabelaListrada(even)">
+                                <tr *ngFor="let ag of agenda; let even = even"  [ngStyle]="fazerTabelaListrada(even)" (click)="editarAgenda(ag)">
                                     <td>{{ag.data | date: 'dd/MM/yyyy'}}</td>
                                     <td>{{ag.dia}}</td>
                                     <td>{{ag.funcao_gestor.unidade_de_negocios}}</td>

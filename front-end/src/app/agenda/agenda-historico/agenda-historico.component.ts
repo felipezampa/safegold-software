@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 import { Agenda, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAgendaComponent } from '../modal-agenda/modal-agenda.component';
 
 @Component({
   selector: 'app-agenda-historico',
@@ -18,7 +20,7 @@ export class AgendaHistoricoComponent implements OnInit {
   diaFim!: Date | string;
   semanaSelecionada!: string;
 
-  constructor(private agendaService: AgendaService, private authService: AuthService) { }
+  constructor(private agendaService: AgendaService, private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     // Nome do usuario para mostrar no header do primeiro cartao
@@ -26,7 +28,16 @@ export class AgendaHistoricoComponent implements OnInit {
     // Garante que as datas que aparecam sejam as da semana atual
     this.verSemanaAtual();
   }
-
+  editarAgenda(ag: Agenda) {
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg' });
+    // Adicionar o ID do objeto a ser editado
+    modalRef.componentInstance.agenda = ag;
+    modalRef.componentInstance.editMode = true;
+  }
+  preencherAgenda(){
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = false;
+  }
   /**
    * Metodo base para a filtragem dos dados, atraves dele
    * que serao filtradas os dados da agenda de acordo com 
