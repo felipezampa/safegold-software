@@ -4,7 +4,7 @@ import { TipoAgenda } from "./tipoagenda.model";
 export interface Agenda {
   funcao_gestor: FuncaoGestor
   tipo: TipoAgenda
-  cod_projeto: string
+  cod_projeto: number
   atendimento: string
   horas: number
   projeto: string

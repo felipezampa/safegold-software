@@ -13,64 +13,16 @@
         "unidade_de_negocios": "Safegold Perfomance"
       },
       "tipo": {
-        "id_tipo": 10,
-        "tipo": "Projeto"
+        "id_tipo": 5,
+        "tipo": "Prospecção"
       },
-      "cod_projeto": "64",
+      "cod_projeto": "3",
       "atendimento": "Presencial",
-      "horas": 8,
-      "projeto": "AGROSS",
-      "dia": "Quinta-Feira",
-      "data": "2023-06-01",
-      "id": 1
-    },
-    {
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "tipo": {
-        "id_tipo": 10,
-        "tipo": "Projeto"
-      },
-      "cod_projeto": "56",
-      "atendimento": "Presencial",
-      "horas": 8,
-      "projeto": "PARMISSIMO",
-      "dia": "Quarta-Feira",
-      "data": "2023-05-31",
-      "id": 2
-    },
-    {
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "tipo": {
-        "id_tipo": 10,
-        "tipo": "Projeto"
-      },
-      "cod_projeto": "64",
-      "atendimento": "Presencial",
-      "horas": 8,
-      "projeto": "AGROSS",
-      "dia": "Sexta-Feira",
-      "data": "2023-06-02",
-      "id": 3
+      "horas": 5,
+      "projeto": "DELSOFT",
+      "dia": "Terça-Feira",
+      "data": "2023-06-06",
+      "id": 6
     }
   ]
 }

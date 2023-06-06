@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { Agenda, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 
 @Component({
@@ -22,19 +22,23 @@ export class CardComponent {
 
   projetoSelecionado!: Projeto | null;
   atendimentoSelecionado!: String;
-  horasSelecionado!: Number;
-  tipoSelecionado!: TipoAgenda;
+  horasSelecionado!: number;
+  tipoSelecionado!: TipoAgenda | undefined;
+  @Input() cardData!: Agenda;
 
   constructor(private projetoService: ProjetoService, private agendaService: AgendaService) { }
 
   ngOnInit(): void {
+    console.log(this.cardData.projeto);
+    this.tipoSelecionado = this.cardData.tipo;
+
     this.listProjetos();
     this.listTipo();
-    this.projetoSelecionado = null;
-    this.atendimentoSelecionado = 'Presencial';
-    this.tipoSelecionado = { id_tipo: 10, tipo: 'Projeto' };
-    this.horasSelecionado = 8;
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    this.projetoSelecionado = null;
+    this.atendimentoSelecionado = this.cardData.atendimento;
+    this.horasSelecionado = this.cardData.horas;
   }
 
   listProjetos() {
@@ -57,6 +61,8 @@ export class CardComponent {
         if (tipo == null) {
           this.tipoAgenda = [];
         } else {
+          console.log(tipo);
+
           this.tipoAgenda = tipo
         }
       }
@@ -68,6 +74,9 @@ export class CardComponent {
   }
 
   salvar() {
+    console.log(this.formAgenda.value);
+    console.log(this.tipoSelecionado?.id_tipo);
+
     let idProjeto = this.formAgenda.value.cod_projeto;
     if (idProjeto != null) {
       this.projetoService.buscarProjeto(idProjeto).subscribe({

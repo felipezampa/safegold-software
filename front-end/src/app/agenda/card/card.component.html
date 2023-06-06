@@ -1,12 +1,15 @@
 <div class="card-deck">
     <form #formAgenda="ngForm" class="px-4">
         <div class="row">
-            <small class="form-text text-muted text-left">Tipo</small>
-            <select [(ngModel)]="tipoSelecionado" name="tipo">
-                <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo" [selected]="tipo.id_tipo === 10">{{
-                    tipo.tipo }}
-                </option>
-            </select>
+        <small class="form-text text-muted text-left">Tipo</small>
+        <select [(ngModel)]="tipoSelecionado" name="tipo">
+          <option 
+              *ngFor="let tipo of tipoAgenda" 
+              [ngValue]="tipo" 
+              [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+              {{tipo.tipo }}
+          </option>
+        </select>
         </div>
         <div class="row">
             <small class="form-text text-muted text-left">Projeto</small>
@@ -17,6 +20,7 @@
                 </option>
             </select>
         </div>
+
         <div class="row">
             <small class="form-text text-muted text-left">Atendimento</small>
             <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
@@ -29,7 +33,7 @@
             <select [(ngModel)]="horasSelecionado" name="horas">
                 <option value='{{hora}}' *ngFor="let hora of horas">{{hora}}</option>
             </select>
-        </div>
+        </div> 
     </form>
 </div>
 <div class="card-footer">

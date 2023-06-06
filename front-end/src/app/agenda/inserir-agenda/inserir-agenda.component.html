@@ -23,7 +23,7 @@
                         <div class="sg-card-header">
                             <div id="options" class="col-12">OPÇÕES:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button  mx-1" id="btn-options">
+                                <button type="button" class="sg-button  mx-1" id="btn-options" (click)="repetirAgenda()">
                                     <i class="fa-solid fa-repeat mx-1"></i>
                                     <span>Repetir agenda</span>
                                 </button>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="card-deck">
                                 <sg-compromisso-card #card 
-                                    [cardData]="teste()"
+                                  [cardData]="teste()"
                                     (adicionarCardEvent)="adicionarCard(dia.index)"
                                     (salvarCardEvent)="salvarCard(dia.index,$event)"
                                     (excluirCardEvent)="excluirCard(dia.index, i)"

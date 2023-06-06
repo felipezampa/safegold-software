@@ -64,15 +64,15 @@ export class InserirAgendaComponent {
         "unidade_de_negocios": "Safegold Perfomance"
       },
       "tipo": {
-        "id_tipo": 10,
-        "tipo": "Projeto"
+        "id_tipo": 2,
+        "tipo": "Folga"
       },
-      "cod_projeto": "42",
+      "cod_projeto": 4,
       "atendimento": "Presencial",
-      "horas": 4,
-      "projeto": "JN FERRAMENTARIA",
+      "horas": 5,
+      "projeto": "BRAZILIAN PET FOODS",
       "dia": "Terça-Feira",
-      "data": "2023-05-30",
+      "data": "2023-06-06",
       "id": 4
     };
     return novoCard;
@@ -85,7 +85,9 @@ export class InserirAgendaComponent {
       SwalFacade.erro("Não foi possível adicionar", "O dia deve não pode ter mais que 8 compromissos!");
     }
   }
-
+  repetirAgenda(){
+    SwalFacade.alerta("Opsss","Funcionalidade ainda não implementada!");
+  }
   salvarCard(indexDia: number, formulario: { tipo: TipoAgenda, cod_projeto: string, atendimento: string, horas: number, projeto: string }) {
     if (formulario.cod_projeto != undefined) {
       const idGestor = this.authService.getCurrentUser();
