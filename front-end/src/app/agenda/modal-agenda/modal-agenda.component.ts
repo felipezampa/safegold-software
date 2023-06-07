@@ -2,10 +2,12 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { EventEmitter, Output } from '@angular/core';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Agenda, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { Agenda, FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
+import { AuthService } from 'src/app/auth';
+import { formatDate } from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-modal-agenda',
@@ -14,7 +16,7 @@ import { AgendaService } from '../services/agenda.service';
 })
 export class ModalAgendaComponent implements OnInit {
   @ViewChild('formAgenda') formAgenda!: NgForm;
-  @Input() agenda!: Agenda;
+  @Input() idAgenda!: number;
   @Input() editMode!: boolean;
 
   projetos!: Projeto[];
@@ -24,33 +26,98 @@ export class ModalAgendaComponent implements OnInit {
   projetoSelecionado!: Projeto | null;
   atendimentoSelecionado!: String;
   horasSelecionado!: number;
-  // tipoSelecionado!: TipoAgenda | undefined;
-  // dataSelecionada!: Date;
-  // @Input() cardData!: Agenda;
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService) { }
+  tipoSelecionado!: TipoAgenda | undefined;
+  dataSelecionada!: Date;
+  @Input() cardData!: Agenda;
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listProjetos();
-    this.atualizarAgenda();
+    this.listTipo();
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
-    // console.log(this.cardData.projeto);
-    // this.tipoSelecionado = this.cardData.tipo;
+    this.atualizarAgenda();
+  }
+  /**  
+   * @description 
+   * Metodo simples que recebe um dia e retorna qual dia da semana esse é
+   * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
+   * 
+   * @param data uma data comum no formato yyyy-mm-dd 
+   * 
+   * @returns Retorna uma string do dia 'Quarta-Feira'
+   */
+  obterDia(data: Date): string | undefined {
+    // const dt: Date = new Date();
+    const dayOfWeek: number = data.getDay();
+    console.log('data->>>>' + data, dayOfWeek);
+    // Retorna um indice do dia da semana sabado - domingo : 0 - 6
+    // const diaSemana = data.getDay();
 
-
-    // this.listTipo();
-
-
-    // this.projetoSelecionado = null;
-    // this.atendimentoSelecionado = this.cardData.atendimento;
-    // this.horasSelecionado = this.cardData.horas;
+    const diaSemana = dayOfWeek;
+    switch (diaSemana) {
+      case 0: return 'Segunda-Feira';
+      case 1: return 'Terça-Feira';
+      case 2: return 'Quarta-Feira';
+      case 3: return 'Quinta-Feira';
+      case 4: return 'Sexta-Feira';
+      case 5: return 'Sábado';
+      case 6: return 'Domingo';
+      default: return undefined;
+    }
   }
 
+  /**  
+ * @description 
+ * Metodo simples que recebe um dia e retorna qual dia da semana esse é
+ * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
+ * 
+ * @param data uma data comum no formato yyyy-mm-dd 
+ * 
+ * @returns Retorna uma string do dia 'Quarta-Feira'
+ */
   salvar() {
-    console.log(this.formAgenda.value);
-    SwalFacade.sucesso("Agenda Salva com sucesso!!");
-    this.activeModal.close();
+    if (this.editMode != true) {
+      if (this.formAgenda.value.cod_projeto == null) {
+        SwalFacade.alerta("Não foi possível salvar", "Selecione um projeto!");
+      } else if (this.formAgenda.value.data == null) {
+        SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
+      } else {
+        const dt: Date = new Date(this.formAgenda.value.data);
+        var dia = this.obterDia(dt);
+        const idGestor = this.authService.getCurrentUser();
+
+        forkJoin([
+          this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
+          this.agendaService.getFuncaoGestor(idGestor)
+        ]).subscribe({
+          next: (results: [any, FuncaoGestor[]]) => {
+            let projeto = results[0].projeto;
+            let funcao_gestor = results[1][0];
+            // const novoObjeto = { funcao_gestor: gestor };
+            var formValues = {
+              ...this.formAgenda.value,
+              funcao_gestor,
+              projeto,
+              dia,
+            };
+            console.log(formValues);
+
+            const format = 'dd/MM/yyyy';
+            const locale = 'en-US';
+            const dataFiltrada = formatDate(new Date(this.formAgenda.value.data), format, locale);
+            this.agendaService.salvarAgenda(formValues).subscribe();
+            SwalFacade.sucesso(dia + '  |  ' + dataFiltrada, "Agenda salva com sucesso!");
+            this.activeModal.close();
+          },
+          error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+        });
+      }
+    } else{
+      SwalFacade.alerta("Não implementado, só salva novos hehehe")
+    }
   }
-  excluir() { 
+
+  excluir() {
     SwalFacade.alerta("Ainda não implentei hehe");
     this.activeModal.close();
   }
@@ -75,8 +142,6 @@ export class ModalAgendaComponent implements OnInit {
         if (tipo == null) {
           this.tipoAgenda = [];
         } else {
-          console.log(tipo);
-
           this.tipoAgenda = tipo
         }
       }
@@ -84,34 +149,29 @@ export class ModalAgendaComponent implements OnInit {
   }
 
   atualizarAgenda() {
-    console.log(this.agenda);console.log(this.agenda?.horas);console.log(this.agenda?.atendimento);
-    
     // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro
     if (this.editMode == true) {
+
       // Testa se o id da empresa existe
-      if (this.agenda.horas !== undefined) {
-        this.formAgenda.setValue({
-          // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
-          projeto: this.agenda?.projeto,
-          horas: this.agenda?.horas,
-          atendimento: this.agenda?.atendimento
+      if (this.idAgenda !== undefined) {
+        // Busca o objeto empresa com o ID passado
+        this.agendaService.procurarAgenda(this.idAgenda).subscribe(ag => {
+          this.dataSelecionada = ag.data;
+          this.atendimentoSelecionado = ag.atendimento;
+          this.horasSelecionado = ag.horas;
+          this.projetoSelecionado = ag.cod_projeto;
+          this.tipoSelecionado = ag.tipo;
         });
-        // // Busca o objeto empresa com o ID passado
-        // this.empresaService.buscarEmpresaPorId(this.idEmpresa).subscribe(empresa => {
-        //   // Coloca os valores encontrados no objeto nos campos do form
-        //   this.formEmpresas.setValue({
-        //     // O observable retorna um array, entao eh preciso acessar a posicao [0] para nao vir valores como undefined
-        //     cnpj: empresa[0].cnpj,
-        //     empresa: empresa[0].empresa,
-        //     cod_projeto: empresa[0].cod_projeto,
-        //     safegold_ger: empresa[0].safegold_ger
-        //   });
-        // });
       } else {
         // Caso não encontrado então levanta uma excecão
         SwalFacade.erro("Agenda não encontrada");
       }
+    } else {
+      console.log('editmode =' + this.editMode);
+
     }
   }
+
+
 }
 

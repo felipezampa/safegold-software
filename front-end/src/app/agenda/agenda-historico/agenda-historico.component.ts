@@ -5,6 +5,7 @@ import { Agenda, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAgendaComponent } from '../modal-agenda/modal-agenda.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-agenda-historico',
@@ -19,6 +20,7 @@ export class AgendaHistoricoComponent implements OnInit {
   diaInicio!: Date | string;
   diaFim!: Date | string;
   semanaSelecionada!: string;
+  subscription: Subscription | undefined;
 
   constructor(private agendaService: AgendaService, private authService: AuthService, private modalService: NgbModal) { }
 
@@ -27,15 +29,18 @@ export class AgendaHistoricoComponent implements OnInit {
     this.username = this.authService.getUsername();
     // Garante que as datas que aparecam sejam as da semana atual
     this.verSemanaAtual();
+    this.subscription = this.agendaService.refreshPage$.subscribe(() => {
+      this.verSemanaAtual();
+    })
   }
   editarAgenda(ag: Agenda) {
-    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg', backdrop: 'static' });
     // Adicionar o ID do objeto a ser editado
-    modalRef.componentInstance.agenda = ag;
+    modalRef.componentInstance.idAgenda = ag.id;
     modalRef.componentInstance.editMode = true;
   }
   preencherAgenda(){
-    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.editMode = false;
   }
   /**

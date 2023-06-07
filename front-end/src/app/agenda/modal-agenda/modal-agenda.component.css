@@ -36,6 +36,7 @@
 #modalLabel {
   color: var(--sg-yellow);
   padding: 0;
+  margin-bottom: 0;
 }
 
 /* -------------------------------------------   TAG  ------------------------------------------- */
@@ -47,7 +48,7 @@ select {
   transform: scaleX(1);
   border-bottom: 2px solid #EDA900;
   outline: none;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 select option {
@@ -60,9 +61,11 @@ small {
   text-align: left;
   font-size: .85rem;
 }
-form{
+
+form {
   padding: .75rem 3rem;
 }
+
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .sg-date {
   margin-bottom: .625rem;
@@ -78,7 +81,7 @@ form{
   color: var(--cor-card-footer);
   border: 0;
   margin: 0;
-  font-weight: 600;
+  font-size: 1.35rem;
   transition: 0.5s;
 }
 
@@ -100,9 +103,10 @@ form{
   background-color: var(--sg-gray);
 }
 
-.modal-footer{
+.modal-footer {
   padding: 0;
 }
+
 /* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width:1370px) {
 
@@ -110,13 +114,16 @@ form{
   option {
     font-size: .9rem;
   }
+
 }
 
-@media screen and (max-width:790px) {
+@media screen and (width < 900px) {
   .sg-footer-button {
     padding: .3rem 0;
+    font-size: 1rem;
   }
-  form{
+
+  form {
     padding: .4rem 2rem;
   }
 }

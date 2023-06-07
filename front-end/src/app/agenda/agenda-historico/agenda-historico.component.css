@@ -9,6 +9,14 @@
   --border-tabela: #cecece;
 }
 
+#btn-preencher {
+  /* Botões de action */
+  --cor-action-btn: #fff;
+  --bg-action-btn: #005248;
+  --hover-cor-action-btn: #fff;
+  --hover-bg-action-btn: #00322c;
+}
+
 #btn-filter {
   /* Botões de action */
   --cor-action-btn: #373935;
