@@ -34,13 +34,13 @@ export class AgendaHistoricoComponent implements OnInit {
     })
   }
   editarAgenda(ag: Agenda) {
-    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg'});
     // Adicionar o ID do objeto a ser editado
     modalRef.componentInstance.idAgenda = ag.id;
     modalRef.componentInstance.editMode = true;
   }
   preencherAgenda(){
-    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ModalAgendaComponent, { size: 'lg'});
     modalRef.componentInstance.editMode = false;
   }
   /**

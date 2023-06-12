@@ -143,6 +143,174 @@
       "projeto": "FARIMAX",
       "dia": "Sexta-Feira",
       "id": 6
+    },
+    {
+      "data": "2023-06-07",
+      "tipo": {
+        "id_tipo": 4,
+        "tipo": "Evento"
+      },
+      "cod_projeto": "64",
+      "atendimento": "Remoto",
+      "horas": "3",
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "AGROSS",
+      "dia": "Quarta-Feira",
+      "id": 7
+    },
+    {
+      "data": "2023-06-01",
+      "tipo": {
+        "id_tipo": 6,
+        "tipo": "Fechamento"
+      },
+      "cod_projeto": "51",
+      "atendimento": "Remoto",
+      "horas": "4",
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "BENDERPLAST",
+      "dia": "Quinta-Feira",
+      "id": 8
+    },
+    {
+      "data": "2023-06-12",
+      "tipo": {
+        "id_tipo": 3,
+        "tipo": "Feriado"
+      },
+      "cod_projeto": "64",
+      "atendimento": "Presencial",
+      "horas": "5",
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "AGROSS",
+      "dia": "Segunda-Feira",
+      "id": 9
+    },
+    {
+      "data": "2023-06-13",
+      "tipo": {
+        "id_tipo": 1,
+        "tipo": "Férias"
+      },
+      "cod_projeto": "64",
+      "atendimento": "Remoto",
+      "horas": 8,
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "AGROSS",
+      "dia": "Terça-Feira",
+      "id": 10
+    },
+    {
+      "data": "2023-05-01",
+      "tipo": {
+        "id_tipo": 3,
+        "tipo": "Feriado"
+      },
+      "cod_projeto": "33",
+      "atendimento": "Remoto",
+      "horas": 8,
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "ANDRADE",
+      "dia": "Segunda-Feira",
+      "id": 11
+    },
+    {
+      "data": "2023-01-02",
+      "tipo": {
+        "id_tipo": 10,
+        "tipo": "Projeto"
+      },
+      "cod_projeto": "33",
+      "atendimento": "Remoto",
+      "horas": 8,
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": "ANDRADE",
+      "dia": "Segunda-Feira",
+      "id": 12
+    },
+    {
+      "data": "2023-05-11",
+      "tipo": {
+        "id_tipo": 4,
+        "tipo": "Evento"
+      },
+      "cod_projeto": "22",
+      "atendimento": "Remoto",
+      "horas": 8,
+      "funcao_gestor": {
+        "id_func_gest": 2,
+        "id_funcao": 3,
+        "funcao": "ADM Software",
+        "id_user": 2,
+        "data_inicio": "2023-05-17",
+        "data_fim": null,
+        "username": "admin",
+        "area": "Administrador",
+        "unidade_de_negocios": "Safegold Perfomance"
+      },
+      "projeto": " ZK SOLUÇÕES EM INJEÇÃO DE ALUMÍNIO LTDA",
+      "dia": "Quinta-Feira",
+      "id": 13
     }
   ]
 }

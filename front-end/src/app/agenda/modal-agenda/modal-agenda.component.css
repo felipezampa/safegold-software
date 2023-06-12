@@ -4,6 +4,7 @@
   --bg-header: #58524c;
   --cor-action-btn: #000000;
   --bg-action-btn: #edaa00a6;
+  --readonly: #efefef;
 }
 
 .sg-add {
@@ -89,7 +90,9 @@ form {
   background-color: var(--hover-bg-card-footer);
   color: var(--hover-cor-card-footer);
 }
-
+.sg-date:read-only{
+  background-color: var(--readonly);
+}
 .card-footer {
   padding: 0;
 }
