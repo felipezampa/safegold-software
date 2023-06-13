@@ -115,7 +115,7 @@ export class InserirAgendaComponent {
   excluirCard(indexDia: number, indexCard: number) {
     if (this.diasSemana[indexDia].cards.length > 1) {
       this.diasSemana[indexDia].cards.splice(indexCard, 1);
-      this.agendaService.excluirAgenda();
+      // this.agendaService.excluirAgenda();
     } else {
       SwalFacade.erro("Não foi possível excluir", "O dia deve ter ao menos um compromisso!");
     }

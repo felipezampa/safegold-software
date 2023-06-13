@@ -3,6 +3,13 @@ import Swal from 'sweetalert2';
 
 export class SwalFacade {
 
+  /**
+   * @description Representa um SweetAlert para informação de erro
+   * 
+   * @param titulo Obrigatório informar um titulo para o popup
+   * @param texto Opcional, um texto extra de ajuda
+   * 
+   */
   static erro(titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,
@@ -28,6 +35,13 @@ export class SwalFacade {
     })
   }
 
+  /**
+   * @description Representa um SweetAlert para informação de sucesso
+   * 
+   * @param titulo Obrigatório informar um titulo para o popup
+   * @param texto Opcional, um texto extra de ajuda
+   * 
+   */
   static sucesso(titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,
@@ -51,6 +65,13 @@ export class SwalFacade {
     })
   }
 
+  /**
+   * @description Representa um SweetAlert para informação de alerta
+   * 
+   * @param titulo Obrigatório informar um titulo para o popup
+   * @param texto Opcional, um texto extra de ajuda
+   * 
+   */
   static alerta(titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,
@@ -74,6 +95,13 @@ export class SwalFacade {
     })
   }
 
+  /**
+   * @description Representa um SweetAlert para exclusão de objetos
+   * 
+   * @param titulo Obrigatório informar um titulo para o popup
+   * @param texto Opcional, um texto extra de ajuda
+   * 
+   */
   static excluir(titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,

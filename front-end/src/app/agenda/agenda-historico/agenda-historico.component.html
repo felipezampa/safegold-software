@@ -8,16 +8,20 @@
                 <div class="card-body" id="sg-menu">
                     <div class="row text-center">
                         <div class="sg-card-header">
-                            <div id="options" class="col-12">VER AGENDA:</div>
+                            <div id="options" class="col-12">VER SEMANA:</div>
                             <div class="col-12">
-                                <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
-                                    <i class="fa-regular fa-calendar-days mx-1"></i>
-                                    <span>Semana Atual</span>
-                                </button>
-                                <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaPassada()" [disabled]="semanaSelecionada == 'passada'">
-                                    <i class="fa-solid fa-backward mx-1"></i>
-                                    <span>Semana Passada</span>
-                                </button>
+                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaPassada()" [disabled]="semanaSelecionada == 'passada'">
+                                <i class="fa-solid fa-backward mx-1"></i>
+                                <span>Passada</span>
+                              </button>
+                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
+                                  <i class="fa-regular fa-calendar-days mx-1"></i>
+                                  <span>Atual</span>
+                              </button>
+                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verProximaSemana()" [disabled]="semanaSelecionada == 'proxima'">
+                                <i class="fa-solid fa-forward mx-1"></i>
+                                <span>Próxima</span>
+                              </button>
                             </div>
                         </div>
                         <div class="sg-card-header">
@@ -36,7 +40,7 @@
                             <div class="col-12">
                                 <button type="button" id="btn-preencher" class="sg-button col mx-1" (click)="preencherAgenda()">
                                     <i class="fa-solid fa-pen mx-1"></i>
-                                    <span>Preencher Agenda</span>
+                                    <span>Inserir Agenda</span>
                                 </button>
                                 <button type="button" (click)="logout()" class="sg-button logout mx-1" id="btn-logout">
                                     <i class="fa-solid fa-right-from-bracket mx-1"></i>

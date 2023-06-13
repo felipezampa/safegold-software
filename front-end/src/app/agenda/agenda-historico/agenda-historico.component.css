@@ -15,6 +15,7 @@
   --bg-action-btn: #005248;
   --hover-cor-action-btn: #fff;
   --hover-bg-action-btn: #00322c;
+  width: 15rem;
 }
 
 #btn-filter {
@@ -32,6 +33,7 @@
   --hover-bg-action-btn: #373935;
   --hover-cor-action-btn: #fff;
   --disabled-cor: #636363;
+  width: 10rem;
 }
 
 #btn-logout {
@@ -40,6 +42,7 @@
   --bg-action-btn: #a83131;
   --hover-cor-action-btn: #fff;
   --hover-bg-action-btn: #4e0000;
+  width: 15rem;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
@@ -91,7 +94,6 @@
   border-radius: 8px;
   transition: 0.5s;
   border: none;
-  width: 15rem;
 }
 
 .sg-button:hover {
@@ -171,16 +173,20 @@ tr {
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
-@media screen and (max-width:1275px) {
+@media screen and (max-width:1590px) {
+  #btn-semana {
+    width: 7rem;
+  }
+  #btn-logout {
+    width: 10rem;
+  }
+  #btn-preencher{
+    width: 10rem;
+  }
+}
+@media screen and (max-width:1155px) {
   #sg-agenda-header h2 {
     font-size: 1.2rem;
-  }
-
-  .sg-card-body {
-    flex-basis: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 1rem .5rem;
   }
 
   .sg-button {
@@ -261,5 +267,8 @@ tr {
 @media screen and (max-width:470px) {
   #options {
     font-size: .8rem;
+  }
+  #btn-semana {
+    width: 6rem;
   }
 }

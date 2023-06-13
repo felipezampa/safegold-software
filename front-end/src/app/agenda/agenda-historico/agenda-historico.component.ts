@@ -162,4 +162,30 @@ export class AgendaHistoricoComponent implements OnInit {
     // Faz a chamada do metodo de filtro personalizado
     this.listarAgenda(ini, fim);
   }
+
+  verProximaSemana(){
+    // Flag do Botao
+    this.semanaSelecionada = 'proxima';
+    // Prepara as datas da semana que vem
+    var curr = new Date;
+    // Primeiro eh o dia do mes - o dia da semana
+    var first = curr.getDate() - curr.getDay() + 7;
+    first++;
+    var last = first + 4;
+    // Cria objetos date e modifica os atributos
+    let firstday = new Date(curr.getFullYear(), curr.getMonth(), first).toUTCString(); // Variavel de data
+    let lastday = new Date(curr.getFullYear(), curr.getMonth(), last).toUTCString(); // Variavel de data
+    // Constantes para formatacao das datas
+    const format = 'yyyy-MM-dd';
+    const locale = 'en-US';
+    // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
+    const ini = formatDate(new Date(firstday), format, locale);
+    const fim = formatDate(new Date(lastday), format, locale);
+    // Infelizmente o tipo utilizado so pode ser utilizado como string
+    // por isso os atributos sao Date | string
+    this.diaInicio = ini;
+    this.diaFim = fim;
+    // Faz a chamada do metodo de filtro personalizado
+    this.listarAgenda(ini, fim);
+  }
 }

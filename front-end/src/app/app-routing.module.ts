@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent } from './agenda';
-import { LoginComponent, PageNotFoundComponent, AuthGuard } from './auth';
+import { AgendaComponent, AgendaHistoricoComponent } from './agenda';
+import { AuthGuard, LoginComponent, PageNotFoundComponent } from './auth';
 import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
 import { DashboardComponent } from './dashboard';
 import { DashboardFinanceiroComponent, FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
@@ -24,8 +24,7 @@ const routes: Routes = [
   {
     path: 'agenda',
     component: AgendaComponent, children: [
-      { path: '', component: InserirAgendaComponent, canActivate: [AuthGuard] },
-      { path: 'historico', component: AgendaHistoricoComponent, canActivate: [AuthGuard] },
+      { path: '', component: AgendaHistoricoComponent, canActivate: [AuthGuard] }
     ],
     canActivate: [AuthGuard]
   },

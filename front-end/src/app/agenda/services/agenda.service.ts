@@ -39,8 +39,15 @@ export class AgendaService {
   updateAgenda(data: any) {
     // IMPLEMENTAR NO FUTURO
   }
-  excluirAgenda() {
-    // IMPLEMENTAR NO FUTURO
+  
+  excluirAgenda(id: number) {
+    return this.http.delete('http://localhost:3000/Agenda/' + id)
+    // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
+    .pipe(
+      tap(() => {
+        this.refreshPage$.next();
+      })
+    );
   }
 
   getFuncaoGestor(idGestor: number): Observable<any> {
