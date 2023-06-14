@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth';
-import { APP_CONFIG } from 'src/app/shared';
+import { APP_CONFIG, Agenda } from 'src/app/shared';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,18 +36,24 @@ export class AgendaService {
     return this.http.get('http://localhost:3000/Agenda/' + id);
   }
 
-  updateAgenda(data: any) {
-    // IMPLEMENTAR NO FUTURO
+  updateAgenda(id: number, data: Agenda) {
+    return this.http.put('http://localhost:3000/Agenda/' + id, data)
+      // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
+      .pipe(
+        tap(() => {
+          this.refreshPage$.next();
+        })
+      );
   }
-  
+
   excluirAgenda(id: number) {
     return this.http.delete('http://localhost:3000/Agenda/' + id)
-    // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
-    .pipe(
-      tap(() => {
-        this.refreshPage$.next();
-      })
-    );
+      // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
+      .pipe(
+        tap(() => {
+          this.refreshPage$.next();
+        })
+      );
   }
 
   getFuncaoGestor(idGestor: number): Observable<any> {

@@ -147,12 +147,12 @@
     {
       "data": "2023-06-12",
       "tipo": {
-        "id_tipo": 3,
-        "tipo": "Feriado"
+        "id_tipo": 10,
+        "tipo": "Projeto"
       },
-      "cod_projeto": "64",
-      "atendimento": "Presencial",
-      "horas": "5",
+      "cod_projeto": "54",
+      "atendimento": "Remoto",
+      "horas": "7",
       "funcao_gestor": {
         "id_func_gest": 2,
         "id_funcao": 3,
@@ -164,7 +164,7 @@
         "area": "Administrador",
         "unidade_de_negocios": "Safegold Perfomance"
       },
-      "projeto": "AGROSS",
+      "projeto": "BLUTRAFOS",
       "dia": "Segunda-Feira",
       "id": 9
     },
@@ -241,141 +241,12 @@
       "id": 13
     },
     {
-      "data": "2023-06-13",
-      "tipo": {
-        "id_tipo": 10,
-        "tipo": "Projeto"
-      },
-      "cod_projeto": "2",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "Coppi Industrial Ltda",
-      "dia": "Terça-Feira",
-      "id": 14
-    },
-    {
-      "data": "2023-06-21",
-      "tipo": "[object Object]",
-      "cod_projeto": "17",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "BAUER",
-      "dia": "Quarta-Feira",
-      "id": 16
-    },
-    {
-      "data": "2023-06-13",
-      "tipo": "7",
-      "cod_projeto": "33",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "ANDRADE",
-      "dia": "Terça-Feira",
-      "id": 17
-    },
-    {
-      "data": "2023-06-13",
-      "tipo": {
-        "id_tipo": 6,
-        "tipo": "Fechamento"
-      },
-      "cod_projeto": "17",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "BAUER",
-      "dia": "Terça-Feira",
-      "id": 18
-    },
-    {
-      "data": "2023-06-13",
-      "tipo": "[object Object]",
-      "cod_projeto": "30",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "BONIELA",
-      "dia": "Terça-Feira",
-      "id": 19
-    },
-    {
-      "data": "2023-06-13",
-      "tipo": "[object Object]",
-      "cod_projeto": "30",
-      "atendimento": "Remoto",
-      "horas": 8,
-      "funcao_gestor": {
-        "id_func_gest": 2,
-        "id_funcao": 3,
-        "funcao": "ADM Software",
-        "id_user": 2,
-        "data_inicio": "2023-05-17",
-        "data_fim": null,
-        "username": "admin",
-        "area": "Administrador",
-        "unidade_de_negocios": "Safegold Perfomance"
-      },
-      "projeto": "BONIELA",
-      "dia": "Terça-Feira",
-      "id": 20
-    },
-    {
       "data": "2023-06-14",
-      "tipo": "Fechamento",
-      "cod_projeto": "33",
+      "tipo": {
+        "id_tipo": 4,
+        "tipo": "Evento"
+      },
+      "cod_projeto": "17",
       "atendimento": "Remoto",
       "horas": 8,
       "funcao_gestor": {
@@ -389,9 +260,9 @@
         "area": "Administrador",
         "unidade_de_negocios": "Safegold Perfomance"
       },
-      "projeto": "ANDRADE",
+      "projeto": "BAUER",
       "dia": "Quarta-Feira",
-      "id": 21
+      "id": 14
     }
   ]
 }

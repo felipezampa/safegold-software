@@ -12,11 +12,10 @@
       <div class="row">
         <small class="form-text text-muted text-left">Tipo</small>
         <select [(ngModel)]="tipoSelecionado" name="tipo">
-          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo">
-            <!-- [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo" -->
-            {{tipo.tipo }}
+          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo" [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+            {{ tipo.tipo }}
           </option>
-        </select>
+        </select>    
       </div>
       <div class="row">
         <small class="form-text text-muted text-left">Projeto</small>
