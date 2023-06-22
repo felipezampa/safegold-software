@@ -15,7 +15,6 @@
   --bg-action-btn: #005248;
   --hover-cor-action-btn: #fff;
   --hover-bg-action-btn: #00322c;
-  width: 15rem;
 }
 
 #btn-filter {
@@ -33,7 +32,6 @@
   --hover-bg-action-btn: #373935;
   --hover-cor-action-btn: #fff;
   --disabled-cor: #636363;
-  width: 10rem;
 }
 
 #btn-logout {
@@ -42,7 +40,14 @@
   --bg-action-btn: #a83131;
   --hover-cor-action-btn: #fff;
   --hover-bg-action-btn: #4e0000;
-  width: 15rem;
+}
+
+#btn-dashboard {
+  /* Botões de action */
+  --cor-action-btn: #fff;
+  --bg-action-btn: #0d4287;
+  --hover-cor-action-btn: #fff;
+  --hover-bg-action-btn: #00214c;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
@@ -94,6 +99,7 @@
   border-radius: 8px;
   transition: 0.5s;
   border: none;
+  width: 10rem;
 }
 
 .sg-button:hover {
@@ -174,16 +180,11 @@ tr {
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
 @media screen and (max-width:1590px) {
-  #btn-semana {
+  .sg-button {
     width: 7rem;
   }
-  #btn-logout {
-    width: 10rem;
-  }
-  #btn-preencher{
-    width: 10rem;
-  }
 }
+
 @media screen and (max-width:1155px) {
   #sg-agenda-header h2 {
     font-size: 1.2rem;
@@ -257,7 +258,7 @@ tr {
     padding: 0rem;
     margin: 0rem;
   }
-
+  .sg-filter-button{ font-size: .8rem; }
   #filterDate input {
     width: 30%;
     font-size: .8rem;
@@ -268,7 +269,8 @@ tr {
   #options {
     font-size: .8rem;
   }
-  #btn-semana {
+
+  .sg-button {
     width: 6rem;
   }
 }

@@ -5,13 +5,13 @@
 
   <hr>
   <div class="row">
-    <div class="col-lg-2 col-md-0 col-sm-12"></div>
-    <div class="text-center col-lg-8 col-sm-12"><h4>Bem vindo, {{firstName}}</h4></div>
-    <div class="col-lg-2 col-sm-12 logout align-items-center">
-      <a type="submit" (click)="logout()">
-        <i class="fa-solid fa-right-from-bracket me-1"></i>
+    <div class="col-lg-3 col-md-0 col-sm-12"></div>
+    <div class="text-center col-lg-6 col-sm-12"><h4>Bem vindo, {{firstName}}</h4></div>
+    <div class="col-lg-3 col-sm-11 align-items-center  d-flex justify-content-center">
+      <button type="button" (click)="logout()" id="btn-logout">
+        <i class="fa-solid fa-right-from-bracket mx-1"></i>
         <span>Logout</span>
-      </a>
+      </button>
     </div>
   </div>
   <h2 class="text-center mb-4">Escolha a opção desejada:</h2>

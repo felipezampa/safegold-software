@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card shadow-lg">
                 <div class="card-header text-center" id="sg-agenda-header">
-                    <h2 class="text-center">Bem vindo {{username}}</h2>
+                    <h2 class="text-center">AGENDA - Bem vindo {{username}}</h2>
                 </div>
                 <div class="card-body" id="sg-menu">
                     <div class="row text-center">
@@ -40,7 +40,11 @@
                             <div class="col-12">
                                 <button type="button" id="btn-preencher" class="sg-button col mx-1" (click)="preencherAgenda()">
                                     <i class="fa-solid fa-pen mx-1"></i>
-                                    <span>Inserir Agenda</span>
+                                    <span>Preencher</span>
+                                </button>
+                                <button type="button" routerLink="/dashboard" class="sg-button mx-1" id="btn-dashboard"> 
+                                    <i class="fa-solid fa-home mx-1"></i> 
+                                    <span>Home</span> 
                                 </button>
                                 <button type="button" (click)="logout()" class="sg-button logout mx-1" id="btn-logout">
                                     <i class="fa-solid fa-right-from-bracket mx-1"></i>
