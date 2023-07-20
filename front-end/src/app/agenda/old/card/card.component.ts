@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { NgForm } from '@angular/forms';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { Agenda, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
-import { AgendaService } from '../services/agenda.service';
+import { AgendaService } from '../../services/agenda.service';
 
 @Component({
   selector: 'sg-compromisso-card',

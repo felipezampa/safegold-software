@@ -1,0 +1,56 @@
+<div id="inserir-agenda">
+  <div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 id="modalLabel">EDITAR AGENDA</h5>
+  </div>
+  <div class="modal-body text-center">
+    <form #formAgenda="ngForm">
+      <div class="row">
+        <small class="form-text text-muted text-left">Data</small>
+        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada">
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Tipo</small>
+        <select [(ngModel)]="tipoSelecionado" name="tipo">
+          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo" [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+            {{ tipo.tipo }}
+          </option>
+        </select>    
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Projeto</small>
+        <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
+          <option value="" [ngValue]="null"> --- </option>
+          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col ps-0">
+          <small class="form-text text-muted text-left">Atendimento</small>
+          <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
+            <option [value]="'Remoto'" selected>Remoto</option>
+            <option [value]="'Presencial'">Presencial</option>
+          </select>
+        </div>
+        <div class="col pe-0">
+          <small class="form-text text-muted text-left">Horas</small>
+          <select [(ngModel)]="horasSelecionado" name="horas">
+            <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
+          </select>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer justify-content-center align-items-center">
+    <button class="sg-footer-button sg-add col-4" (click)="this.activeModal.close()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <button class="sg-footer-button sg-save col-4" (click)="salvar()">
+      <i class="fa-solid fa-check"></i>
+    </button>
+    <button class="sg-footer-button sg-remove col-4" (click)="excluir()">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+</div>

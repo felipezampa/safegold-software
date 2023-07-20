@@ -13,7 +13,7 @@
   --bg-card-footer: #58524c30;
   --hover-cor-card-footer: #fff;
   --hover-bg-card-footer: #58524c;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .sg-save {
@@ -22,7 +22,15 @@
   --bg-card-footer: #00ac0030;
   --hover-cor-card-footer: #fff;
   --hover-bg-card-footer: #00ac00;
-  border-bottom-left-radius: 5px;
+}
+
+.sg-remove {
+  /* Botões de remover dos cards de dias */
+  --cor-card-footer: #ff0000;
+  --bg-card-footer: #ff000030;
+  --hover-cor-card-footer: #fff;
+  --hover-bg-card-footer: #ff0000;
+  border-bottom-right-radius: 5px;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
@@ -82,7 +90,9 @@ form {
   background-color: var(--hover-bg-card-footer);
   color: var(--hover-cor-card-footer);
 }
-
+.sg-date:read-only{
+  background-color: var(--readonly);
+}
 .card-footer {
   padding: 0;
 }

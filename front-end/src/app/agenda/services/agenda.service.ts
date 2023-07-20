@@ -65,5 +65,29 @@ export class AgendaService {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.tipoUrl, { headers });
   }
+  
+  /**  
+   * @description 
+   * Metodo simples que recebe um dia e retorna qual dia da semana esse é
+   * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
+   * 
+   * @param data uma data comum no formato yyyy-mm-dd 
+   * 
+   * @returns Retorna uma string do dia 'Quarta-Feira'
+   */
+  obterDia(data: Date): string | undefined {
+    const dayOfWeek: number = data.getDay();
+    const diaSemana = dayOfWeek;
 
+    switch (diaSemana) {
+      case 0: return 'Segunda-Feira';
+      case 1: return 'Terça-Feira';
+      case 2: return 'Quarta-Feira';
+      case 3: return 'Quinta-Feira';
+      case 4: return 'Sexta-Feira';
+      case 5: return 'Sábado';
+      case 6: return 'Domingo';
+      default: return undefined;
+    }
+  }
 }

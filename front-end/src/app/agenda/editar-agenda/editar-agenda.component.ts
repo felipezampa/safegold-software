@@ -1,19 +1,18 @@
-import { formatDate } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Agenda, FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 
+
 @Component({
-  selector: 'app-modal-agenda',
-  templateUrl: './modal-agenda.component.html',
-  styleUrls: ['./modal-agenda.component.css']
+  selector: 'app-editar-agenda',
+  templateUrl: './editar-agenda.component.html',
+  styleUrls: ['./editar-agenda.component.css']
 })
-export class ModalAgendaComponent implements OnInit {
+export class EditarAgendaComponent {
   @ViewChild('formAgenda') formAgenda!: NgForm;
   @Input() idAgenda!: number;
   @Input() editMode!: boolean;
@@ -47,61 +46,52 @@ export class ModalAgendaComponent implements OnInit {
   * @returns Retorna uma string do dia 'Quarta-Feira'
   */
   salvar() {
-    if (this.editMode == false) {
-      if (this.formAgenda.value.data == null) {
-        SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
-      } else {
-        const dt: Date = new Date(this.formAgenda.value.data);
-        var dia = this.obterDia(dt);
-        const idGestor = this.authService.getCurrentUser();
-        forkJoin([
-          this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
-          this.agendaService.getFuncaoGestor(idGestor)
-        ]).subscribe({
-          next: (results: [any, FuncaoGestor[]]) => {
-            let projeto = results[0].projeto;
-            let funcao_gestor = results[1][0];
-            var formValues = {
-              ...this.formAgenda.value,
-              funcao_gestor,
-              projeto,
-              dia,
-            };
-            this.agendaService.salvarAgenda(formValues).subscribe();
-            SwalFacade.sucesso("Agenda salva com sucesso!");
-            this.activeModal.close();
-          },
-          error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-        });
-      }
-    } else {
-      const dt: Date = new Date(this.formAgenda.value.data);
-      var dia = this.obterDia(dt);
-      const idGestor = this.authService.getCurrentUser();
-      forkJoin([
-        this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
-        this.agendaService.getFuncaoGestor(idGestor)
-      ]).subscribe({
-        next: (results: [any, FuncaoGestor[]]) => {
-          let projeto = results[0].projeto;
-          let funcao_gestor = results[1][0];
-          var formValues = {
-            ...this.formAgenda.value,
-            funcao_gestor,
-            projeto,
-            dia,
-          };
-          const format = 'dd/MM/yyyy';
-          const locale = 'en-US';
-          const dataFiltrada = formatDate(new Date(this.formAgenda.value.data), format, locale);
-          this.agendaService.updateAgenda(this.idAgenda, formValues).subscribe();
-          SwalFacade.sucesso(dia + '  |  ' + dataFiltrada, "Agenda atualizada com sucesso!");
-          this.activeModal.close();
-        },
-        error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-      });
+    console.log(this.formAgenda.value);
+    
+    // let formValues: any;
+    // const dt: Date = new Date(this.formAgenda.value.data);
+    // var dia = this.obterDia(dt);
+    // const idGestor = this.authService.getCurrentUser();
+    // if (this.formAgenda.value.data == null) {
+    //   SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
+    // } else if (this.formAgenda.value.tipo.id_tipo == 10) {
+    //   forkJoin([
+    //     this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
+    //     this.agendaService.getFuncaoGestor(idGestor)
+    //   ]).subscribe({
+    //     next: (results: [any, FuncaoGestor[]]) => {
+    //       let projeto = results[0].projeto;
+    //       let funcao_gestor = results[1][0];
+    //       formValues = {
+    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
+    //       };
+    //     },
+    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+    //   });
+    // } else {
+    //   this.agendaService.getFuncaoGestor(idGestor).subscribe({
+    //     next: (results: any) => {
+    //       let funcao_gestor = results;
+    //       let projeto = 'Feriado'
+    //       formValues = {
+    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
+    //       };
+    //     },
+    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+    //   });
+    // }
 
-    }
+    // if (this.editMode == false) {
+    //   this.agendaService.salvarAgenda(formValues).subscribe();
+    //   SwalFacade.sucesso("Agenda salva com sucesso!");
+    //   this.activeModal.close();
+    //   console.log(formValues);
+      
+    // } else {
+    //   this.agendaService.updateAgenda(this.idAgenda, formValues).subscribe();
+    //   SwalFacade.sucesso("Agenda atualizada com sucesso!");
+    //   this.activeModal.close();
+    // }
   }
 
   /**
@@ -121,6 +111,9 @@ export class ModalAgendaComponent implements OnInit {
           this.horasSelecionado = ag.horas;
           this.projetoSelecionado = ag.cod_projeto;
           this.tipoSelecionado = new TipoAgenda(ag.tipo.id_tipo, ag.tipo.tipo);
+
+          // Chamar listTipo() para buscar os tipos de agenda antes de definir o tipoSelecionado
+          this.listTipo();
         });
         // Transforma o input de data para nao poder ser alterado
         const dataElement = document.getElementById('dataId') as HTMLInputElement;
@@ -135,7 +128,7 @@ export class ModalAgendaComponent implements OnInit {
       this.atendimentoSelecionado = 'Remoto';
       this.projetoSelecionado = null;
       this.horasSelecionado = 8;
-      this.tipoSelecionado = new TipoAgenda(10, 'Projeto');
+      // this.tipoSelecionado = new TipoAgenda(10, 'Projeto');
     }
   }
 
@@ -171,31 +164,6 @@ export class ModalAgendaComponent implements OnInit {
     }
   }
 
-  /**  
-   * @description 
-   * Metodo simples que recebe um dia e retorna qual dia da semana esse é
-   * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
-   * 
-   * @param data uma data comum no formato yyyy-mm-dd 
-   * 
-   * @returns Retorna uma string do dia 'Quarta-Feira'
-   */
-  obterDia(data: Date): string | undefined {
-    const dayOfWeek: number = data.getDay();
-    const diaSemana = dayOfWeek;
-
-    switch (diaSemana) {
-      case 0: return 'Segunda-Feira';
-      case 1: return 'Terça-Feira';
-      case 2: return 'Quarta-Feira';
-      case 3: return 'Quinta-Feira';
-      case 4: return 'Sexta-Feira';
-      case 5: return 'Sábado';
-      case 6: return 'Domingo';
-      default: return undefined;
-    }
-  }
-
   /**
    * @description Lista todos os projeto para selecionar como opção na tag select input
    */
@@ -222,9 +190,17 @@ export class ModalAgendaComponent implements OnInit {
         if (tipo == null) {
           this.tipoAgenda = [];
         } else {
-          this.tipoAgenda = tipo
-          // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
-          // this.tipoAgenda.sort((a, b) => (a.tipo ?? '').localeCompare(b.tipo ?? ''));
+          this.tipoAgenda = tipo;
+          this.tipoAgenda.sort((a, b) => (a.tipo ?? '').localeCompare(b.tipo ?? ''));
+  
+          // Após buscar os tipos, defina o tipoSelecionado aqui, caso seja necessário
+          if (this.editMode && this.tipoSelecionado) {
+            // Encontre o tipo no array de tipos com o mesmo ID do tipoSelecionado
+            this.tipoSelecionado = this.tipoAgenda.find((tipoAgenda) => tipoAgenda.id_tipo === this.tipoSelecionado?.id_tipo);
+          } else{
+            let t = new TipoAgenda(10, 'Projeto');
+            this.tipoSelecionado = this.tipoAgenda.find((t) => t.id_tipo === this.tipoSelecionado?.id_tipo);
+          }
         }
       }
     });

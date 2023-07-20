@@ -1,79 +1,51 @@
-<div class="container-fluid" id="inserir-agenda">
-    <div class="row mb-2">
-        <div class="col">
-            <div class="card shadow-lg">
-                <div class="card-header text-center" id="sg-agenda-header">
-                    <h2 class="text-center">Bem vindo {{username}}</h2>
-                </div>
-                <div class="card-body" id="sg-menu">
-                    <div class="row text-center">
-                        <div class="sg-card-header">
-                            <div id="options" class="col-12">VER AGENDA:</div>
-                            <div class="col-12">
-                                <button type="button" class="sg-button mx-1" id="btn-options" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
-                                    <i class="fa-solid fa-hourglass-start mx-1"></i>
-                                    <span>Semana Atual</span>
-                                </button>
-                                <button class="sg-button mx-1" id="btn-options" (click)="verProximaSemana()" [disabled]="semanaSelecionada == 'proxima'">
-                                    <i class="fa-solid fa-forward mx-1"></i>
-                                    <span>Próxima semana</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sg-card-header">
-                            <div id="options" class="col-12">OPÇÕES:</div>
-                            <div class="col-12">
-                                <button type="button" class="sg-button  mx-1" id="btn-options" (click)="repetirAgenda()">
-                                    <i class="fa-solid fa-repeat mx-1"></i>
-                                    <span>Repetir agenda</span>
-                                </button>
-                                <button type="button" class="sg-button  mx-1" id="btn-options" routerLink="/agenda/historico">
-                                    <i class="fa-solid fa-clock-rotate-left mx-1"></i>
-                                    <span>Histórico da Agenda</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sg-card-header">
-                            <div id="options" class="col-12">AÇÕES:</div>
-                            <div class="col-12">
-                                <button type="button" routerLink="/dashboard" class="sg-button mx-1" id="btn-dashboard"> <i class="fa-solid fa-home mx-1"></i> <span>Home</span> </button>
-                                <button type="button" (click)="logout()" class="sg-button mx-1" id="btn-logout"> <i class="fa-solid fa-right-from-bracket mx-1"></i> <span>Logout</span> </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="card shadow-lg text-center">
-                <div class="card-header" id="sg-agenda-header">
-                    <h2 class="text-center">
-                        Sua Agenda: {{diaInicio | date: 'dd/MM/yyyy'}} - {{diaFim | date: 'dd/MM/yyyy'}}
-                    </h2>
-                </div>
-                <div class="row px-4">
-                    <div class="sg-card-body" *ngFor="let dia of diasSemana">
-                        <div class="card">
-                            <div class="card-header" id="sg-dia-header">
-                                <h2>{{dia.nome}}</h2>
-                                <h5>{{dia.dia | date: 'dd/MM/yyyy'}}</h5>
-                            </div>
-                            <div class="card-deck">
-                                <sg-compromisso-card #card 
-                                  [cardData]="teste()"
-                                    (adicionarCardEvent)="adicionarCard(dia.index)"
-                                    (salvarCardEvent)="salvarCard(dia.index,$event)"
-                                    (excluirCardEvent)="excluirCard(dia.index, i)"
-                                    *ngFor="let card of dia.cards; let i = index;">
-                                </sg-compromisso-card>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="inserir-agenda">
+  <div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 id="modalLabel">PREENCHER AGENDA</h5>
+  </div>
+  <div class="modal-body text-center">
+    <form #formAgenda="ngForm">
+      <div class="row">
+        <small class="form-text text-muted text-left">Data</small>
+        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada">
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Tipo</small>
+        <select [(ngModel)]="tipoSelecionado" name="tipo">
+          <option value="10" [selected]="!tipoSelecionado">Projeto</option>
+          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo" [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+            {{ tipo.tipo }}
+          </option>
+        </select>    
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Projeto</small>
+        <select [(ngModel)]="projetoSelecionado" name="projeto">
+          <option value="" [ngValue]="null"> --- </option>
+          <option *ngFor="let projeto of projetos" [value]="projeto.projeto">{{projeto.projeto}}
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Atendimento</small>
+        <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
+          <option [value]="'Remoto'" selected>Remoto</option>
+          <option [value]="'Presencial'">Presencial</option>
+        </select>
+      </div>
+      <div class="row">
+        <small class="form-text text-muted text-left">Horas</small>
+        <select [(ngModel)]="horasSelecionado" name="horas">
+          <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer justify-content-center align-items-center">
+    <button class="sg-footer-button sg-save col-6" (click)="salvar()">
+      <i class="fa-solid fa-check"></i>
+    </button>
+    <button class="sg-footer-button sg-add col-6" (click)="this.activeModal.close()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
 </div>
