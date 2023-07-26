@@ -96,6 +96,8 @@ export class InserirAgendaComponent {
   listProjetos() {
     this.projetoService.listProjetos().subscribe({
       next: (data: Projeto[]) => {
+        console.log(data);
+        
         if (data == null) {
           this.projetos = [];
         } else {

@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
+import { AuthService } from 'src/app/auth';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class EditarAgendaComponent {
     this.listProjetos();
     this.listTipo();
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
-    this.isUpdateOrCreate();
+    this.getAgenda();
   }
 
   /**  
@@ -47,88 +48,68 @@ export class EditarAgendaComponent {
   */
   salvar() {
     console.log(this.formAgenda.value);
-    
-    // let formValues: any;
-    // const dt: Date = new Date(this.formAgenda.value.data);
-    // var dia = this.obterDia(dt);
-    // const idGestor = this.authService.getCurrentUser();
-    // if (this.formAgenda.value.data == null) {
-    //   SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
-    // } else if (this.formAgenda.value.tipo.id_tipo == 10) {
-    //   forkJoin([
-    //     this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
-    //     this.agendaService.getFuncaoGestor(idGestor)
-    //   ]).subscribe({
-    //     next: (results: [any, FuncaoGestor[]]) => {
-    //       let projeto = results[0].projeto;
-    //       let funcao_gestor = results[1][0];
-    //       formValues = {
-    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
-    //       };
-    //     },
-    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-    //   });
-    // } else {
-    //   this.agendaService.getFuncaoGestor(idGestor).subscribe({
-    //     next: (results: any) => {
-    //       let funcao_gestor = results;
-    //       let projeto = 'Feriado'
-    //       formValues = {
-    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
-    //       };
-    //     },
-    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-    //   });
-    // }
 
-    // if (this.editMode == false) {
-    //   this.agendaService.salvarAgenda(formValues).subscribe();
-    //   SwalFacade.sucesso("Agenda salva com sucesso!");
-    //   this.activeModal.close();
-    //   console.log(formValues);
-      
-    // } else {
-    //   this.agendaService.updateAgenda(this.idAgenda, formValues).subscribe();
-    //   SwalFacade.sucesso("Agenda atualizada com sucesso!");
-    //   this.activeModal.close();
-    // }
+    let formValues: any;
+    const dt: Date = new Date(this.formAgenda.value.data);
+    var dia = this.agendaService.obterDia(dt);
+    const idGestor = this.authService.getCurrentUser();
+    if (this.formAgenda.value.data == null) {
+      SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
+    } else if (this.formAgenda.value.tipo.id_tipo == 10) {
+      forkJoin([
+        this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
+        this.agendaService.getFuncaoGestor(idGestor)
+      ]).subscribe({
+        next: (results: [any, FuncaoGestor[]]) => {
+          let projeto = results[0].projeto;
+          let funcao_gestor = results[1][0];
+          formValues = {
+            ...this.formAgenda.value, funcao_gestor, projeto, dia,
+          };
+          console.log(formValues);
+          this.agendaService.updateAgenda(this.idAgenda,formValues).subscribe();
+          SwalFacade.sucesso("Agenda atualizada com sucesso!");
+          this.activeModal.close();
+          console.log(formValues);
+        },
+        error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+      });
+      console.log(formValues);
+    } else {
+      this.agendaService.getFuncaoGestor(idGestor).subscribe({
+        next: (results: any) => {
+          let funcao_gestor = results;
+          let projeto = 'Feriado'
+          formValues = {
+            ...this.formAgenda.value, funcao_gestor, projeto, dia,
+          };
+        },
+        error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+      });
+    }
   }
 
   /**
-   * @description O modal funciona tanto para atualizar ou inserir, o metodo ira verificar com a flag editMode
-   * e caso seja atualizacao preenche com os dados do objeto caso contrario preenche com uns genericos
+   * @description Atribui ao formulario os valores contidos no objeto a ser editado
    */
-  isUpdateOrCreate() {
-    // Verifica se a flag de edicao eh verdadeira, ou seja se o action eh edicao e nao cadastro
-    if (this.editMode == true) {
-      // Testa se o id da empresa existe
-      if (this.idAgenda !== undefined) {
-        // Busca o objeto empresa com o ID passado
-        this.agendaService.procurarAgenda(this.idAgenda).subscribe(ag => {
-          // Atribui as instancias os valores da agenda
-          this.dataSelecionada = ag.data;
-          this.atendimentoSelecionado = ag.atendimento;
-          this.horasSelecionado = ag.horas;
-          this.projetoSelecionado = ag.cod_projeto;
-          this.tipoSelecionado = new TipoAgenda(ag.tipo.id_tipo, ag.tipo.tipo);
+  getAgenda() {
+    // Testa se o id da empresa existe
+    if (this.idAgenda !== undefined) {
+      // Busca o objeto empresa com o ID passado
+      this.agendaService.procurarAgenda(this.idAgenda).subscribe(ag => {
+        // Atribui as instancias os valores da agenda
+        this.dataSelecionada = ag.data;
+        this.atendimentoSelecionado = ag.atendimento;
+        this.horasSelecionado = ag.horas;
+        this.projetoSelecionado = ag.cod_projeto;
+        this.tipoSelecionado = new TipoAgenda(ag.tipo.id_tipo, ag.tipo.tipo);
 
-          // Chamar listTipo() para buscar os tipos de agenda antes de definir o tipoSelecionado
-          this.listTipo();
-        });
-        // Transforma o input de data para nao poder ser alterado
-        const dataElement = document.getElementById('dataId') as HTMLInputElement;
-        dataElement.readOnly = true;
-      } else {
-        // Caso não encontrado então levanta uma excecão
-        SwalFacade.erro("Agenda não encontrada");
-      }
+        // Chamar listTipo() para buscar os tipos de agenda antes de definir o tipoSelecionado
+        this.listTipo();
+      });
     } else {
-      // Se editMode == false entao estamos cadastrando um objeto
-      // Para isso sera setado uns valores por padrao para ajudar o usuario
-      this.atendimentoSelecionado = 'Remoto';
-      this.projetoSelecionado = null;
-      this.horasSelecionado = 8;
-      // this.tipoSelecionado = new TipoAgenda(10, 'Projeto');
+      // Caso não encontrado então levanta uma excecão
+      SwalFacade.erro("Agenda não encontrada");
     }
   }
 
@@ -137,30 +118,25 @@ export class EditarAgendaComponent {
    * o objeto não tenha mais de um mês de criação
    */
   excluir() {
-    if (this.editMode == false) {
-      // Se o objeto não existe então não precisa excluir, basta apenas fechar o modal
-      this.activeModal.close();
-    } else {
-      // Se o objeto existe, então pega uma data um mes antes do dia de hoje
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      // Data selecionada do objeto
-      const objectDate = new Date(this.dataSelecionada);
+    // Pega uma data um mes antes do dia de hoje
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    // Data selecionada do objeto
+    const objectDate = new Date(this.dataSelecionada);
 
-      if (objectDate < oneMonthAgo) {
-        // Se a data do objeto eh mais antiga que um mes atras a partir de hoje
-        SwalFacade.alerta("Não é possível excluir", "A agenda é mais antiga do que um mês!");
-      } else {
-        // Caso contrario abre um popup SweetAlert com a opção de excluir ou cancelar
-        SwalFacade.excluir("Deseja excluir a agenda?", "A ação não poderá ser desfeita")
-          .then((result) => {
-            if (result.isConfirmed) {
-              this.agendaService.excluirAgenda(this.idAgenda).subscribe();
-              this.activeModal.close();
-              SwalFacade.sucesso("Agenda excluída com sucessso");
-            }
-          })
-      }
+    if (objectDate < oneMonthAgo) {
+      // Se a data do objeto eh mais antiga que um mes atras a partir de hoje
+      SwalFacade.alerta("Não é possível excluir", "A agenda é mais antiga do que um mês!");
+    } else {
+      // Caso contrario abre um popup SweetAlert com a opção de excluir ou cancelar
+      SwalFacade.excluir("Deseja excluir a agenda?", "A ação não poderá ser desfeita")
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.agendaService.excluirAgenda(this.idAgenda).subscribe();
+            this.activeModal.close();
+            SwalFacade.sucesso("Agenda excluída com sucessso");
+          }
+        })
     }
   }
 
@@ -173,7 +149,11 @@ export class EditarAgendaComponent {
         if (data == null) {
           this.projetos = [];
         } else {
-          this.projetos = data;
+          this.projetos = data.filter(
+            // Filtra os projetos para mostrar apenas os que estão ativos
+            emp => emp.ativo == 1
+          );
+          this.projetos
           // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
           this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
         }
@@ -192,12 +172,12 @@ export class EditarAgendaComponent {
         } else {
           this.tipoAgenda = tipo;
           this.tipoAgenda.sort((a, b) => (a.tipo ?? '').localeCompare(b.tipo ?? ''));
-  
+
           // Após buscar os tipos, defina o tipoSelecionado aqui, caso seja necessário
           if (this.editMode && this.tipoSelecionado) {
             // Encontre o tipo no array de tipos com o mesmo ID do tipoSelecionado
             this.tipoSelecionado = this.tipoAgenda.find((tipoAgenda) => tipoAgenda.id_tipo === this.tipoSelecionado?.id_tipo);
-          } else{
+          } else {
             let t = new TipoAgenda(10, 'Projeto');
             this.tipoSelecionado = this.tipoAgenda.find((t) => t.id_tipo === this.tipoSelecionado?.id_tipo);
           }

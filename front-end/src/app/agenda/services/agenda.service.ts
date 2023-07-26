@@ -18,7 +18,7 @@ export class AgendaService {
     return this._refreshPage$;
   }
 
-  salvarAgenda(data: any) {
+  salvarAgenda(data: any) {    console.log(data);
     return this.http.post('http://localhost:3000/Agenda', data)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(

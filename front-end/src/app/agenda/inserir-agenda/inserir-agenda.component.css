@@ -42,6 +42,7 @@ select {
   border-bottom: 2px solid #EDA900;
   outline: none;
   margin-bottom: 1rem;
+  padding-left: 1rem;
 }
 
 select option {
@@ -101,7 +102,7 @@ form {
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
-@media screen and (max-width:1370px) {
+@media screen and (width < 1370px) {
 
   select,
   option {
