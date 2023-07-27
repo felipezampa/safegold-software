@@ -64,7 +64,7 @@ from app.shared import views
 
 
 urlpatterns = [
-    path('index/',views.IndexView.as_view(),name='index'),
+    path('',views.IndexView.as_view(),name='index'),
     path('admin/',admin.site.urls,name='admin'),
     # path('app/',include('app.shared.urls',namespace='shared')),
     # path('home/', include('usuarios.urls')),

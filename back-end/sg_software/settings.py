@@ -15,7 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR,'staticfiles')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -53,10 +53,6 @@ INSTALLED_APPS = [
     'app.avaliacao.apps.AvaliacaoConfig',
     'app.shared.apps.SharedConfig',
     # 'app.auth.apps.AuthConfig',
-
-
-
- 
 ]
 
 # =================  Link que salvou a minha vida, problemas com o REST: https://github.com/adamchainz/django-cors-headers  =================
