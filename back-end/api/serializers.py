@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from crud_app.models import  *
+from app.shared.models import  *
+from app.financeiro.models import *
+from app.avaliacao.models import *
 from django.contrib.auth import authenticate
 
 '''
