@@ -1,6 +1,7 @@
 from app.shared import models as shared_models
 from app.financeiro import models as financeiro_models
 from app.avaliacao import models as avaliacao_models
+from app.agenda import models as agenda_models
 from rest_framework import viewsets, generics
 from api import serializers
 from django_filters.rest_framework import DjangoFilterBackend
@@ -16,6 +17,7 @@ from django.contrib.auth.models import User
 from datetime import datetime, timedelta, date
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 
 '''
     @eduardolcordeiro
@@ -29,27 +31,30 @@ from rest_framework.decorators import action
         - search_fields = Recebe uma lista dos campos que serão filtrados no campo de search
 
 '''
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
-class EmpresaserializerViewSet(viewsets.ModelViewSet):
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+class EmpresasViewSet(viewsets.ModelViewSet):
 
     queryset = shared_models.Empresas.objects.all()
     serializer_class = serializers.EmpresasSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['cod_empresa','empresa', 'cnpj', 'cod_projeto','cod_projeto__id_user']
-    search_fields = ['cod_empresa', 'empresa', 'cnpj','cod_projeto']
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['cod_empresa', 'empresa', 'cnpj', 'cod_projeto']  # Use 'projeto__id_user'
+    search_fields = ['cod_empresa', 'empresa', 'cnpj', 'cod_projeto']
     # permission_classes = [IsAuthenticated]
 
 
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 class ProjetosViewSet(viewsets.ModelViewSet):
 
     queryset = shared_models.Projetos.objects.all()
     serializer_class = serializers.ProjetosSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['projeto', 'cod_projeto','id_user']
-    search_fields = ['projeto', 'cod_projeto', 'id_user']
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['projeto', 'cod_projeto','id_user']
+    # search_fields = ['projeto', 'cod_projeto', 'id_user']
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['projeto', 'cod_projeto', 'projetouser__id_user']  # Update the filterset_fields
+    search_fields = ['projeto', 'cod_projeto', 'projetouser__id_user']  # Add search fields if needed
     # permission_classes = [IsAuthenticated]
 
 
@@ -65,13 +70,18 @@ class UserViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 class ProjetoUserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = shared_models.ProjetoUser.objects.all()
     serializer_class = serializers.ProjetoUserSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['cod_projeto', 'id_user']  # Update the filterset_fields
+    search_fields = ['cod_projeto__projeto']  # Add search fields if needed
+
+
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 class FinGrupoContasViewSet(viewsets.ModelViewSet):
@@ -177,15 +187,15 @@ class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head']
     
 
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
-class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+# class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
+#     permission_classes = [IsAuthenticated]
 
-    queryset = avaliacao_models.RhClassificacaoComp.objects.all()
-    serializer_class = serializers.RhClassificacaoCompSerializers
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'classificacao']
+#     queryset = avaliacao_models.RhClassificacaoComp.objects.all()
+#     serializer_class = serializers.RhClassificacaoCompSerializers
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = ['id', 'classificacao']
 
 # class RhFactCargoMetasViewSet(viewsets.ModelViewSet):
 #     queryset = models.RhFactCargoMetas.objects.all()
@@ -210,13 +220,6 @@ class RhClassificacaoCompViewSet(viewsets.ModelViewSet):
 #     serializer_class = serializers.RhUserAvaliacaoSerializers
 #     filter_backends = [DjangoFilterBackend]
 #     filterset_fields = []
-
-# class AptoGestorViewSet(viewsets.ModelViewSet):
-#     queryset = models.AptoProj.objects.all()
-#     serializer_class = serializers.Apto_gestorSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = []
-
 
 
 
@@ -301,14 +304,14 @@ def api_userlogin(request):
 #     filter_backends = [DjangoFilterBackend]
 #     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# class AgTipoViewSet(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
-#     queryset = models.AgTipo.objects.all()
-#     serializer_class = serializers.AgTipoSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['id_tipo','tipo']
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class AgTipoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = agenda_models.AgTipo.objects.all()
+    serializer_class = serializers.AgTipoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_tipo','tipo']
 
 # # @authentication_classes([TokenAuthentication])
 # # @permission_classes([IsAuthenticated])   

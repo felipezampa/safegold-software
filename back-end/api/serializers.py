@@ -2,7 +2,7 @@ from rest_framework import serializers
 from app.shared.models import  *
 from app.financeiro.models import *
 from app.avaliacao.models import *
-from django.contrib.auth import authenticate
+from app.agenda.models import *
 
 '''
 
@@ -68,7 +68,6 @@ class ProjetoUserSerializer(serializers.ModelSerializer):
         fields = ('id','id_user','username','cod_projeto','projeto')
 
 
- 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -88,25 +87,31 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 
-
 class ProjetosSerializer(serializers.ModelSerializer):
     id_user = UserSerializer(read_only= True, many=True)
 
     class Meta:
         model = Projetos
-        fields = ('cod_projeto','projeto','ativo','safegold_ger','data_criacao','data_atualiza','id_user')
+        fields = ('cod_projeto','projeto','ativo','cod_segmento','ativo','cep','cidade','data_cadastro','data_atualiza','id_user')
 
 
 class EmpresasSerializer(serializers.ModelSerializer):
-    projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
-    ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
-    id_user = serializers.StringRelatedField(source='cod_projeto.id_user', many=True, read_only=True)
-    id_user_id = serializers.StringRelatedField(source='cod_projeto.id_user.id')
+    # projetouser = ProjetoUserSerializer()
+    # projeto = serializers.StringRelatedField(source='cod_projeto.projeto')
+    # ativo = serializers.StringRelatedField(source='cod_projeto.ativo')
+    # id_user = serializers.StringRelatedField(source='cod_projeto.id_user', many=True, read_only=True)
+    # id_user_id = serializers.StringRelatedField(source='cod_projeto.id_user.id')
 
 
     class Meta:
         model = Empresas
-        fields = ('cod_empresa', 'empresa', 'data_cadastro', 'data_atualiza', 'safegold_ger', 'cnpj', 'cod_projeto','projeto','ativo','id_user','id_user_id')
+        fields = '__all__'
+
+    # def create(self, validated_data):
+    #     projetouser_data = validated_data.pop('projetouser')  # Handle nested data during creation
+    #     empresa = Empresas.objects.create(**validated_data)
+    #     ProjetoUser.objects.create(empresa=empresa, **projetouser_data)
+    #     return empresa
 
 
 
@@ -278,14 +283,14 @@ class AgTipoSerializers(serializers.ModelSerializer):
         model = AgTipo
         fields = '__all__'
 
-class AgFactAgendaSerializer(serializers.ModelSerializer):
-    funcao_gestor = serializers.SerializerMethodField()
-    tipo_nome = serializers.StringRelatedField(source='tipo.tipo')
-    projeto_nome =serializers.StringRelatedField(source='projetos.projeto')
-    def get_funcao_gestor(self, obj):
-        funcao_gestor = SgFuncaoGestorSerializers(obj.sg_funcao_gestor).data
-        return funcao_gestor
+# class AgFactAgendaSerializer(serializers.ModelSerializer):
+#     funcao_gestor = serializers.SerializerMethodField()
+#     tipo_nome = serializers.StringRelatedField(source='tipo.tipo')
+#     projeto_nome =serializers.StringRelatedField(source='projetos.projeto')
+#     def get_funcao_gestor(self, obj):
+#         funcao_gestor = SgFuncaoGestorSerializers(obj.sg_funcao_gestor).data
+#         return funcao_gestor
 
-    class Meta:
-        model = AgFactAgenda
-        fields = 'cod_agenda','data','dia_semana','tipo','tipo_nome','projetos','projeto_nome','atendimento','horas','funcao_gestor'
+#     class Meta:
+#         model = AgFactAgenda
+#         fields = 'cod_agenda','data','dia_semana','tipo','tipo_nome','projetos','projeto_nome','atendimento','horas','funcao_gestor'

@@ -21,7 +21,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 # EMPRESA E CONTEXTO
-router.register('empresas', EmpresaserializerViewSet, basename= 'Empresas')
+router.register('empresas', EmpresasViewSet, basename= 'Empresas')
 router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 router.register('user', UserViewSet, basename= 'User')
 router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
@@ -38,7 +38,7 @@ router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, 
 # AVALIAÇÃO DE DESEMPENHO, MODULO RH
 router.register('auth_user_permission', AuthUserPermissionsViewSet, basename='auth_user_permission')
 # router.register('rh_cargos', RHCargoViewSet, basename='rh_cargos')
-router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, basename='rh_classificacao_comportamental')
+# router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, basename='rh_classificacao_comportamental')
 # router.register('rh_cargo_metas', RhFactCargoMetasViewSet, basename='rh_cargo_metas')
 # router.register('rh_indicador_competencia', RhFactComportamentalViewSet, basename='rh_factcomportamental')
 # router.register('rh_mapeamento_cargo_competencias',RhMapCargoCompViewSet , basename='rh_mapeamento_cargo_competencias')
@@ -52,7 +52,7 @@ router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, b
 # router.register('sg_funcao', SgFuncaoViewSet, basename='sg_funcao')
 # router.register('sg_funcao_gestor', SgFuncaoGestorViewSet, basename='sg_funcao_gestor')
 # router.register('ag_agenda', AgFactAgendaViewSet, basename='ag_agenda')
-# router.register('ag_tipo', AgTipoViewSet, basename='ag_tipo')
+router.register('ag_tipo', AgTipoViewSet, basename='ag_tipo')
 # router.register('ag_semana_atual', CurrentWeekAgendaViewSet, basename='ag_semana_atual')
 # router.register('ag_semana_passada', LastWeekAgendaViewSet, basename='ag_semana_passada')
 # router.register('ag_semana_proxima', NextWeekAgendaViewSet, basename='ag_semana_proxima')
@@ -61,6 +61,8 @@ router.register('rh_classificacao_comportamental', RhClassificacaoCompViewSet, b
 
 
 from app.shared import views
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 urlpatterns = [
