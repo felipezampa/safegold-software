@@ -15,23 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import *
+from app.shared.views import *
+from app.financeiro.views import *
+from app.agenda.views import *
+from app.auth.views import *
 
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-# EMPRESA E CONTEXTO
+# SHARED
 router.register('empresas', EmpresasViewSet, basename= 'Empresas')
 router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 router.register('user', UserViewSet, basename= 'User')
 router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
 
-# PLANO DE CONTAS
-router.register('fin_grupo_contas',FinGrupoContasViewSet, basename='fin_grupo_contas')
-router.register('fin_subgrupo_contas',FinSubgrupoContasViewSet, basename='fin_subgrupo_contas')
-router.register('fin_conta_analitica',FinContaAnaliticaViewSet, basename='fin_conta_analitica')
-
-# FORNECEDOR
+# FINANCEIRO
+router.register('fin_grupo_contas',GrupoContasViewSet, basename='fin_grupo_contas')
+router.register('fin_subgrupo_contas',SubgrupoContasViewSet, basename='fin_subgrupo_contas')
+router.register('fin_conta_analitica',ContaAnaliticaViewSet, basename='fin_conta_analitica')
 router.register('fornecedor',FornecedorViewset, basename='fornecedor')
 router.register('matriz_analitica_fornecedor',MatrizAnaliticaFornecedorViewSet, basename='matriz_analitica_fornecedor')
 
@@ -44,7 +45,6 @@ router.register('auth_user_permission', AuthUserPermissionsViewSet, basename='au
 # router.register('rh_mapeamento_cargo_competencias',RhMapCargoCompViewSet , basename='rh_mapeamento_cargo_competencias')
 # router.register('rh_user_avaliacao',RhUserAvaliacaoViewSet , basename='rh_user_avaliacao')
 # router.register('rh_apro_gestor',AptoGestorViewSet , basename='rh_apro_gestor')
-
 
 # AGENDA
 # router.register('sg_unidadedenegocios', SgUnidadeNegocioViewSet, basename='sg_unidadedenegocios')
