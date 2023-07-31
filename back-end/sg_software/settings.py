@@ -15,7 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = os.path.join(BASE_DIR,'staticfiles')
+TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -46,18 +46,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-
-
+    #=====================================
     'app.financeiro.apps.FinanceiroConfig',
     'app.agenda.apps.AgendaConfig',
     'app.avaliacao.apps.AvaliacaoConfig',
     'app.shared.apps.SharedConfig',
-    # 'app.auth.apps.AuthConfig',
 ]
 
 # =================  Link que salvou a minha vida, problemas com o REST: https://github.com/adamchainz/django-cors-headers  =================
-
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
@@ -67,7 +63,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:9000",
 ]
 # AUTHENTICATION_BACKENDS = ['sg_software.backends.DjangoBackend']
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,8 +74,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
-
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -90,7 +83,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
 )
-
 
 ROOT_URLCONF = 'sg_software.urls'
 SESSION_COOKIE_SECURE = True
@@ -112,7 +104,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sg_software.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -160,8 +151,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = "/staticfiles/"
+STATIC_URL = 'static/'
 
 
 # Default primary key field type
@@ -171,7 +161,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'bootstrap4', 'materialize_css_forms', )
 CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
@@ -179,14 +168,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication','rest_framework.authentication.SessionAuthentication',
 ],
-  
-
-
 }
-
-
-
-# LOGIN_REDIRECT_URL = '/api/'
 
 
 CORS_ALLOW_METHODS = [
@@ -210,15 +192,13 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_HTTPONLY = True
-
-
-SESSION_COOKIE_SAMESITE = None
 CSRF_COOKIE_SAMESITE = None
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = True
