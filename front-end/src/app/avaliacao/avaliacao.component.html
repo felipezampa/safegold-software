@@ -2,12 +2,12 @@
     <div *ngIf="currentUser" class="sg-sidebar" id="sidebar">
         <ul>
             <li class="sg-hover">
-                <a href="dashboard" class="logo">
+                <a routerLink="/dashboard" class="logo">
                     <img src="../assets/img/Safegold.svg" alt="Safegold">
                 </a>
             </li>
             <hr>
-            <li class="sg-hover">
+            <!-- <li class="sg-hover">
                 <a href="avaliacao/autoavaliacao" class="sg-anchor">
                     <i class="fa-solid fa-thumbs-up"></i>
                     <span class="sg-nav-item">Auto-Avaliação</span>
@@ -30,7 +30,13 @@
                     <i class="fa-solid fa-lock"></i>
                     <span class="sg-nav-item">Admin</span>
                 </a>
-            </li>
+            </li> -->
+            <!-- SUBSTITUIR TODOS OS HREF POR ROUTERLINK -->
+            <!-- <button routerLink="/financeiro/empresas" class="sg-anchor" [disabled]="currentRoute == '/financeiro/empresas'">
+                <i class="fa-solid fa-handshake"></i>
+                <span class="sg-nav-item">Empresas</span>
+            </button> -->
+            <!-- SUBSTITUIR TODOS OS HREF POR ROUTERLINK -->
             <li class="sg-logout mt-5 pt-5">
                 <a type="submit" (click)="logout()">
                     <i class="fa-solid fa-right-from-bracket"></i>

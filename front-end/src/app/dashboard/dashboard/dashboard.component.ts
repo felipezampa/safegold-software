@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
 import { Empresa, Projeto, SwalFacade } from 'src/app/shared';
 import { DashboardService } from '../services/dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
   user_id!: number;
   user!: any;
 
-  constructor(private dashboardService: DashboardService, private authService: AuthService) { }
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
@@ -76,7 +77,9 @@ export class DashboardComponent implements OnInit {
     if (this.user_acesso_fin != true) {
       SwalFacade.erro("Acesso Negado", "Você não tem acesso a essa página");
     } else {
-      window.location.href = 'financeiro/dashboard-financeiro'
+      // IMPORTANTE - Sempre usar this.router.navigate ao inves de window.location.href pois o router nao atualiza a pagina e eh mais rapido
+      // o window atualiza e demora mais
+      this.router.navigate(['/financeiro','dashboard-financeiro'])
     }
   }
   
@@ -84,11 +87,11 @@ export class DashboardComponent implements OnInit {
     if (this.user_acesso_av != true) {
       SwalFacade.erro("Acesso Negado", "Você não tem acesso a essa página");
     } else {
-      window.location.href = 'avaliacao'
+      this.router.navigate(['/avaliacao'])
     }
   }
   validacaoAcessoAgenda() {
-    window.location.href = 'agenda'
+    this.router.navigate(['/agenda'])
   }
 
   logout() {
