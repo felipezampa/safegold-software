@@ -9,7 +9,7 @@ import { APP_CONFIG, Empresa } from 'src/app/shared';
 })
 export class DashboardService {
 
-  baseURL = APP_CONFIG.baseURL + 'api/empresas/';
+  baseURL = APP_CONFIG.baseURL + 'api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -19,15 +19,17 @@ export class DashboardService {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.authService.getTokenUser()
     });
-
+    console.log(this.baseURL + '?projetouser__id_user=' + idUser);
     return this.http.get<Array<{ cod_empresa: number, empresa: string, cod_projeto: number }>>
-    (this.baseURL + '?cod_projeto__id_user=' + idUser,{ headers });
+    (this.baseURL + '/projetos/?projetouser__id_user=' + idUser,{ headers });
+
+    
   }
 
   alteraProjeto(selectedProjetos: number) {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.authService.getTokenUser()
     });
-    return this.http.get<Empresa[]>(this.baseURL + '?cod_projeto=' + selectedProjetos,{ headers });
+    return this.http.get<Empresa[]>(this.baseURL + '/empresas/?cod_projeto=' + selectedProjetos,{ headers });
   }
 }

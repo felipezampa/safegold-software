@@ -80,12 +80,24 @@
 
 #filterDate input {
   margin: 0 .2rem;
-  width: 35%;
+  width: 25%;
   border: none;
   font-size: 1rem;
   font-weight: 500;
   border-bottom: 2px solid var(--cor-header);
   outline: none;
+  height: 1.75rem;
+}
+
+#filterDate select {
+  margin: 0 .2rem;
+  width: 25%;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 2px solid var(--cor-header);
+  outline: none;
+  height: 1.75rem;
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
@@ -260,6 +272,10 @@ tr {
   }
   .sg-filter-button{ font-size: .8rem; }
   #filterDate input {
+    width: 30%;
+    font-size: .8rem;
+  }
+  #filterDate select {
     width: 30%;
     font-size: .8rem;
   }

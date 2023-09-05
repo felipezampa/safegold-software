@@ -29,6 +29,9 @@
                             <div class="col-12" id="filterDate">
                                 <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
                                 <input type="date" name="diaFim" [(ngModel)]="diaFim">
+                                <select name="Gestor" id="">
+                                  <option value="">Gestor</option>
+                                </select>
                                 <button type="button" class="sg-filter-button" id="btn-filter" (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
                                     <span>Filtrar</span>
@@ -39,8 +42,8 @@
                             <div id="options" class="col-12">AÇÕES:</div>
                             <div class="col-12">
                                 <button type="button" id="btn-preencher" class="sg-button col mx-1" (click)="preencherAgenda()">
-                                    <i class="fa-solid fa-pen mx-1"></i>
-                                    <span>Preencher</span>
+                                    <i class="fa-solid fa-plus mx-1"></i>
+                                    <span>Novo</span>
                                 </button>
                                 <button type="button" routerLink="/dashboard" class="sg-button mx-1" id="btn-dashboard"> 
                                     <i class="fa-solid fa-home mx-1"></i> 
@@ -55,7 +58,6 @@
                     </div>
                     <div class="row">
                       
-                      <select name="Gestor" id=""></select>
                     </div>
                 </div>
             </div>

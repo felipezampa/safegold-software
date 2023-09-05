@@ -111,6 +111,9 @@ a {
     .card {
         width: 20rem;
     }
+    .header-image {
+      width: 25rem;
+  }
 }
 
 @media screen and (max-width: 1200px) {

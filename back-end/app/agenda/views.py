@@ -40,16 +40,16 @@ from rest_framework.authentication import TokenAuthentication
 
 # @authentication_classes([TokenAuthentication])
 # @permission_classes([IsAuthenticated])
-# class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
+class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
 
-#     queryset = models.SgFuncaoGestor.objects.all()
-#     serializer_class = serializers.SgFuncaoGestorSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
+    queryset = agenda_models.SgFuncaoGestor.objects.all()
+    serializer_class = serializers.SgFuncaoGestorSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_func_gest','id_funcao','id_user', 'data_inicio','data_fim']
 
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])  
 class AgTipoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = agenda_models.AgTipo.objects.all()

@@ -39,15 +39,15 @@ class ContaAnaliticaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cod_empresa', 'cod_conta_analitica', 'desc_conta','cod_subgrupo_contas']
 
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 class FornecedorViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = financeiro_models.Fornecedor.objects.all()
     serializer_class = serializers.FornecedorSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa', 'insc_est', 'matriz', 'fornecedor']
+    filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa',  'matriz', 'fornecedor']
 
 
 @authentication_classes([TokenAuthentication])

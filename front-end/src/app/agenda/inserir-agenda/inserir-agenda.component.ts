@@ -35,7 +35,7 @@ export class InserirAgendaComponent {
     this.atendimentoSelecionado = 'Remoto';
     this.projetoSelecionado = null;
     this.horasSelecionado = 8;
-    // this.tipoSelecionado = {id_tipo: 10, tipo: 'Projeto'};
+    this.tipoSelecionado = {id_tipo: 10, tipo: 'Projeto'};
   }
 
   /**  
