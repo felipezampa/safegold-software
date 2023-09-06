@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth';
-import { Agenda, SwalFacade } from 'src/app/shared';
+import { Agenda, FuncaoGestor, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAgendaComponent } from '../old/modal-agenda/modal-agenda.component';
@@ -22,18 +22,28 @@ export class AgendaHistoricoComponent implements OnInit {
   diaInicio!: Date | string;
   diaFim!: Date | string;
   semanaSelecionada!: string;
+  usuarioSelecionado!: FuncaoGestor;
   subscription: Subscription | undefined;
+  gestores!: FuncaoGestor[];
 
   constructor(private agendaService: AgendaService, private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     // Nome do usuario para mostrar no header do primeiro cartao
     this.username = this.authService.getUsername();
+    const idGestor = this.authService.getCurrentUser();
+    this.agendaService.getFuncaoGestor(idGestor).subscribe({
+      next: (results: FuncaoGestor) => {
+        this.usuarioSelecionado = results
+    }})
     // Garante que as datas que aparecam sejam as da semana atual
-    this.verSemanaAtual();
+    this.verSemanaAtual(this.username);
     this.subscription = this.agendaService.refreshPage$.subscribe(() => {
-      this.verSemanaAtual();
+      this.verSemanaAtual(this.username);
     })
+    this.listarGestor();
+
+
   }
   editarAgenda(ag: Agenda) {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
@@ -41,10 +51,12 @@ export class AgendaHistoricoComponent implements OnInit {
     modalRef.componentInstance.idAgenda = ag.id;
     modalRef.componentInstance.editMode = true;
   }
+
   preencherAgenda(){
     const modalRef = this.modalService.open(InserirAgendaComponent, { size: 'lg'});
     modalRef.componentInstance.editMode = false;
   }
+
   /**
    * Metodo base para a filtragem dos dados, atraves dele
    * que serao filtradas os dados da agenda de acordo com 
@@ -54,12 +66,12 @@ export class AgendaHistoricoComponent implements OnInit {
    * @param fim A data final a ser filtrada.
    *
    */
-  listarAgenda(inicio: Date | string, fim: Date | string) {
+  listarAgenda(inicio: Date | string, fim: Date | string, username: string) {
     // Converte os parametros para string caso eles venham em texto
     const dataInicio = typeof inicio === 'string' ? new Date(inicio) : inicio;
     const dataFim = typeof fim === 'string' ? new Date(fim) : fim;
     // Lista todos os dados da agenda
-    this.agendaService.listarAgenda().subscribe(filtro => {
+    this.agendaService.listarAgenda(username).subscribe(filtro => {
       // Filtro de data, só traz os dados que estão entre a dataInicio e dataFim
       this.agenda = filtro.filter((ag: any) => {
         const data = new Date(ag.data);
@@ -67,6 +79,19 @@ export class AgendaHistoricoComponent implements OnInit {
       });
       // Ordena de forma crescente
       this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime());
+    });
+  }
+
+  listarGestor(){
+    this.agendaService.listFuncaoGestor().subscribe({
+      next: (gestor: any[]) => {
+        if (gestor == null) {
+          this.gestores = [];
+        } else {
+          this.gestores = gestor;
+          this.gestores.sort((a, b) => (a.username ?? '').localeCompare(b.username ?? ''));
+        }
+      }
     });
   }
 
@@ -107,11 +132,13 @@ export class AgendaHistoricoComponent implements OnInit {
       // Atribui os valores dos inputs nos atributos locais
       this.diaFim = fim;
       this.diaInicio = ini;
-      this.listarAgenda(ini, fim);
+     
+      
+      this.listarAgenda(ini, fim,this.usuarioSelecionado.username);
     }
   }
 
-  verSemanaAtual() {
+  verSemanaAtual(username: string) {
     // Flag do Botao
     this.semanaSelecionada = 'atual';
     // Pega data atual
@@ -136,7 +163,7 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.listarAgenda(ini, fim);
+    this.listarAgenda(ini, fim,username);
   }
 
   verSemanaPassada() {
@@ -162,7 +189,7 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.listarAgenda(ini, fim);
+    this.listarAgenda(ini, fim,this.usuarioSelecionado.username);
   }
 
   verProximaSemana(){
@@ -188,6 +215,6 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.listarAgenda(ini, fim);
+    this.listarAgenda(ini, fim,this.usuarioSelecionado.username);
   }
 }

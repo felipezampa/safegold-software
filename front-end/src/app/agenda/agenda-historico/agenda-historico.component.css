@@ -197,6 +197,13 @@ tr {
   }
 }
 
+@media screen and (max-width:1399px) {
+  .sg-filter-button {
+    width: 10rem;
+  }
+}
+
+
 @media screen and (max-width:1155px) {
   #sg-agenda-header h2 {
     font-size: 1.2rem;
@@ -283,7 +290,7 @@ tr {
 
 @media screen and (max-width:470px) {
   #options {
-    font-size: .8rem;
+    font-size: 1rem;
   }
 
   .sg-button {

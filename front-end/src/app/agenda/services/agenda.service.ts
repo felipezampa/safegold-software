@@ -28,8 +28,8 @@ export class AgendaService {
       );
   }
 
-  listarAgenda(): Observable<any> {
-    return this.http.get('http://localhost:3000/Agenda');
+  listarAgenda(username: string): Observable<any> {
+    return this.http.get('http://localhost:3000/agenda/?funcao_gestor.username=' + username);
   }
 
   procurarAgenda(id: number): Observable<any> {
@@ -59,6 +59,11 @@ export class AgendaService {
   getFuncaoGestor(idGestor: number): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.funcaoGestorUrl + idGestor, { headers });
+  }
+
+  listFuncaoGestor(): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.get(this.funcaoGestorUrl, { headers });
   }
 
   listTipo(): Observable<any> {

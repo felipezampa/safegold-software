@@ -15,7 +15,7 @@
   --bg-card-footer: #58524c30;
   --hover-cor-card-footer: #fff;
   --hover-bg-card-footer: #58524c;
-  border-bottom-left-radius: 5px;
+  
 }
 
 .sg-save {
@@ -24,6 +24,7 @@
   --bg-card-footer: #00ac0030;
   --hover-cor-card-footer: #fff;
   --hover-bg-card-footer: #00ac00;
+  border-bottom-left-radius: 5px;
 }
 
 .sg-remove {

@@ -13,6 +13,8 @@ class SgArea(models.Model):
     class Meta:
         managed = False
         db_table = 'sg_area'
+        verbose_name_plural = 'Area'
+
     def __str__(self):
         return '{} - {} - {}'.format(self.id_area, self.id_unidade,self.area)
 
@@ -48,6 +50,8 @@ class SgFuncao(models.Model):
     class Meta:
         managed = False
         db_table = 'sg_funcao'
+        verbose_name_plural = 'Funcao'
+
     def __str__(self):
         return '{} - {} - {} - {}'.format(self.id_funcao, self.id_area,self.funcao, self.carga_horaria)
 
@@ -61,6 +65,8 @@ class SgFuncaoGestor(models.Model):
     class Meta:
         managed = False
         db_table = 'sg_funcao_gestor'
+        verbose_name_plural = 'Funcao Gestor'
+
     def __str__(self):
         return '{} - {} - {} - {} - {}'.format(self.id_func_gest, self.id_funcao, self.id_user, self.data_inicio, self.data_fim)
 
@@ -71,6 +77,8 @@ class SgUnidadeNegocio(models.Model):
     class Meta:
         managed = False
         db_table = 'sg_unidade_negocio'
+        verbose_name_plural = 'Unidade Negocio'
+
     def __str__(self):
         return '{} - {}'.format(self.id_unidade, self.unidade)
     
@@ -81,6 +89,7 @@ class AgTipo(models.Model):
     class Meta:
         managed = False
         db_table = 'ag_tipo'
+        verbose_name_plural = 'Tipo'
 
     def __str__(self):
         return '{} - {}'.format(self.id_tipo, self.tipo)

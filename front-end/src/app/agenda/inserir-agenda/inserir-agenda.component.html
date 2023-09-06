@@ -26,17 +26,19 @@
         </select>
       </div>
       <div class="row">
-        <small class="form-text text-muted float-left">Atendimento</small>
-        <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
-          <option [value]="'Remoto'" selected>Remoto</option>
-          <option [value]="'Presencial'">Presencial</option>
-        </select>
-      </div>
-      <div class="row">
-        <small class="form-text text-muted float-left">Horas</small>
-        <select [(ngModel)]="horasSelecionado" name="horas">
-          <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
-        </select>
+        <div class="col ps-0">
+          <small class="form-text text-muted float-left">Atendimento</small>
+          <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
+            <option [value]="'Remoto'" selected>Remoto</option>
+            <option [value]="'Presencial'">Presencial</option>
+          </select>
+        </div>
+        <div class="col pe-0">
+          <small class="form-text text-muted float-left">Horas</small>
+          <select [(ngModel)]="horasSelecionado" name="horas">
+            <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
+          </select>
+        </div>
       </div>
     </form>
   </div>

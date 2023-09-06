@@ -11,7 +11,7 @@ class FinGrupoContas(models.Model):
     class Meta:
         managed = False
         db_table = 'fin_grupo_contas'
-        verbose_name_plural = 'Grupo de Contas // Plano de Contas'
+        verbose_name_plural = 'PC - Grupo de Contas'
 
     
     def __str__(self):
@@ -25,7 +25,7 @@ class FinSubgrupoContas(models.Model):
     class Meta:
         managed = False
         db_table = 'fin_subgrupo_contas'
-        verbose_name_plural = 'SubgrupoContas // Plano de Contas'
+        verbose_name_plural = 'PC - SubGrupoContas'
 
 
     def __str__(self):
@@ -40,7 +40,7 @@ class FinContaAnalitica(models.Model):
     class Meta:
         managed = False
         db_table = 'fin_conta_analitica'
-        verbose_name_plural = 'Analitico // Plano de Contas'
+        verbose_name_plural = 'PC - Analitico'
 
 
     def __str__(self):
@@ -76,6 +76,6 @@ class MatrizAnaliticaFornecedor(models.Model):
     class Meta:
         managed = False
         db_table = 'matriz_analitica_fornecedor'
-        verbose_name_plural = 'Vinculo de Fornecedor á Conta Analitica'
+        verbose_name_plural = 'Vinculo Conta-Fornecedor'
     def __str__(self):
         return "Código Analitico: {} // Fornecedor: {}".format(self.cod_conta_analitica, self.cod_fornecedor)

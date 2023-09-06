@@ -10,36 +10,37 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 # Create your views here.
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
-#     queryset = avaliacao_models.SgUnidadeNegocio.objects.all()
-#     serializer_class = serializers.SgUnidadedeNegocioSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['id_unidade','unidade']
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# class SgAreaViewSet(viewsets.ModelViewSet):
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class SgUnidadeNegocioViewSet(viewsets.ModelViewSet):
+    queryset = agenda_models.SgUnidadeNegocio.objects.all()
+    serializer_class = serializers.SgUnidadedeNegocioSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_unidade','unidade']
 
-#     queryset = models.SgArea.objects.all()
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class SgAreaViewSet(viewsets.ModelViewSet):
 
-#     serializer_class = serializers.SgAreaSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['id_area','id_unidade', 'area']
+    queryset = agenda_models.SgArea.objects.all()
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# class SgFuncaoViewSet(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
+    serializer_class = serializers.SgAreaSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_area','id_unidade', 'area']
 
-#     queryset = models.SgFuncao.objects.all()
-#     serializer_class = serializers.SgFuncaoSerializers
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['id_funcao','id_area','funcao','carga_horaria']
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class SgFuncaoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+    queryset = agenda_models.SgFuncao.objects.all()
+    serializer_class = serializers.SgFuncaoSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_funcao','id_area','funcao','carga_horaria']
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -57,21 +58,21 @@ class AgTipoViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_tipo','tipo']
 
-# # @authentication_classes([TokenAuthentication])
-# # @permission_classes([IsAuthenticated])   
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])   
 # class AgFactAgendaViewSet(viewsets.ModelViewSet):
 #     permission_classes = [IsAuthenticated]
 
 #     serializer_class = serializers.AgFactAgendaSerializer
-#     queryset = models.AgFactAgenda.objects.all()
+#     queryset = agenda_models.AgFactAgenda.objects.all()
 
-#     # def list(self, request):
-#     #     year_start, year_end = self.get_year_range(date.today().year)
-#     #     agendas_ano = models.AgFactAgenda.objects.filter(data__range=[year_start, year_end])
-#     #     serializer = serializers.AgFactAgendaSerializer(agendas_ano, many=True)
-#     #     return Response(serializer.data)
+#     def list(self, request):
+#         year_start, year_end = self.get_year_range(date.today().year)
+#         agendas_ano = models.AgFactAgenda.objects.filter(data__range=[year_start, year_end])
+#         serializer = serializers.AgFactAgendaSerializer(agendas_ano, many=True)
+#         return Response(serializer.data)
 
-#     # def get_year_range(self, year):
-#     #     start = date(year, 1, 1)
-#     #     end = date(year, 12, 31)
-#     #     return start, end
+#     def get_year_range(self, year):
+#         start = date(year, 1, 1)
+#         end = date(year, 12, 31)
+#         return start, end

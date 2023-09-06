@@ -14,7 +14,7 @@
                                 <i class="fa-solid fa-backward mx-1"></i>
                                 <span>Passada</span>
                               </button>
-                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
+                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual(username)" [disabled]="semanaSelecionada == 'atual'">
                                   <i class="fa-regular fa-calendar-days mx-1"></i>
                                   <span>Atual</span>
                               </button>
@@ -29,8 +29,8 @@
                             <div class="col-12" id="filterDate">
                                 <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
                                 <input type="date" name="diaFim" [(ngModel)]="diaFim">
-                                <select name="Gestor" id="">
-                                  <option value="">Gestor</option>
+                                <select name="gestor" id="" [(ngModel)]="usuarioSelecionado">
+                                  <option [ngValue]="gestor" *ngFor="let gestor of gestores">{{gestor.username}}</option>
                                 </select>
                                 <button type="button" class="sg-filter-button" id="btn-filter" (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
@@ -84,7 +84,7 @@
                                     <th>Gestor</th>
                                     <th>Tipo</th>
                                     <th>Projeto</th>
-                                    <th>Previsão Horas</th>
+                                    <th>Horas</th>
                                     <th>Atendimento</th>
                                 </tr>
                             </thead>
@@ -105,7 +105,7 @@
                         </table>
                         <div *ngIf="agenda.length < 1 && semanaSelecionada != 'atual'">
                             <h5><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h5>
-                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual()" [disabled]="semanaSelecionada == 'atual'">
+                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual(username)" [disabled]="semanaSelecionada == 'atual'">
                                 <i class="fa-regular fa-calendar-days mx-1"></i>
                                 <span>Semana Atual</span>
                             </button>
