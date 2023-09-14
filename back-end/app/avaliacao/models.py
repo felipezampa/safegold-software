@@ -67,3 +67,25 @@ class RhFactComportamental(models.Model):
 #         verbose_name_plural = 'Mapeamento de Comportamentos'
 #     def __str__(self):
 #         return '{} - {} - {}'.format(self.idrh_fact_comportamental,self.idrh_classificacao_comp, self.idrh_cargo)
+
+# class SgAvaliador(models.Model):
+#     id_avaliador = models.AutoField(primary_key=True)
+#     id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user', blank=True, null=True)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'sg_avaliador'
+#     def __str__(self):
+#         return '{} - {}'.format(self.id_avaliador, self.id_user)
+
+# class SgAvaliadorGestor(models.Model):
+#     id_user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user', blank=True, null=True)
+#     id_avaliador = models.ForeignKey(SgAvaliador, models.DO_NOTHING, db_column='id_avaliador', blank=True, null=True)
+#     data_inicio = models.DateField()
+#     data_fim = models.DateField(blank=True, null=True)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'sg_avaliador_gestor'
+#     def __str__(self):
+#         return '{} - {} - {} - {}'.format(self.id_user, self.id_avaliador, self.data_inicio, self.data_fim)
