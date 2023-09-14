@@ -18,10 +18,10 @@
         </select>    
       </div>
       <div class="row">
-        <small class="form-text text-muted text-left">Projeto</small>
-        <select [(ngModel)]="projetoSelecionado" name="projeto">
+        <small class="text-muted ps-3">Projeto</small>
+        <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
           <option value="" [ngValue]="null"> --- </option>
-          <option *ngFor="let projeto of projetos" [value]="projeto.projeto">{{projeto.projeto}}
+          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
           </option>
         </select>
       </div>

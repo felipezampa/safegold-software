@@ -4,10 +4,8 @@ import { AuthService } from 'src/app/auth';
 import { Agenda, FuncaoGestor, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalAgendaComponent } from '../old/modal-agenda/modal-agenda.component';
-import { Subscription } from 'rxjs';
-import { EditarAgendaComponent } from '../editar-agenda/editar-agenda.component';
-import { InserirAgendaComponent } from '../inserir-agenda/inserir-agenda.component';
+import { Subscription } from 'rxjs';8
+import { InserirAgendaComponent, EditarAgendaComponent } from '.././index';
 
 @Component({
   selector: 'app-agenda-historico',
@@ -42,8 +40,6 @@ export class AgendaHistoricoComponent implements OnInit {
       this.verSemanaAtual(this.username);
     })
     this.listarGestor();
-
-
   }
   editarAgenda(ag: Agenda) {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
@@ -166,7 +162,7 @@ export class AgendaHistoricoComponent implements OnInit {
     this.listarAgenda(ini, fim,username);
   }
 
-  verSemanaPassada() {
+  verSemanaPassada(username: string) {
     // Flag do Botao
     this.semanaSelecionada = 'passada';
     // Prepara as datas da semana que vem
@@ -189,10 +185,10 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.listarAgenda(ini, fim,this.usuarioSelecionado.username);
+    this.listarAgenda(ini, fim,username);
   }
 
-  verProximaSemana(){
+  verProximaSemana(username: string){
     // Flag do Botao
     this.semanaSelecionada = 'proxima';
     // Prepara as datas da semana que vem
@@ -215,6 +211,6 @@ export class AgendaHistoricoComponent implements OnInit {
     this.diaInicio = ini;
     this.diaFim = fim;
     // Faz a chamada do metodo de filtro personalizado
-    this.listarAgenda(ini, fim,this.usuarioSelecionado.username);
+    this.listarAgenda(ini, fim,username);
   }
 }

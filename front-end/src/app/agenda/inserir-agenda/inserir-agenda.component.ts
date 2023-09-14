@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
@@ -35,7 +35,7 @@ export class InserirAgendaComponent {
     this.atendimentoSelecionado = 'Remoto';
     this.projetoSelecionado = null;
     this.horasSelecionado = 8;
-    this.tipoSelecionado = {id_tipo: 10, tipo: 'Projeto'};
+    // this.tipoSelecionado = { id_tipo: 10, tipo: 'Projeto' };
   }
 
   /**  
@@ -48,16 +48,15 @@ export class InserirAgendaComponent {
   * @returns Retorna uma string do dia 'Quarta-Feira'
   */
   salvar() {
+
     let formValues: any;
     const dt: Date = new Date(this.formAgenda.value.data);
     var dia = this.agendaService.obterDia(dt);
     const idGestor = this.authService.getCurrentUser();
-    console.log(this.formAgenda.value);
-    
+
     if (this.formAgenda.value.data == null) {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
-    } else{
-    // else if (this.formAgenda.value.tipo.id_tipo == 10) {
+    } else {
       forkJoin([
         this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
         this.agendaService.getFuncaoGestor(idGestor)
@@ -75,19 +74,7 @@ export class InserirAgendaComponent {
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
-    } 
-    // else {
-    //   this.agendaService.getFuncaoGestor(idGestor).subscribe({
-    //     next: (results: any) => {
-    //       let funcao_gestor = results;
-    //       let projeto = 'Feriado'
-    //       formValues = {
-    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
-    //       };
-    //     },
-    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-    //   });
-    // }
+    }
   }
 
   /**
@@ -96,8 +83,6 @@ export class InserirAgendaComponent {
   listProjetos() {
     this.projetoService.listProjetos().subscribe({
       next: (data: Projeto[]) => {
-        console.log(data);
-        
         if (data == null) {
           this.projetos = [];
         } else {

@@ -53,9 +53,10 @@ export class EditarAgendaComponent {
     const dt: Date = new Date(this.formAgenda.value.data);
     var dia = this.agendaService.obterDia(dt);
     const idGestor = this.authService.getCurrentUser();
+
     if (this.formAgenda.value.data == null) {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
-    } else if (this.formAgenda.value.tipo.id_tipo == 10) {
+    } else  {
       forkJoin([
         this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
         this.agendaService.getFuncaoGestor(idGestor)
@@ -71,18 +72,6 @@ export class EditarAgendaComponent {
           SwalFacade.sucesso("Agenda atualizada com sucesso!");
           this.activeModal.close();
           console.log(formValues);
-        },
-        error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-      });
-      console.log(formValues);
-    } else {
-      this.agendaService.getFuncaoGestor(idGestor).subscribe({
-        next: (results: any) => {
-          let funcao_gestor = results;
-          let projeto = 'Feriado'
-          formValues = {
-            ...this.formAgenda.value, funcao_gestor, projeto, dia,
-          };
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
