@@ -85,16 +85,19 @@ export class EditarAgendaComponent {
     // Testa se o id da empresa existe
     if (this.idAgenda !== undefined) {
       // Busca o objeto empresa com o ID passado
-      this.agendaService.procurarAgenda(this.idAgenda).subscribe(ag => {
+      this.agendaService.findAgenda(this.idAgenda).subscribe(ag => {
         // Atribui as instancias os valores da agenda
-        this.dataSelecionada = ag.data;
-        this.atendimentoSelecionado = ag.atendimento;
-        this.horasSelecionado = ag.horas;
-        this.projetoSelecionado = ag.cod_projeto;
-        this.tipoSelecionado = new TipoAgenda(ag.tipo.id_tipo, ag.tipo.tipo);
-
-        // Chamar listTipo() para buscar os tipos de agenda antes de definir o tipoSelecionado
+        this.dataSelecionada = ag[0].data;
+        this.atendimentoSelecionado = ag[0].atendimento;
+        this.horasSelecionado = ag[0].horas;
+        this.projetoService.buscarProjeto(ag[0].cod_projeto).subscribe(
+          p => {this.projetoSelecionado = p[0]; console.log(p)}
+        );
+        this.agendaService.findTipo(ag[0].cod_tipo).subscribe(
+          t => {this.tipoSelecionado = t[0]; console.log(t)}
+        );
         this.listTipo();
+        
       });
     } else {
       // Caso não encontrado então levanta uma excecão

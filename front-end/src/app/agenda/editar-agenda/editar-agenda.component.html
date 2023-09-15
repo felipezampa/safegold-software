@@ -11,16 +11,16 @@
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
         <select [(ngModel)]="tipoSelecionado" name="tipo">
-          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo" [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo">
             {{ tipo.tipo }}
           </option>
         </select>    
       </div>
       <div class="row">
         <small class="text-muted ps-3">Projeto</small>
-        <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
-          <option value="" [ngValue]="null"> --- </option>
-          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+        <select [(ngModel)]="projetoSelecionado" name="projeto">
+          <option *ngFor="let projeto of projetos" [ngValue]="projeto">
+            {{projeto.projeto}}
           </option>
         </select>
       </div>

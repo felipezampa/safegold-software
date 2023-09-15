@@ -91,12 +91,12 @@
                             <tbody>
                                 <tr *ngFor="let ag of agenda; let even = even"  [ngStyle]="fazerTabelaListrada(even)" (click)="editarAgenda(ag)">
                                     <td>{{ag.data | date: 'dd/MM/yyyy'}}</td>
-                                    <td>{{ag.dia}}</td>
+                                    <td>{{ag.dia_semana}}</td>
                                     <td>{{ag.funcao_gestor.unidade_de_negocios}}</td>
                                     <td>{{ag.funcao_gestor.area}}</td>
                                     <td>{{ag.funcao_gestor.funcao}}</td>
                                     <td>{{ag.funcao_gestor.username}}</td>
-                                    <td>{{ag.tipo.tipo}}</td>
+                                    <td>{{ag.tipo}}</td>
                                     <td>{{ag.projeto}}</td>
                                     <td>{{ag.horas}}</td>
                                     <td>{{ag.atendimento}}</td>

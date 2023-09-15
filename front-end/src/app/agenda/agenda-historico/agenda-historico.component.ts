@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/auth';
 import { Agenda, FuncaoGestor, SwalFacade } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';8
+import { Subscription } from 'rxjs';
 import { InserirAgendaComponent, EditarAgendaComponent } from '.././index';
 
 @Component({
@@ -44,8 +44,10 @@ export class AgendaHistoricoComponent implements OnInit {
   editarAgenda(ag: Agenda) {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
     // Adicionar o ID do objeto a ser editado
-    modalRef.componentInstance.idAgenda = ag.id;
+    modalRef.componentInstance.idAgenda = ag.cod_agenda;
     modalRef.componentInstance.editMode = true;
+    console.log(ag.cod_agenda);
+    
   }
 
   preencherAgenda(){

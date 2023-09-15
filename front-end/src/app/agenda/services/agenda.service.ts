@@ -9,7 +9,8 @@ import { APP_CONFIG, Agenda } from 'src/app/shared';
 export class AgendaService {
 
   private tipoUrl = APP_CONFIG.baseURL + 'api/ag_tipo/';
-  private funcaoGestorUrl = APP_CONFIG.baseURL + 'api/sg_funcao_gestor/?id_user=';
+  private funcaoGestorUrl = APP_CONFIG.baseURL + 'api/ag_funcao_gestor/?id_user=';
+  private agendaUrl = APP_CONFIG.baseURL + 'api/ag_agenda/';
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -29,15 +30,17 @@ export class AgendaService {
   }
 
   listarAgenda(username: string): Observable<any> {
-    return this.http.get('http://localhost:3000/agenda/?funcao_gestor.username=' + username);
+    // return this.http.get(this.agendaUrl + username);
+    return this.http.get(this.agendaUrl + '?id_user=' + 2); // fazer o id_user ser dinamico depois
   }
 
-  procurarAgenda(id: number): Observable<any> {
-    return this.http.get('http://localhost:3000/Agenda/' + id);
+  findAgenda(id: number): Observable<any> {
+    return this.http.get(this.agendaUrl + '?cod_agenda=' + id);
   }
 
   updateAgenda(id: number, data: Agenda) {
-    return this.http.put('http://localhost:3000/Agenda/' + id, data)
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.put(this.agendaUrl + id + '/', data, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -47,7 +50,8 @@ export class AgendaService {
   }
 
   excluirAgenda(id: number) {
-    return this.http.delete('http://localhost:3000/Agenda/' + id)
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.delete(this.agendaUrl + id + '/', { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -71,6 +75,11 @@ export class AgendaService {
     return this.http.get(this.tipoUrl, { headers });
   }
   
+  findTipo(id: number): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.get(this.tipoUrl + '?id_tipo=' + id, { headers });
+  }
+
   /**  
    * @description 
    * Metodo simples que recebe um dia e retorna qual dia da semana esse é
