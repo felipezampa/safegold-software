@@ -9,8 +9,8 @@ import { APP_CONFIG, Fornecedor, MatrizAnalitica } from 'src/app/shared';
 })
 export class MatrizContaFornecedorService {
 
-  private baseURL = APP_CONFIG.baseURL + 'api/matriz_analitica_fornecedor/';
-  private baseFornecedor = APP_CONFIG.baseURL + 'api/fornecedor/';
+  private baseURL = APP_CONFIG.baseURL + 'api/fin_matriz_analitica/';
+  private baseFornecedor = APP_CONFIG.baseURL + 'api/fin_fornecedor/';
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }

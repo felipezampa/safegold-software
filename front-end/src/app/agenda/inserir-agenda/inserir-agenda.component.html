@@ -5,14 +5,14 @@
   <div class="modal-body text-center">
     <form #formAgenda="ngForm">
       <div class="row">
-        <small class="form-text text-muted text-left">Data</small>
+        <small class="text-muted ps-3">Data</small>
         <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada">
       </div>
       <div class="row">
-        <small class="form-text text-muted text-left">Tipo</small>
-        <select [(ngModel)]="tipoSelecionado" name="tipo">
-          <option value="10" [selected]="!tipoSelecionado">Projeto</option>
-          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo" [selected]="tipo.id_tipo === tipoSelecionado?.id_tipo">
+        <small class="text-muted ps-3">Tipo</small>
+        <select [(ngModel)]="tipoSelecionado" name="cod_tipo">
+          <!-- <option value="10" [selected]="!tipoSelecionado">Projeto</option> -->
+          <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
         </select>    
@@ -20,21 +20,22 @@
       <div class="row">
         <small class="text-muted ps-3">Projeto</small>
         <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
-          <option value="" [ngValue]="null"> --- </option>
-          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">{{projeto.projeto}}
+          <option [value]="0"> --- </option> 
+          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
+            {{projeto.projeto}}
           </option>
         </select>
       </div>
       <div class="row">
         <div class="col ps-0">
-          <small class="form-text text-muted float-left">Atendimento</small>
+          <small class="text-muted ps-3">Atendimento</small>
           <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
             <option [value]="'Remoto'" selected>Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
         </div>
         <div class="col pe-0">
-          <small class="form-text text-muted float-left">Horas</small>
+          <small class="text-muted ps-3">Horas</small>
           <select [(ngModel)]="horasSelecionado" name="horas">
             <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
           </select>

@@ -10,17 +10,18 @@
       </div>
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
-        <select [(ngModel)]="tipoSelecionado" name="tipo">
-          <option *ngFor="let tipo of tipoAgenda" [ngValue]="tipo">
+        <select [(ngModel)]="tipoSelecionado" name="cod_tipo">
+          <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
         </select>    
       </div>
       <div class="row">
         <small class="text-muted ps-3">Projeto</small>
-        <select [(ngModel)]="projetoSelecionado" name="projeto">
-          <option *ngFor="let projeto of projetos" [ngValue]="projeto">
-            {{projeto.projeto}}
+        <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
+          <option [value]="0"> --- </option> 
+          <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
+            {{ projeto.projeto }}
           </option>
         </select>
       </div>
@@ -28,7 +29,7 @@
         <div class="col ps-0">
           <small class="text-muted ps-3">Atendimento</small>
           <select [(ngModel)]="atendimentoSelecionado" name="atendimento">
-            <option [value]="'Remoto'" selected>Remoto</option>
+            <option [value]="'Remoto'">Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
         </div>

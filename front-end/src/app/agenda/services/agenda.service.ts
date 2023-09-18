@@ -20,7 +20,7 @@ export class AgendaService {
   }
 
   salvarAgenda(data: any) {
-    return this.http.post('http://localhost:3000/Agenda', data)
+    return this.http.post(this.agendaUrl, data)
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -61,6 +61,7 @@ export class AgendaService {
   }
 
   getFuncaoGestor(idGestor: number): Observable<any> {
+    // arrumar pra trazer o ultimo funcaogestor quando um user tiver mais de um, se basear pela data fim null
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.funcaoGestorUrl + idGestor, { headers });
   }

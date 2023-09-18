@@ -20,11 +20,11 @@ export class InserirAgendaComponent {
   tipoAgenda!: TipoAgenda[];
   horas!: number[];
 
-  projetoSelecionado!: Projeto | null;
-  atendimentoSelecionado!: String;
+  projetoSelecionado!: number;
+  atendimentoSelecionado!: string;
   horasSelecionado!: number;
-  tipoSelecionado!: TipoAgenda | undefined;
-  dataSelecionada!: Date;
+  tipoSelecionado!: number;
+  dataSelecionada!: Date | string;
 
   constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService) { }
 
@@ -33,9 +33,9 @@ export class InserirAgendaComponent {
     this.listTipo();
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
     this.atendimentoSelecionado = 'Remoto';
-    this.projetoSelecionado = null;
     this.horasSelecionado = 8;
-    // this.tipoSelecionado = { id_tipo: 10, tipo: 'Projeto' };
+    this.tipoSelecionado = 10;
+    this.projetoSelecionado = 0;
   }
 
   /**  
@@ -48,10 +48,9 @@ export class InserirAgendaComponent {
   * @returns Retorna uma string do dia 'Quarta-Feira'
   */
   salvar() {
-
     let formValues: any;
     const dt: Date = new Date(this.formAgenda.value.data);
-    var dia = this.agendaService.obterDia(dt);
+    var dia_semana = this.agendaService.obterDia(dt);
     const idGestor = this.authService.getCurrentUser();
 
     if (this.formAgenda.value.data == null) {
@@ -59,18 +58,21 @@ export class InserirAgendaComponent {
     } else {
       forkJoin([
         this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
-        this.agendaService.getFuncaoGestor(idGestor)
+        this.agendaService.getFuncaoGestor(idGestor),
+        this.agendaService.findTipo(this.formAgenda.value.cod_tipo)
       ]).subscribe({
-        next: (results: [any, FuncaoGestor[]]) => {
+        next: (results: [any, FuncaoGestor[], any]) => {
           let projeto = results[0].projeto;
-          let funcao_gestor = results[1][0];
+          let sg_funcao_gestor = results[1][0].id_func_gest;
+          
+          let tipo = results[2][0].tipo;
+          
           formValues = {
-            ...this.formAgenda.value, funcao_gestor, projeto, dia
+            ...this.formAgenda.value, sg_funcao_gestor, projeto, dia_semana, tipo
           };
           this.agendaService.salvarAgenda(formValues).subscribe();
           SwalFacade.sucesso("Agenda salva com sucesso!");
           this.activeModal.close();
-          console.log(formValues);
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });

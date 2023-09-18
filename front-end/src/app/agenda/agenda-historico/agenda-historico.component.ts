@@ -23,6 +23,7 @@ export class AgendaHistoricoComponent implements OnInit {
   usuarioSelecionado!: FuncaoGestor;
   subscription: Subscription | undefined;
   gestores!: FuncaoGestor[];
+  isLoading!: boolean;
 
   constructor(private agendaService: AgendaService, private authService: AuthService, private modalService: NgbModal) { }
 
@@ -41,18 +42,15 @@ export class AgendaHistoricoComponent implements OnInit {
     })
     this.listarGestor();
   }
+
   editarAgenda(ag: Agenda) {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
-    // Adicionar o ID do objeto a ser editado
-    modalRef.componentInstance.idAgenda = ag.cod_agenda;
-    modalRef.componentInstance.editMode = true;
-    console.log(ag.cod_agenda);
-    
+    // Adicionar o objeto a ser editado
+    modalRef.componentInstance.agenda = ag;
   }
 
   preencherAgenda(){
     const modalRef = this.modalService.open(InserirAgendaComponent, { size: 'lg'});
-    modalRef.componentInstance.editMode = false;
   }
 
   /**
@@ -69,14 +67,23 @@ export class AgendaHistoricoComponent implements OnInit {
     const dataInicio = typeof inicio === 'string' ? new Date(inicio) : inicio;
     const dataFim = typeof fim === 'string' ? new Date(fim) : fim;
     // Lista todos os dados da agenda
-    this.agendaService.listarAgenda(username).subscribe(filtro => {
-      // Filtro de data, só traz os dados que estão entre a dataInicio e dataFim
-      this.agenda = filtro.filter((ag: any) => {
-        const data = new Date(ag.data);
-        return data >= dataInicio && data <= dataFim;
-      });
-      // Ordena de forma crescente
-      this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime());
+    this.agendaService.listarAgenda(username).subscribe({
+      next: (filtro) => (
+        // Filtro de data, só traz os dados que estão entre a dataInicio e dataFim
+        this.agenda = filtro.filter((ag: any) => {
+          const data = new Date(ag.data);
+          return data >= dataInicio && data <= dataFim;
+        })
+      ),
+      error: err => (
+        this.isLoading = false,
+        SwalFacade.alerta('Nenhum dado encontrado!',err)
+      ),
+      complete: () => (
+        this.isLoading = false, 
+        // Ordena de forma crescente
+        this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime())
+      )
     });
   }
 
@@ -116,6 +123,7 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   filtrarPorData(ini: Date | string, fim: Date | string) {
+    this.isLoading = true;
     // Limpa a flag dos botões selecionados
     this.semanaSelecionada = '';
 
@@ -137,6 +145,7 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   verSemanaAtual(username: string) {
+    this.isLoading = true;
     // Flag do Botao
     this.semanaSelecionada = 'atual';
     // Pega data atual
@@ -165,6 +174,7 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   verSemanaPassada(username: string) {
+    this.isLoading = true;
     // Flag do Botao
     this.semanaSelecionada = 'passada';
     // Prepara as datas da semana que vem
@@ -191,6 +201,7 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   verProximaSemana(username: string){
+    this.isLoading = true;
     // Flag do Botao
     this.semanaSelecionada = 'proxima';
     // Prepara as datas da semana que vem

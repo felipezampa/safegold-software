@@ -30,7 +30,7 @@
                                 <input type="date" name="diaInicio" [(ngModel)]="diaInicio">
                                 <input type="date" name="diaFim" [(ngModel)]="diaFim">
                                 <select name="gestor" id="" [(ngModel)]="usuarioSelecionado">
-                                  <option [ngValue]="gestor" *ngFor="let gestor of gestores">{{gestor.username}}</option>
+                                  <option  *ngFor="let gestor of gestores" [value]="gestor">{{gestor.username}}</option>
                                 </select>
                                 <button type="button" class="sg-filter-button" id="btn-filter" (click)="filtrarPorData(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="card-body table-responsive-lg">
                     <div class="row sg-table">
-                        <table class="table table-hover" *ngIf="agenda.length >= 1">
+                        <table class="table table-hover" *ngIf="agenda.length >= 1  && !isLoading">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -103,16 +103,24 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div *ngIf="agenda.length < 1 && semanaSelecionada != 'atual'">
-                            <h5><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h5>
-                            <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual(username)" [disabled]="semanaSelecionada == 'atual'">
-                                <i class="fa-regular fa-calendar-days mx-1"></i>
-                                <span>Atual</span>
-                            </button>
+                        <div *ngIf="isLoading" class="text-center text-dark">
+                          <button class="btn btn-warning mt-2" type="button" disabled>
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Carregando dados...
+                          </button>
                         </div>
-                        <div *ngIf="agenda.length < 1 && semanaSelecionada == 'atual'">
-                            <h3><strong>Semana atual não possui dados!</strong></h3>
-                            <h5><strong>Se o erro persistir entre em contato com o suporte: suportebi@safegold.com.br</strong></h5>
+                        <div *ngIf="!isLoading">
+                          <div *ngIf="agenda.length < 1 && semanaSelecionada != 'atual'">
+                              <h4><strong>Nenhum dado encontrado, deseja ver a semana atual?</strong></h4>
+                              <button type="button" class="sg-button col mx-1" id="btn-semana" (click)="verSemanaAtual(username)" [disabled]="semanaSelecionada == 'atual'">
+                                  <i class="fa-regular fa-calendar-days mx-1"></i>
+                                  <span>Atual</span>
+                              </button>
+                          </div>
+                          <div *ngIf="agenda.length < 1 && semanaSelecionada == 'atual'">
+                              <h4><strong>Semana atual não possui dados!</strong></h4>
+                              <h5><strong>Se o erro persistir entre em contato com o suporte: suportebi@safegold.com.br</strong></h5>
+                          </div>
                         </div>
                     </div>
                 </div>
