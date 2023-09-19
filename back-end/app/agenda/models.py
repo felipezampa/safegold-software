@@ -3,24 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class AgFactAgenda(models.Model):
-    cod_agenda = models.AutoField(primary_key=True)
-    data = models.DateField(blank=True, null=True)
-    dia_semana = models.CharField(max_length=255, blank=True, null=True)
-    tipo = models.ForeignKey('AgTipo', models.DO_NOTHING, db_column='tipo', blank=True, null=True)
-    projetos = models.ForeignKey('shared.Projetos', models.DO_NOTHING, db_column='projetos', blank=True, null=True)
-    atendimento = models.CharField(max_length=255, blank=True, null=True)
-    horas = models.CharField(max_length=255, blank=True, null=True)
-    sg_funcao_gestor = models.ForeignKey('SgFuncaoGestor', models.DO_NOTHING, db_column='sg_funcao_gestor', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ag_fact_agenda'
-        verbose_name_plural = 'Agenda'
-
-    def __str__(self):
-        return '{}/{} - {} . {} '.format(self.data, self.dia_semana, self.projetos, self.sg_funcao_gestor)
-    
 class AgTipo(models.Model):
     id_tipo = models.AutoField(primary_key=True)
     tipo = models.CharField(max_length=255, blank=True, null=True)
@@ -87,3 +69,20 @@ class SgUnidadeNegocio(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.id_unidade, self.unidade)
     
+class AgFactAgenda(models.Model):
+    cod_agenda = models.AutoField(primary_key=True)
+    data = models.DateField(blank=True, null=True)
+    dia_semana = models.CharField(max_length=255, blank=True, null=True)
+    cod_tipo = models.ForeignKey(AgTipo, models.DO_NOTHING, db_column='cod_tipo', blank=True, null=True)
+    cod_projeto = models.ForeignKey('shared.Projetos', models.DO_NOTHING, db_column='cod_projeto', blank=True, null=True)
+    atendimento = models.CharField(max_length=255, blank=True, null=True)
+    horas = models.CharField(max_length=255, blank=True, null=True)
+    funcao_gestor = models.ForeignKey(SgFuncaoGestor, models.DO_NOTHING, db_column='funcao_gestor', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ag_fact_agenda'
+        verbose_name_plural = 'Agenda'
+
+    def __str__(self):
+        return '{}  - {} . {} '.format(self.data, self.cod_projeto, self.funcao_gestor)

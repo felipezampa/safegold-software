@@ -24,10 +24,10 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 # SHARED
-router.register('sha_empresas', EmpresasViewSet, basename= 'Empresas')
-router.register('sha_projetos', ProjetosViewSet, basename= 'Projetos')
-router.register('sha_user', UserViewSet, basename= 'User')
-router.register('sha_projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
+router.register('empresas', EmpresasViewSet, basename= 'Empresas')
+router.register('projetos', ProjetosViewSet, basename= 'Projetos')
+router.register('user', UserViewSet, basename= 'User')
+router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
 
 # FINANCEIRO
 router.register('fin_grupo_contas',GrupoContasViewSet, basename='fin_grupo_contas')

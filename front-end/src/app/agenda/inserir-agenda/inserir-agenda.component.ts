@@ -57,22 +57,24 @@ export class InserirAgendaComponent {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
     } else {
       forkJoin([
-        this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
+        this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),//isso aqui nao precisa para fazer o POST, só o cod já vale
         this.agendaService.getFuncaoGestor(idGestor),
-        this.agendaService.findTipo(this.formAgenda.value.cod_tipo)
+        this.agendaService.findTipo(this.formAgenda.value.cod_tipo)//isso aqui nao precisa para fazer o POST, só o cod já vale
       ]).subscribe({
         next: (results: [any, FuncaoGestor[], any]) => {
           let projeto = results[0].projeto;
-          let sg_funcao_gestor = results[1][0].id_func_gest;
+          let funcao_gestor = results[1][0];
           
           let tipo = results[2][0].tipo;
           
           formValues = {
-            ...this.formAgenda.value, sg_funcao_gestor, projeto, dia_semana, tipo
+            ...this.formAgenda.value, funcao_gestor, projeto, dia_semana, tipo
           };
-          this.agendaService.salvarAgenda(formValues).subscribe();
+          // this.agendaService.salvarAgenda(formValues).subscribe();
           SwalFacade.sucesso("Agenda salva com sucesso!");
           this.activeModal.close();
+          console.log(formValues);
+          
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
