@@ -45,50 +45,43 @@ def set_default_idrh_cargo(sender, instance, **kwargs):
         - search_fields = Recebe uma lista dos campos que serão filtrados no campo de search
 
 '''
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class EmpresasViewSet(viewsets.ModelViewSet):
-
+    permission_classes = [IsAuthenticated]
     queryset = Empresas.objects.all()
     serializer_class = serializers.EmpresasSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['cod_empresa', 'empresa', 'cnpj', 'cod_projeto']  # Use 'projeto__id_user'
     search_fields = ['cod_empresa', 'empresa', 'cnpj', 'cod_projeto']
-    # permission_classes = [IsAuthenticated]
 
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class ProjetosViewSet(viewsets.ModelViewSet):
-
+    permission_classes = [IsAuthenticated]
     queryset = Projetos.objects.all()
     serializer_class = serializers.ProjetosSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['projeto', 'cod_projeto','id_user']
-    # search_fields = ['projeto', 'cod_projeto', 'id_user']
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['projeto', 'cod_projeto', 'projetouser__id_user']  # Update the filterset_fields
     search_fields = ['projeto', 'cod_projeto', 'projetouser__id_user']  # Add search fields if needed
-    # permission_classes = [IsAuthenticated]
+
 
 
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'email', 'id']
-    # permission_classes = [IsAuthenticated]
 
-
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class ProjetoUserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
     queryset = ProjetoUser.objects.all()
     serializer_class = serializers.ProjetoUserSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]

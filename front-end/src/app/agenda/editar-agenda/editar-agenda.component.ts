@@ -38,43 +38,25 @@ export class EditarAgendaComponent {
 
   /**  
   * @description 
-  * Metodo simples que recebe um dia e retorna qual dia da semana esse é
-  * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
-  * 
-  * @param data uma data comum no formato yyyy-mm-dd 
-  * 
-  * @returns Retorna uma string do dia 'Quarta-Feira'
+  * Salva a agenda atualizada
   */
   salvar() {
-    console.log(this.formAgenda.value);
-    console.log(this.agenda)
-    // let formValues: any;
-    // const dt: Date = new Date(this.formAgenda.value.data);
-    // var dia = this.agendaService.obterDia(dt);
-    // const idGestor = this.authService.getCurrentUser();
+    // Nem todos os valores passados pelo formulario serao necessarios para fazer o patch
+    // por isso eu somente seleciono aqueles que me interessam
+    let formValues = {
+      atendimento: this.formAgenda.value.atendimento,
+      cod_projeto: this.formAgenda.value.cod_projeto,
+      cod_tipo: this.formAgenda.value.cod_tipo,
+      horas: this.formAgenda.value.horas
+    };
 
-    // if (this.formAgenda.value.data == null) {
-    //   SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
-    // } else  {
-    //   forkJoin([
-    //     this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),
-    //     this.agendaService.getFuncaoGestor(idGestor)
-    //   ]).subscribe({
-    //     next: (results: [any, FuncaoGestor[]]) => {
-    //       let projeto = results[0].projeto;
-    //       let funcao_gestor = results[1][0];
-    //       formValues = {
-    //         ...this.formAgenda.value, funcao_gestor, projeto, dia,
-    //       };
-    //       console.log(formValues);
-    //       // this.agendaService.updateAgenda(this.idAgenda,formValues).subscribe();
-    //       SwalFacade.sucesso("Agenda atualizada com sucesso!");
-    //       this.activeModal.close();
-    //       console.log(formValues);
-    //     },
-    //     error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
-    //   });
-    // }
+    try {
+      this.agendaService.updateAgenda(this.agenda.cod_agenda, formValues).subscribe();
+      SwalFacade.sucesso("Agenda atualizada com sucesso!");
+      this.activeModal.close();
+    } catch (error) {
+      SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
+    }
   }
 
   /**
@@ -86,6 +68,7 @@ export class EditarAgendaComponent {
     this.horasSelecionado = Number(this.agenda.horas);
     this.projetoSelecionado = this.agenda.cod_projeto;
     this.tipoSelecionado = this.agenda.cod_tipo;
+    this.getProjeto(this.agenda.cod_projeto)
   }
 
   /**
@@ -136,6 +119,25 @@ export class EditarAgendaComponent {
     });
   }
 
+  /**
+   * @description Metodo importante, o `listProjetos()` tem o filtro de projetos ativos somente
+   * ou seja, caso um projeto nao estiver ativo nao ira aparecer no dropdown do html
+   * entao esse metodo vai procurar esse projeto e caso ele nao esteja ativo entao adiciona ele ao array
+   */
+  getProjeto(id: number){
+    this.projetoService.buscarProjeto(id).subscribe({
+      next: (proj: any) => {
+        if (proj.ativo == 0){
+          
+          this.projetos.push(proj)
+          // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
+          this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
+        }
+      },
+      error: () => {SwalFacade.erro("Projeto não encontrado","Não foi possível encontrar o projeto da agenda")}
+    })
+
+  }
   /**
    * @description Lista todos os tipos de agenda para selecionar como opção na tag select input
    */

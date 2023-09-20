@@ -20,7 +20,8 @@ export class AgendaService {
   }
 
   salvarAgenda(data: any) {
-    return this.http.post(this.agendaUrl, data)
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+    return this.http.post(this.agendaUrl, data, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -29,18 +30,18 @@ export class AgendaService {
       );
   }
 
-  listarAgenda(username: string): Observable<any> {
-    // return this.http.get(this.agendaUrl + username);
-    return this.http.get(this.agendaUrl + '?id_user=' + 2); // fazer o id_user ser dinamico depois
+  listarAgenda(idUser: number): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+    return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, {headers}); // fazer o id_user ser dinamico depois
   }
 
   findAgenda(id: number): Observable<any> {
     return this.http.get(this.agendaUrl + '?cod_agenda=' + id);
   }
 
-  updateAgenda(id: number, data: Agenda) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
-    return this.http.put(this.agendaUrl + id + '/', data, {headers})
+  updateAgenda(id: number, data: any) {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+    return this.http.patch(this.agendaUrl + id + '/', data, {headers})
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {

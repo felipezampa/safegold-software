@@ -34,18 +34,13 @@ export class InserirAgendaComponent {
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
     this.atendimentoSelecionado = 'Remoto';
     this.horasSelecionado = 8;
-    this.tipoSelecionado = 10;
+    this.tipoSelecionado = 10; // projeto
     this.projetoSelecionado = 0;
   }
 
   /**  
   * @description 
-  * Metodo simples que recebe um dia e retorna qual dia da semana esse é
-  * Exemplo: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'
-  * 
-  * @param data uma data comum no formato yyyy-mm-dd 
-  * 
-  * @returns Retorna uma string do dia 'Quarta-Feira'
+  * Salva a agenda atualizada
   */
   salvar() {
     let formValues: any;
@@ -56,25 +51,24 @@ export class InserirAgendaComponent {
     if (this.formAgenda.value.data == null) {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
     } else {
-      forkJoin([
-        this.projetoService.buscarProjeto(this.formAgenda.value.cod_projeto),//isso aqui nao precisa para fazer o POST, só o cod já vale
-        this.agendaService.getFuncaoGestor(idGestor),
-        this.agendaService.findTipo(this.formAgenda.value.cod_tipo)//isso aqui nao precisa para fazer o POST, só o cod já vale
-      ]).subscribe({
-        next: (results: [any, FuncaoGestor[], any]) => {
-          let projeto = results[0].projeto;
-          let funcao_gestor = results[1][0];
-          
-          let tipo = results[2][0].tipo;
-          
+      this.agendaService.getFuncaoGestor(idGestor).subscribe({
+        next: (results: FuncaoGestor[]) => {
+          // Um gestor pode ter varias funcoes, o codigo abaixo ira percorrer por todas as suas funcoes e
+          // atribuir a funcao atual, ou seja aquela que nao tem data de fim
+          let funcao_gestor;
+          for (let i = 0; i < results.length; i++) {
+            const element = results[i];
+            if (results[i].data_fim == null) {
+              funcao_gestor = results[i].id_func_gest;
+            }
+          }
+
           formValues = {
-            ...this.formAgenda.value, funcao_gestor, projeto, dia_semana, tipo
+            ...this.formAgenda.value, funcao_gestor, dia_semana
           };
-          // this.agendaService.salvarAgenda(formValues).subscribe();
+          this.agendaService.salvarAgenda(formValues).subscribe();
           SwalFacade.sucesso("Agenda salva com sucesso!");
           this.activeModal.close();
-          console.log(formValues);
-          
         },
         error: () => SwalFacade.erro("Erro ao salvar", "Se o erro persistir entre em contato com o administrador!")
       });
@@ -90,7 +84,11 @@ export class InserirAgendaComponent {
         if (data == null) {
           this.projetos = [];
         } else {
-          this.projetos = data;
+          this.projetos = data.filter(
+            // Filtra os projetos para mostrar apenas os que estão ativos
+            emp => emp.ativo == 1
+          );
+          this.projetos
           // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
           this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
         }

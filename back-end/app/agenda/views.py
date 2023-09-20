@@ -10,11 +10,12 @@ from . import serializers
 
 # Create your views here.
 
-@authentication_classes([TokenAuthentication])
+@authentication_classes([TokenAuthentication])  
 @permission_classes([IsAuthenticated])   
 class AgFactAgendaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['cod_agenda','funcao_gestor__id_func_gest','funcao_gestor__id_user'] 
     serializer_class = serializers.AgFactAgendaSerializer
     queryset = agenda_models.AgFactAgenda.objects.all()
 
@@ -30,9 +31,7 @@ class AgTipoViewSet(viewsets.ModelViewSet):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 class SgAreaViewSet(viewsets.ModelViewSet):
-
     queryset = agenda_models.SgArea.objects.all()
-
     serializer_class = serializers.SgAreaSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_area','id_unidade', 'area']
@@ -41,7 +40,6 @@ class SgAreaViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class SgFuncaoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
     queryset = agenda_models.SgFuncao.objects.all()
     serializer_class = serializers.SgFuncaoSerializers
     filter_backends = [DjangoFilterBackend]
@@ -51,7 +49,6 @@ class SgFuncaoViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class SgFuncaoGestorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
     queryset = agenda_models.SgFuncaoGestor.objects.all()
     serializer_class = serializers.SgFuncaoGestorSerializers
     filter_backends = [DjangoFilterBackend]

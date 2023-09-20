@@ -29,6 +29,13 @@ export class AuthService {
     return this.http.get(this.baseUrl + 'userlogado/', { headers });
   }
 
+  listUsers(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Token ' + this.getTokenUser()
+    });
+    return this.http.get(this.baseUrl + 'user/', { headers });
+  }
+
   logout(): void {
     this.user = null;
     sessionStorage.removeItem('user');

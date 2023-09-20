@@ -19,7 +19,6 @@ export class DashboardService {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.authService.getTokenUser()
     });
-    console.log(this.baseURL + '?projetouser__id_user=' + idUser);
     return this.http.get<Array<{ cod_empresa: number, empresa: string, cod_projeto: number }>>
     (this.baseURL + '/projetos/?projetouser__id_user=' + idUser,{ headers });
 

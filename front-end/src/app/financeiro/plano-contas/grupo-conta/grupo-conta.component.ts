@@ -15,7 +15,6 @@ export class GrupoContaComponent {
     const novoCard = new SubGrupoContaComponent;
     this.subgrupos.push(novoCard);
     // let i = this.subgrupos.length;
-    // console.log(i);
     
     // this.subgrupos[i].cards.push(novoCard);
   }
