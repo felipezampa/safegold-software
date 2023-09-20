@@ -59,6 +59,8 @@
     align-items: center;
     justify-content: center;
     transition: 0.6s;
+    width: 10rem;
+    height: 2.5rem;
 }
 
 .sg-button:hover {
@@ -144,10 +146,14 @@
     input {
         margin-top: 1rem;
     }
+
 }
 
 @media screen and (max-width:500px) {
     .sg-login-image-container img {
         width: 9rem;
+    }
+    .sg-button{
+      width: 7rem;
     }
 }

@@ -22,12 +22,16 @@ export class LoginComponent {
   error: string = '';
   token = '';
   user: any = {};
+  isLoading!: boolean;
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.isLoading = false;
+   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.authService.login(this.username, this.password)
       .subscribe({
         next: (data) => {

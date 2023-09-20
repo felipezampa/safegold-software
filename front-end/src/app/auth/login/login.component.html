@@ -17,7 +17,10 @@
                   <i class="fa fa-eye" (click)="mostrarSenha()"></i>
               </div>
               <div class="text-center mt-5">
-                <button type="submit" class="sg-button my-2" [disabled]="!loginForm.valid">Login</button>
+                <button type="submit" class="sg-button my-2" [disabled]="!loginForm.valid || isLoading">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                  <span *ngIf="!isLoading">Login</span> 
+                </button>
               </div>
             </form>
           </div>
