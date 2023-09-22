@@ -44,15 +44,18 @@ export class LoginComponent {
                     this.authService.setUser(user); // armazenando o objeto do usuário no UserService
                     sessionStorage.setItem('user', JSON.stringify(user));
                     this.router.navigate(['/dashboard']);
+                    this.isLoading = false;
                   }
                 );
               });
           } else {
             SwalFacade.erro("Erro ao fazer login", "Usuário ou senha incorretos");
+            this.isLoading = false;
           }
         },
         error: () => {
           SwalFacade.erro("Erro ao fazer login", "Usuário ou senha incorretos");
+          this.isLoading = false;
         }
       })
   }

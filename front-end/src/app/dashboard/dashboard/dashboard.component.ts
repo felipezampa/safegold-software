@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/avaliacao'])
     }
   }
+  
   validacaoAcessoAgenda() {
     this.router.navigate(['/agenda'])
   }

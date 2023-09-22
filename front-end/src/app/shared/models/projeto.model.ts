@@ -1,9 +1,11 @@
-import { User } from "./user.model";
 
 export interface Projeto {
-    cod_projeto: number;
-    projeto: string;
-    ativo: number;
-    safegold_ger: number;
-    id_user: User;
+    cod_projeto: number
+    projeto: string
+    ativo: number
+    cod_segmento: any
+    cep: string
+    cidade: string
+    data_cadastro: string
+    data_atualiza: string
 }
