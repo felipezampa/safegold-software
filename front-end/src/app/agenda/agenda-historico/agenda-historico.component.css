@@ -3,8 +3,8 @@
   height: 100vh;
   padding-top: .8rem;
   /* Header Principal dos dois cards */
-  --cor-header: #eda900;
-  --bg-header: #373935;
+  --cor-header: #FFA516;
+  --bg-header: #162233;
   --header-tabela: #2e3241;
   --border-tabela: #cecece;
 }
@@ -19,17 +19,17 @@
 
 #btn-filter {
   /* Botões de action */
-  --cor-action-btn: #373935;
-  --bg-action-btn: #edaa00cc;
-  --hover-bg-action-btn: #373935;
+  --cor-action-btn: #162233;
+  --bg-action-btn: #FFA516cc;
+  --hover-bg-action-btn: #162233;
   --hover-cor-action-btn: #fff;
 }
 
 #btn-semana {
   /* Botões de action */
-  --cor-action-btn: #373935;
-  --bg-action-btn: #edaa00cc;
-  --hover-bg-action-btn: #373935;
+  --cor-action-btn: #162233;
+  --bg-action-btn: #FFA516cc;
+  --hover-bg-action-btn: #162233;
   --hover-cor-action-btn: #fff;
   --disabled-cor: #636363;
 }
@@ -122,7 +122,7 @@
 .sg-button:disabled {
   cursor: not-allowed;
   background-color: var(--disabled-cor);
-  color: var(--white);
+  color: var(--sg-white);
 }
 
 .sg-filter-button {
@@ -161,7 +161,7 @@
 
 /* -------------------------------------------   TAG  ------------------------------------------- */
 h2 {
-  font-family: 'Raleway', sans-serif;
+  font-family: system-ui, sans-serif;
   text-transform: uppercase;
   font-size: 1.3rem;
   letter-spacing: 2px;

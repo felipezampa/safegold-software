@@ -12,21 +12,21 @@ html {
 
 .financeiro {
     --bg-color: #edaa00d0;
-    --bg-color-light: #4144423a;
-    --text-color-hover: #414442;
+    --bg-color-light: #1b2a3d3a;
+    --text-color-hover: #1b2a3d;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
 .agenda {
     --bg-color: #005248;
-    --bg-color-light: #4144423a;
+    --bg-color-light: #1b2a3d3a;
     --text-color-hover: #fff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
 
 .avaliacao {
     --bg-color: #9A7C4E;
-    --bg-color-light: #4144423a;
+    --bg-color-light: #1b2a3d3a;
     --text-color-hover: #fff;
     --box-shadow-color: rgba(106, 105, 106, 0.48);
 }
@@ -89,10 +89,9 @@ html {
 }
 
 .header-image {
-    width: 40rem;
+    width: 35rem;
     display: flex;
     margin: auto;
-    padding-top: 0.625rem;
 }
 
 /* -------------------------------------------   TAG  ------------------------------------------- */

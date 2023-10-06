@@ -7,15 +7,15 @@
     padding-top: 1rem;
     margin-bottom: 1rem;
     --card-cor-before: #fff;
-    --card-bg-before: #373935;
-    --card-cor-hover: #eda900;
+    --card-bg-before: #162233;
+    --card-cor-hover: #FFA516;
 }
 
 #btn-main {
     /* Botões de action */
-    --cor-action-btn: #373935;
-    --bg-action-btn: #edaa00cc;
-    --hover-bg-action-btn: #373935;
+    --cor-action-btn: #162233;
+    --bg-action-btn: #FFA516cc;
+    --hover-bg-action-btn: #162233;
     --hover-cor-action-btn: #fff;
 }
 

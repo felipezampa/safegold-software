@@ -9,9 +9,9 @@
 
 #btn-fechar {
     /* Botões de action */
-    --cor-action-btn: #373935;
+    --cor-action-btn: #162233;
     --bg-action-btn: #c1c1c1;
-    --hover-bg-action-btn: #373935;
+    --hover-bg-action-btn: #162233;
     --hover-cor-action-btn: #fff;
 }
 

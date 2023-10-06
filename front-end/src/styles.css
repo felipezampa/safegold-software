@@ -2,15 +2,11 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 :root {
   /* cores sg */
-  --sg-yellow: #EDA900;
-  --sg-gray: #373935;
+  --sg-yellow: #FFA516;
+  --sg-gray: #162233;
   --sg-green: #005248;
-  --sg-white: #FFEDCB;
+  --sg-white: #F5F5F5;
   --sg-brown: #9A7C4E;
-  /* outros */
-  --black: #000;
-  --white: #fff;
-  --cor-footer: #fff;
 }
 
 html,body{
@@ -22,7 +18,7 @@ html,body{
 }
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .sg-footer {
-  background: var(--cor-footer);
+  background: var(--sg-white);
   text-align: center;
   width: 100%;
   padding-bottom: 1rem;

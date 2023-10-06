@@ -54,7 +54,7 @@ export class LoginComponent {
           }
         },
         error: () => {
-          SwalFacade.erro("Erro ao fazer login", "Usuário ou senha incorretos");
+          SwalFacade.erro("Erro ao fazer login", "Problema no servidor");
           this.isLoading = false;
         }
       })

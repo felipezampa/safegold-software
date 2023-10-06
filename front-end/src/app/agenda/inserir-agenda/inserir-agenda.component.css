@@ -1,11 +1,11 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #inserir-agenda {
-  --primary-color: #eda900;
+  --primary-color: #FFA516;
   --secondary-color: #58524c;
-  --cor-header: #edaa00cc;
+  --cor-header: #FFA516cc;
   --bg-header: #58524c;
   --cor-action-btn: #000000;
-  --bg-action-btn: #edaa00a6;
+  --bg-action-btn: #FFA516cc;
   --readonly: #efefef;
 }
 

@@ -1,13 +1,13 @@
 <div>
     <div *ngIf="currentUser" class="sg-sidebar" id="sidebar">
         <ul>
-            <li class="sg-hover">
+            <li>
                 <a routerLink="/dashboard" class="logo">
-                    <img src="../assets/img/Safegold.svg" alt="Safegold">
+                    <img src="../assets/img/sg-white.svg" alt="Safegold">
                 </a>
             </li>
             <hr class="my-1">
-            <li class="sg-hover">
+            <li>
                 <a class="sg-contexto">
                     <i class="fa-solid fa-layer-group align-middle"></i>
                     <span class="sg-nav-item">
@@ -26,37 +26,37 @@
                 </a>
             </li>
             <hr class="my-1">
-            <li class="sg-hover">
+            <li>
                 <button routerLink="/dashboard" class="sg-anchor">
                     <i class="fa-solid fa-home"></i>
                     <span class="sg-nav-item">Home</span>
                 </button>
             </li>
-            <li class="sg-hover">
+            <li>
                 <button routerLink="/financeiro/dashboard-financeiro" class="sg-anchor" [disabled]="currentRoute == '/financeiro/dashboard-financeiro'">
                     <i class="fa-solid fa-clipboard"></i>
                     <span class="sg-nav-item">Dashboard</span>
                 </button>
             </li>
-            <li class="sg-hover">
+            <li>
                 <button routerLink="/financeiro/conta-fornecedor" class="sg-anchor" [disabled]="currentRoute == '/financeiro/conta-fornecedor'">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="sg-nav-item">Conta-Fornecedor</span>
                 </button>
             </li>
-            <li class="sg-hover" >
+            <li >
                 <button routerLink="/financeiro/plano-de-contas" class="sg-anchor" [disabled]="currentRoute == '/financeiro/plano-de-contas'">
                     <i class="fa-solid fa-list-ol"></i>
                     <span class="sg-nav-item">Plano de Contas</span>
                 </button>
             </li>
-            <li class="sg-hover">
+            <li>
                 <button routerLink="/financeiro/empresas" class="sg-anchor" [disabled]="currentRoute == '/financeiro/empresas'">
                     <i class="fa-solid fa-handshake"></i>
                     <span class="sg-nav-item">Empresas</span>
                 </button>
             </li>
-            <li *ngIf="isSuperuser == true" class="sg-hover">
+            <li *ngIf="isSuperuser == true">
                 <a href="{{adminURL}}/admin/" class="sg-anchor">
                     <i class="fa-solid fa-lock"></i>
                     <span class="sg-nav-item">Admin</span>

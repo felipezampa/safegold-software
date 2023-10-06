@@ -30,7 +30,7 @@ export class SwalFacade {
       icon: 'error',
       title: titulo,
       text: texto,
-      confirmButtonColor: '#EDA900',
+      confirmButtonColor: '#FFA516',
       confirmButtonText: 'Ok'
     })
   }

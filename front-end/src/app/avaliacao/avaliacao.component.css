@@ -2,9 +2,9 @@
 #sidebar {
     --minimizado-sidebar: 5.625rem;
     --hover-sidebar: 20rem;
-    --bg-sidebar: #414442;
+    --bg-sidebar: #1b2a3d;
     --cor-sidebar: #ffffff;
-    --hover-icon: #EDA900;
+    --hover-icon: #FFA516;
     --hover-logout: #E62121;
 }
 /* -------------------------------------------  CLASS ------------------------------------------- */

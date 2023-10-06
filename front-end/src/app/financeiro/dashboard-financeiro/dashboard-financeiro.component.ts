@@ -55,7 +55,7 @@ export class DashboardFinanceiroComponent implements OnInit {
   createBarChart(): void {
     const labels = ["Fornecedores com vínculo", "Fornecedores sem vínculo"];
     const dados = [this.fornecedoresComVinculo, this.fornecedoresSemVinculo];
-    const colors = ["#006472", "#EDA900"];
+    const colors = ["#006472", "#FFA516"];
     new Chart(this.barChart.nativeElement, {
       type: 'doughnut',
       data: {

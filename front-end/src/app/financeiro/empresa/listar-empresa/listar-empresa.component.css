@@ -9,9 +9,9 @@
 
 #btn-options {
     /* Botões de action */
-    --cor-action-btn: #373935;
-    --bg-action-btn: #edaa00cc;
-    --hover-bg-action-btn: #373935;
+    --cor-action-btn: #162233;
+    --bg-action-btn: #FFA516cc;
+    --hover-bg-action-btn: #162233;
     --hover-cor-action-btn: #fff;
 }
 
@@ -82,7 +82,7 @@
 .sg-button:disabled {
     cursor: not-allowed;
     background-color: var(--disabled-cor);
-    color: var(--white);
+    color: var(--sg-white);
 }
 
 .sg-container-tabela {

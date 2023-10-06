@@ -9,18 +9,18 @@
 
 #btn-salvar {
     /* Botões de action */
-    --cor-action-btn: #373935;
-    --bg-action-btn: #edaa00cc;
-    --hover-bg-action-btn: #373935;
+    --cor-action-btn: #162233;
+    --bg-action-btn: #FFA516cc;
+    --hover-bg-action-btn: #162233;
     --hover-cor-action-btn: #fff;
     --disabled-cor: #edaa0075;
 }
 
 #btn-fechar {
     /* Botões de action */
-    --cor-action-btn: #373935;
+    --cor-action-btn: #162233;
     --bg-action-btn: #c1c1c1;
-    --hover-bg-action-btn: #373935;
+    --hover-bg-action-btn: #162233;
     --hover-cor-action-btn: #fff;
 }
 

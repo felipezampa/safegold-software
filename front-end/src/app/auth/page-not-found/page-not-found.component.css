@@ -11,10 +11,10 @@
 }
 
 #safegold {
-    --botao-cor: #414442;
-    --botao-bg: #EDA900;
-    --hover-botao-bg: #414442;
-    --hover-botao-cor: #EDA900;
+    --botao-cor: #1b2a3d;
+    --botao-bg: #FFA516;
+    --hover-botao-bg: #1b2a3d;
+    --hover-botao-cor: #FFA516;
 }
 
 #safegoldbi {
@@ -43,7 +43,7 @@
     font-weight: 500;
     letter-spacing: 1.5px;
     text-align: center;
-    color: var(--white);
+    color: var(--sg-white);
     margin-left: auto;
     margin-right: auto;
     display: flex;

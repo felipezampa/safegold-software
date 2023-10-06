@@ -1,12 +1,14 @@
 <div class="container" id="dashboard">
   <div>
-    <img src="../../../assets/img/Safegold-2.png" alt="" class="header-image">
+    <img src="../../../assets/img/sg-blue.svg" alt="" class="header-image">
   </div>
 
   <hr>
   <div class="row">
     <div class="col-lg-3 col-md-0 col-sm-12"></div>
-    <div class="text-center col-lg-6 col-sm-12"><h4>Bem vindo, {{firstName}}</h4></div>
+    <div class="text-center col-lg-6 col-sm-12">
+      <h4>Bem vindo, {{firstName}}</h4>
+    </div>
     <div class="col-lg-3 col-sm-11 align-items-center  d-flex justify-content-center">
       <button type="button" (click)="logout()" id="btn-logout">
         <i class="fa-solid fa-right-from-bracket mx-1"></i>
@@ -14,19 +16,20 @@
       </button>
     </div>
   </div>
-  <h3 class="text-center mb-4">Escolha a opção desejada:</h3>
+  <h4 class="text-center mb-4">Escolha a opção desejada:</h4>
   <div class="row d-flex justify-content-center">
-    <a class="card financeiro col-lg-3 col-sm-12" (click)="validacaoAcessoFin()">
-        <h1 class="card-span text-center">Financeiro</h1>
-    </a>
     <a class="card agenda col-lg-3 col-md-12" (click)="validacaoAcessoAgenda()">
-        <h1 class="card-span text-center">Agenda Gestores</h1>
+      <h1 class="card-span text-center">Agenda Gestores</h1>
     </a>
-    <a class="card avaliacao col-lg-3 col-md-12" (click)="validacaoAcessoRH()">
+    <a class="card financeiro col-lg-3 col-sm-12" (click)="validacaoAcessoFin()">
+      <h1 class="card-span text-center">Financeiro</h1>
+    </a>
+
+    <!-- <a class="card avaliacao col-lg-3 col-md-12" (click)="validacaoAcessoRH()">
       <div class="sg-card-header">
         <h1 class="card-span text-center">Avaliação de Desempenho</h1>
       </div>
-    </a>
-    
+    </a> -->
+
   </div>
 </div>
