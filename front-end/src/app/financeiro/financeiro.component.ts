@@ -16,7 +16,7 @@ export class FinanceiroComponent implements OnInit {
   projetos!: Projeto[];
   selectedProjetos!: number;
   selectedEmpresa!: number;
-  projetosUnicos!: any[];
+  projetosUnicos!: Projeto[];
   firstName!: string;
   isSuperuser!: boolean;
   adminURL = APP_CONFIG.baseURL;
@@ -59,6 +59,7 @@ export class FinanceiroComponent implements OnInit {
         this.getUniqueProjetos();
       });
   }
+
   getUniqueProjetos() {
     this.projetosUnicos = [];
     this.projetos.forEach((projeto) => {
@@ -67,8 +68,10 @@ export class FinanceiroComponent implements OnInit {
       }
       // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
       this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
+      this.projetosUnicos.filter(projeto => projeto.acesso_financeiro = true);
     });
   }
+  
   onProjectChange() {
     if (this.selectedProjetos) {
       this.dashboardService.alteraProjeto(this.selectedProjetos)

@@ -109,7 +109,7 @@ export class EditarAgendaComponent {
         } else {
           this.projetos = data.filter(
             // Filtra os projetos para mostrar apenas os que estão ativos
-            emp => emp.ativo == 1
+            proj => proj.ativo == true
           );
           this.projetos
           // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
@@ -138,6 +138,7 @@ export class EditarAgendaComponent {
     })
 
   }
+
   /**
    * @description Lista todos os tipos de agenda para selecionar como opção na tag select input
    */

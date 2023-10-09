@@ -21,11 +21,23 @@ class Estado(models.Model):
     def __str__(self):
         return "{}".format(self.nome)
 
+class SegmentoProjeto(models.Model):
+    segmento = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'segmento_projeto'
+        verbose_name_plural = 'Segmentos'
+    
+    def __str__(self):
+        return "{}".format(self.segmento)
+
 class Projetos(models.Model):
     cod_projeto = models.BigAutoField(primary_key=True)
     projeto = models.CharField(max_length=50, blank=True, null=True)
     cod_segmento = models.ForeignKey('SegmentoProjeto', models.DO_NOTHING, db_column='cod_segmento', blank=True, null=True)
-    ativo = models.IntegerField(blank=True, null=True)
+    ativo = models.BooleanField(blank=True, null=True)
+    acesso_financeiro = models.BooleanField(blank=True, null=True)
     cep = models.CharField(max_length=20, blank=True, null=True)
     cidade = models.CharField(max_length=100, blank=True, null=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
@@ -77,13 +89,3 @@ class ProjetoUser(models.Model):
     def __str__(self):
         return "{} -- {}".format(self.cod_projeto, self.id_user)
     
-class SegmentoProjeto(models.Model):
-    segmento = models.CharField(max_length=30, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'segmento_projeto'
-        verbose_name_plural = 'Segmentos'
-    
-    def __str__(self):
-        return "{}".format(self.segmento)

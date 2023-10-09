@@ -10,8 +10,7 @@
       </div>
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
-        <select [(ngModel)]="tipoSelecionado" name="cod_tipo">
-          <!-- <option value="10" [selected]="!tipoSelecionado">Projeto</option> -->
+        <select [(ngModel)]="tipoSelecionado" (ngModelChange)="onTipoChange()" name="cod_tipo">
           <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
@@ -20,7 +19,7 @@
       <div class="row">
         <small class="text-muted ps-3">Projeto</small>
         <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
-          <option [value]="0"> --- </option> 
+          <option [value]="'0'"> --- </option> 
           <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
             {{projeto.projeto}}
           </option>

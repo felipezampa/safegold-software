@@ -40,7 +40,12 @@ class MatrizAnaliticaFornecedorSerializer(serializers.ModelSerializer):
         try:
             return super().to_representation(instance)
         except Fornecedor.MultipleObjectsReturned:
-            return {'error': 'Mais de um Fornecedor associado a esta Matriz Analítica.'}
+            return {
+                'error': 'Mais de um Fornecedor associado a esta Matriz Analítica.',
+                'instancia com erro': {
+                    'cod_matriz_analitica_fornecedor': instance.cod_matriz_analitica_fornecedor
+                }
+            }
 
 class FornecedorSerializer(serializers.ModelSerializer):
 

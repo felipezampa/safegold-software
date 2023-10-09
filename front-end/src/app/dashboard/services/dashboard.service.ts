@@ -21,7 +21,6 @@ export class DashboardService {
     });
     return this.http.get<Array<{ cod_empresa: number, empresa: string, cod_projeto: number }>>
     (this.baseURL + '/projetos/?projetouser__id_user=' + idUser,{ headers });
-
     
   }
 

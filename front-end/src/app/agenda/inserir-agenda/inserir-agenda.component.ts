@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
@@ -86,7 +85,7 @@ export class InserirAgendaComponent {
         } else {
           this.projetos = data.filter(
             // Filtra os projetos para mostrar apenas os que estão ativos
-            emp => emp.ativo == 1
+            proj => proj.ativo == true
           );
           this.projetos
           // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
@@ -107,8 +106,33 @@ export class InserirAgendaComponent {
         } else {
           this.tipoAgenda = tipo;
           this.tipoAgenda.sort((a, b) => (a.tipo ?? '').localeCompare(b.tipo ?? ''));
+          console.log(this.tipoAgenda)
         }
       }
     });
+  }
+
+  onTipoChange(){
+    console.log(this.tipoSelecionado);
+    const tipo = this.tipoSelecionado;
+
+    if (tipo == 10 || tipo == 6 || tipo == 8) {
+      //  PROJETO || FECHAMENTO || OVERVIEW
+      //  listar os projetos
+      this.listProjetos();
+      console.log('PROJETO || FECHAMENTO || OVERVIEW');
+    } else if(tipo == 7){
+      //  ADMINISTRATIVO
+      this.projetos = [];
+    } else  if (tipo == 2 || tipo == 3 || tipo == 5 || tipo == 9) {
+      //  FOLGA || FERIADO || PROSPECÇÂO || CURSO
+      this.projetos = [];
+      // fazer um projeto safegold talvez aqui
+    } else if (tipo == 4) {
+      //  EVENTO
+      //  Talvez vou ter fazer algo aqui, eventos pode ter mais de um, o mais comum é a convenção, mas podem ter outros
+      this.listProjetos();
+      console.log('EVENTO');
+    }
   }
 }

@@ -84,7 +84,7 @@ class ProjetosSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Projetos
-        fields = ('cod_projeto','projeto','ativo','cod_segmento','ativo','cep','cidade','data_cadastro','data_atualiza','id_user')
+        fields = ('cod_projeto','projeto','ativo','cod_segmento','cep','cidade','estado','acesso_financeiro','id_user')
 
 
 class EmpresasSerializer(serializers.ModelSerializer):

@@ -97,7 +97,7 @@
                                     <td>{{ag.funcao_gestor.funcao}}</td>
                                     <td>{{ag.funcao_gestor.username}}</td>
                                     <td>{{ag.tipo}}</td>
-                                    <td>{{ag.projeto}}</td>
+                                    <td>{{ag.projeto != null ? ag.projeto : ag.tipo}}</td>
                                     <td>{{ag.horas}}</td>
                                     <td>{{ag.atendimento}}</td>
                                 </tr>

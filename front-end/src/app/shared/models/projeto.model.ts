@@ -1,11 +1,11 @@
 
 export interface Projeto {
-    cod_projeto: number
-    projeto: string
-    ativo: number
-    cod_segmento: any
-    cep: string
-    cidade: string
-    data_cadastro: string
-    data_atualiza: string
+  cod_projeto: number
+  projeto: string
+  ativo: boolean
+  cod_segmento: number
+  cep: string
+  cidade: string
+  estado: number
+  acesso_financeiro: boolean
 }
