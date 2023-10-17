@@ -28,6 +28,8 @@ router.register('empresas', EmpresasViewSet, basename= 'Empresas')
 router.register('projetos', ProjetosViewSet, basename= 'Projetos')
 router.register('user', UserViewSet, basename= 'User')
 router.register('projeto_user', ProjetoUserViewSet, basename= 'projeto_user')
+router.register('projetos_segmentos', SegmentoProjetoViewSet, basename= 'projetos_segmentos')
+router.register('estado', EstadoViewSet, basename='estado')
 
 # FINANCEIRO
 router.register('fin_grupo_contas',GrupoContasViewSet, basename='fin_grupo_contas')

@@ -87,3 +87,21 @@ class ProjetoUserViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['cod_projeto', 'id_user']  # Update the filterset_fields
     search_fields = ['cod_projeto__projeto']  # Add search fields if needed
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class SegmentoProjetoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = SegmentoProjeto.objects.all()
+    serializer_class = serializers.SegmentoProjetoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['segmento']
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+class EstadoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = Estado.objects.all()
+    serializer_class = serializers.EstadoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['nome', 'uf']

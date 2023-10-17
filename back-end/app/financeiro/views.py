@@ -50,15 +50,15 @@ class FornecedorViewset(viewsets.ModelViewSet):
     filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa',  'matriz', 'fornecedor']
 
 
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = financeiro_models.MatrizAnaliticaFornecedor.objects.all()
     serializer_class = serializers.MatrizAnaliticaFornecedorSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['cod_matriz_analitica_fornecedor', 'cod_empresa', 'vinculo', 'cod_conta_analitica', 'cod_fornecedor']
+    filterset_fields = ['cod_matriz_analitica_fornecedor', 'vinculo', 'cod_conta_analitica', 'cod_fornecedor']
     
     @action(detail=True, methods=['patch'])
     def update_fields(self, request, pk=None):

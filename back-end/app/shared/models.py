@@ -10,9 +10,8 @@ CHOICES_BOOL = (
 
 ########################### GERAL
 class Estado(models.Model):
-    id = models.BigAutoField(primary_key=True)
+    uf = models.CharField(primary_key=True,max_length=2)
     nome = models.CharField(max_length=60, blank=True, null=True)
-    uf = models.CharField(max_length=2, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -57,6 +56,7 @@ class Projetos(models.Model):
         if not self.cod_projeto:
             # This is a new instance, set the created_at field
             self.created_at = timezone.now()
+            self.ativo = True
         super().save(*args, **kwargs)
 
 class Empresas(models.Model):

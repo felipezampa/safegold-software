@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService } from '../services/agenda.service';
+import { InserirProjetoComponent } from '../inserir-projeto/inserir-projeto.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { AgendaService } from '../services/agenda.service';
   templateUrl: './inserir-agenda.component.html',
   styleUrls: ['./inserir-agenda.component.css']
 })
-export class InserirAgendaComponent {
+export class InserirAgendaComponent implements OnInit{
   @ViewChild('formAgenda') formAgenda!: NgForm;
 
   projetos!: Projeto[];
@@ -20,12 +21,13 @@ export class InserirAgendaComponent {
   horas!: number[];
 
   projetoSelecionado!: number;
-  atendimentoSelecionado!: string;
-  horasSelecionado!: number;
+  atendimentoSelecionado!: string | null;
+  horasSelecionado!: number | null;
   tipoSelecionado!: number;
   dataSelecionada!: Date | string;
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService) { }
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService,
+               private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listProjetos();
@@ -120,19 +122,33 @@ export class InserirAgendaComponent {
       //  PROJETO || FECHAMENTO || OVERVIEW
       //  listar os projetos
       this.listProjetos();
-      console.log('PROJETO || FECHAMENTO || OVERVIEW');
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Remoto';
     } else if(tipo == 7){
       //  ADMINISTRATIVO
       this.projetos = [];
-    } else  if (tipo == 2 || tipo == 3 || tipo == 5 || tipo == 9) {
-      //  FOLGA || FERIADO || PROSPECÇÂO || CURSO
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Presencial';
+    } else  if (tipo == 5 || tipo == 9) {
+      // PROSPECÇÂO || CURSO
       this.projetos = [];
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Presencial';
       // fazer um projeto safegold talvez aqui
+    } else if (tipo == 2 || tipo == 3 ) {
+      //  FOLGA || FERIADO 
+      this.projetos = [];
+      this.horasSelecionado = null;
+      this.atendimentoSelecionado = null;
     } else if (tipo == 4) {
       //  EVENTO
       //  Talvez vou ter fazer algo aqui, eventos pode ter mais de um, o mais comum é a convenção, mas podem ter outros
       this.listProjetos();
       console.log('EVENTO');
     }
+  }
+
+  novoProjeto() {
+    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg'});
   }
 }

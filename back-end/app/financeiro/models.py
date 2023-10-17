@@ -59,7 +59,7 @@ class Fornecedor(models.Model):
         db_table = 'fornecedores_geral'
         verbose_name_plural = 'Fornecedor'
     def __str__(self):
-        return "Fornecedor: {} / Empresa: {} ".format(self.fornecedor, self.empresa)
+        return "Fornecedor: {} / Empresa: {} ".format(self.fornecedor, self.cod_empresa)
 
 class MatrizAnaliticaFornecedor(models.Model):
     cod_matriz_analitica_fornecedor = models.AutoField(primary_key=True)

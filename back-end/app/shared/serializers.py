@@ -86,6 +86,15 @@ class ProjetosSerializer(serializers.ModelSerializer):
         model = Projetos
         fields = ('cod_projeto','projeto','ativo','cod_segmento','cep','cidade','estado','acesso_financeiro','id_user')
 
+class SegmentoProjetoSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = SegmentoProjeto
+        fields = '__all__'
+
+class EstadoSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Estado
+        fields = '__all__'
 
 class EmpresasSerializer(serializers.ModelSerializer):
     # projetouser = ProjetoUserSerializer()

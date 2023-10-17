@@ -55,17 +55,16 @@ export class MatrizContaFornecedorService {
       );
   }
 
-  deleteVinculo(id: number): Observable<any> {
+  deleteVinculo(matriz: MatrizAnalitica): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
 
-    // // Deleta uma instancia da API
-    return this.http.get<MatrizAnalitica[]>(this.baseURL + '?cod_empresa=' + this.authService.getCurrentCod_empresa(), { headers });
-    // // return this.http.delete(this.baseURL + id + '/', {headers})
-    //   // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
-    // .pipe(
-    //   tap(() => {
-    //     this._refreshPage$.next();
-    //   })
-    // );
+    // Atualiza os campos de conta analitica para nulo e o vinculo para 0  
+    return this.http.put(this.baseURL + matriz.cod_matriz_analitica_fornecedor + '/', matriz, { headers })
+      // Essa parte abaixo é responsável por atualizar a página quando uma instancia for atualizada
+      .pipe(
+        tap(() => {
+          this._refreshPage$.next();
+        })
+      );
   }
 }

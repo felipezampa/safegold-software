@@ -16,8 +16,8 @@ export class ExcluirContaFornecedorComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  excluir(id: number) {
-    this.matrizService.deleteVinculo(id).subscribe(
+  excluir(matriz: MatrizAnalitica) {
+    this.matrizService.deleteVinculo(matriz).subscribe(
       {
         next: () => {
           this.activeModal.close();

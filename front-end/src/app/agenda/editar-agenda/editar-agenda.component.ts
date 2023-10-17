@@ -125,7 +125,7 @@ export class EditarAgendaComponent {
    * entao esse metodo vai procurar esse projeto e caso ele nao esteja ativo entao adiciona ele ao array
    */
   getProjeto(id: number){
-    this.projetoService.buscarProjeto(id).subscribe({
+    this.projetoService.find(id).subscribe({
       next: (proj: any) => {
         if (proj.ativo == 0){
           

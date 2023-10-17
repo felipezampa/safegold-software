@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth';
-import { APP_CONFIG, Projeto, User } from 'src/app/shared';
+import { APP_CONFIG, Estado, Projeto, SegmentoProjeto, User, ViaCEP } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ import { APP_CONFIG, Projeto, User } from 'src/app/shared';
 export class ProjetoService {
 
   private baseURL = APP_CONFIG.baseURL + 'api/projetos/';
+  private segmentoURL = APP_CONFIG.baseURL + 'api/projetos_segmentos/';
+  private estadoURL = APP_CONFIG.baseURL + 'api/estado/';
   private _refreshPage$ = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -19,7 +21,8 @@ export class ProjetoService {
     return this._refreshPage$;
   }
 
-  createProjeto(value: { cod_projeto: number; projeto: string; ativo: number; safegold_ger: number; id_user: User }): Observable<any> {
+
+  create(value: Projeto | any): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.post(this.baseURL, value, {headers})
@@ -31,7 +34,7 @@ export class ProjetoService {
       );
   }
 
-  updateProjeto(id: number | undefined, value: { cod_projeto: number; projeto: string; ativo: number; safegold_ger: number; id_user: User }): Observable<any> {
+  update(id: number | undefined, value:  Projeto | any): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.put(this.baseURL + id + '/', value, {headers})
@@ -45,17 +48,16 @@ export class ProjetoService {
 
   listProjetos(): Observable<Projeto[]> {
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-
     return this.http.get<Projeto[]>(this.baseURL, { headers});
   }
 
-  buscarProjeto(id: number): Observable<Projeto[]> {
+  find(id: number): Observable<Projeto[]> {
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.get<Projeto[]>(this.baseURL + id + '/', { headers});
   }
 
-  deleteProjeto(id: number) {
+  delete(id: number) {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.delete(this.baseURL + id + '/', {headers})
@@ -65,5 +67,19 @@ export class ProjetoService {
           this._refreshPage$.next();
         })
       );
+  }
+
+  listSegmentos(): Observable<SegmentoProjeto[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+    return this.http.get<SegmentoProjeto[]>(this.segmentoURL, { headers});
+  }
+
+  listEstados(): Observable<Estado[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+    return this.http.get<Estado[]>(this.estadoURL, { headers});
+  } 
+
+  getEndereco(cep: number): Observable<ViaCEP>{
+    return this.http.get<ViaCEP>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 }

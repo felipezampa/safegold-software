@@ -12,3 +12,4 @@ export * from './user.model';
 export * from './funcaogestor.model';
 export * from './empresa.model';
 export * from './payload.model';
+export * from './segmentoprojeto.model';

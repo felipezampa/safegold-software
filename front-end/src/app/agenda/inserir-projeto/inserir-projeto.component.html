@@ -1,0 +1,51 @@
+<div id="inserir-agenda">
+  <div class="modal-header modal-lg d-flex justify-content-center">
+    <h5 id="modalLabel">NOVO PROJETO</h5>
+  </div>
+  <div class="modal-body text-center">
+    <form #formProjeto="ngForm">
+      <div class="row">
+        <small class="text-muted ps-3">Projeto</small>
+        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="nomeProjeto">
+      </div>
+      <div class="row">
+        <div class="col p-0">
+          <small class="text-muted ps-3">Segmento</small>
+          <select name="cod_segmento" ngModel>
+            <option [value]="segmento.id" *ngFor="let segmento of segmentos">{{segmento.segmento}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col me-3">
+          <div class="row">
+            <small class="text-muted ps-3">CEP</small>
+            <input type="text" name="cep" class="sg-input" [(ngModel)]="cepEndereco" placeholder="00000-000" mask="00000-000" (mouseleave)="preencherEndereco()">
+          </div>
+        </div>
+        <div class="col ms-3">
+          <div class="row">
+            <small class="text-muted ps-3">Cidade</small>
+            <input type="text" name="cidade" class="sg-input" placeholder="Insira a cidade do projeto" [(ngModel)]="cidadeEndereco">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col p-0">
+          <small class="text-muted ps-3">Estado</small>
+          <select name="estado" [(ngModel)]="estadoEndereco">
+            <option [value]="estado.uf" *ngFor="let estado of estados">{{estado.nome}}</option>
+          </select>
+        </div>
+      </div>
+    </form> 
+  </div>
+  <div class="modal-footer justify-content-center align-items-center">
+    <button class="sg-footer-button sg-save col-6" (click)="salvar()">
+      <i class="fa-solid fa-check"></i>
+    </button>
+    <button class="sg-footer-button sg-add col-6" (click)="this.activeModal.close()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+</div>
