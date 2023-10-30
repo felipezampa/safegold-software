@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-from datetime import timedelta
+from sshtunnel import SSHTunnelForwarder
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
@@ -108,13 +108,28 @@ WSGI_APPLICATION = 'sg_software.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+postgres_hostname = "localhost" # localhost
+postgres_host_port = 5432 # 5432
+postgres_user = 'postgres' # postgres
+postgres_password = 'postgres' # postgres
+
+# Configuração SSH
+
+# SSHTunnelForwarder(
+#     ('ssh.pythonanywhere.com',22),
+#     ssh_username='Safegold',
+#     ssh_password='Soft2022sg@BI#ware',
+#     remote_bind_address=(postgres_hostname, postgres_host_port)
+# ).start()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sg_db',
-        'USER': 'postgres',
-        'PASSWORD':'postgres',
-        'HOST': 'localhost'
+        'USER': postgres_user,
+        'PASSWORD': postgres_password,
+        'HOST': postgres_hostname,
+        'PORT': postgres_host_port,
     }
 }
 
@@ -122,15 +137,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
@@ -166,7 +172,7 @@ CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication','rest_framework.authentication.SessionAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication','rest_framework.authentication.SessionAuthentication','rest_framework.authentication.BasicAuthentication'
 ],
 }
 

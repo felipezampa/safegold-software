@@ -50,8 +50,8 @@ class FornecedorViewset(viewsets.ModelViewSet):
     filterset_fields = ['cod_fornecedor', 'cod_empresa', 'cnpj', 'empresa',  'matriz', 'fornecedor']
 
 
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class MatrizAnaliticaFornecedorViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
