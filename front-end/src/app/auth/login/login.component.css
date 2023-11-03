@@ -1,13 +1,6 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #sg-login {
     height: 100vh;
-    --background-color: #162233;
-    --login-btn: #FFA516;
-    --hover-btn: #1b2a3d;
-    --disabled-btn: #ffa6165e;
-    --input-cor: #1b2a3d;
-    --input-hover: #FFA516;
-    --input-bg: #fafafa;
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
@@ -36,13 +29,13 @@
 }
 
 .sg-background {
-    background-color: var(--background-color);
+    background-color: var(--sg-blue);
     margin: auto;
     padding: .2rem 0;
 }
 
 .sg-button {
-    background: var(--login-btn);
+    background: var(--sg-yellow);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     border: none;
@@ -64,11 +57,11 @@
 }
 
 .sg-button:hover {
-    background: var(--hover-btn);
+    background: var(--sg-blue);
 }
 
 .sg-button:disabled {
-    background: var(--disabled-btn);
+    background: var(--sg-yellow-dimmed);
 }
 
 .sg-login-form-container {
@@ -88,11 +81,11 @@
 
 .sg-input {
     border: none;
-    background-color: var(--input-bg);
+    background-color: var(--sg-white);
     font-size: 1.2rem;
     font-weight: 500;
     width: 100%;
-    border-bottom: 2px solid var(--input-cor);
+    border-bottom: 2px solid var(--sg-blue);
     outline: none;
     transition: 0.6s;
     margin-top: 1rem;
@@ -101,12 +94,12 @@
 
 .sg-input[type=text]:focus,
 .sg-input[type=text]:active {
-    border-bottom: 2px solid var(--input-hover);
+    border-bottom: 2px solid var(--sg-yellow);
 }
 
 .sg-input[type=password]:focus,
 .sg-input[type=password]:active {
-    border-bottom: 2px solid var(--input-hover);
+    border-bottom: 2px solid var(--sg-yellow);
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */

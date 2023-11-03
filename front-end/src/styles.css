@@ -3,10 +3,13 @@
 :root {
   /* cores sg */
   --sg-yellow: #FFA516;
-  --sg-gray: #162233;
+  --sg-blue: #162233;
   --sg-green: #005248;
   --sg-white: #F5F5F5;
-  --sg-brown: #9A7C4E;
+  --sg-black: #000000;
+
+  --sg-blue-dimmed: #162233aa;
+  --sg-yellow-dimmed: #FFA516aa;
 }
 
 html,body{
@@ -54,18 +57,18 @@ html,body{
 }
 
 .fa-pencil:hover {
-  color: #000;
+  color: var(--sg-black);
 }
 
 /* -----------------------------------------  SCROLLBAR  -----------------------------------------*/
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: #F5F5F5;
+  background-color: var(--sg-white);
 }
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #ffffff;
+  background-color: var(--sg-white);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -73,5 +76,5 @@ html,body{
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #000000;
+  background: var(--sg-black);
 }

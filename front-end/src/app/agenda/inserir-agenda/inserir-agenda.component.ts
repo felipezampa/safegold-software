@@ -13,21 +13,21 @@ import { InserirProjetoComponent } from '../inserir-projeto/inserir-projeto.comp
   templateUrl: './inserir-agenda.component.html',
   styleUrls: ['./inserir-agenda.component.css']
 })
-export class InserirAgendaComponent implements OnInit{
+export class InserirAgendaComponent implements OnInit {
   @ViewChild('formAgenda') formAgenda!: NgForm;
 
   projetos!: Projeto[];
   tipoAgenda!: TipoAgenda[];
   horas!: number[];
 
-  projetoSelecionado!: number;
+  projetoSelecionado!: number | null;
   atendimentoSelecionado!: string | null;
   horasSelecionado!: number | null;
   tipoSelecionado!: number;
   dataSelecionada!: Date | string;
 
   constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService,
-               private modalService: NgbModal) { }
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listProjetos();
@@ -36,7 +36,7 @@ export class InserirAgendaComponent implements OnInit{
     this.atendimentoSelecionado = 'Remoto';
     this.horasSelecionado = 8;
     this.tipoSelecionado = 10; // projeto
-    this.projetoSelecionado = 0;
+    this.projetoSelecionado = null;
   }
 
   /**  
@@ -108,47 +108,49 @@ export class InserirAgendaComponent implements OnInit{
         } else {
           this.tipoAgenda = tipo;
           this.tipoAgenda.sort((a, b) => (a.tipo ?? '').localeCompare(b.tipo ?? ''));
-          console.log(this.tipoAgenda)
         }
       }
     });
   }
 
-  onTipoChange(){
-    console.log(this.tipoSelecionado);
+  onTipoChange() {
+    let data = this.listProjetos();
     const tipo = this.tipoSelecionado;
-
+    this.listProjetos();
     if (tipo == 10 || tipo == 6 || tipo == 8) {
       //  PROJETO || FECHAMENTO || OVERVIEW
-      //  listar os projetos
-      this.listProjetos();
+      // this.listProjetos();
+      // this.projetos = data.filter(
+      //   proj => proj.cod_projeto > 1 //Safegold
+      // )
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Remoto';
-    } else if(tipo == 7){
-      //  ADMINISTRATIVO
-      this.projetos = [];
+    } else if (tipo == 7 || tipo == 4) {
+      //  ADMINISTRATIVO ||  EVENTO
+      this.projetos = this.projetos.filter(
+        proj => proj.cod_projeto == 1 //Safegold
+      )
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Presencial';
-    } else  if (tipo == 5 || tipo == 9) {
+      this.projetoSelecionado = 1;
+    } else if (tipo == 5 || tipo == 9) {
       // PROSPECÇÂO || CURSO
       this.projetos = [];
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Presencial';
+      this.projetoSelecionado = null;
       // fazer um projeto safegold talvez aqui
-    } else if (tipo == 2 || tipo == 3 ) {
+    } else if (tipo == 2 || tipo == 3) {
       //  FOLGA || FERIADO 
       this.projetos = [];
       this.horasSelecionado = null;
       this.atendimentoSelecionado = null;
-    } else if (tipo == 4) {
-      //  EVENTO
-      //  Talvez vou ter fazer algo aqui, eventos pode ter mais de um, o mais comum é a convenção, mas podem ter outros
-      this.listProjetos();
-      console.log('EVENTO');
+      this.projetoSelecionado = null;
     }
   }
 
   novoProjeto() {
-    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg'});
+    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg' });
   }
+
 }

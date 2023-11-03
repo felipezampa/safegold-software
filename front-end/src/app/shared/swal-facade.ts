@@ -102,12 +102,12 @@ export class SwalFacade {
    * @param texto Opcional, um texto extra de ajuda
    * 
    */
-  static excluir(titulo: string, texto?: string): Promise<any> {
+  static excluir(button: string,titulo: string, texto?: string): Promise<any> {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top',
       showConfirmButton: true,
-      confirmButtonText: 'Excluir',
+      confirmButtonText: button,
       confirmButtonColor: '#DD0707',
       showCancelButton: true,
       cancelButtonColor: '#5e5e5e',

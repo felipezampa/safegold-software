@@ -31,7 +31,7 @@
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .modal-header {
-    background-color: var(--sg-gray);
+    background-color: var(--sg-blue);
 }
 
 .sg-gerencia {
@@ -68,7 +68,7 @@
 
 .sg-input[type=text]:focus,
 .sg-input[type=text]:active {
-    border-bottom: 2px solid var(--sg-gray);
+    border-bottom: 2px solid var(--sg-blue);
 }
 
 .sg-input:read-only {

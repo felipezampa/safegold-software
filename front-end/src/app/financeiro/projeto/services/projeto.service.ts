@@ -22,7 +22,7 @@ export class ProjetoService {
   }
 
 
-  create(value: Projeto | any): Observable<any> {
+  create(value: any): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
 
     return this.http.post(this.baseURL, value, {headers})

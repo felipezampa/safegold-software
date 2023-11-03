@@ -31,8 +31,7 @@ export class InserirProjetoComponent implements OnInit{
   salvar(){
     console.log(this.formProjeto.value);
     if(this.nomeProjeto != null){
-      const formDataJSON = JSON.stringify(this.formProjeto);
-      this.projetoService.create(formDataJSON).subscribe();
+      this.projetoService.create(this.formProjeto.value).subscribe();
       SwalFacade.sucesso("Agenda salva com sucesso!");
       this.activeModal.close();
     } else {

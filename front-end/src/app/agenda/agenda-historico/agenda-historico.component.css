@@ -3,8 +3,7 @@
   height: 100vh;
   padding-top: .8rem;
   /* Header Principal dos dois cards */
-  --cor-header: #FFA516;
-  --bg-header: #162233;
+  /* --sg-yellow: red; */
   --header-tabela: #2e3241;
   --border-tabela: #cecece;
 }
@@ -31,7 +30,7 @@
   --bg-action-btn: #FFA516cc;
   --hover-bg-action-btn: #162233;
   --hover-cor-action-btn: #fff;
-  --disabled-cor: #636363;
+  --disabled-cor: #162233bb;
 }
 
 #btn-logout {
@@ -52,8 +51,8 @@
 
 /* -------------------------------------------   ID   ------------------------------------------- */
 #sg-agenda-header {
-  background-color: var(--bg-header);
-  color: var(--cor-header);
+  background-color: var(--sg-blue);
+  color: var(--sg-yellow);
 }
 
 #options {
@@ -84,7 +83,7 @@
   border: none;
   font-size: 1rem;
   font-weight: 500;
-  border-bottom: 2px solid var(--cor-header);
+  border-bottom: 2px solid var(--sg-yellow);
   outline: none;
   height: 1.75rem;
 }
@@ -95,7 +94,7 @@
   border: none;
   font-size: 1rem;
   font-weight: 500;
-  border-bottom: 2px solid var(--cor-header);
+  border-bottom: 2px solid var(--sg-yellow);
   outline: none;
   height: 1.75rem;
 }

@@ -36,7 +36,7 @@
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .card-header {
-    background-color: var(--sg-gray);
+    background-color: var(--sg-blue);
 }
 
 .input-with-icon {
@@ -124,7 +124,7 @@
 .sg-input[type=text]:focus,
 .sg-input[type=text]:active {
     transform: scaleX(1);
-    border-bottom: 2px solid var(--sg-gray);
+    border-bottom: 2px solid var(--sg-blue);
     outline: none;
 }
 
@@ -136,7 +136,7 @@ h2 {
     font-size: 1.3rem;
     letter-spacing: 2px;
     font-weight: 700;
-    color: var(--sg-gray);
+    color: var(--sg-blue);
     color: var(--sg-yellow);
     margin: 0;
 }

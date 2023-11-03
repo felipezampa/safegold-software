@@ -4,7 +4,6 @@
   --secondary-color: #58524c;
   --cor-header: #FFA516cc;
   --bg-header: #58524c;
-  --cor-action-btn: #000000;
   --bg-action-btn: #FFA516cc;
   --readonly: #efefef;
 }
@@ -80,7 +79,7 @@ select:active {
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .sg-button {
   background-color: var(--bg-action-btn);
-  color: var(--sg-gray);
+  color: var(--sg-blue);
   font-weight: 600;
   margin: .25rem;
   padding: .3rem .5rem;
@@ -91,7 +90,7 @@ select:active {
 }
 
 .sg-button:hover {
-  background-color: var(--sg-gray);
+  background-color: var(--sg-blue);
   color: var(--sg-white);
 }
 
@@ -124,11 +123,11 @@ select:active {
 
 .card-deck {
   padding: .5rem 1rem 0 1rem;
-  border-top: 1px solid #0000002d;
+  border-top: 1px solid var(--sg-black);
 }
 
 .modal-header {
-  background-color: var(--sg-gray);
+  background-color: var(--sg-blue);
 }
 
 .modal-footer {

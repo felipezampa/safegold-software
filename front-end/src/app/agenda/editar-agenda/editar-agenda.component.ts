@@ -1,11 +1,10 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Agenda, FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { Agenda, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
+import { InserirProjetoComponent } from '../inserir-projeto/inserir-projeto.component';
 import { AgendaService } from '../services/agenda.service';
-import { AuthService } from 'src/app/auth';
-import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -21,13 +20,13 @@ export class EditarAgendaComponent {
   tipoAgenda!: TipoAgenda[];
   horas!: number[];
 
-  projetoSelecionado!: number;
-  atendimentoSelecionado!: string;
-  horasSelecionado!: number;
+  projetoSelecionado!: number | null;
+  atendimentoSelecionado!: string | null;
+  horasSelecionado!: number | null;
   tipoSelecionado!: number;
   dataSelecionada!: Date | string;
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService) { }
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listProjetos();
@@ -87,7 +86,7 @@ export class EditarAgendaComponent {
       SwalFacade.alerta("Não é possível excluir", "A agenda é mais antiga do que um mês!");
     } else {
       // Caso contrario abre um popup SweetAlert com a opção de excluir ou cancelar
-      SwalFacade.excluir("Deseja excluir a agenda?", "A ação não poderá ser desfeita")
+      SwalFacade.excluir("Excluir","Deseja excluir a agenda?", "A ação não poderá ser desfeita")
         .then((result) => {
           if (result.isConfirmed) {
             this.agendaService.excluirAgenda(this.agenda.cod_agenda).subscribe();
@@ -153,5 +152,45 @@ export class EditarAgendaComponent {
         }
       }
     });
+  }
+
+  onTipoChange() {
+    let data = this.listProjetos();
+    const tipo = this.tipoSelecionado;
+    this.listProjetos();
+    if (tipo == 10 || tipo == 6 || tipo == 8) {
+      //  PROJETO || FECHAMENTO || OVERVIEW
+      // this.listProjetos();
+      // this.projetos = data.filter(
+      //   proj => proj.cod_projeto > 1 //Safegold
+      // )
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Remoto';
+    } else if (tipo == 7 || tipo == 4) {
+      //  ADMINISTRATIVO ||  EVENTO
+      this.projetos = this.projetos.filter(
+        proj => proj.cod_projeto == 1 //Safegold
+      )
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Presencial';
+      this.projetoSelecionado = 1;
+    } else if (tipo == 5 || tipo == 9) {
+      // PROSPECÇÂO || CURSO
+      this.projetos = [];
+      this.horasSelecionado = 8;
+      this.atendimentoSelecionado = 'Presencial';
+      this.projetoSelecionado = null;
+      // fazer um projeto safegold talvez aqui
+    } else if (tipo == 2 || tipo == 3) {
+      //  FOLGA || FERIADO 
+      this.projetos = [];
+      this.horasSelecionado = null;
+      this.atendimentoSelecionado = null;
+      this.projetoSelecionado = null;
+    }
+  }
+
+  novoProjeto() {
+    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg' });
   }
 }

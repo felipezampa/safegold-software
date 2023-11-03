@@ -1,20 +1,16 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #inserir-agenda {
-  --primary-color: #FFA516;
-  --secondary-color: #58524c;
   --cor-header: #FFA516cc;
-  --bg-header: #58524c;
-  --cor-action-btn: #000000;
   --bg-action-btn: #edaa00a6;
   --readonly: #efefef;
 }
 
 .sg-add {
   /* Botões de adicionar dos cards de dias */
-  --cor-card-footer: #58524c;
-  --bg-card-footer: #58524c30;
+  --cor-card-footer: #162233;
+  --bg-card-footer: #16223330;
   --hover-cor-card-footer: #fff;
-  --hover-bg-card-footer: #58524c;
+  --hover-bg-card-footer: #162233;
   
 }
 
@@ -58,7 +54,7 @@ select {
   font-size: 1rem;
   font-weight: 500;
   width: 100%;
-  border-bottom: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--sg-blue);
   outline: none;
   margin-bottom: 1rem;
   padding-left: 1rem;
@@ -80,7 +76,7 @@ input[type=date]:focus,
 input[type=date]:active,
 select:focus,
 select:active {
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid var(--sg-yellow);
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
@@ -117,11 +113,11 @@ select:active {
 
 .card-deck {
   padding: .5rem 1rem 0 1rem;
-  border-top: 1px solid #0000002d;
+  border-top: 1px solid var(--sg-black);
 }
 
 .modal-header {
-  background-color: var(--sg-gray);
+  background-color: var(--sg-blue);
 }
 
 .modal-footer {

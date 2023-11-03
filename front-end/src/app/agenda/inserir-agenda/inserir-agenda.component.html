@@ -20,17 +20,16 @@
         <div class="col p-0">
           <small class="text-muted ps-3">Projeto</small>
           <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
-            <option [value]="'0'"> --- </option> 
+            <option [value]="null"> --- </option> 
             <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
               {{projeto.projeto}}
             </option>
           </select>
         </div>
-        <div class="col-2 pe-0 float-right"  [hidden]="tipoSelecionado != 8">
+        <div class="col-2 pe-0 justify-content-end"  [hidden]="tipoSelecionado != 8">
           <button type="button" class="sg-button " (click)="novoProjeto()">
             <i class="fa-solid fa-plus mx-1"></i>
-            <span>Novo</span>
-        </button>
+          </button>
         </div>  
       </div>
       <div class="row">
