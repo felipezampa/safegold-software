@@ -31,8 +31,13 @@ export class AgendaService {
   }
 
   listarAgenda(idUser: number): Observable<any> {
+    console.log(idUser);
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, {headers}); // fazer o id_user ser dinamico depois
+    if(idUser != null){
+      return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, {headers}); 
+    } else{
+      return this.http.get(this.agendaUrl, {headers}); 
+    }
   }
 
   findAgenda(id: number): Observable<any> {
