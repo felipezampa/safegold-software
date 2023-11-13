@@ -13,7 +13,7 @@ class AgTipo(models.Model):
         verbose_name_plural = 'Tipo'
 
     def __str__(self):
-        return '{} - {}'.format(self.id_tipo, self.tipo)
+        return f'{self.tipo}'
 
 class SgArea(models.Model):
     id_area = models.AutoField(primary_key=True)
@@ -26,7 +26,7 @@ class SgArea(models.Model):
         verbose_name_plural = 'Area'
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.id_area, self.id_unidade,self.area)
+        return f'{self.id_unidade} - {self.area}'
 
 class SgFuncao(models.Model):
     id_funcao = models.AutoField(primary_key=True)
@@ -40,7 +40,7 @@ class SgFuncao(models.Model):
         verbose_name_plural = 'Funcao'
 
     def __str__(self):
-        return '{} - {} - {} - {}'.format(self.id_funcao, self.id_area,self.funcao, self.carga_horaria)
+        return f'{self.id_area} - {self.funcao}'
 
 class SgFuncaoGestor(models.Model):
     id_func_gest = models.AutoField(primary_key=True)
@@ -55,7 +55,7 @@ class SgFuncaoGestor(models.Model):
         verbose_name_plural = 'Funcao Gestor'
 
     def __str__(self):
-        return '{} - {} - {} - {} - {}'.format(self.id_func_gest, self.id_funcao, self.id_user, self.data_inicio, self.data_fim)
+        return f'{self.id_funcao.funcao} - {self.id_user.username} - Data Fim: {self.data_fim}'
 
 class SgUnidadeNegocio(models.Model):
     id_unidade = models.AutoField(primary_key=True)
@@ -67,8 +67,8 @@ class SgUnidadeNegocio(models.Model):
         verbose_name_plural = 'Unidade Negocio'
 
     def __str__(self):
-        return '{} - {}'.format(self.id_unidade, self.unidade)
-    
+        return f'{self.unidade}'
+
 class AgFactAgenda(models.Model):
     cod_agenda = models.AutoField(primary_key=True)
     data = models.DateField(blank=True, null=True)
@@ -85,4 +85,4 @@ class AgFactAgenda(models.Model):
         verbose_name_plural = 'Agenda'
 
     def __str__(self):
-        return '{}  - {} . {} '.format(self.data, self.cod_projeto, self.funcao_gestor)
+        return f'{self.data}  - {self.cod_projeto} / {self.funcao_gestor.id_user.username} '
