@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'app.agenda.apps.AgendaConfig',
     'app.avaliacao.apps.AvaliacaoConfig',
     'app.shared.apps.SharedConfig',
+    'app.landing_page.apps.LandingPageConfig'
 ]
 
 # =================  Link que salvou a minha vida, problemas com o REST: https://github.com/adamchainz/django-cors-headers  =================

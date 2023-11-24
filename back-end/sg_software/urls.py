@@ -19,6 +19,7 @@ from app.shared.views import *
 from app.financeiro.views import *
 from app.agenda.views import *
 from app.auth.views import *
+from app.landing_page.views import *
 
 from rest_framework import routers
 
@@ -45,7 +46,9 @@ router.register('auth_user_permission', AuthUserPermissionsViewSet, basename='au
 router.register('ag_funcao_gestor', SgFuncaoGestorViewSet, basename='sg_funcao_gestor')
 router.register('ag_agenda', AgFactAgendaViewSet, basename='ag_agenda')
 router.register('ag_tipo', AgTipoViewSet, basename='ag_tipo')
- 
+
+# LANDING PAGE
+router.register('landing_page', LandingPageViewSet, basename='landing_page')
 
 urlpatterns = [
     path('',IndexView.as_view(),name='index'),
