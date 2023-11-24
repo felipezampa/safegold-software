@@ -4,7 +4,7 @@ import { AgendaComponent, AgendaHistoricoComponent } from './agenda';
 import { AuthGuard, LoginComponent, PageNotFoundComponent } from './auth';
 import { AutoAvaliacaoComponent, AvaliacaoComponent } from './avaliacao';
 import { DashboardComponent } from './dashboard';
-import { DashboardFinanceiroComponent, FinanceiroComponent, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
+import { DashboardFinanceiroComponent, FinanceiroComponent, FinanceiroGuard, ListarContaFornecedorComponent, ListarEmpresaComponent, ListarPlanoContasComponent } from './financeiro';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,13 +13,13 @@ const routes: Routes = [
   {
     path: 'financeiro',
     component: FinanceiroComponent, children: [
-      { path: '', component: DashboardFinanceiroComponent, canActivate: [AuthGuard] },
-      { path: 'empresas', component: ListarEmpresaComponent, canActivate: [AuthGuard] },
-      { path: 'plano-de-contas', component: ListarPlanoContasComponent, canActivate: [AuthGuard] },
-      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent, canActivate: [AuthGuard] },
-      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent, canActivate: [AuthGuard] },
+      { path: '', component: DashboardFinanceiroComponent, canActivate: [FinanceiroGuard] },
+      { path: 'empresas', component: ListarEmpresaComponent, canActivate: [FinanceiroGuard] },
+      { path: 'plano-de-contas', component: ListarPlanoContasComponent, canActivate: [FinanceiroGuard] },
+      { path: 'conta-fornecedor', component: ListarContaFornecedorComponent, canActivate: [FinanceiroGuard] },
+      { path: 'dashboard-financeiro', component: DashboardFinanceiroComponent, canActivate: [FinanceiroGuard] },
     ],
-    canActivate: [AuthGuard]
+    canActivate: [FinanceiroGuard]
   },
   {
     path: 'agenda',
