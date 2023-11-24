@@ -1,16 +1,17 @@
 <div id="inserir-agenda">
   <div class="modal-header modal-lg d-flex justify-content-center">
-    <h5 id="modalLabel">EDITAR AGENDA</h5>
+    <h5 id="modalLabel" *ngIf="canEdit">EDITAR AGENDA</h5>
+    <h5 id="modalLabel" *ngIf="!canEdit">VER AGENDA</h5>
   </div>
   <div class="modal-body text-center">
     <form #formAgenda="ngForm">
       <div class="row">
         <small class="text-muted ps-3">Data</small>
-        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada" readonly>
+        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada" readonly [disabled]="!canEdit">
       </div>
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
-        <select [(ngModel)]="tipoSelecionado" (ngModelChange)="onTipoChange()" name="cod_tipo">
+        <select [(ngModel)]="tipoSelecionado" (ngModelChange)="onTipoChange()" name="cod_tipo" [disabled]="!canEdit">
           <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
@@ -19,7 +20,7 @@
       <div class="row">
         <div class="col p-0">
           <small class="text-muted ps-3">Projeto</small>
-          <select [(ngModel)]="projetoSelecionado" name="cod_projeto">
+          <select [(ngModel)]="projetoSelecionado" name="cod_projeto" [disabled]="!canEdit">
             <option [value]="null"> --- </option> 
             <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
               {{projeto.projeto}}
@@ -35,14 +36,14 @@
       <div class="row">
         <div class="col ps-0">
           <small class="text-muted ps-3">Atendimento</small>
-          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null">
+          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null" [disabled]="!canEdit">
             <option [value]="'Remoto'">Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
         </div>
         <div class="col pe-0">
           <small class="text-muted ps-3">Horas</small>
-          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null">
+          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null" [disabled]="!canEdit">
             <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
           </select>
         </div>
@@ -50,7 +51,7 @@
 
     </form>
   </div>
-  <div class="modal-footer justify-content-center align-items-center">
+  <div class="modal-footer justify-content-center align-items-center" *ngIf="canEdit">
     <button class="sg-footer-button sg-save col-4" (click)="salvar()">
       <i class="fa-solid fa-check"></i>
     </button>
@@ -59,6 +60,11 @@
     </button>
     <button class="sg-footer-button sg-remove col-4" (click)="excluir()">
       <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+  <div class="modal-footer justify-content-center align-items-center" *ngIf="!canEdit">
+    <button class="sg-footer-button sg-add sg-view-only col" (click)="this.activeModal.close()">
+      <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
 </div>

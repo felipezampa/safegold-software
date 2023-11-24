@@ -24,6 +24,7 @@ export class AgendaHistoricoComponent implements OnInit {
   subscription: Subscription | undefined;
   gestores!: User[];
   isLoading!: boolean;
+  canEdit: boolean = true;
 
   constructor(private agendaService: AgendaService, private authService: AuthService, private modalService: NgbModal) { }
 
@@ -45,6 +46,7 @@ export class AgendaHistoricoComponent implements OnInit {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
     // Adicionar o objeto a ser editado
     modalRef.componentInstance.agenda = ag;
+    modalRef.componentInstance.canEdit = this.canEdit;
   }
 
   preencherAgenda(){
@@ -121,7 +123,15 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   filtrarDataGestor(ini: Date | string, fim: Date | string) {
+    if(this.authService.getCurrentUser() != this.usuarioSelecionado){
+      this.canEdit = false;
+    } else{
+      this.canEdit = true;
+    }
+
     this.isLoading = true;
+    console.log(this.usuarioSelecionado);
+    
     // Limpa a flag dos botões selecionados
     this.semanaSelecionada = '';
 

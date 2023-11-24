@@ -15,6 +15,7 @@ import { AgendaService } from '../services/agenda.service';
 export class EditarAgendaComponent {
   @ViewChild('formAgenda') formAgenda!: NgForm;
   @Input() agenda!: Agenda;
+  @Input() canEdit!: boolean;
 
   projetos!: Projeto[];
   tipoAgenda!: TipoAgenda[];
