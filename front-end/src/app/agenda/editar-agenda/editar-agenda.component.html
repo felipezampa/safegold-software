@@ -7,7 +7,8 @@
     <form #formAgenda="ngForm">
       <div class="row">
         <small class="text-muted ps-3">Data</small>
-        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada" readonly [disabled]="!canEdit">
+        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada" readonly
+          [disabled]="!canEdit">
       </div>
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
@@ -15,35 +16,35 @@
           <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
-        </select>    
+        </select>
       </div>
       <div class="row">
         <div class="col p-0">
           <small class="text-muted ps-3">Projeto</small>
           <select [(ngModel)]="projetoSelecionado" name="cod_projeto" [disabled]="!canEdit">
-            <option [value]="null"> --- </option> 
+            <option [value]="null"> --- </option>
             <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
               {{projeto.projeto}}
             </option>
           </select>
         </div>
-        <div class="col-2 pe-0 justify-content-end"  [hidden]="tipoSelecionado != 8">
+        <div class="col-2 pe-0 justify-content-end" [hidden]="tipoSelecionado != 8">
           <button type="button" class="sg-button" (click)="novoProjeto()">
             <i class="fa-solid fa-plus mx-1"></i>
           </button>
-        </div> 
+        </div>
       </div>
       <div class="row">
         <div class="col ps-0">
           <small class="text-muted ps-3">Atendimento</small>
-          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null" [disabled]="!canEdit">
+          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null || !canEdit">
             <option [value]="'Remoto'">Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
         </div>
         <div class="col pe-0">
           <small class="text-muted ps-3">Horas</small>
-          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null" [disabled]="!canEdit">
+          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null || !canEdit">
             <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
           </select>
         </div>

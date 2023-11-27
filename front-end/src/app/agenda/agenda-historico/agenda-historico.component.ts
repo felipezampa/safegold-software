@@ -43,14 +43,14 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   editarAgenda(ag: Agenda) {
-    const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg'});
+    const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg' });
     // Adicionar o objeto a ser editado
     modalRef.componentInstance.agenda = ag;
     modalRef.componentInstance.canEdit = this.canEdit;
   }
 
-  preencherAgenda(){
-    const modalRef = this.modalService.open(InserirAgendaComponent, { size: 'lg'});
+  preencherAgenda() {
+    const modalRef = this.modalService.open(InserirAgendaComponent, { size: 'lg' });
   }
 
   /**
@@ -87,7 +87,7 @@ export class AgendaHistoricoComponent implements OnInit {
     });
   }
 
-  listarGestor(){
+  listarGestor() {
     this.authService.listUsers().subscribe({
       next: (gestor: any[]) => {
         if (gestor == null) {
@@ -123,9 +123,9 @@ export class AgendaHistoricoComponent implements OnInit {
   }
 
   filtrarDataGestor(ini: Date | string, fim: Date | string) {
-    if(this.authService.getCurrentUser() != this.usuarioSelecionado){
+    if (this.authService.getCurrentUser() != this.usuarioSelecionado) {
       this.canEdit = false;
-    } else{
+    } else {
       this.canEdit = true;
     }
 
@@ -144,9 +144,7 @@ export class AgendaHistoricoComponent implements OnInit {
       // Atribui os valores dos inputs nos atributos locais
       this.diaFim = fim;
       this.diaInicio = ini;
-     
-      
-      this.listarAgenda(ini, fim,this.usuarioSelecionado);
+      this.listarAgenda(ini, fim, this.usuarioSelecionado);
     }
   }
 
@@ -206,7 +204,7 @@ export class AgendaHistoricoComponent implements OnInit {
     this.listarAgenda(ini, fim, this.usuarioSelecionado);
   }
 
-  verProximaSemana(){
+  verProximaSemana() {
     this.isLoading = true;
     // Flag do Botao
     this.semanaSelecionada = 'proxima';

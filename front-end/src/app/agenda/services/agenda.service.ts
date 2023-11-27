@@ -20,8 +20,8 @@ export class AgendaService {
   }
 
   salvarAgenda(data: any) {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.post(this.agendaUrl, data, {headers})
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.post(this.agendaUrl, data, { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -31,11 +31,12 @@ export class AgendaService {
   }
 
   listarAgenda(idUser: number): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-    if(idUser != null){
-      return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, {headers}); 
-    } else{
-      return this.http.get(this.agendaUrl, {headers}); 
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    // tive que passar -1 quando seleciona todos pois dava erro quando era null
+    if (idUser > 0) {
+      return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, { headers });
+    } else {
+      return this.http.get(this.agendaUrl, { headers });
     }
   }
 
@@ -44,8 +45,8 @@ export class AgendaService {
   }
 
   updateAgenda(id: number, data: any) {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.patch(this.agendaUrl + id + '/', data, {headers})
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.patch(this.agendaUrl + id + '/', data, { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -80,7 +81,7 @@ export class AgendaService {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.tipoUrl, { headers });
   }
-  
+
   findTipo(id: number): Observable<any> {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.get(this.tipoUrl + '?id_tipo=' + id, { headers });
