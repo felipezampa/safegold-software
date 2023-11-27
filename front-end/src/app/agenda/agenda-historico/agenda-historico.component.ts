@@ -95,6 +95,22 @@ export class AgendaHistoricoComponent implements OnInit {
         } else {
           this.gestores = gestor;
           this.gestores.sort((a, b) => (a.first_name ?? '').localeCompare(b.first_name ?? ''));
+          this.gestores.sort((a, b) => {
+            const firstNameA = (a.id ?? '');
+            const firstNameB = (b.id ?? '');
+          
+            // Se 'firstNameA' é o valor que você deseja colocar primeiro, retorna -1
+            if (firstNameA == this.authService.getCurrentUser()) {
+              return -1;
+            }
+            // Se 'firstNameB' é o valor que você deseja colocar primeiro, retorna 1
+            if (firstNameB == this.authService.getCurrentUser()) {
+              return 1;
+            }
+          
+            // Caso contrário, compara normalmente usando localeCompare
+            return firstNameA - firstNameB;
+          });
         }
       }
     });
@@ -130,8 +146,6 @@ export class AgendaHistoricoComponent implements OnInit {
     }
 
     this.isLoading = true;
-    console.log(this.usuarioSelecionado);
-    
     // Limpa a flag dos botões selecionados
     this.semanaSelecionada = '';
 

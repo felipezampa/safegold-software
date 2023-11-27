@@ -6,12 +6,13 @@
     <form #formProjeto="ngForm">
       <div class="row">
         <small class="text-muted ps-3">Projeto</small>
-        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="nomeProjeto">
+        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="projeto.projeto">
       </div>
       <div class="row">
         <div class="col p-0">
           <small class="text-muted ps-3">Segmento</small>
-          <select name="cod_segmento" ngModel>
+          <select name="cod_segmento" [(ngModel)]="projeto.cod_segmento">
+            <option [value]="undefined"> --- </option>
             <option [value]="segmento.id" *ngFor="let segmento of segmentos">{{segmento.segmento}}</option>
           </select>
         </div>
@@ -20,20 +21,21 @@
         <div class="col me-3">
           <div class="row">
             <small class="text-muted ps-3">CEP</small>
-            <input type="text" name="cep" class="sg-input" [(ngModel)]="cepEndereco" placeholder="00000-000" mask="00000-000" (mouseleave)="preencherEndereco()">
+            <input type="text" name="cep" class="sg-input" [(ngModel)]="projeto.cep" placeholder="00000-000" mask="00000-000" (mouseleave)="preencherEndereco()">
           </div>
         </div>
         <div class="col ms-3">
           <div class="row">
             <small class="text-muted ps-3">Cidade</small>
-            <input type="text" name="cidade" class="sg-input" placeholder="Insira a cidade do projeto" [(ngModel)]="cidadeEndereco">
+            <input type="text" name="cidade" class="sg-input" placeholder="Insira a cidade do projeto" [(ngModel)]="projeto.cidade">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col p-0">
           <small class="text-muted ps-3">Estado</small>
-          <select name="estado" [(ngModel)]="estadoEndereco">
+          <select name="estado" [(ngModel)]="projeto.estado">
+            <option [value]="undefined"> --- </option>
             <option [value]="estado.uf" *ngFor="let estado of estados">{{estado.nome}}</option>
           </select>
         </div>

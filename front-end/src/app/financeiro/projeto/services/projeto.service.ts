@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth';
-import { APP_CONFIG, Estado, Projeto, SegmentoProjeto, User, ViaCEP } from 'src/app/shared';
+import { APP_CONFIG, Estado, Projeto, SegmentoProjeto } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,10 @@ export class ProjetoService {
   }
 
 
-  create(value: any): Observable<any> {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+  create(projeto: Projeto): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
 
-    return this.http.post(this.baseURL, value, {headers})
+    return this.http.post(this.baseURL, projeto, { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for criada
       .pipe(
         tap(() => {
@@ -34,10 +34,10 @@ export class ProjetoService {
       );
   }
 
-  update(id: number | undefined, value:  Projeto | any): Observable<any> {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+  update(id: number | undefined, value: Projeto | any): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
 
-    return this.http.put(this.baseURL + id + '/', value, {headers})
+    return this.http.put(this.baseURL + id + '/', value, { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for alterada
       .pipe(
         tap(() => {
@@ -47,20 +47,20 @@ export class ProjetoService {
   }
 
   listProjetos(): Observable<Projeto[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.get<Projeto[]>(this.baseURL, { headers});
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.get<Projeto[]>(this.baseURL, { headers });
   }
 
   find(id: number): Observable<Projeto[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
 
-    return this.http.get<Projeto[]>(this.baseURL + id + '/', { headers});
+    return this.http.get<Projeto[]>(this.baseURL + id + '/', { headers });
   }
 
   delete(id: number) {
-    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser()});
+    const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
 
-    return this.http.delete(this.baseURL + id + '/', {headers})
+    return this.http.delete(this.baseURL + id + '/', { headers })
       // Essa parte abaixo é responsável por atualizar a página quando uma instancia for deletada
       .pipe(
         tap(() => {
@@ -70,16 +70,16 @@ export class ProjetoService {
   }
 
   listSegmentos(): Observable<SegmentoProjeto[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.get<SegmentoProjeto[]>(this.segmentoURL, { headers});
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.get<SegmentoProjeto[]>(this.segmentoURL, { headers });
   }
 
   listEstados(): Observable<Estado[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
-    return this.http.get<Estado[]>(this.estadoURL, { headers});
-  } 
+    const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser() });
+    return this.http.get<Estado[]>(this.estadoURL, { headers });
+  }
 
-  getEndereco(cep: number): Observable<ViaCEP>{
-    return this.http.get<ViaCEP>(`https://viacep.com.br/ws/${cep}/json/`);
+  getEndereco(cep: number): Observable<any> {
+    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 }

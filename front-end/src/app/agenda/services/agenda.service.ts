@@ -31,7 +31,6 @@ export class AgendaService {
   }
 
   listarAgenda(idUser: number): Observable<any> {
-    console.log(idUser);
     const headers = new HttpHeaders({ 'Content-Type': 'application', Authorization: 'Token ' + this.authService.getTokenUser()});
     if(idUser != null){
       return this.http.get(this.agendaUrl + '?funcao_gestor__id_user=' + idUser, {headers}); 

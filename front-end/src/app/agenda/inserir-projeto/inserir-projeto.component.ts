@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjetoService } from 'src/app/financeiro/projeto';
-import { Estado, SegmentoProjeto, SwalFacade, ViaCEP } from 'src/app/shared';
+import { Estado, Projeto, SegmentoProjeto, SwalFacade } from 'src/app/shared';
 
 @Component({
   selector: 'app-inserir-projeto',
@@ -12,26 +12,22 @@ import { Estado, SegmentoProjeto, SwalFacade, ViaCEP } from 'src/app/shared';
 export class InserirProjetoComponent implements OnInit{
 
   @ViewChild('formProjeto') formProjeto!: NgForm;
+  projeto!: Projeto;
   segmentos!: SegmentoProjeto[];
   estados!: Estado[];
-
-  estadoEndereco!: string;
-  cidadeEndereco!: string;
   cepEndereco!: number;
-  nomeProjeto!: number;
 
   constructor(public activeModal: NgbActiveModal, private projetoService: ProjetoService) {}
 
   ngOnInit(): void {
+    this.projeto = new Projeto();
     this.listarSegmentos();
     this.listarEstados();
-    this.estadoEndereco = 'PR';
   }
 
   salvar(){
-    console.log(this.formProjeto.value);
-    if(this.nomeProjeto != null){
-      this.projetoService.create(this.formProjeto.value).subscribe();
+    if(this.projeto.projeto != null){
+      this.projetoService.create(this.projeto).subscribe();
       SwalFacade.sucesso("Agenda salva com sucesso!");
       this.activeModal.close();
     } else {
@@ -58,10 +54,12 @@ export class InserirProjetoComponent implements OnInit{
   }
 
   preencherEndereco() {
-    this.projetoService.getEndereco(this.cepEndereco).subscribe({
-      next: (cep: ViaCEP) => {
-        this.cidadeEndereco = cep.localidade,
-        this.estadoEndereco = cep.uf
+    let cep = this.projeto.cep != undefined ? Number(this.projeto.cep) : 0
+    
+    this.projetoService.getEndereco(cep).subscribe({
+      next: (cep) => {
+        this.projeto.cidade = cep.localidade,
+        this.projeto.estado = cep.uf
       }
     })
   }

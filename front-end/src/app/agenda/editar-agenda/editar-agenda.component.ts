@@ -126,7 +126,6 @@ export class EditarAgendaComponent {
    */
   getProjeto(id: number){
     let tipo = this.tipoSelecionado;
-    console.log();
     
     if(tipo !== 2 && tipo !== 3 && tipo !== 5 && tipo !== 9){
       this.projetoService.find(id).subscribe({
