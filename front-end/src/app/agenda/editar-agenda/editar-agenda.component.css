@@ -1,7 +1,10 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
 #inserir-agenda {
+  --primary-color: #FFA516;
+  --secondary-color: #58524c;
   --cor-header: #FFA516cc;
-  --bg-action-btn: #edaa00a6;
+  --bg-header: #58524c;
+  --bg-action-btn: #FFA516cc;
   --readonly: #efefef;
 }
 
@@ -92,6 +95,23 @@ select:active {
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
+.sg-button {
+  background-color: var(--bg-action-btn);
+  color: var(--sg-blue);
+  font-weight: 600;
+  margin: .25rem;
+  padding: .3rem .5rem;
+  height: 2.7rem;
+  border-radius: 8px;
+  transition: 0.5s;
+  border: none;
+}
+
+.sg-button:hover {
+  background-color: var(--sg-blue);
+  color: var(--sg-white);
+}
+
 .sg-date {
   margin-bottom: .625rem;
   border: none;

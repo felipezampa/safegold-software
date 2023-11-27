@@ -125,18 +125,25 @@ export class EditarAgendaComponent {
    * entao esse metodo vai procurar esse projeto e caso ele nao esteja ativo entao adiciona ele ao array
    */
   getProjeto(id: number){
-    this.projetoService.find(id).subscribe({
-      next: (proj: any) => {
-        if (proj.ativo == 0){
-          
-          this.projetos.push(proj)
-          // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
-          this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
-        }
-      },
-      error: () => {SwalFacade.erro("Projeto não encontrado","Não foi possível encontrar o projeto da agenda")}
-    })
+    let tipo = this.tipoSelecionado;
+    console.log();
+    
+    if(tipo !== 2 && tipo !== 3 && tipo !== 5 && tipo !== 9){
+      this.projetoService.find(id).subscribe({
+        next: (proj: any) => {
+          if (proj.ativo == 0){
+            
+            this.projetos.push(proj)
+            // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
+            this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
+          }
+        },
+        error: () => {SwalFacade.erro("Projeto não encontrado","Não foi possível encontrar o projeto da agenda")}
+      })
 
+    } else{
+      // se não tiver projetos não precisa buscar
+    }
   }
 
   /**
@@ -156,11 +163,11 @@ export class EditarAgendaComponent {
   }
 
   onTipoChange() {
-    let data = this.listProjetos();
     const tipo = this.tipoSelecionado;
-    this.listProjetos();
+
     if (tipo == 10 || tipo == 6 || tipo == 8) {
-      //  PROJETO || FECHAMENTO || OVERVIEW
+      //  PROJETO || FECHAMENTO || OVERVIEW 
+      this.listProjetos();
       // this.listProjetos();
       // this.projetos = data.filter(
       //   proj => proj.cod_projeto > 1 //Safegold
@@ -168,6 +175,7 @@ export class EditarAgendaComponent {
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Remoto';
     } else if (tipo == 7 || tipo == 4) {
+      this.listProjetos();
       //  ADMINISTRATIVO ||  EVENTO
       this.projetos = this.projetos.filter(
         proj => proj.cod_projeto == 1 //Safegold

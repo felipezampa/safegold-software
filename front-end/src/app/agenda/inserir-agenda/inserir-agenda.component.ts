@@ -114,11 +114,11 @@ export class InserirAgendaComponent implements OnInit {
   }
 
   onTipoChange() {
-    let data = this.listProjetos();
     const tipo = this.tipoSelecionado;
-    this.listProjetos();
+
     if (tipo == 10 || tipo == 6 || tipo == 8) {
-      //  PROJETO || FECHAMENTO || OVERVIEW
+      //  PROJETO || FECHAMENTO || OVERVIEW 
+      this.listProjetos();
       // this.listProjetos();
       // this.projetos = data.filter(
       //   proj => proj.cod_projeto > 1 //Safegold
@@ -126,6 +126,7 @@ export class InserirAgendaComponent implements OnInit {
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Remoto';
     } else if (tipo == 7 || tipo == 4) {
+      this.listProjetos();
       //  ADMINISTRATIVO ||  EVENTO
       this.projetos = this.projetos.filter(
         proj => proj.cod_projeto == 1 //Safegold
