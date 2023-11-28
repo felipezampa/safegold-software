@@ -21,13 +21,17 @@ class SgFuncaoSerializers(serializers.ModelSerializer):
 
 class SgFuncaoGestorSerializers(serializers.ModelSerializer):
     funcao = serializers.StringRelatedField(source='id_funcao.funcao')
-    username = serializers.StringRelatedField(source='id_user.first_name')
+    username = serializers.SerializerMethodField()
     area = serializers.StringRelatedField(source='id_funcao.id_area.area')
     unidade_de_negocios = serializers.StringRelatedField(source='id_funcao.id_area.id_unidade.unidade')
 
     class Meta:
         model = agenda_models.SgFuncaoGestor
         fields = '__all__'
+    
+    def get_username(self, obj):
+        # Concatenate first_name and last_name of the related user
+        return f"{obj.id_user.first_name} {obj.id_user.last_name}"
         
 class SgUnidadedeNegocioSerializers(serializers.ModelSerializer):
     class Meta:

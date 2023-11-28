@@ -31,7 +31,7 @@
                                 <input type="date" name="diaFim" [(ngModel)]="diaFim">
                                 <select name="gestor" id="" [(ngModel)]="usuarioSelecionado">
                                   <option [value]=-1>Todos</option>
-                                  <option  *ngFor="let gestor of gestores" [value]="gestor.id">{{gestor.first_name}} <hr> </option>
+                                  <option  *ngFor="let gestor of gestores" [value]="gestor.id">{{gestor.first_name + ' ' + gestor.last_name}}<hr> </option>
                                 </select>
                                 <button type="button" class="sg-filter-button" id="btn-filter" (click)="filtrarDataGestor(diaInicio,diaFim)">
                                     <i class="fa-solid fa-filter mx-1"></i>

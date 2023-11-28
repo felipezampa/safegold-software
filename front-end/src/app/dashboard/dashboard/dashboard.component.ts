@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     this.user_acesso_fin = this.authService.getUserAcessoFin();
     this.user_acesso_av = this.authService.getUserAcessoAv();
     this.user_is_head = this.authService.getUserisHead();
-    this.firstName = this.authService.getUsername();
+    this.firstName = this.authService.getFirstName();
     this.is_superuser = this.authService.getIsSuperUser();
     this.getProjetos();
     const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');

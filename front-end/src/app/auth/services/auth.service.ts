@@ -70,11 +70,18 @@ export class AuthService {
     return CurrentProjeto ? JSON.parse(CurrentProjeto).cod_projeto : null;
   }
 
-  getUsername() {
+  getFirstName() {
     const currentUser = sessionStorage.getItem('user');
     const username = currentUser ? JSON.parse(currentUser).first_name : null;
     return username
   }
+
+  getLastName() {
+    const currentUser = sessionStorage.getItem('user');
+    const username = currentUser ? JSON.parse(currentUser).last_name : null;
+    return username
+  }
+
 
   getCurrentUser() {
     const currentUser = sessionStorage.getItem('user');

@@ -36,7 +36,7 @@ export class FinanceiroComponent implements OnInit {
     });
     this.setCurrentUser();
     this.isSuperuser = this.authService.getIsSuperUser();
-    this.firstName = this.authService.getUsername();
+    this.firstName = this.authService.getFirstName();
 
     // chama a função getProjetos novamente para obter os projetos mais recentes do usuário
     this.dashboardService.getProjetos(this.authService.getCurrentUser())

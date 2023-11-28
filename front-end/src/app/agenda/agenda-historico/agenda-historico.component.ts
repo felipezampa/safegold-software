@@ -30,7 +30,7 @@ export class AgendaHistoricoComponent implements OnInit {
 
   ngOnInit(): void {
     // Nome do usuario para mostrar no header do primeiro cartao
-    this.username = this.authService.getUsername();
+    this.username = this.authService.getFirstName();
     const idGestor = this.authService.getCurrentUser();
     this.usuarioSelecionado = idGestor;
 

@@ -27,7 +27,7 @@ export class DashboardFinanceiroComponent implements OnInit {
     this.currentEmpresa = this.authService.getCurrentNome_empresa();
     this.isLoading = true;
     this.getFornecedores();
-    this.username = this.authService.getUsername();
+    this.username = this.authService.getFirstName();
   }
 
   getFornecedores(): void {
