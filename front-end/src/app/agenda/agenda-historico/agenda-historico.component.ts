@@ -37,7 +37,7 @@ export class AgendaHistoricoComponent implements OnInit {
     // Garante que as datas que aparecam sejam as da semana atual
     this.verSemanaAtual();
     this.subscription = this.agendaService.refreshPage$.subscribe(() => {
-      this.verSemanaAtual();
+      this.filtrarDataGestor(this.diaInicio, this.diaFim);
     })
     this.listarGestor();
   }
@@ -77,10 +77,10 @@ export class AgendaHistoricoComponent implements OnInit {
       ),
       error: err => (
         this.isLoading = false,
-        SwalFacade.alerta('Nenhum dado encontrado!',err)
+        SwalFacade.alerta('Nenhum dado encontrado!', err)
       ),
       complete: () => (
-        this.isLoading = false, 
+        this.isLoading = false,
         // Ordena de forma crescente
         this.agenda.sort((a, b) => new Date(a.data).getTime() - new Date(b.data).getTime())
       )
