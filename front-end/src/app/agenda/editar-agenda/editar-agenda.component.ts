@@ -21,11 +21,7 @@ export class EditarAgendaComponent {
   tipoAgenda!: TipoAgenda[];
   horas!: number[];
 
-  projetoSelecionado!: number | null;
-  atendimentoSelecionado!: string | null;
   horasSelecionado!: number | null;
-  tipoSelecionado!: number;
-  dataSelecionada!: Date | string;
 
   constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private modalService: NgbModal) { }
 
@@ -44,12 +40,13 @@ export class EditarAgendaComponent {
     // Nem todos os valores passados pelo formulario serao necessarios para fazer o patch
     // por isso eu somente seleciono aqueles que me interessam
     let formValues = {
-      atendimento: this.formAgenda.value.atendimento,
+      atendimento: this.agenda.atendimento,
       cod_projeto: this.formAgenda.value.cod_projeto,
-      cod_tipo: this.formAgenda.value.cod_tipo,
+      cod_tipo: this.agenda.cod_tipo,
       horas: this.formAgenda.value.horas
     };
-
+    console.log(formValues);
+    
     try {
       this.agendaService.updateAgenda(this.agenda.cod_agenda, formValues).subscribe();
       SwalFacade.sucesso("Agenda atualizada com sucesso!");
@@ -63,11 +60,7 @@ export class EditarAgendaComponent {
    * @description Atribui ao formulario os valores contidos no objeto a ser editado
    */
   getAgenda() {
-    this.dataSelecionada = this.agenda.data;
-    this.atendimentoSelecionado = this.agenda.atendimento;
     this.horasSelecionado = Number(this.agenda.horas);
-    this.projetoSelecionado = this.agenda.cod_projeto;
-    this.tipoSelecionado = this.agenda.cod_tipo;
     this.getProjeto(this.agenda.cod_projeto)
   }
 
@@ -80,14 +73,14 @@ export class EditarAgendaComponent {
     const oneMonthAgo = new Date();
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
     // Data selecionada do objeto
-    const objectDate = new Date(this.dataSelecionada);
+    const objectDate = new Date(this.agenda.data);
 
     if (objectDate < oneMonthAgo) {
       // Se a data do objeto eh mais antiga que um mes atras a partir de hoje
       SwalFacade.alerta("Não é possível excluir", "A agenda é mais antiga do que um mês!");
     } else {
       // Caso contrario abre um popup SweetAlert com a opção de excluir ou cancelar
-      SwalFacade.excluir("Excluir","Deseja excluir a agenda?", "A ação não poderá ser desfeita")
+      SwalFacade.excluir("Excluir", "Deseja excluir a agenda?", "A ação não poderá ser desfeita")
         .then((result) => {
           if (result.isConfirmed) {
             this.agendaService.excluirAgenda(this.agenda.cod_agenda).subscribe();
@@ -124,23 +117,23 @@ export class EditarAgendaComponent {
    * ou seja, caso um projeto nao estiver ativo nao ira aparecer no dropdown do html
    * entao esse metodo vai procurar esse projeto e caso ele nao esteja ativo entao adiciona ele ao array
    */
-  getProjeto(id: number){
-    let tipo = this.tipoSelecionado;
-    
-    if(tipo !== 2 && tipo !== 3 && tipo !== 5 && tipo !== 9){
+  getProjeto(id: number | null) {
+    let tipo = this.agenda.cod_tipo;
+
+    if (tipo !== 2 && tipo !== 3 && tipo !== 5 && tipo !== 9 && id) {
       this.projetoService.find(id).subscribe({
         next: (proj: any) => {
-          if (proj.ativo == 0){
-            
+          if (proj.ativo == 0) {
+
             this.projetos.push(proj)
             // Utiliza a funcao sort e percorre o array fazendo comparacao para ordenar com o nome de forma crescente
             this.projetos.sort((a, b) => (a.projeto ?? '').localeCompare(b.projeto ?? ''));
           }
         },
-        error: () => {SwalFacade.erro("Projeto não encontrado","Não foi possível encontrar o projeto da agenda")}
+        error: () => { SwalFacade.erro("Projeto não encontrado", "Não foi possível encontrar o projeto da agenda") }
       })
 
-    } else{
+    } else {
       // se não tiver projetos não precisa buscar
     }
   }
@@ -162,7 +155,7 @@ export class EditarAgendaComponent {
   }
 
   onTipoChange() {
-    const tipo = this.tipoSelecionado;
+    const tipo = this.agenda.cod_tipo;
 
     if (tipo == 10 || tipo == 6 || tipo == 8) {
       //  PROJETO || FECHAMENTO || OVERVIEW 
@@ -172,7 +165,8 @@ export class EditarAgendaComponent {
       //   proj => proj.cod_projeto > 1 //Safegold
       // )
       this.horasSelecionado = 8;
-      this.atendimentoSelecionado = 'Remoto';
+      this.agenda.atendimento = 'Remoto';
+      this.agenda.cod_projeto = 1;
     } else if (tipo == 7 || tipo == 4) {
       this.listProjetos();
       //  ADMINISTRATIVO ||  EVENTO
@@ -180,21 +174,21 @@ export class EditarAgendaComponent {
         proj => proj.cod_projeto == 1 //Safegold
       )
       this.horasSelecionado = 8;
-      this.atendimentoSelecionado = 'Presencial';
-      this.projetoSelecionado = 1;
+      this.agenda.atendimento = 'Presencial';
+      this.agenda.cod_projeto = 1;
     } else if (tipo == 5 || tipo == 9) {
       // PROSPECÇÂO || CURSO
       this.projetos = [];
       this.horasSelecionado = 8;
-      this.atendimentoSelecionado = 'Presencial';
-      this.projetoSelecionado = null;
+      this.agenda.atendimento = 'Presencial';
+      this.agenda.cod_projeto = null;
       // fazer um projeto safegold talvez aqui
     } else if (tipo == 2 || tipo == 3) {
       //  FOLGA || FERIADO 
       this.projetos = [];
       this.horasSelecionado = null;
-      this.atendimentoSelecionado = null;
-      this.projetoSelecionado = null;
+      this.agenda.atendimento = null;
+      this.agenda.cod_projeto = null;
     }
   }
 

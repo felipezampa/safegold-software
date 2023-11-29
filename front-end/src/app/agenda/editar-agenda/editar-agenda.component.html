@@ -7,12 +7,12 @@
     <form #formAgenda="ngForm">
       <div class="row">
         <small class="text-muted ps-3">Data</small>
-        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="dataSelecionada" readonly
+        <input type="date" id="dataId" name="data" class="sg-date" [(ngModel)]="this.agenda.data" readonly
           [disabled]="!canEdit">
       </div>
       <div class="row">
         <small class="text-muted ps-3">Tipo</small>
-        <select [(ngModel)]="tipoSelecionado" (ngModelChange)="onTipoChange()" name="cod_tipo" [disabled]="!canEdit">
+        <select [(ngModel)]="agenda.cod_tipo" (ngModelChange)="onTipoChange()" name="cod_tipo" [disabled]="!canEdit">
           <option *ngFor="let tipo of tipoAgenda" [value]="tipo.id_tipo">
             {{ tipo.tipo }}
           </option>
@@ -21,14 +21,14 @@
       <div class="row">
         <div class="col p-0">
           <small class="text-muted ps-3">Projeto</small>
-          <select [(ngModel)]="projetoSelecionado" name="cod_projeto" [disabled]="!canEdit">
+          <select [(ngModel)]="agenda.cod_projeto" name="cod_projeto" [disabled]="!canEdit">
             <option [value]="null"> --- </option>
             <option *ngFor="let projeto of projetos" [value]="projeto.cod_projeto">
               {{projeto.projeto}}
             </option>
           </select>
         </div>
-        <div class="col-2 pe-0 justify-content-end" [hidden]="tipoSelecionado != 8">
+        <div class="col-2 pe-0 justify-content-end" [hidden]="agenda.cod_tipo != 8">
           <button type="button" class="sg-button" (click)="novoProjeto()">
             <i class="fa-solid fa-plus mx-1"></i>
           </button>
@@ -37,14 +37,14 @@
       <div class="row">
         <div class="col ps-0">
           <small class="text-muted ps-3">Atendimento</small>
-          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null || !canEdit">
+          <select [(ngModel)]="agenda.atendimento" name="atendimento" [disabled]="agenda.atendimento == null || !canEdit">
             <option [value]="'Remoto'">Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
         </div>
         <div class="col pe-0">
           <small class="text-muted ps-3">Horas</small>
-          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null || !canEdit">
+          <select [(ngModel)]="horasSelecionado" name="horas" [disabled]="horasSelecionado == null || horasSelecionado == 0 || !canEdit">
             <option [value]="hora" *ngFor="let hora of horas">{{hora}}</option>
           </select>
         </div>
