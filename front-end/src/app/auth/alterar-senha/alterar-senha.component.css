@@ -1,0 +1,148 @@
+/* -------------------------------------------  MAIN  ------------------------------------------- */
+#inserir-agenda {
+  --cor-header: #FFA516cc;
+  --bg-action-btn: #FFA516cc;
+  --readonly: #efefef;
+}
+
+.sg-add {
+  /* Botões de adicionar dos cards de dias */
+  --cor-card-footer: #58524c;
+  --bg-card-footer: #58524c30;
+  --hover-cor-card-footer: #fff;
+  --hover-bg-card-footer: #58524c;
+  border-bottom-right-radius: 5px;
+}
+
+.sg-save {
+  /* Botões de salvar dos cards de dias */
+  --cor-card-footer: #00ac00;
+  --bg-card-footer: #00ac0030;
+  --hover-cor-card-footer: #fff;
+  --hover-bg-card-footer: #00ac00;
+  border-bottom-left-radius: 5px;
+}
+
+/* -------------------------------------------   ID   ------------------------------------------- */
+#modalLabel {
+  color: var(--sg-yellow);
+  padding: 0;
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------   TAG  ------------------------------------------- */
+form {
+  padding: .75rem 3rem;
+}
+
+input {
+  padding-left: 1rem;
+  transition: 0.6s;
+  width: 100%;
+  margin-bottom: .625rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 2px solid var(--sg-blue);
+  outline: none;
+}
+
+select {
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  border-bottom: 2px solid var(--sg-blue);
+  outline: none;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  transition: 0.6s;
+}
+
+select option {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+small {
+  font-size: .85rem;
+  text-align: left;
+  float: left;
+}
+
+input[type=text]:focus,
+input[type=text]:active,
+select:focus,
+select:active {
+  border-bottom: 2px solid var(--sg-yellow);
+}
+
+/* -------------------------------------------  CLASS ------------------------------------------- */
+.sg-button {
+  background-color: var(--bg-action-btn);
+  color: var(--sg-blue);
+  font-weight: 600;
+  margin: .25rem;
+  padding: .3rem .5rem;
+  height: 2.7rem;
+  border-radius: 8px;
+  transition: 0.5s;
+  border: none;
+}
+
+.sg-button:hover {
+  background-color: var(--sg-blue);
+  color: var(--sg-white);
+}
+
+.sg-footer-button {
+  background-color: var(--bg-card-footer);
+  color: var(--cor-card-footer);
+  border: 0;
+  margin: 0;
+  font-size: 1.35rem;
+  transition: 0.5s;
+}
+
+.sg-footer-button:hover {
+  background-color: var(--hover-bg-card-footer);
+  color: var(--hover-cor-card-footer);
+}
+
+.card-footer {
+  padding: 0;
+}
+
+.card-deck {
+  padding: .5rem 1rem 0 1rem;
+  border-top: 1px solid var(--sg-black);
+}
+
+.modal-header {
+  background-color: var(--sg-blue);
+}
+
+.modal-footer {
+  padding: 0;
+}
+
+/* -------------------------------------------  MEDIA ------------------------------------------- */
+@media screen and (width < 1370px) {
+
+  select,
+  option {
+    font-size: .9rem;
+  }
+
+}
+
+@media screen and (width < 900px) {
+  .sg-footer-button {
+    padding: .3rem 0;
+    font-size: 1rem;
+  }
+
+  form {
+    padding: .4rem 2rem;
+  }
+}

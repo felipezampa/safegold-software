@@ -113,8 +113,6 @@ export class AgendaHistoricoComponent implements OnInit {
    *
    */
   fazerTabelaListrada(isEven: boolean): object {
-    // 
-    // 
     if (isEven) {
       return { 'background-color': '#f2f2f2' };
     } else {
