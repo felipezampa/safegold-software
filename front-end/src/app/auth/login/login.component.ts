@@ -3,8 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalFacade } from 'src/app/shared';
 import { AuthService } from '../services/auth.service';
-import { catchError, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',

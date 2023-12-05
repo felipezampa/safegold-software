@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth';
+import { AlterarSenhaComponent, AuthService } from 'src/app/auth';
 import { Empresa, Projeto, SwalFacade } from 'src/app/shared';
 import { DashboardService } from '../services/dashboard.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,7 @@ export class DashboardComponent implements OnInit {
   user_id!: number;
   user!: any;
 
-  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router) { }
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
@@ -87,7 +88,8 @@ export class DashboardComponent implements OnInit {
     if (this.user_acesso_av != true) {
       SwalFacade.erro("Acesso Negado", "Você não tem acesso a essa página");
     } else {
-      this.router.navigate(['/avaliacao'])
+      // this.router.navigate(['/avaliacao'])
+      SwalFacade.alerta('Módulo não implementado ainda')
     }
   }
   
@@ -97,5 +99,14 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  mudarSenha() {
+    SwalFacade.alerta('Módulo não implementado ainda') // temporario
+    // this.modalService.open(AlterarSenhaComponent, { size: 'lg' });
+  }
+
+  validacaoSankhya() {
+    SwalFacade.alerta('Módulo não implementado ainda')
   }
 }

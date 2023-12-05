@@ -1,173 +1,121 @@
 /* -------------------------------------------  MAIN  ------------------------------------------- */
-html {
-    color-scheme: light dark;
-}
-
 #dashboard {
-    height: 100vh;
-    --logout: #ff1818;
-    --card-title-color: #2a2a2a;
-
-}
-
-.financeiro {
-    --bg-color: #edaa00d0;
-    --bg-color-light: #1b2a3d3a;
-    --text-color-hover: #1b2a3d;
-    --box-shadow-color: rgba(106, 105, 106, 0.48);
-}
-
-.agenda {
-    --bg-color: #005248;
-    --bg-color-light: #1b2a3d3a;
-    --text-color-hover: #fff;
-    --box-shadow-color: rgba(106, 105, 106, 0.48);
-}
-
-.avaliacao {
-    --bg-color: #9A7C4E;
-    --bg-color-light: #1b2a3d3a;
-    --text-color-hover: #fff;
-    --box-shadow-color: rgba(106, 105, 106, 0.48);
+  height: 100vh;
+  --logout: #ff1818;
+  --card-title-color: #2a2a2a;
 }
 
 /* -------------------------------------------   ID   ------------------------------------------- */
 #btn-logout {
-    background-color: #a83131;
-    color: #fff;
-    font-weight: 600;
-    margin: .25rem;
-    padding: .3rem .5rem;
-    height: 2.7rem;
-    border-radius: 8px;
-    transition: 0.5s;
-    border: none;
-    width: 10rem;
+  background-color: #a83131;
+  color: #fff;
+  font-weight: 600;
+  margin: .25rem;
+  padding: .3rem .5rem;
+  height: 2.7rem;
+  border-radius: 8px;
+  transition: 0.5s;
+  border: none;
+  width: 10rem;
 }
 
 #btn-logout:hover {
-    background-color: #4e0000;
+  background-color: #4e0000;
 }
 
 /* -------------------------------------------  CLASS ------------------------------------------- */
 .card {
-    width: 25rem;
-    height: 20rem;
-    background: var(--bg-color-light);
-    border-top-right-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease-out;
-    text-decoration: none;
-    margin: 0 .5rem;
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+  width: 20rem;
+  height: 10rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+  background-color: var(--sg-blue);
+  color: var(--sg-white);
 }
 
 .card:hover {
-    background: var(--bg-color);
-    transform: translateY(-5px) scale(1.005) translateZ(0);
-    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 24px 46px var(--box-shadow-color);
+  background: var(--sg-yellow);
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 24px 46px var(--sg-white);
 }
 
-.card:hover h1 {
-    color: var(--text-color-hover);
+.card:hover h4 {
+  color: var(--sg-blue);
 }
 
 .card-span {
-    font-family: 'Open Sans', sans-serif;
-    text-transform: uppercase;
-    font-size: 1.7rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-    color: var(--card-title-color);
-    transition: color 0.3s ease-out;
-    top: 0;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--card-title-color);
+  transition: color 0.3s ease-out;
+  top: 0;
 }
 
 .header-image {
-    width: 35rem;
-    display: flex;
-    margin: auto;
-}
-
-/* -------------------------------------------   TAG  ------------------------------------------- */
-a {
-    cursor: pointer;
-    padding: .2rem 1rem;
-    border-radius: 5px;
+  width: 35rem;
+  display: flex;
+  margin: auto;
 }
 
 /* -------------------------------------------  MEDIA ------------------------------------------- */
-@media screen and (max-width: 1400px) {
-    .card-span {
-        font-size: 1.5rem;
-    }
 
-    .card {
-        width: 20rem;
-    }
-    .header-image {
-      width: 25rem;
+
+@media screen and (max-width: 1300px) {
+  .card {
+    width: 20rem;
+  }
+
+  .header-image {
+    width: 25rem;
   }
 }
 
-@media screen and (max-width: 1200px) {
-    .card-span {
-        font-size: 1.2rem;
-    }
-
-    .card {
-        width: 17rem;
-    }
-}
-
 @media screen and (max-width: 991px) {
-    #dashboard {
-        margin: none;
-    }
+  #dashboard {
+    margin: none;
+  }
 
-    .header-image {
-        width: 17rem;
-    }
+  .header-image {
+    width: 15rem;
+  }
 
-    .row {
-        display: flex;
-        flex-direction: row;
-    }
+  .card-span {
+    font-size: 1.2rem;
+  }
 
-    .card-span {
-        font-size: 1.2rem;
-    }
+  .card {
+    width: 20rem;
+  }
 
-    .card {
-        width: 20rem;
-        margin-bottom: .7rem;
-    }
-
-    #btn-logout {
-        font-weight: 500;
-        margin: .25rem;
-        padding: .3rem .5rem;
-        height: 2.5rem;
-        width: 7.5rem;
-    }
+  #btn-logout {
+    font-weight: 500;
+    margin: .25rem;
+    padding: .3rem .5rem;
+    height: 2.5rem;
+    width: 7.5rem;
+  }
 
 }
 
 @media screen and (max-width: 767px) {
-    #btn-logout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
+  #btn-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-@media screen and (max-width:500px) {
-    .card {
-        height: 11rem;
-    }
+  #dashboard {
+    height: 100%;
+  }
+
+  .card {
+    height: 7rem;
+    margin-bottom: 1.4rem;
+  }
 }

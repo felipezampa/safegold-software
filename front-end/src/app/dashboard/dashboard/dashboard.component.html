@@ -17,19 +17,45 @@
     </div>
   </div>
   <h4 class="text-center mb-4">Escolha a opção desejada:</h4>
-  <div class="row d-flex justify-content-center">
-    <a class="card agenda col-lg-3 col-md-12" (click)="validacaoAcessoAgenda()">
-      <h1 class="card-span text-center">Agenda Gestores</h1>
-    </a>
-    <a class="card financeiro col-lg-3 col-sm-12" (click)="validacaoAcessoFin()">
-      <h1 class="card-span text-center">Financeiro</h1>
-    </a>
-
-    <!-- <a class="card avaliacao col-lg-3 col-md-12" (click)="validacaoAcessoRH()">
-      <div class="sg-card-header">
-        <h1 class="card-span text-center">Avaliação de Desempenho</h1>
+  <div class="">
+    <div class="row text-center">
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" (click)="validacaoAcessoAgenda()">
+          <div class="card-body">
+            <h4 class="card-title">Agenda Gestores</h4>
+          </div>
+        </div>
       </div>
-    </a> -->
-
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" (click)="mudarSenha()">
+          <div class="card-body">
+            <h4 class="card-title">Alterar Senha</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" (click)="validacaoAcessoFin()">
+          <div class="card-body">
+            <h4 class="card-title">Financeiro</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" (click)="validacaoAcessoRH()">
+          <div class="card-body">
+            <h4 class="card-title">Avaliação de Desempenho</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card" (click)="validacaoSankhya()">
+          <div class="card-body">
+            <h4 class="card-title">Apontamento Sankhya</h4>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
