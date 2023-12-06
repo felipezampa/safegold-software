@@ -24,3 +24,11 @@ class AuthUserPermissionsSerializers(serializers.ModelSerializer):
     class Meta:
         model = AuthUserPermissions
         fields = 'id','id_user', 'username', 'financeiro','avaliacao', 'is_head', 'idrh_cargo','nome_cargo'
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+      Serializer para a troca de senha de usuarios.
+    """
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

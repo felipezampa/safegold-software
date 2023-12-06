@@ -1,45 +1,17 @@
-from . import models as auth_models
-from rest_framework import viewsets
-from . import serializers
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.csrf import csrf_exempt
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
-'''
-    @eduardolcordeiro
-
-    Autenticação JWT (JSON Web Token)
-        - JWT é usado para criar tokens de acesso a um app
-        - O servidor gera um token que certifica a identidade do usuário e o envia ao cliente
-
-        Instale o pacote do django-rest-framework-simplejwt:
-
-          '  pip instalar djangorestframework-simplejwt  '
-
-        
-        adicione ao settings.py 
-        
-            REST_FRAMEWORK = {
-                'DEFAULT_AUTHENTICATION_CLASSES': [
-                    'rest_framework_simplejwt.authentication.JWTAuthentication',
-                ],
-            }
-        
+from . import models as auth_models
+from . import serializers as auth_serializers
 
 
-    referencia = https://medium.com/django-rest/django-rest-framework-jwt-authentication-94bee36f2af8
-
-
-'''
-
-
-
-# AVALIAÇÃO DE DESEMPENHO, MODULO RH
 
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -47,13 +19,38 @@ class AuthUserPermissionsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = auth_models.AuthUserPermissions.objects.all()
-    serializer_class = serializers.AuthUserPermissionsSerializers
+    serializer_class = auth_serializers.AuthUserPermissionsSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id','id_user', 'financeiro','avaliacao', 'is_head']
     
 
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_password(request):
+    user = request.user
+
+    if request.method == 'PATCH':
+        serializer = auth_serializers.ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            old_password = serializer.data.get("old_password")
+
+            if not user.check_password(old_password):
+                return JsonResponse({"error": "Wrong password."}, status=400)
+
+            new_password = serializer.data.get("new_password")
+            user.set_password(new_password)
+            user.save()
+
+            return JsonResponse({"message": "Password updated successfully"}, status=204)
+
+        return JsonResponse(serializer.errors, status=400)
+    else:
+        return JsonResponse({"error": "Invalid request method"}, status=400)
+
 
 @api_view(['POST'])
+@csrf_exempt
 def api_login(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -64,6 +61,7 @@ def api_login(request):
         return JsonResponse({'token': token.key})
     else:
         return JsonResponse({'error': 'Invalid credentials'})
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

@@ -58,4 +58,5 @@ urlpatterns = [
     path('api/',include(router.urls)),
     path('api/login/', api_login, name='login'),
     path('api/userlogado/', api_userlogin, name='user_logged'),
+    path('changeuser/', update_password, name='changeuser')
 ]
