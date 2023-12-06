@@ -4,26 +4,37 @@
   </div>
   <div class="modal-body text-center">
     <form #formProjeto="ngForm">
-      <div class="row">
+      <div class="input-with-icon">
         <small class="text-muted ps-3">Digite sua senha atual</small>
-        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="password">
+        <input type="password" class="sg-input" name="old_password" [(ngModel)]="old_password" placeholder="Sua senha"
+          required>
+        <i class="fa fa-eye" (click)="mostrarSenha('old_password')"></i>
       </div>
-      <div class="row">
+      <div class="input-with-icon">
         <small class="text-muted ps-3">Digite sua nova senha</small>
-        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="password">
+        <input type="password" class="sg-input" name="password" [(ngModel)]="new_password" placeholder="Sua senha"
+          required>
+        <i class="fa fa-eye" (click)="mostrarSenha('password')"></i>
       </div>
-      <div class="row">
+      <div class="input-with-icon">
         <small class="text-muted ps-3">Confirme sua nova senha</small>
-        <input type="text" name="projeto" class="sg-input" placeholder="Insira o nome do projeto" [(ngModel)]="password">
+        <input type="password" class="sg-input" name="confirm_password" [(ngModel)]="confirm_password"
+          placeholder="Sua senha" required>
+        <i class="fa fa-eye" (click)="mostrarSenha('confirm_password')"></i>
       </div>
-    </form> 
+    </form>
   </div>
-  <div class="modal-footer justify-content-center align-items-center">
+  <div class="modal-footer justify-content-center align-items-center" *ngIf="!isLoading">
     <button class="sg-footer-button sg-save col-6" (click)="salvar()">
       <i class="fa-solid fa-check"></i>
     </button>
     <button class="sg-footer-button sg-add col-6" (click)="this.activeModal.close()">
       <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="modal-footer justify-content-center align-items-center" *ngIf="isLoading">
+    <button class="sg-footer-button col-12" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     </button>
   </div>
 </div>

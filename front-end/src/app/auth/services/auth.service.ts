@@ -22,6 +22,14 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login/', body, { headers });
   }
 
+  changePassword(old_password: string, new_password: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Token ' + this.getTokenUser()
+    });
+    const body = { old_password, new_password };
+    return this.http.patch(`${APP_CONFIG.baseURL}changeuser/`, body, { headers });
+  }
+
   getUserInfo(token: string): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + token
@@ -124,4 +132,5 @@ export class AuthService {
     const cargo = currentUser ? JSON.parse(currentUser).cargo : null;
     return cargo;
   }
+
 }

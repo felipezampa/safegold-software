@@ -36,43 +36,8 @@ export class DashboardComponent implements OnInit {
     this.user_is_head = this.authService.getUserisHead();
     this.firstName = this.authService.getFirstName();
     this.is_superuser = this.authService.getIsSuperUser();
-    this.getProjetos();
-    const contexto = JSON.parse(localStorage.getItem('selectedEmpresa') ?? '');
-    this.selectedProjetos = contexto?.cod_projeto;
-    this.selectedEmpresa = contexto?.cod_empresa;
-    this.onProjectChange()
   }
 
-  getProjetos() {
-    this.dashboardService.getProjetos(this.authService.getCurrentUser())
-      .subscribe(data => {
-        this.projetos = data;
-        this.getUniqueProjetos();
-      });
-  }
-
-  getUniqueProjetos() {
-    this.projetosUnicos = [];
-    this.projetos.forEach((projeto) => {
-      if (!this.projetosUnicos.find(p => p.cod_projeto === projeto.cod_projeto)) {
-        this.projetosUnicos.push(projeto);
-      }
-    });
-  }
-
-  onProjectChange() {
-    if (this.selectedProjetos) {
-      this.dashboardService.alteraProjeto(this.selectedProjetos)
-        .subscribe(data => {
-          this.empresas = data;
-        });
-    }
-  }
-
-  onEmpresaChanged(cod_empresa: number) {
-    const selectedEmpresa = this.empresas.find(empresa => empresa.cod_empresa == cod_empresa);
-    localStorage.setItem("selectedEmpresa", JSON.stringify({ cod_empresa: selectedEmpresa?.cod_empresa, empresa: selectedEmpresa?.empresa, cod_projeto: selectedEmpresa?.cod_projeto, projeto: selectedEmpresa?.projeto }));
-  }
 
   validacaoAcessoFin() {
     if (this.user_acesso_fin != true) {
@@ -102,8 +67,7 @@ export class DashboardComponent implements OnInit {
   }
 
   mudarSenha() {
-    SwalFacade.alerta('Módulo não implementado ainda') // temporario
-    // this.modalService.open(AlterarSenhaComponent, { size: 'lg' });
+    this.modalService.open(AlterarSenhaComponent, { size: 'lg' });
   }
 
   validacaoSankhya() {
