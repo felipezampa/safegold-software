@@ -19,7 +19,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
     const body = { username, password };
-    return this.http.post(this.baseUrl + 'login/', body, { headers });
+    return this.http.post(`${APP_CONFIG.baseURL}login/`, body, { headers });
   }
 
   changePassword(old_password: string, new_password: string){
@@ -34,14 +34,14 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + token
     });
-    return this.http.get(this.baseUrl + 'userlogado/', { headers });
+    return this.http.get(`${APP_CONFIG.baseURL}userlogado/`, { headers });
   }
 
   listUsers(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.getTokenUser()
     });
-    return this.http.get(this.baseUrl + 'user/', { headers });
+    return this.http.get(`${APP_CONFIG.baseURL}user/`, { headers });
   }
 
   logout(): void {
