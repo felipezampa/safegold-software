@@ -67,7 +67,7 @@ export class AgendaHistoricoComponent implements OnInit {
     const dataInicio = typeof inicio === 'string' ? new Date(inicio) : inicio;
     const dataFim = typeof fim === 'string' ? new Date(fim) : fim;
     // Lista todos os dados da agenda
-    this.agendaService.listarAgenda(idUser).subscribe({
+    this.agendaService.listAgenda(idUser).subscribe({
       next: (filtro) => (
         // Filtro de data, só traz os dados que estão entre a dataInicio e dataFim
         this.agenda = filtro.filter((ag: any) => {

@@ -27,7 +27,7 @@
           </select>
         </div>
         <div class="col-2 pe-0 justify-content-end"  [hidden]="tipoSelecionado != 8">
-          <button type="button" class="sg-button" (click)="novoProjeto()">
+          <button type="button" class="sg-button" (click)="newProjeto()">
             <i class="fa-solid fa-plus mx-1"></i>
           </button>
         </div>  
@@ -50,7 +50,7 @@
     </form>
   </div>
   <div class="modal-footer justify-content-center align-items-center">
-    <button class="sg-footer-button sg-save col-6" (click)="salvar()">
+    <button class="sg-footer-button sg-save col-6" (click)="saveAgenda()">
       <i class="fa-solid fa-check"></i>
     </button>
     <button class="sg-footer-button sg-add col-6" (click)="this.activeModal.close()">

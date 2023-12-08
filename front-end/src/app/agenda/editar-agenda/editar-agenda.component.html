@@ -29,7 +29,7 @@
           </select>
         </div>
         <div class="col-2 pe-0 justify-content-end" [hidden]="agenda.cod_tipo != 8">
-          <button type="button" class="sg-button" (click)="novoProjeto()">
+          <button type="button" class="sg-button" (click)="newProjeto()">
             <i class="fa-solid fa-plus mx-1"></i>
           </button>
         </div>
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col ps-0">
           <small class="text-muted ps-3">Atendimento</small>
-          <select [(ngModel)]="agenda.atendimento" name="atendimento" [disabled]="agenda.atendimento == null || !canEdit">
+          <select [(ngModel)]="atendimentoSelecionado" name="atendimento" [disabled]="atendimentoSelecionado == null || !canEdit">
             <option [value]="'Remoto'">Remoto</option>
             <option [value]="'Presencial'">Presencial</option>
           </select>
@@ -53,13 +53,13 @@
     </form>
   </div>
   <div class="modal-footer justify-content-center align-items-center" *ngIf="canEdit">
-    <button class="sg-footer-button sg-save col-4" (click)="salvar()">
+    <button class="sg-footer-button sg-save col-4" (click)="saveAgenda()">
       <i class="fa-solid fa-check"></i>
     </button>
     <button class="sg-footer-button sg-add col-4" (click)="this.activeModal.close()">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <button class="sg-footer-button sg-remove col-4" (click)="excluir()">
+    <button class="sg-footer-button sg-remove col-4" (click)="deleteAgenda()">
       <i class="fa-solid fa-trash"></i>
     </button>
   </div>

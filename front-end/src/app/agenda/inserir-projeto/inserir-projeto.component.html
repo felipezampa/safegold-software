@@ -21,7 +21,7 @@
         <div class="col me-3">
           <div class="row">
             <small class="text-muted ps-3">CEP</small>
-            <input type="text" name="cep" class="sg-input" [(ngModel)]="projeto.cep" placeholder="00000-000" mask="00000-000" (mouseleave)="preencherEndereco()">
+            <input type="text" name="cep" class="sg-input" [(ngModel)]="projeto.cep" placeholder="00000-000" mask="00000-000" (mouseleave)="insertEndereco()">
           </div>
         </div>
         <div class="col ms-3">
@@ -43,7 +43,7 @@
     </form> 
   </div>
   <div class="modal-footer justify-content-center align-items-center">
-    <button class="sg-footer-button sg-save col-6" (click)="salvar()">
+    <button class="sg-footer-button sg-save col-6" (click)="saveProjeto()">
       <i class="fa-solid fa-check"></i>
     </button>
     <button class="sg-footer-button sg-add col-6" (click)="this.activeModal.close()">

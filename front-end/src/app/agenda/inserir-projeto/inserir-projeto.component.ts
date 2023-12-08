@@ -15,17 +15,20 @@ export class InserirProjetoComponent implements OnInit{
   projeto!: Projeto;
   segmentos!: SegmentoProjeto[];
   estados!: Estado[];
-  cepEndereco!: number;
 
   constructor(public activeModal: NgbActiveModal, private projetoService: ProjetoService) {}
 
   ngOnInit(): void {
     this.projeto = new Projeto();
-    this.listarSegmentos();
-    this.listarEstados();
+    this.listSegmentos();
+    this.listEstados();
   }
 
-  salvar(){
+
+  /**
+   * @description Salva o projeto, verificando se o nome do projeto foi preenchido.
+   */
+  saveProjeto(){
     if(this.projeto.projeto != null){
       this.projetoService.create(this.projeto).subscribe();
       SwalFacade.sucesso("Agenda salva com sucesso!");
@@ -35,7 +38,11 @@ export class InserirProjetoComponent implements OnInit{
     }
   }
 
-  listarSegmentos() {
+
+  /**
+   * @description Lista os segmentos de projeto disponíveis.
+   */
+  listSegmentos() {
     this.projetoService.listSegmentos().subscribe({
       next: (seg: SegmentoProjeto[]) => {
         this.segmentos = seg;
@@ -44,7 +51,11 @@ export class InserirProjetoComponent implements OnInit{
     })
   }
 
-  listarEstados() {
+
+  /**
+   * @description Lista os estados disponíveis.
+   */
+  listEstados() {
     this.projetoService.listEstados().subscribe({
       next: (est: Estado[]) => {
         this.estados = est;
@@ -53,7 +64,11 @@ export class InserirProjetoComponent implements OnInit{
     })
   }
 
-  preencherEndereco() {
+
+  /**
+   * @description Insere o endereço no projeto, utilizando o CEP fornecido.
+   */
+  insertEndereco() {
     let cep = this.projeto.cep != undefined ? Number(this.projeto.cep) : 0
     
     this.projetoService.getEndereco(cep).subscribe({

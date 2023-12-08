@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent, EditarAgendaComponent, InserirProjetoComponent } from './index';
+import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent, EditarAgendaComponent, InserirProjetoComponent, AgendaService } from './index';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { AgendaComponent, AgendaHistoricoComponent, InserirAgendaComponent, Edit
     NgxMaskPipe
   ],
   providers: [
+    AgendaService,
     provideNgxMask()
   ]
 })

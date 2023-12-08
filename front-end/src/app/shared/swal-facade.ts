@@ -35,6 +35,7 @@ export class SwalFacade {
     })
   }
 
+  
   /**
    * @description Representa um SweetAlert para informação de sucesso
    * 
@@ -65,6 +66,7 @@ export class SwalFacade {
     })
   }
 
+
   /**
    * @description Representa um SweetAlert para informação de alerta
    * 
@@ -94,6 +96,7 @@ export class SwalFacade {
       text: texto
     })
   }
+
 
   /**
    * @description Representa um SweetAlert para exclusão de objetos

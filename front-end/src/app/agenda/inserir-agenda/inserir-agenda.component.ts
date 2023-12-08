@@ -1,11 +1,10 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
-import { AgendaService } from '../services/agenda.service';
-import { InserirProjetoComponent } from '../inserir-projeto/inserir-projeto.component';
+import { AgendaService, InserirProjetoComponent } from '../index';
 
 
 @Component({
@@ -26,8 +25,8 @@ export class InserirAgendaComponent implements OnInit {
   tipoSelecionado!: number;
   dataSelecionada!: Date | string;
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private authService: AuthService,
-    private modalService: NgbModal) { }
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, 
+              private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listProjetos();
@@ -39,11 +38,12 @@ export class InserirAgendaComponent implements OnInit {
     this.projetoSelecionado = null;
   }
 
-  /**  
-  * @description 
-  * Salva a agenda atualizada
-  */
-  salvar() {
+  
+  /**
+   * @description Salva a agenda, verificando se a data foi selecionada
+   * e atribuindo a função do gestor ativa.
+   */
+  saveAgenda() {
     let formValues: any;
     const dt: Date = new Date(this.formAgenda.value.data);
     var dia_semana = this.agendaService.obterDia(dt);
@@ -54,8 +54,8 @@ export class InserirAgendaComponent implements OnInit {
     } else {
       this.agendaService.getFuncaoGestor(idGestor).subscribe({
         next: (results: FuncaoGestor[]) => {
-          // Um gestor pode ter varias funcoes, o codigo abaixo ira percorrer por todas as suas funcoes e
-          // atribuir a funcao atual, ou seja aquela que nao tem data de fim
+          // Um gestor pode ter varias funcoes, o codigo abaixo ira percorrer por todas as 
+          // suas funcoes e atribuir a funcao atual, ou seja aquela que nao tem data de fim
           let funcao_gestor;
           for (let i = 0; i < results.length; i++) {
             const element = results[i];
@@ -63,11 +63,11 @@ export class InserirAgendaComponent implements OnInit {
               funcao_gestor = results[i].id_func_gest;
             }
           }
-
+          // Junta os valores do formulario, o funcao_gestor e os dados da data
           formValues = {
             ...this.formAgenda.value, funcao_gestor, dia_semana
           };
-          this.agendaService.salvarAgenda(formValues).subscribe();
+          this.agendaService.saveAgenda(formValues).subscribe();
           SwalFacade.sucesso("Agenda salva com sucesso!");
           this.activeModal.close();
         },
@@ -76,8 +76,10 @@ export class InserirAgendaComponent implements OnInit {
     }
   }
 
+
   /**
-   * @description Lista todos os projeto para selecionar como opção na tag select input
+   * @description Lista os projetos, filtrando e ordenando os ativos por nome de 
+   * forma crescente.
    */
   listProjetos() {
     this.projetoService.listProjetos().subscribe({
@@ -97,8 +99,9 @@ export class InserirAgendaComponent implements OnInit {
     });
   }
 
+
   /**
-   * @description Lista todos os tipos de agenda para selecionar como opção na tag select input
+   * @description Lista os tipos de agenda, ordenando por nome de forma crescente.
    */
   listTipo() {
     this.agendaService.listTipo().subscribe({
@@ -113,23 +116,24 @@ export class InserirAgendaComponent implements OnInit {
     });
   }
 
+
+  /**
+   * @description Manipula a mudança de tipo, atualizando a lista 
+   * de projetos e configurações com base no tipo selecionado.
+   */
   onTipoChange() {
     const tipo = this.tipoSelecionado;
 
     if (tipo == 10 || tipo == 6 || tipo == 8) {
       //  PROJETO || FECHAMENTO || OVERVIEW 
       this.listProjetos();
-      // this.listProjetos();
-      // this.projetos = data.filter(
-      //   proj => proj.cod_projeto > 1 //Safegold
-      // )
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Remoto';
     } else if (tipo == 7 || tipo == 4) {
       this.listProjetos();
       //  ADMINISTRATIVO ||  EVENTO
       this.projetos = this.projetos.filter(
-        proj => proj.cod_projeto == 1 //Safegold
+        proj => proj.cod_projeto == 1 //SG
       )
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Presencial';
@@ -140,7 +144,6 @@ export class InserirAgendaComponent implements OnInit {
       this.horasSelecionado = 8;
       this.atendimentoSelecionado = 'Presencial';
       this.projetoSelecionado = null;
-      // fazer um projeto safegold talvez aqui
     } else if (tipo == 2 || tipo == 3) {
       //  FOLGA || FERIADO 
       this.projetos = [];
@@ -150,8 +153,12 @@ export class InserirAgendaComponent implements OnInit {
     }
   }
 
-  novoProjeto() {
-    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg' });
+
+  /**
+   * @description Abre uma janela modal para criar um novo projeto.
+   */
+  newProjeto() {
+    this.modalService.open(InserirProjetoComponent, { size: 'lg' });
   }
 
 }

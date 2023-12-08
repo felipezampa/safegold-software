@@ -22,30 +22,33 @@ export class EditarAgendaComponent {
   horas!: number[];
 
   horasSelecionado!: number | null;
+  atendimentoSelecionado!: string | null;
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private projetoService: ProjetoService, private modalService: NgbModal) { }
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, 
+              private projetoService: ProjetoService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listProjetos();
     this.listTipo();
     this.horas = [1, 2, 3, 4, 5, 6, 7, 8];
-    this.getAgenda();
+    this.getProjeto(this.agenda.cod_projeto);
+    this.horasSelecionado = Number(this.agenda.horas);
+    this.atendimentoSelecionado = this.agenda.atendimento;
   }
 
   /**  
-  * @description 
-  * Salva a agenda atualizada
-  */
-  salvar() {
+   * @description Salva a agenda, verificando se a data foi selecionada
+   * e atribuindo a função do gestor ativa.
+   */
+  saveAgenda() {
     // Nem todos os valores passados pelo formulario serao necessarios para fazer o patch
     // por isso eu somente seleciono aqueles que me interessam
     let formValues = {
-      atendimento: this.agenda.atendimento,
+      atendimento: this.atendimentoSelecionado,
       cod_projeto: this.formAgenda.value.cod_projeto,
       cod_tipo: this.agenda.cod_tipo,
-      horas: this.formAgenda.value.horas
+      horas: this.horasSelecionado
     };
-    console.log(formValues);
     
     try {
       this.agendaService.updateAgenda(this.agenda.cod_agenda, formValues).subscribe();
@@ -56,19 +59,12 @@ export class EditarAgendaComponent {
     }
   }
 
-  /**
-   * @description Atribui ao formulario os valores contidos no objeto a ser editado
-   */
-  getAgenda() {
-    this.horasSelecionado = Number(this.agenda.horas);
-    this.getProjeto(this.agenda.cod_projeto)
-  }
 
   /**
    * @description Metodo para excluir um compromisso da agenda com a condição de que
-   * o objeto não tenha mais de um mês de criação
+   * o objeto não tenha mais de um mês de criação.
    */
-  excluir() {
+  deleteAgenda() {
     // Pega uma data um mes antes do dia de hoje
     const oneMonthAgo = new Date();
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
@@ -91,8 +87,10 @@ export class EditarAgendaComponent {
     }
   }
 
+
   /**
-   * @description Lista todos os projeto para selecionar como opção na tag select input
+   * @description Lista os projetos, filtrando e ordenando os ativos por nome de 
+   * forma crescente.
    */
   listProjetos() {
     this.projetoService.listProjetos().subscribe({
@@ -112,10 +110,13 @@ export class EditarAgendaComponent {
     });
   }
 
+
   /**
-   * @description Metodo importante, o `listProjetos()` tem o filtro de projetos ativos somente
-   * ou seja, caso um projeto nao estiver ativo nao ira aparecer no dropdown do html
-   * entao esse metodo vai procurar esse projeto e caso ele nao esteja ativo entao adiciona ele ao array
+   * @description Metodo importante, o `listProjetos()` tem somente o filtro de 
+   * projetos ativos ou seja, caso um projeto nao estiver ativo nao ira aparecer 
+   * no dropdown do html entao esse metodo vai procurar esse projeto e caso ele 
+   * nao esteja ativo entao adiciona ele ao array.
+   * @param id O código do projeto que é procurado.
    */
   getProjeto(id: number | null) {
     let tipo = this.agenda.cod_tipo;
@@ -133,10 +134,9 @@ export class EditarAgendaComponent {
         error: () => { SwalFacade.erro("Projeto não encontrado", "Não foi possível encontrar o projeto da agenda") }
       })
 
-    } else {
-      // se não tiver projetos não precisa buscar
     }
   }
+
 
   /**
    * @description Lista todos os tipos de agenda para selecionar como opção na tag select input
@@ -154,45 +154,49 @@ export class EditarAgendaComponent {
     });
   }
 
+
+  /**
+   * @description Manipula a mudança de tipo, atualizando a lista 
+   * de projetos e configurações com base no tipo selecionado.
+   */
   onTipoChange() {
     const tipo = this.agenda.cod_tipo;
 
     if (tipo == 10 || tipo == 6 || tipo == 8) {
       //  PROJETO || FECHAMENTO || OVERVIEW 
       this.listProjetos();
-      // this.listProjetos();
-      // this.projetos = data.filter(
-      //   proj => proj.cod_projeto > 1 //Safegold
-      // )
       this.horasSelecionado = 8;
-      this.agenda.atendimento = 'Remoto';
+      this.atendimentoSelecionado = 'Remoto';
       this.agenda.cod_projeto = 1;
     } else if (tipo == 7 || tipo == 4) {
       this.listProjetos();
       //  ADMINISTRATIVO ||  EVENTO
       this.projetos = this.projetos.filter(
-        proj => proj.cod_projeto == 1 //Safegold
+        proj => proj.cod_projeto == 1 //SG
       )
       this.horasSelecionado = 8;
-      this.agenda.atendimento = 'Presencial';
+      this.atendimentoSelecionado = 'Presencial';
       this.agenda.cod_projeto = 1;
     } else if (tipo == 5 || tipo == 9) {
       // PROSPECÇÂO || CURSO
       this.projetos = [];
       this.horasSelecionado = 8;
-      this.agenda.atendimento = 'Presencial';
+      this.atendimentoSelecionado = 'Presencial';
       this.agenda.cod_projeto = null;
-      // fazer um projeto safegold talvez aqui
     } else if (tipo == 2 || tipo == 3) {
       //  FOLGA || FERIADO 
       this.projetos = [];
       this.horasSelecionado = null;
-      this.agenda.atendimento = null;
+      this.atendimentoSelecionado = null;
       this.agenda.cod_projeto = null;
     }
   }
 
-  novoProjeto() {
-    const modalRef = this.modalService.open(InserirProjetoComponent, { size: 'lg' });
+
+  /**
+   * @description Abre uma janela modal para criar um novo projeto.
+   */
+  newProjeto() {
+    this.modalService.open(InserirProjetoComponent, { size: 'lg' });
   }
 }
