@@ -25,6 +25,12 @@ export class AgendaService {
     return this._refreshPage$;
   }
 
+  
+  /**
+   * @description Salva uma nova agenda no servidor.
+   * @param data Os dados da agenda a serem salvos.
+   * @returns Observable que representa a resposta da requisição.
+   */
   saveAgenda(data: any) {
     const headers = new HttpHeaders({ Authorization: 'Token ' + this.authService.getTokenUser() });
     return this.http.post(this.agendaUrl, data, { headers })
@@ -140,9 +146,7 @@ export class AgendaService {
    * @description Metodo simples que recebe um dia e retorna qual 
    * dia da semana ele é.
    * Ex: Uma data 2023-06-07 irá retornar a string 'Quarta-Feira'.
-   * 
    * @param data uma data comum no formato yyyy-mm-dd. 
-   * 
    * @returns String do dia Ex: 'Quarta-Feira'.
    */
   obterDia(data: Date): string | undefined {

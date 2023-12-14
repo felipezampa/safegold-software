@@ -18,7 +18,11 @@ export class AlterarSenhaComponent implements OnInit {
 
   ngOnInit() { this.isLoading = false; }
 
-  mostrarSenha(fieldName: string) {
+  /**
+   * @description Alterna a visibilidade da senha em um campo específico.
+   * @param fieldName O nome do campo de senha.
+   */
+  showPassword(fieldName: string) {
     const inputElement = document.getElementsByName(fieldName)[0] as HTMLInputElement;
 
     // Verifica se o elemento foi encontrado
@@ -30,6 +34,10 @@ export class AlterarSenhaComponent implements OnInit {
     }
   }
 
+  
+  /**
+   * @description Salva a alteração de senha do usuário.
+   */
   salvar() {
     this.isLoading = true;
     if (this.new_password == this.confirm_password) {

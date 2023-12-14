@@ -1,11 +1,10 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth';
-import { Agenda, SwalFacade, User } from 'src/app/shared';
-import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { InserirAgendaComponent, EditarAgendaComponent } from '.././index';
+import { AuthService } from 'src/app/auth';
+import { Agenda, SwalFacade, User } from 'src/app/shared';
+import { AgendaService, EditarAgendaComponent, InserirAgendaComponent } from '.././index';
 
 @Component({
   selector: 'app-agenda-historico',
@@ -42,6 +41,11 @@ export class AgendaHistoricoComponent implements OnInit {
     this.listarGestor();
   }
 
+  
+  /**
+   * @description Abre o modal para editar uma agenda.
+   * @param ag A agenda a ser editada.
+   */
   editarAgenda(ag: Agenda) {
     const modalRef = this.modalService.open(EditarAgendaComponent, { size: 'lg' });
     // Adicionar o objeto a ser editado
@@ -49,18 +53,22 @@ export class AgendaHistoricoComponent implements OnInit {
     modalRef.componentInstance.canEdit = this.canEdit;
   }
 
+  
+  /**
+   * @description Abre o modal para preencher uma nova agenda.
+   */
   preencherAgenda() {
-    const modalRef = this.modalService.open(InserirAgendaComponent, { size: 'lg' });
+    this.modalService.open(InserirAgendaComponent, { size: 'lg' });
   }
 
+  
   /**
-   * Metodo base para a filtragem dos dados, atraves dele
+   * @description Metodo base para a filtragem dos dados, atraves dele
    * que serao filtradas os dados da agenda de acordo com 
    * a opcao escolhida pelo usuario.
-   * 
    * @param inicio A data inicial a ser filtrada.
    * @param fim A data final a ser filtrada.
-   *
+   * @param idUser O id do usuario para filtrar a agenda
    */
   listarAgenda(inicio: Date | string, fim: Date | string, idUser: number) {
     // Converte os parametros para string caso eles venham em texto
@@ -87,6 +95,10 @@ export class AgendaHistoricoComponent implements OnInit {
     });
   }
 
+
+  /**
+   * @description Lista os gestores disponíveis.
+   */
   listarGestor() {
     this.authService.listUsers().subscribe({
       next: (gestor: any[]) => {
@@ -100,17 +112,20 @@ export class AgendaHistoricoComponent implements OnInit {
     });
   }
 
+
+  /**
+   * @description Realiza o logout do usuário, encerrando a sessão.
+   */
   logout() {
     this.authService.logout();
   }
 
+
   /**
-   * Maneira mais facil que eu encontrei de deixar a tabela listrada
+   * @description Maneira mais facil que eu encontrei de deixar a tabela listrada
    * As classes CSS / BStrap por algum motivo nao estavam funcionando 
    * a opcao escolhida pelo usuario.
-   * 
    * @param isEven Testa se a linha é par.
-   *
    */
   fazerTabelaListrada(isEven: boolean): object {
     if (isEven) {
@@ -120,6 +135,12 @@ export class AgendaHistoricoComponent implements OnInit {
     }
   }
 
+
+  /**
+   * @description Filtra a agenda do gestor por um intervalo de datas.
+   * @param ini A data inicial do intervalo.
+   * @param fim A data final do intervalo.
+   */
   filtrarDataGestor(ini: Date | string, fim: Date | string) {
     if (this.authService.getCurrentUser() != this.usuarioSelecionado) {
       this.canEdit = false;
@@ -146,6 +167,10 @@ export class AgendaHistoricoComponent implements OnInit {
     }
   }
 
+
+  /**
+   * @description Visualiza a agenda da semana atual.
+   */
   verSemanaAtual() {
     this.isLoading = true;
     // Flag do Botao
@@ -175,6 +200,10 @@ export class AgendaHistoricoComponent implements OnInit {
     this.listarAgenda(ini, fim, this.usuarioSelecionado);
   }
 
+
+  /**
+   * @description Visualiza a agenda da semana passada.
+   */
   verSemanaPassada() {
     this.isLoading = true;
     // Flag do Botao
@@ -202,6 +231,10 @@ export class AgendaHistoricoComponent implements OnInit {
     this.listarAgenda(ini, fim, this.usuarioSelecionado);
   }
 
+
+  /**
+   * @description Visualiza a agenda da proxima semana.
+   */
   verProximaSemana() {
     this.isLoading = true;
     // Flag do Botao

@@ -14,15 +14,26 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  /**
+   * @description Realiza o login do usuário.
+   * @param username O nome de usuário.
+   * @param password A senha do usuário.
+   * @returns Observable que representa a resposta da requisição de login.
+   */
   login(username: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { username, password };
     return this.http.post(`${this.baseUrl}login/`, body, { headers });
   }
 
-  changePassword(old_password: string, new_password: string){
+
+  /**
+   * @description Altera a senha do usuário.
+   * @param old_password A senha atual do usuário.
+   * @param new_password A nova senha desejada.
+   * @returns Observable que representa a resposta da requisição de alteração de senha.
+   */
+  changePassword(old_password: string, new_password: string) {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.getTokenUser()
     });
@@ -30,6 +41,12 @@ export class AuthService {
     return this.http.patch(`${APP_CONFIG.baseURL}changeuser/`, body, { headers });
   }
 
+
+  /**
+   * @description Obtém as informações do usuário logado.
+   * @param token O token de autenticação do usuário.
+   * @returns Observable que representa a resposta da requisição de informações do usuário logado.
+   */
   getUserInfo(token: string): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + token
@@ -37,6 +54,11 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}userlogado/`, { headers });
   }
 
+
+  /**
+   * @description Lista os usuários cadastrados.
+   * @returns Observable que representa a resposta da requisição de listagem de usuários.
+   */
   listUsers(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Token ' + this.getTokenUser()
@@ -44,12 +66,17 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}user/`, { headers });
   }
 
+
+  /**
+   * @description Realiza o logout do usuário, removendo as informações de usuário armazenadas e redirecionando para a página de login.
+   */
   logout(): void {
     this.user = null;
     sessionStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 
+  
   setUser(user: any): void {
     this.user = user;
   }
@@ -120,7 +147,7 @@ export class AuthService {
     const is_superuser = currentUser ? JSON.parse(currentUser).superuser : null;
     return is_superuser;
   }
-  
+
   getTokenUser() {
     const currentUser = sessionStorage.getItem('user');
     const token = currentUser ? JSON.parse(currentUser).token : null;

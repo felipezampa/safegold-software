@@ -58,7 +58,9 @@ export class LoginComponent {
       })
   }
 
-
+  /**
+   * @description Alterna a visibilidade da senha.
+   */
   mostrarSenha() {
     this.showPassword = !this.showPassword;
     let tipoInput = document.getElementById('sg-senha');

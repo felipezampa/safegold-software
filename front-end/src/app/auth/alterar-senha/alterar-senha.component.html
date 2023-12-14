@@ -8,19 +8,19 @@
         <small class="text-muted ps-3">Digite sua senha atual</small>
         <input type="password" class="sg-input" name="old_password" [(ngModel)]="old_password" placeholder="Sua senha"
           required>
-        <i class="fa fa-eye" (click)="mostrarSenha('old_password')"></i>
+        <i class="fa fa-eye" (click)="showPassword('old_password')"></i>
       </div>
       <div class="input-with-icon">
         <small class="text-muted ps-3">Digite sua nova senha</small>
         <input type="password" class="sg-input" name="password" [(ngModel)]="new_password" placeholder="Sua senha"
           required>
-        <i class="fa fa-eye" (click)="mostrarSenha('password')"></i>
+        <i class="fa fa-eye" (click)="showPassword('password')"></i>
       </div>
       <div class="input-with-icon">
         <small class="text-muted ps-3">Confirme sua nova senha</small>
         <input type="password" class="sg-input" name="confirm_password" [(ngModel)]="confirm_password"
           placeholder="Sua senha" required>
-        <i class="fa fa-eye" (click)="mostrarSenha('confirm_password')"></i>
+        <i class="fa fa-eye" (click)="showPassword('confirm_password')"></i>
       </div>
     </form>
   </div>
