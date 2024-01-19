@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth';
 import { ProjetoService } from 'src/app/financeiro/projeto';
 import { FuncaoGestor, Projeto, SwalFacade, TipoAgenda } from 'src/app/shared';
 import { AgendaService, InserirProjetoComponent } from '../index';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -48,9 +49,13 @@ export class InserirAgendaComponent implements OnInit {
     const dt: Date = new Date(this.formAgenda.value.data);
     var dia_semana = this.agendaService.obterDia(dt);
     const idGestor = this.authService.getCurrentUser();
+    let validDate = this.validateDate(this.formAgenda.value.data);
 
     if (this.formAgenda.value.data == null) {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
+    } 
+    else if (!validDate) {
+      SwalFacade.alerta("Não foi possível salvar", "A data não é válida!");
     } else {
       this.agendaService.getFuncaoGestor(idGestor).subscribe({
         next: (results: FuncaoGestor[]) => {
@@ -159,6 +164,35 @@ export class InserirAgendaComponent implements OnInit {
    */
   newProjeto() {
     this.modalService.open(InserirProjetoComponent, { size: 'lg' });
+  }
+
+
+  /**
+   * @description Verifica se uma data é valida, ou seja se ela é está entre
+   * 1 ano atrás e 1 ano no futuro
+   * @param date a data a ser valida
+   * @returns uma flag dizendo se a a data é valida ou não
+   */
+  validateDate(date: Date): boolean {
+    // Obtem a data de hoje
+    const today = new Date();
+  
+    // Calcula a data de um ano atras
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(today.getFullYear() - 1);
+  
+    // Calcula a data de um ano no futuro
+    const oneYearAhead = new Date();
+    oneYearAhead.setFullYear(today.getFullYear() + 1);
+
+    // Constantes para formatacao das datas
+    const format = 'yyyy-MM-dd';
+    const locale = 'en-US';
+    // Utiliza a formacao 2000-12-30 para facilitar a utilizacao
+    const beginDate = formatDate(new Date(oneYearAgo), format, locale);
+    const endDate = formatDate(new Date(oneYearAhead), format, locale);
+    // Checa se a data esta inserida entre o maximo e o minimo
+    return date.toString() >= beginDate && date.toString() <= endDate;
   }
 
 }
