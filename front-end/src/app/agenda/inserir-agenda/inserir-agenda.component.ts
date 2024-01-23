@@ -49,12 +49,12 @@ export class InserirAgendaComponent implements OnInit {
     const dt: Date = new Date(this.formAgenda.value.data);
     var dia_semana = this.agendaService.obterDia(dt);
     const idGestor = this.authService.getCurrentUser();
-    let validDate = this.validateDate(this.formAgenda.value.data);
+    // let validDate = this.validateDate(this.formAgenda.value.data);
 
     if (this.formAgenda.value.data == null) {
       SwalFacade.alerta("Não foi possível salvar", "Selecione uma data!");
     } 
-    else if (!validDate) {
+    else if (this.validateDate(this.formAgenda.value.data) == false) {
       SwalFacade.alerta("Não foi possível salvar", "A data não é válida!");
     } else {
       this.agendaService.getFuncaoGestor(idGestor).subscribe({
